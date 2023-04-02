@@ -1,0 +1,130 @@
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0f1286;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 10px !important;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    background-color: #1873e8;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+.sidenav a:hover {
+    color: #000;
+    background-color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    margin-left: 250px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+.close {
+    background-color: #1873e8;
+    color: #fff;
+}
+
+.header {
+    background-color: #0f1286;
+}
+
+.profile {
+    padding-left: 40px;
+}
+
+.profile img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.profile h3 {
+    color: #fff;
+}
+
+.profile h4 {
+    color: aliceblue;
+}
+
+#fullDiv ul {
+    margin: 0;
+    padding: 0;
+}
+
+#fullDiv li {
+    float: left;
+    display: block;
+    width: 14.2857%;
+    text-align: center;
+    list-style-type: none;
+}
+
+#fullDiv li:nth-child(n+1):nth-child(-n+7) {
+    font-weight: 900;
+    color: #e67e22;
+}
+
+#fullDiv li:nth-child(n+39),
+#fullDiv li:nth-child(n+8):nth-child(-n+16) {
+    font-weight: 900;
+    color: rgba(0, 0, 0, .3);
+}
+
+#fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
+#fullDiv li:nth-child(17) {
+    border-radius: 5px;
+    background-color: #1abc9c;
+    color: #ecf0f1;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.sidenav a:hover {
+    color: #000;
+    background-color: #f1f1f1;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 18px !important;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+    background-color: #1873e8;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+}
