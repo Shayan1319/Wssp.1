@@ -9,8 +9,10 @@
    </style>
 </head>
 <body>
-<div id="main">
-<?php include('link/desigene/navbar.php')?>
+
+  <div id="main">
+    <?php include('link/desigene/navbar.php')?>
+    <?php include ('link/desigene/sidebar.php')?>
 <div class="container-fluid m-auto p-5">
     <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
