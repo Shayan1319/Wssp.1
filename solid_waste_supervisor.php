@@ -12,7 +12,6 @@
 
   <div id="main">
     <?php include('link/desigene/navbar.php')?>
-    <?php include ('link/desigene/sidebar.php')?>
 <div class="container-fluid m-auto p-5">
     <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -78,7 +77,7 @@
             </div><!-- ./col -->
           <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
+              <div class="small-box bg-blue">
                 <div class="inner">
                   <h3>1</h3>
                   <h4>OVER TIME</h4>
@@ -90,7 +89,7 @@
             </div><!-- ./col -->
           <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
+              <div class="small-box bg-purple">
                 <div class="inner">
                   <h3>0</h3>
                   <h4>DOUBLE DUTY</h4>
@@ -114,7 +113,7 @@
           <div class="row">
           <div class="col-lg-12 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box bg-orange">
                 <div class="inner">
                   <h3>7</h3>
                   <h4>TOTAL LEAVE REQUEST</h4>
@@ -138,7 +137,7 @@
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-yellow">
+              <div class="small-box bg-blue">
                 <div class="inner">
                   <h3>3</h3>
                   <h4>PENDING</h4>
@@ -163,8 +162,6 @@
           </div><!-- /.row -->
         </section>
 </div>
-
-
 <?php include('link/desigene/script.php')?>
 </body>
 </html>
