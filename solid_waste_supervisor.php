@@ -27,7 +27,7 @@
           
           </div>
           <div class="row">
-          <div class="col-lg-12 col-xs-12">
+          <div class="col-lg-3 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
@@ -109,9 +109,7 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-          </div>
-          <div class="row">
-          <div class="col-lg-12 col-xs-12">
+          <div class="col-lg-3 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-orange">
                 <div class="inner">
@@ -123,7 +121,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
+          <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
@@ -135,7 +133,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
+          <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-blue">
                 <div class="inner">
@@ -147,7 +145,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
+          <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -159,8 +157,78 @@
                 </div>
               </div>
             </div><!-- ./col -->
+            
           </div><!-- /.row -->
+            
         </section>
+        <div class="row">
+            <div class="col-sm-12 col-lg-6 col-md-6">
+                    <div class="p-4"><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px none; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
+                        <canvas id="myChart" style="width: 520px; max-width: 600px; display: block; height: 259px;" width="780" height="388"></canvas>
+                        <script>
+                            var xValues = ["Item1", "Item2", "Item3", "Item4", "Item5"];
+                            var yValues = [55, 49, 44, 24, 20];
+                            var barColors = ["red", "green", "blue", "orange", "brown"];
+
+                            new Chart("myChart", {
+                                type: "bar",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    legend: {
+                                        display: false
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: ""
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-lg-6 col-md-6">
+                    <div class="p-4"><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px none; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
+
+                        <canvas id="myChart1" style="width: 400px; max-width: 400px; display: block; height: 400px;" width="600" height="600"></canvas>
+
+                        <script>
+                            var xValues = ["type1", "type2", "type3", "type4", "type5"];
+                            var yValues = [55, 49, 44, 24, 15];
+                            var barColors = [
+                                "#b91d47",
+                                "#00aba9",
+                                "#2b5797",
+                                "#e8c3b9",
+                                "#1e7145"
+                            ];
+
+                            new Chart("myChart1", {
+                                type: "pie",
+                                data: {
+                                    labels: xValues,
+                                    datasets: [{
+                                        backgroundColor: barColors,
+                                        data: yValues
+                                    }]
+                                },
+                                options: {
+                                    title: {
+                                        display: true,
+                                        text: ""
+                                    }
+                                }
+                            });
+                        </script>
+
+                    </div>
+                </div>
+            </div>
 </div>
 <?php include('link/desigene/script.php')?>
 </body>
