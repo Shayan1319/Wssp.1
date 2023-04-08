@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
+   
 </head>
 <body>
     <?php include ('link/desigene/sidebar.php')?>
@@ -39,16 +40,38 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
-                                  <select id="EmpGroup" name="Employement_Group" class="form-control">
-                                    <option>Choose CONTRACTUAL/CONTINGENT</option>
-                                    <option>WSSC CONTRACTUAL</option>
-                                    <option>WSSC CONTINGENT</option>
-                                  </select>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-light form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                    Select
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                    <li>Choose CONTRACTUAL/CONTINGENT<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
+                                    <li>WSSC CONTRACTUAL<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
+                                    <li>WSSC CONTINGENT<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
+                                    </ul>
+                                </div>
+                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Class</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select id="Employee_Class" name="Employee_Class" class="form-control">
                                     <option>Select</option>
                                     <option>Wssc Pay</option>
@@ -59,6 +82,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select id="Employee_Group" name="Employee_Group" class="form-control">
                                     <option>Select</option>
                                     <option>WSSCS-ADMIN PAY</option>
@@ -72,6 +103,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Sub Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Employee_Sub_Group" class="form-control">
                                     <option>Select</option>
                                     <option>WSSCS-ADMIN-CONTINGENT PAY</option>
@@ -90,6 +129,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Quota</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select id="Employee_Quota" name="Employee_Quota" class="form-control">
                                     <option>Select</option>
                                     <option>DECEASED SON</option>
@@ -102,6 +149,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Grade</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select id="" name="Grade_tma" class="form-control">
                                     <option>Select</option>
                                     <option>CONTINGENT</option>
@@ -125,6 +180,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Department" id="Department" class="form-control">
                                     <option>Select</option>
                                     <option>ADMINISTRATION</option>
@@ -137,6 +200,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Job Tiltle</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Job_Tiltle" class="form-control">
                                     <option>Select</option>
                                     <option>CHIEF EXECUTIVE OFFICER</option>
@@ -223,6 +294,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Mode</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Salary_Mode" class="form-control">
                                     <option>Select</option>
                                     <option>BANK TRANSFER</option>
@@ -233,6 +312,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Status</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Status" id="Status" class="form-control">
                                     <option>Select</option>
                                     <option>CONTRACT EXP</option>
@@ -322,6 +409,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="EmpGrupTma" class="form-control">
                                     <option>Choose Permanent/Daily Wages</option>
                                     <option>TMA PERMANENT</option>
@@ -332,6 +427,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Class</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Employee_Class_tma" id="Employee_Class_Tma" class="form-control">
                                     <option>Select</option>
                                     <option>Wssc Pay</option>
@@ -342,6 +445,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Employee_Group_tma" id="Employee_Group" class="form-control">
                                     <option>Select</option>
                                     <option>TMA-ADMIN PAY</option>
@@ -354,6 +465,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Sub Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Employee_Sub_Group_tma" class="form-control">
                                     <option>Select</option>
                                     <option>TMA-ADMIN-PERMANENT PAY</option>
@@ -368,6 +487,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Quota</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Employee_Quota_tma" id="Employee_Quota_tma" class="form-control">
                                     <option>Select</option>
                                     <option>DECEASED SON</option>
@@ -380,6 +507,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Grade</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Grande_tma" id="Grande_tma" class="form-control">
                                     <option>Select</option>
                                     <option>BPS-2</option>
@@ -399,6 +534,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Department_name" id="Department_name" class="form-control">
                                     <option>Select</option>
                                     <option>ADMINISTRATION</option>
@@ -411,6 +554,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Job Tiltle</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Job_Tiltle_tma" id="Job_Tiltle" class="form-control">
                                     <option>Select</option>
                                     <option>OFFICE ASSISTANT</option>
@@ -440,6 +591,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Mode</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Salary_Mode_tma" id="Salary_Mode" class="form-control">
                                     <option>Select</option>
                                     <option>BANK TRANSFER</option>
@@ -450,6 +609,14 @@
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Status</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
                                   <select name="Status_tma" id="Status_tma" class="form-control">
                                     <option>Select</option>
                                     <option>CONTRACT EXP</option>
