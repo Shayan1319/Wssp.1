@@ -6,10 +6,11 @@
     h4, h3 {
       text-align: center;
     }
+
    </style>
 </head>
 <body>
-
+    <?php include ('link/desigene/sidebar.php') ?>
   <div id="main">
     <?php include('link/desigene/navbar.php')?>
 <div class="container-fluid m-auto p-5">
