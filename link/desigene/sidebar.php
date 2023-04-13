@@ -1,5 +1,5 @@
 <style>
-.sidenav {
+  .sidenav {
     height: 100%;
     width: 250px;
     position: fixed;
@@ -10,12 +10,12 @@
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 10px;
-}
+  }
 
-.sidenav a {
+  .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 10px !important;
+    font-size: 20px !important;
     color: #fff;
     display: block;
     transition: 0.3s;
@@ -24,94 +24,56 @@
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 12px;
-}
+  }
 
-.sidenav a:hover {
+  .sidenav a:hover {
     color: #000;
     background-color: #f1f1f1;
-}
+  }
 
-.sidenav .closebtn {
+  .sidenav .closebtn {
     font-size: 36px;
     margin-left: 50px;
-}
+  }
 
-#main {
+  #main {
     transition: margin-left .5s;
     margin-left: 250px;
-}
+  }
 
 
-.dropdown .dropbtn { 
-  outline: none;
-}
+  .dropdown .dropbtn {
+    outline: none;
+  }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-}
+  .navbar a:hover,
+  .dropdown:hover .dropbtn {}
 
-.dropdown-content {
-  display: none;
-  z-index: 1;
-}
+  .dropdown-content {
+    display: none;
+    z-index: 1;
+  }
 
-.dropdown-content a {
-  float: none;
-  display: block;
-  text-align: left;
-}
+  .dropdown-content a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 
-.dropdown-content a:hover {
-}
+  .dropdown-content a:hover {}
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 </style>
 <div id="mySidenav" class="sidenav">
   <div class="row w-100">
-  <div class="profile col-12">
-    <img src="image/download.jfif" alt="">
-    <h3>Name</h3>
-    <h4>Designation</h4>
+    <div class="profile col-12">
+      <img src="image/download.jfif" alt="">
+      <h3>Name</h3>
+      <h4>Designation</h4>
+    </div>
+
   </div>
-
-  </div>                
-              <a href="index.php" class="nav-link mt-3">Dashboard (SWS)</a>
-              <a class="dropbtn nav-link" href="employeePersonalInfo.php">
-                  Add Employee
-                </a>
-                
-                  <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
-                  <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a>
-                  <a id="section_c" onclick="validateSection2()" href="#">Qualification</a>
-                  <a id="section_d" onclick="validateSection3()" href="#">Treining Info</a>
-                  <a id="section_e" onclick="validateSection4()" href="#">Promotions</a>
-                  <a id="section_f" onclick="validateSection5()" href="#"> Transfer</a>
-               
-
-              <!-- <a href="EmployeeInitialAppointment.php" class="nav-link">
-                  Employement Info
-                </a> -->
-
-
-                <a href="Addfamily.php" class="nav-link">
-                  Family Information
-                </a>
-                <a href="EXITCLEARANCEFORM.php" class="nav-link">
-                  Exit clearance form
-                </a>
-                <a href="Apraisal.php" class="nav-link">
-                 Appraisal form
-                </a>
-                <a href="Leaves.php" class="nav-link">
-                 Leaves requests
-                </a>
-
-                <!-- <a href="EmployeePromotions.php" class="nav-link">
-                  Promotions
-                </a>
-                <a href="EmployeeTransfer.php" class="nav-link">
-                  Transfer
-                </a> --> 
-              </div>
+  <a href="index.php" class="nav-link mt-3">Dashboard</a>
+</div>

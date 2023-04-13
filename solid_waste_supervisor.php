@@ -30,7 +30,7 @@
           
           </div>
           <div class="row">
-          <div class="col-lg-3 col-xs-12">
+          <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
@@ -42,7 +42,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
@@ -66,7 +66,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
@@ -78,7 +78,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-blue">
                 <div class="inner">
@@ -90,7 +90,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-purple">
                 <div class="inner">
@@ -112,7 +112,7 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
-          <div class="col-lg-3 col-xs-12">
+          <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-orange">
                 <div class="inner">
@@ -124,7 +124,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
@@ -136,7 +136,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-blue">
                 <div class="inner">
@@ -148,7 +148,7 @@
                 </div>
               </div>
             </div><!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
