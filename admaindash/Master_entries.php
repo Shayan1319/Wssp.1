@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
-   
 </head>
 <body>
     <?php include ('link/desigene/sidebar.php')?>
@@ -39,26 +38,55 @@
                             <div class="row">
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Employement Group</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                    <label>Employement Group</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                      </div>
+                                      <div class="col-3">
+                                          <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
                                     </div>
-                                    <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-light form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                    Select
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                    <li>Choose CONTRACTUAL/CONTINGENT<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
-                                    <li>WSSC CONTRACTUAL<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
-                                    <li>WSSC CONTINGENT<a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a></li>
-                                    </ul>
-                                </div>
-                                
+                                  <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                          <div class="row" >
+                                            <div class="col-8">Choose CONTRACTUAL/CONTINGENT</div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
+                                            </div>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="row" >
+                                            <div class="col-8">WSSC CONTRACTUAL</div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
+                                            </div>
+                                          </div>
+                                        </li>
+                                        <li>
+                                          <div class="row" >
+                                            <div class="col-8">WSSC CONTINGENT</div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
+                                            </div>
+                                            <div class="col-2">
+                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">

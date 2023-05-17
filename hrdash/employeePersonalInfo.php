@@ -1,4 +1,152 @@
+<?php 
+include('../link/desigene/db.php');
+if(isset($_POST['submit']))
+{
+$image = $_FILES ["image"];
+$fName = $_POST ["fName"];
+$mName = $_POST ["mName"];
+$lName = $_POST ["lName"];
+$father_Name = $_POST ["father_Name"];
+$CNIC = $_POST ["CNIC"];
+$email = $_POST ["email"];
+$pAddress = $_POST ["pAddress"];
+$cAddress = $_POST ["cAddress"];
+$city = $_POST ["city"];
+$postAddress = $_POST ["postAddress"];
+$mNumber = $_POST ["mNumber"];
+$ofphNumber = $_POST ["ofphNumber"];
+$Alternate_Number = $_POST ["Alternate_Number"];
+$DofB = $_POST ["DofB"];
+$religion = $_POST ["religion"];
+$gender = $_POST ["gender"];
+$BlGroup = $_POST ["BlGroup"];
+$Domicile = $_POST ["Domicile"];
+$MaritalStatus = $_POST ["MaritalStatus"];
+$NextofKin = $_POST ["NextofKin"];
+$NextofKinCellNumber = $_POST ["NextofKinCellNumber"];
+$ContactPerson = $_POST ["ContactPerson"];
+$CPCN = $_POST ["CPCN"];
+$Employement_Group = $_POST ["Employement_Group"];
+$Employee_Class = $_POST ["Employee_Class"];
+$Employee_Group = $_POST ["Employee_Group"];
+$Employee_Sub_Group = $_POST ["Employee_Sub_Group"];
+$Employee_Quota = $_POST ["Employee_Quota"];
+$Grade_tma = $_POST ["Grade_tma"];
+$Department = $_POST ["Department"];
+$Job_Tiltle = $_POST ["Job_Tiltle"];
+$Salary_Mode = $_POST ["Salary_Mode"];
+$Employee_Status = $_POST ["Status"];
+$EmployeeNowssp = $_POST ["EmployeeNowssp"];
+$Employee_Manager = $_POST ["Employee_Manager"];
+$Joining_Date = $_POST ["Joining_Date"];
+$Contract_Expiry_Date = $_POST ["Contract_Expiry_Date"];
+$Last_Working_Date = $_POST ["Last_Working_Date"];
+$Attendance_Supervisor = $_POST ["Attendance_Supervisor"];
+$Duty_Location = $_POST ["Duty_Location"];
+$Duty_Point = $_POST ["Duty_Point"];
+$EmpGrupTma = $_POST ["EmpGrupTma"];
+$Employee_Class_tma = $_POST ["Employee_Class_tma"];
+$Employee_Group_tma = $_POST ["Employee_Group_tma"];
+$Employee_Sub_Group_tma = $_POST ["Employee_Sub_Group_tma"];
+$Employee_Quota_tma = $_POST ["Employee_Quota_tma"];
+$Grande_tma = $_POST ["Grande_tma"];
+$Department_name = $_POST ["Department_name"];
+$Job_Tiltle_tma = $_POST ["Job_Tiltle_tma"];
+$Salary_Mode_tma = $_POST ["Salary_Mode_tma"];
+$Status_tma = $_POST ["Status_tma"];
+$EmployeeNo_tma = $_POST ["EmployeeNo_tma"];
+$Employee_Manager_tma = $_POST ["Employee_Manager_tma"];
+$Joining_Date_tma = $_POST ["Joining_Date_tma"];
+$Contract_Expiry_Date_tma = $_POST ["Contract_Expiry_Date_tma"];
+$Last_Working_Day = $_POST ["Last_Working_Day"];
+$Attendance_Supervisor_tma = $_POST ["Attendance_Supervisor_tma"];
+$Duty_Location_tma = $_POST ["Duty_Location_tma"];
+$Duty_Point_tma = $_POST ["Duty_Point_tma"];
+$Image_name =$image['name'];
+$Image_path = $image['tmp_name'];
+$Image_error = $image['error'];
+if($Image_error==0)
+{
+    $Image_save='../image/'.$Image_name;
+    // echo $Image_save;
+    move_uploaded_file($Image_path, $Image_save);  
+}else{
+    echo '<script>alert("Picture is not uploaded Kindli update");</script>';
+}
+$insertquery = "INSERT INTO `employeeinfo`( `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Grade_tma`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Employee_Status`, `EmployeeNowssp`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `EmpGrupTma`, `Employee_Class_tma`, `Employee_Group_tma`, `Employee_Sub_Group_tma`, `Employee_Quota_tma`, `Grande_tma`, `Department_name`, `Job_Tiltle_tma`, `Salary_Mode_tma`, `Status_tma`, `EmployeeNo_tma`, `Employee_Manager_tma`, `Joining_Date_tma`, `Contract_Expiry_Date_tma`, `Last_Working_Day`, `Attendance_Supervisor_tma`, `Duty_Location_tma`, `Duty_Point_tma`, `Status`) VALUES ('$Image_name','$fName','$mName','$lName','$father_Name','$CNIC','$email','$pAddress','$cAddress','$city','$postAddress','$mNumber','$ofphNumber','$Alternate_Number','$DofB','$religion','$gender','$BlGroup','$Domicile','$MaritalStatus','$NextofKin','$NextofKinCellNumber','$ContactPerson','$CPCN','$Employement_Group','$Employee_Class','$Employee_Group','$Employee_Sub_Group','$Employee_Quota','$Grade_tma','$Department','$Job_Tiltle','$Salary_Mode','$Employee_Status','$EmployeeNowssp','$Employee_Manager','$Joining_Date','$Contract_Expiry_Date','$Last_Working_Date','$Attendance_Supervisor','$Duty_Location','$Duty_Point','$EmpGrupTma','$Employee_Class_tma','$Employee_Group_tma','$Employee_Sub_Group_tma','$Employee_Quota_tma','$Grande_tma','$Department_name','$Job_Tiltle_tma','$Salary_Mode_tma','$Status_tma','$EmployeeNo_tma','$Employee_Manager_tma','$Joining_Date_tma','$Contract_Expiry_Date_tma','$Last_Working_Day','$Attendance_Supervisor_tma','$Duty_Location_tma','$Duty_Point_tma','Block')";
+$query= mysqli_query($conn,$insertquery);
+if($query)
+{
+    echo '<script>alert("Data is inserted");</script>';
+    $sqlA = "CREATE TABLE `database_wssc`.`$CNIC A`(
+    Id INT PRIMARY KEY,
+    Qualification  VARCHAR(255),
+    GradeDivision VARCHAR(255),
+    Passing_Year_of_Degree VARCHAR(255),
+    Last_Institute VARCHAR(255),
+    PEC_Registration VARCHAR(255),
+    CV VARCHAR(255),
+    Institute_AddressCV VARCHAR(255),
+    Major_Subject VARCHAR(255),
+    RemarksCV VARCHAR(255)
+    )";
+     $sqlB = "CREATE TABLE `database_wssc`.`$CNIC B`(
+        Id INT PRIMARY KEY,
+        Training_Serial_Number VARCHAR(255),
+        Training_Name VARCHAR(255),
+        Institute VARCHAR(255),
+        City VARCHAR(255),
+        Institute_Address VARCHAR(255),
+        Oblige_Sponsor VARCHAR(255),
+        From_Date DATE,
+        To_Date DATE,
+        Duration VARCHAR(255)
+      )";
+      $sqlC = "CREATE TABLE `database_wssc`.`$CNIC C`(
+          Id INT PRIMARY KEY,
+          From_Designation VARCHAR(255),
+          To_Designation VARCHAR(255),
+          From_BPS VARCHAR(255),
+          ToBps VARCHAR(255),
+          Promotion_Date VARCHAR(255),
+          Promotion_Number VARCHAR(255),
+          Department1 VARCHAR(255),
+          Acting VARCHAR(255),
+          Remarks VARCHAR(255)
+      )";
+      $sqlD = "CREATE TABLE `database_wssc`.`$CNIC D`(
+        Id INT PRIMARY KEY,
+        Transfer_Order_Number VARCHAR(255),
+        Designation VARCHAR(255),
+        BPS VARCHAR(255),
+        From_Department VARCHAR(255),
+        To_Project VARCHAR(255),
+        From_Station VARCHAR(255),
+        To_Station VARCHAR(255),
+        Worked_From VARCHAR(255),
+        Transfer_Date VARCHAR(255)
+    )";
+    $tableA = $conn->query($sqlA);
+    $tableB = $conn->query($sqlB);
+    $tableC = $conn->query($sqlC);
+    $tableD = $conn->query($sqlD);
 
+     if ( $tableA === TRUE && $tableB === TRUE && $tableC === TRUE && $tableD === TRUE) {
+      echo '<script>alert( "Table created successfully");</script>';
+     ?>
+            <script>
+                location.replace('Qualification.php?updat=<?php echo $CNIC?>');
+            </script>
+     <?php
+    } else {
+      echo "Error creating table: " ;
+    }
+}
+else{
+echo '<script>alert("Sorry Data is not inserted");</script>'; 
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,43 +160,6 @@
       <form id="myForm" method="post" enctype="multipart/form-data">
         <div class="container-fluid">
           <div class="row my-4">
-            <div class="col-12">
-              <div class="row my-3">
-                <div class="col-1" style="padding-right:0%">
-                  <button type="button" id="section_a" onclick="backToSection1()" class="rounded-circle btn text-white btn-primary m-auto float-start">Personal Info</button>
-                </div>
-                <div class="col-1 p-0">
-                   <hr class="border border-primary border-3 opacity-75" style="margin-top: 1.6rem !important;">
-                </div>
-                <div class="col-1 p-0">
-                  <button type="button" id="section_b" onclick="validateSection1()" class="rounded-circle btn btn-primary text-white float-start" >Joining Info</button>
-                </div>
-                <div class="col-1 p-0">
-                   <hr class="border border-primary border-3 opacity-75" style="margin-top: 1.6rem !important;">
-                </div>
-                <div class="col-1 p-0">
-                <button type="button" id="section_c" onclick="validateSection2()" class="rounded-circle btn btn-primary text-white"  >Qualification Info</button>
-                </div>
-                <div class="col-1 p-0">
-                   <hr class="border border-primary border-3 opacity-75" style="margin-top: 1.6rem !important;">
-                </div>
-                <div class="col-1 p-0">
-                <button type="button" id="section_d" onclick="validateSection3()" class="rounded-circle btn btn-primary text-white" >Training Info</button>
-                </div>
-                <div class="col-1 p-0">
-                   <hr class="border border-primary border-3 opacity-75" style="margin-top: 1.6rem !important;">
-                </div>
-                <div class="col-1 p-0">
-                <button type="button" id="section_e" onclick="validateSection4()" class="rounded-circle btn btn-primary text-white" >Promotions Info</button>
-                </div>
-                <div class="col-1 p-0">
-                   <hr class="border border-primary border-3 opacity-75" style="margin-top: 1.6rem !important;">
-                </div>
-                <div class="col-1 p-0">
-                <button type="button" id="section_f" onclick="validateSection5()" class="rounded-circle btn btn-primary text-white" >Transfer Info</button>
-                </div>
-              </div>
-            </div>
             <div class="col-md-12 ">
               <div id="section1">
                 <div class="card card-success border border-2 border-dark bg-light">
@@ -167,7 +278,6 @@
                               <option value="">Choose</option>
                               <option value="">Male</option>
                               <option value="">Female</option>
-                            
                           </select>
                         </div>
                       </div>
@@ -736,334 +846,11 @@
                   </div>
                   <div class="col-md-12 text-end mt-2">
                     <input style="background-color: darkblue;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
-                    <input style="background-color: darkblue;" onclick="validateSection2()" type="button" class="btn text-white  float-right shadow" value="Next">
+                    <input style="background-color: darkblue;" name="submit" type="submit" class="btn text-white  float-right shadow" value="Submit">
                     
                   </div>
                 </div>
               </div>
-              <div id="section3" style="display: none;">
-                <div class="row my-4">
-                  <div class="col-md-12">
-                    <div class="card card-success bg-light">
-                      <div style="background-color: darkblue;" class="card-header text-white fw-bold">
-                        <div class="card-title">Employee Qualification</div>
-                      </div>
-                      <br>
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Qualification</label>
-                              <input type="text" name="Qualification" id="Qualification" placeholder="Qualification" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Grade/Division</label>
-                              <input type="text" name="GradeDivision" placeholder="Grade/Division" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Passing Year of Degree</label>
-                              <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Last Institute</label>
-                              <input type="text" name="Last_Institute" placeholder="Last Institute" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>PEC Registration</label>
-                              <input type="text" name="PEC_Registration" placeholder="Last Institute" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2 mt-4">
-                            <div class="form-group">
-                              <div class="custom-file">
-                                <input type="file" name="CV" class="custom-file-input" id="CV">
-                                  <label class="custom-file-label" for="customFile">CV Attachment(Optional) </label>
-                                  <span id="n1" class="text-danger"></span>
-                                  </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Institute Address</label>
-                              <input type="text" name="Institute_AddressCV" id="Institute_Address" placeholder="Institute Address " class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Major Subject</label>
-                              <input type="text" name="Major_Subject" placeholder="Major Subject" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Remarks</label>
-                              <textarea name="RemarksCV" id="Remarks" class="form-control"></textarea>
-                            </div>
-                          </div>
-                        </div>
-                        <div class=" text-end">
-                          <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Back" >
-                          <input style="background-color: darkblue;" type="button" onclick="validateSection3()" class="btn text-white shadow float-right" value="Next" >
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                  </div>
-                  <!-- Col-12 -->
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div id="section4" style="display: none;">
-                <div class="row my-4">
-                  <!-- left column -->
-                  <div class="col-md-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title text-white">Employee Training Information</div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body bg-light">
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Training Serial Number</label>
-                              <input type="text" name="Training_Serial_Number" placeholder="Training Serial Number" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Training Name</label>
-                              <input type="text" name="Training_Name" id="Training_Name" placeholder="Training Name" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Institute</label>
-                              <input type="text" name="Institute" placeholder="Institute" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>City</label>
-                              <input type="text" name="City" placeholder="City" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Institute Address</label>
-                              <input type="text" name="Institute_Address" placeholder="Institute Address" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Oblige Sponsor</label>
-                              <input type="text" name="Oblige_Sponsor" placeholder="Oblige Sponsor" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From</label>
-                              <input type="Date" name="From" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>To</label>
-                              <input type="Date" name="To" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div> 
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Duration </label>
-                              <input type="text" name="Duration" placeholder="Duration" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-end mt-2">
-                              <input style="background-color: darkblue;" type="button" onclick=" backToSection3()" class="btn text-white float-right shadow" value="Back">
-                              <input style="background-color: darkblue;" type="button" onclick=" validateSection4()" class="btn text-white float-right shadow" value="Next">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                      <!-- /.card -->
-                  </div>
-                  <!-- Col-12 -->
-                </div>
-                <!-- row -->
-              </div>
-              <div id="section5" style="display: none;">
-                <div class="row my-4">
-                  <!-- left column -->
-                  <div class="col-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Employee Promotions</div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body bg-light">
-                        <!-- form start -->
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From Designation </label>
-                              <input type="text" name="From_Designation" placeholder="From Designation" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>To Designation</label>
-                              <input type="text" name="To_Designation" placeholder="To Designation" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From BPS</label>
-                              <input type="text" name="From_BPS" placeholder="From BPS" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>To BPS</label>
-                              <input type="text" name="ToBps" placeholder="To BPS" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Promotion Date</label>
-                              <input type="Date" name="Promotion_Date" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Promotion Number</label>
-                              <input type="text" name="Promotion_Number" placeholder="Promotion Number" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Department</label>
-                              <input type="text" name="Department1" placeholder="Department" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Acting</label>
-                              <select name="Acting" class="form-control">
-                                <option>Choose</option>
-                                <option>Regular</option>
-                                <option>OPS</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Remarks</label>
-                              <input type="text" name="Remarks" placeholder="Remarks" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-end mt-2">
-                            <input style="background-color: darkblue;" type="button" onclick="backToSection4()" class="btn text-white float-right shadow" value="Back" >
-                            <input style="background-color: darkblue;" type="button" onclick=" validateSection5()" class="btn text-white float-right shadow" value="Next" >
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                  </div>
-                  <!-- Col-12 -->
-                </div>
-              </div>
-              <div id="section6" style="display: none;">
-                <div class="row my-4">
-                  <!-- left column -->
-                  <div class="col-md-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Employee Transfer</div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body bg-light">
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Transfer Order Number </label>
-                              <input type="text" name="Transfer_Order_Number" placeholder="Transfer Order Number" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>  
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Designation</label>
-                              <input type="text" name="Designation" placeholder="Designation" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>BPS</label>
-                              <input type="text" name="BPS" placeholder="From BPS" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From Department</label>
-                              <input type="text" name="From_Department" placeholder="From Deparment" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label> To Project</label>
-                              <input type="text" name="To_Project" placeholder="To Project" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From Station</label>
-                              <input type="text" name="From_Station" placeholder="From  Station" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>To Station</label>
-                              <input type="text" name="To_Station" placeholder="To Station" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Worked From</label>
-                              <input type="text" name="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Transfer Date</label>
-                              <input type="Date" name="Transfer_Date" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-end mt-2">
-                            <input style="background-color: darkblue;" type="button" onclick="backToSection5()" class="btn text-white float-right shadow" value="back">
-                            <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="saveUser1">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                  </div>
-                  <!-- Col-12 -->
-                </div>
-              </div>
-              <!-- /.card -->
             </div>
             <!-- Col-12 -->
           </div>
@@ -1075,17 +862,7 @@
                 var cNo = document.getElementById("cNo").value;
                 if (cNo) {
                     document.getElementById("section1").style.display = "none";
-                    document.getElementById("section3").style.display = "none";
-                    document.getElementById("section4").style.display = "none";
-                    document.getElementById("section5").style.display = "none";
-                    document.getElementById("section6").style.display = "none";
                     document.getElementById("section2").style.display="block";
-                document.getElementById("section_b").style.background="darkblue";
-                document.getElementById("section_a").style.background="#0d6efd";
-                document.getElementById("section_c").style.background="#0d6efd";
-                document.getElementById("section_d").style.background="#0d6efd";
-                document.getElementById("section_e").style.background="#0d6efd";
-                document.getElementById("section_f").style.background="#0d6efd";
 
 
                 } else {
@@ -1093,102 +870,13 @@
                 }
             }
 
-            function validateSection2() {
-                    document.getElementById("section1").style.display = "none";
-                    document.getElementById("section2").style.display = "none";
-                    document.getElementById("section4").style.display = "none";
-                    document.getElementById("section5").style.display = "none";
-                    document.getElementById("section6").style.display = "none";
-                    document.getElementById("section3").style.display = "block";
-                document.getElementById("section_c").style.background="darkblue";
-                document.getElementById("section_a").style.background="#0d6efd";
-                document.getElementById("section_b").style.background="#0d6efd";
-                document.getElementById("section_d").style.background="#0d6efd";
-                document.getElementById("section_e").style.background="#0d6efd";
-                document.getElementById("section_f").style.background="#0d6efd";
-            }
-            function validateSection3(){
-              document.getElementById("section1").style.display="none";
-              document.getElementById("section2").style.display="none";
-              document.getElementById("section3").style.display="none";
-              document.getElementById("section5").style.display="none";
-              document.getElementById("section6").style.display="none";
-              document.getElementById("section4").style.display="block";
-              document.getElementById("section_d").style.background="darkblue";
-                document.getElementById("section_a").style.background="#0d6efd";
-                document.getElementById("section_b").style.background="#0d6efd";
-                document.getElementById("section_c").style.background="#0d6efd";
-                document.getElementById("section_e").style.background="#0d6efd";
-              document.getElementById("section_f").style.background="#0d6efd";
-            }
-            function validateSection4(){
-              document.getElementById("section1").style.display="none";
-              document.getElementById("section2").style.display="none";
-              document.getElementById("section3").style.display="none";
-              document.getElementById("section4").style.display="none";
-              document.getElementById("section6").style.display="none";
-              document.getElementById("section5").style.display="block";
-              document.getElementById("section_e").style.background="darkblue";
-                document.getElementById("section_a").style.background="#0d6efd";
-                document.getElementById("section_b").style.background="#0d6efd";
-                document.getElementById("section_c").style.background="#0d6efd";
-                document.getElementById("section_d").style.background="#0d6efd";
-              document.getElementById("section_f").style.background="#0d6efd";
-            }
-            function validateSection5(){
-              document.getElementById("section1").style.display="none";
-              document.getElementById("section2").style.display="none";
-              document.getElementById("section3").style.display="none";
-              document.getElementById("section4").style.display="none";
-              document.getElementById("section5").style.display="none";
-              document.getElementById("section6").style.display="block";
-              document.getElementById("section_f").style.background="darkblue";
-              document.getElementById("section_a").style.background="#0d6efd";
-              document.getElementById("section_b").style.background="#0d6efd";
-              document.getElementById("section_c").style.background="#0d6efd";
-              document.getElementById("section_d").style.background="#0d6efd";
-              document.getElementById("section_e").style.background="#0d6efd";
-            }
-            function validateSection6(){
-              document.getElementById("section6").style.display="none";
-              document.getElementById("section7").style.display="block";
-            }
-
             function backToSection1() {
                 document.getElementById("section2").style.display = "none";
-                document.getElementById("section3").style.display = "none";
-                document.getElementById("section4").style.display = "none";
-                document.getElementById("section5").style.display = "none";
-                document.getElementById("section6").style.display = "none";
                 document.getElementById("section1").style.display = "block";
-                document.getElementById("section_a").style.background="darkblue";
-                document.getElementById("section_b").style.background="#0d6efd";
-                document.getElementById("section_c").style.background="#0d6efd";
-                document.getElementById("section_d").style.background="#0d6efd";
-                document.getElementById("section_e").style.background="#0d6efd";
-                document.getElementById("section_f").style.background="#0d6efd";
+               
             }
 
-            function backToSection2() {
-                document.getElementById("section3").style.display = "none";
-                document.getElementById("section2").style.display = "block";
-            }
-            function backToSection3(){
-              document.getElementById("section4").style.display="none";
-              document.getElementById("section3").style.display="block";
-            }
-            function backToSection4(){
-              document.getElementById("section5").style.display="none";
-              document.getElementById("section4").style.display="block";
-            }
-            function backToSection5(){
-              document.getElementById("section6").style.display="none";
-              document.getElementById("section5").style.display="block";
-            }
-            function backToSection6(){
-              document.getElementById("section7").style.display="none";
-              document.getElementById("section6").style.display="block";
-            }
+          
         </script>
 
     <?php include('link/desigene/script.php')?>
