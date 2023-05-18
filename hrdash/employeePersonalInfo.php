@@ -79,7 +79,7 @@ if($query)
 {
     echo '<script>alert("Data is inserted");</script>';
     $sqlA = "CREATE TABLE `database_wssc`.`$CNIC A`(
-    Id INT PRIMARY KEY,
+    Id INT PRIMARY KEY AUTO_INCREMENT,
     Qualification  VARCHAR(255),
     GradeDivision VARCHAR(255),
     Passing_Year_of_Degree VARCHAR(255),
@@ -91,7 +91,7 @@ if($query)
     RemarksCV VARCHAR(255)
     )";
      $sqlB = "CREATE TABLE `database_wssc`.`$CNIC B`(
-        Id INT PRIMARY KEY,
+        Id INT PRIMARY KEY AUTO_INCREMENT,
         Training_Serial_Number VARCHAR(255),
         Training_Name VARCHAR(255),
         Institute VARCHAR(255),
@@ -103,7 +103,7 @@ if($query)
         Duration VARCHAR(255)
       )";
       $sqlC = "CREATE TABLE `database_wssc`.`$CNIC C`(
-          Id INT PRIMARY KEY,
+          Id INT PRIMARY KEY AUTO_INCREMENT,
           From_Designation VARCHAR(255),
           To_Designation VARCHAR(255),
           From_BPS VARCHAR(255),
@@ -115,7 +115,7 @@ if($query)
           Remarks VARCHAR(255)
       )";
       $sqlD = "CREATE TABLE `database_wssc`.`$CNIC D`(
-        Id INT PRIMARY KEY,
+        Id INT PRIMARY KEY AUTO_INCREMENT,
         Transfer_Order_Number VARCHAR(255),
         Designation VARCHAR(255),
         BPS VARCHAR(255),
@@ -126,12 +126,19 @@ if($query)
         Worked_From VARCHAR(255),
         Transfer_Date VARCHAR(255)
     )";
+    $sqlE = "CREATE TABLE `database_wssc`.`$CNIC E`(
+      Id INT PRIMARY KEY AUTO_INCREMENT,
+      Spouse_Name VARCHAR(255),
+      CNIC VARCHAR(255),
+      Date_of_B VARCHAR(255)
+  )";
     $tableA = $conn->query($sqlA);
     $tableB = $conn->query($sqlB);
     $tableC = $conn->query($sqlC);
     $tableD = $conn->query($sqlD);
+    $tableE = $conn->query($sqlE);
 
-     if ( $tableA === TRUE && $tableB === TRUE && $tableC === TRUE && $tableD === TRUE) {
+     if ( $tableA === TRUE && $tableB === TRUE && $tableC === TRUE && $tableD === TRUE && $tableD === TRUE) {
       echo '<script>alert( "Table created successfully");</script>';
      ?>
             <script>

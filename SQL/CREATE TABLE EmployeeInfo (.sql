@@ -33,7 +33,7 @@ CREATE TABLE EmployeeInfo (
     Department VARCHAR(255),
     Job_Tiltle VARCHAR(255),
     Salary_Mode VARCHAR(255),
-    Status VARCHAR(255),
+    Employee_Status VARCHAR(255),
     EmployeeNowssp VARCHAR(255),
     Employee_Manager VARCHAR(255),
     Joining_Date DATE,
