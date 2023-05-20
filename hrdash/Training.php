@@ -13,16 +13,10 @@ if(isset($_POST['submit']))
     $From = $_POST['From'];
     $To = $_POST['To'];
     $Duration = $_POST['Duration'];
-$insertquery = "INSERT INTO `$CNIC b`(`Training_Serial_Number`, `Training_Name`, `Institute`, `City`, `Institute_Address`, `Oblige_Sponsor`, `From_Date`, `To_Date`, `Duration`) VALUES ('$Training_Serial_Number','$Training_Name','$Institute','$City','$Institute_Address','$Oblige_Sponsor','$From','$To','$Duration')";
-$query= mysqli_query($conn,$insertquery);
-if ($query)
-{echo '<script>alert( "Data Insertaed");</script>';
-    ?>
-           <script>
-               location.replace('Promotions.php?updat=<?php echo $CNIC?>');
-           </script>
-    <?php
-    }
+    $insertquery = "INSERT INTO `$CNIC b`(`Training_Serial_Number`, `Training_Name`, `Institute`, `City`, `Institute_Address`, `Oblige_Sponsor`, `From_Date`, `To_Date`, `Duration`) VALUES ('$Training_Serial_Number','$Training_Name','$Institute','$City','$Institute_Address','$Oblige_Sponsor','$From','$To','$Duration')";
+    $query= mysqli_query($conn,$insertquery);
+    if ($query)
+    {echo '<script>alert( "Data Insertaed");</script>';}
 
 }
 ?>
@@ -69,156 +63,156 @@ if ($query)
               </div>
             </div>
           </div>
-        <br>
-        <hr>
-        <div class="col-12 bg-white mt-5 px-2">
-          <nav class="navbar bg-white">
-            <div class="container-fluid">
-              <h4>Basic Info</h4>
-            </div>
-          </nav>
-          <div class="row mt-5 p-3">
-            <div class="col-md-4 my-2">
-              <div class="form-group">
-                            <label>First Name</label>
-                            <h5><?php echo $see ['fName'] ?></h5>
+          <br>
+          <hr>
+          <div class="col-12 bg-white mt-5 px-2">
+            <nav class="navbar bg-white">
+              <div class="container-fluid">
+                <h4>Basic Info</h4>
+              </div>
+            </nav>
+            <div class="row mt-5 p-3">
+              <div class="col-md-4 my-2">
+                <div class="form-group">
+                              <label>First Name</label>
+                              <h5><?php echo $see ['fName'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                          <div class="form-group">
+                            <label>Middle Name</label>
+                            <h5><?php echo $see ['mName'] ?></h5>
                           </div>
                         </div>
-                        <div class="col-md-4 my-2">
-                        <div class="form-group">
-                          <label>Middle Name</label>
-                          <h5><?php echo $see ['mName'] ?></h5>
-                        </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Last Name</label>
+                              <h5><?php echo $see ['lName'] ?></h5>
+                            </div>
+                          </div> 
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Father Name</label>
+                              <h5><?php echo $see ['father_Name'] ?></h5>
+                            </div>
+                          </div> 
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>CNIC</label>
+                              <h5><?php echo $see ['CNIC'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Email address</label>
+                              <h5><?php echo $see ['email'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Permenent Address</label>
+                              <h5><?php echo $see ['pAddress'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Current Address</label>
+                              <h5><?php echo $see ['cAddress'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>City</label>
+                              <h5><?php echo $see ['city'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Postal Address</label>
+                              <h5><?php echo $see ['postAddress'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Mobile Number</label>
+                              <h5><?php echo $see ['mNumber'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Office Phone Number</label>
+                              <h5><?php echo $see ['ofphNumber'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Alternate Number</label>
+                              <h5><?php echo $see ['Alternate_Number'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Date of Birth</label>
+                              <h5><?php echo $see ['DofB'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Religion</label>
+                              <h5><?php echo $see ['religion'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Gender</label>
+                              <h5><?php echo $see ['gender'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Blood Group</label>
+                              <h5><?php echo $see ['BlGroup'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Domicile</label>
+                              <h5><?php echo $see ['Domicile'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Marital Status </label>
+                              <h5><?php echo $see ['MaritalStatus'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Next of Kin</label>
+                              <h5><?php echo $see ['NextofKin'] ?></h5>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Next of Kin Cell Number</label>
+                              <h5><?php echo $see ['NextofKinCellNumber'] ?></h5>
+                            </div>
+                          </div>                   
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Contact Person</label>
+                              <h5><?php echo $see ['ContactPerson'] ?></h5>
+                            </div>
+                          </div>                    
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Contact Person Cell Number</label>
+                            <h5><?php echo $see ['CPCN'] ?></h5>
+                            </div>
+                          </div>
                       </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Last Name</label>
-                            <h5><?php echo $see ['lName'] ?></h5>
-                          </div>
-                        </div> 
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Father Name</label>
-                            <h5><?php echo $see ['father_Name'] ?></h5>
-                          </div>
-                        </div> 
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>CNIC</label>
-                            <h5><?php echo $see ['CNIC'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Email address</label>
-                            <h5><?php echo $see ['email'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Permenent Address</label>
-                            <h5><?php echo $see ['pAddress'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Current Address</label>
-                            <h5><?php echo $see ['cAddress'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>City</label>
-                            <h5><?php echo $see ['city'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Postal Address</label>
-                            <h5><?php echo $see ['postAddress'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Mobile Number</label>
-                            <h5><?php echo $see ['mNumber'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Office Phone Number</label>
-                            <h5><?php echo $see ['ofphNumber'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Alternate Number</label>
-                            <h5><?php echo $see ['Alternate_Number'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Date of Birth</label>
-                            <h5><?php echo $see ['DofB'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Religion</label>
-                            <h5><?php echo $see ['religion'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Gender</label>
-                            <h5><?php echo $see ['gender'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Blood Group</label>
-                            <h5><?php echo $see ['BlGroup'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Domicile</label>
-                            <h5><?php echo $see ['Domicile'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Marital Status </label>
-                            <h5><?php echo $see ['MaritalStatus'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Next of Kin</label>
-                            <h5><?php echo $see ['NextofKin'] ?></h5>
-                          </div>
-                        </div>
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Next of Kin Cell Number</label>
-                            <h5><?php echo $see ['NextofKinCellNumber'] ?></h5>
-                          </div>
-                        </div>                   
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Contact Person</label>
-                            <h5><?php echo $see ['ContactPerson'] ?></h5>
-                          </div>
-                        </div>                    
-                        <div class="col-md-4 my-2">
-                          <div class="form-group">
-                            <label>Contact Person Cell Number</label>
-                          <h5><?php echo $see ['CPCN'] ?></h5>
-                          </div>
-                        </div>
-                    </div>
-        </div>
-            <div class="col-12 bg-white mt-5 px-2">
+          </div>
+          <div class="col-12 bg-white mt-5 px-2">
                 <nav class="navbar bg-white">
                   <div class="container-fluid">
                       <h4>Employement Info</h4>
@@ -336,71 +330,55 @@ if ($query)
                                 </div>
                    </div>
               </div>
-              <?php  $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `$CNIC`");
-      while($see=mysqli_fetch_array($select)){
-        ?>
-              
-              <div class="col-12 bg-white mt-5 px-2"> 
-                <nav class="navbar bg-white">
-                  <div class="container-fluid">
+          <div class="col-12 bg-white mt-5 px-2">
+            <nav class="navbar bg-white">
+               <div class="container-fluid">
                     <h4>Qualification Info</h4>
                   </div>
                 </nav>
-                <div class="row">
-                  <div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>GradeDivision</label>
-                      <h5><?php echo $see ['GradeDivision'] ?></h5>
-                    </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>Passing_Year_of_Degree</label>
-                      <h5><?php echo $see ['Passing_Year_of_Degree'] ?></h5>
-                    </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>Last_Institute</label>
-                      <h5><?php echo $see ['Last_Institute'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>PEC_Registration</label>
-                      <h5><?php echo $see ['PEC_Registration'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>CV</label>
-                      <h5><?php echo $see ['CV'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>Institute_AddressCV</label>
-                      <h5><?php echo $see ['Institute_AddressCV'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>Qualification</label>
-                      <h5><?php echo $see ['Qualification'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>Major_Subject</label>
-                      <h5><?php echo $see ['Major_Subject'] ?></h5>
-                    </div>
-                  </div><div class="col-md-4 my-2">
-                    <div class="form-group">
-                      <label>RemarksCV</label>
-                      <h5><?php echo $see ['RemarksCV'] ?></h5>
-                    </div>
-                  </div>
+                <div>
+                  <table class="table bg-light">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Qualification</th>
+                        <th scope="col">Grade/Division</th>
+                        <th scope="col">Passing Year of Degree</th>
+                        <th scope="col">Last Institute</th>
+                        <th scope="col">PEC Registration</th>
+                        <th scope="col">Institute Address</th>
+                        <th scope="col">Major Subject</th>
+                        <th scope="col">CV</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php   $CNIC = $_GET['updat'];
+                      $select = mysqli_query($conn,"SELECT * FROM `$CNIC a`");
+                      while($see=mysqli_fetch_array($select))
+                      {
+                      ?>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td><?php echo $see ['Qualification'] ?></td>
+                        <td><?php echo $see ['GradeDivision'] ?></td>
+                        <td><?php echo $see ['Passing_Year_of_Degree'] ?></td>
+                        <td><?php echo $see ['Last_Institute'] ?></td>
+                        <td><?php echo $see ['PEC_Registration'] ?></td>
+                        <td><?php echo $see ['Institute_AddressCV'] ?></td>
+                        <td><?php echo $see ['Major_Subject'] ?></td>
+                        <td><a href="../CV/<?php echo $see ['CV'] ?>"></a></td>
+                        <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
+                        <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                      </tr>
+                      <?php }?>
+                    </tbody>
+                  </table>
                 </div>
-
               </div>
-             <?php }?>
-       <!-- <div class="col-12 bg-white mt-5 px-2">
+          
+              <!-- <div class="col-12 bg-white mt-5 px-2">
               <nav class="navbar bg-white">
               <div class="container-fluid">
                   <h4>Family Info</h4>
@@ -460,7 +438,9 @@ if ($query)
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body bg-light">
-                        <div class="row">
+                       <form action="#" method="post">
+                         
+                      <div class="row">
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Training Serial Number</label>
@@ -516,12 +496,65 @@ if ($query)
                             </div>
                           </div>
                           <div class="col-md-12 text-end mt-2">
-                          <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip" >
-                          <input style="background-color: darkblue;"  type="submit" onclick="validateSection3()" class="btn text-white shadow float-right" value="Submit" >
+                          <button style="background-color: darkblue;" name="submit" type="submit" class="btn text-white shadow float-right"><i class="fa-solid fa-plus"></i></button>
+                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip">
+                            <input type="submit"  onclick="backToSection2()"  style="background-color: darkblue;" class="btn text-white shadow float-right" value="Submit" name="submit" id="">
                           </div>
                         </div>
+                      
+                       </form>
                       </div>
                       <!-- /.card-body -->
+                      <div class="col-12 bg-white mt-5 px-2"> 
+                <nav class="navbar bg-white">
+                  <div class="container-fluid">
+                    <h4>Qualification Info</h4>
+                  </div>
+                </nav>
+                <div>
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Qualification</th>
+                                    <th scope="col">Grade/Division</th>
+                                    <th scope="col">Passing Year of Degree</th>
+                                    <th scope="col">Last Institute</th>
+                                    <th scope="col">PEC Registration</th>
+                                    <th scope="col">Institute Address</th>
+                                    <th scope="col">Major Subject</th>
+                                    <th scope="col">CV</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
+                                </tr></thead>
+                                
+                                <tbody>
+                                <?php   $CNIC = $_GET['updat'];
+                                  $select = mysqli_query($conn,"SELECT * FROM `$CNIC b`");
+                                  while($see=mysqli_fetch_array($select))
+                                  { 
+                                  ?>
+                                    <tr>
+                                    <th scope="row"><?php echo $see ['Id'] ?></th>
+                                    <td><?php echo $see ['Training_Serial_Number'] ?></td>
+                                    <td><?php echo $see ['Training_Name'] ?></td>
+                                    <td><?php echo $see ['Institute'] ?></td>
+                                    <td><?php echo $see ['City'] ?></td>
+                                    <td><?php echo $see ['Institute_Address'] ?></td>
+                                    <td><?php echo $see ['Oblige_Sponsor'] ?></td>
+                                    <td><?php echo $see ['From_Date'] ?></td>
+                                    <td><a href="../CV/<?php echo $see ['To_Date'] ?>"></a></td>
+                                    <td><a href="../CV/<?php echo $see ['Duration'] ?>"></a></td>
+                                    <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                    <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+                                    <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    
+               </div>
+      
                     </div>
                       <!-- /.card -->
                   </div>

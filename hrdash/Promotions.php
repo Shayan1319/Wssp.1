@@ -4,15 +4,15 @@ include('../link/desigene/db.php');
 if(isset($_POST['submit']))
 {
 $CNIC = $_GET['updat'];
-$From_Designation = $_POST[''];
-$To_Designation = $_POST[''];
-$From_BPS = $_POST[''];
-$ToBps = $_POST[''];
-$Promotion_Date = $_POST[''];
-$Promotion_Number = $_POST[''];
-$Department1 = $_POST[''];
-$Acting = $_POST[''];
-$Remarks = $_POST[''];
+$From_Designation = $_POST['From_Designation'];
+$To_Designation = $_POST['To_Designation'];
+$From_BPS = $_POST['From_BPS'];
+$ToBps = $_POST['ToBps'];
+$Promotion_Date = $_POST['Promotion_Date'];
+$Promotion_Number = $_POST['Promotion_Number'];
+$Department1 = $_POST['Department1'];
+$Acting = $_POST['Acting'];
+$Remarks = $_POST['Remarks'];
 $insertquery = "INSERT INTO `$CNIC c`(`From_Designation`, `To_Designation`, `From_BPS`, `ToBps`, `Promotion_Date`, `Promotion_Number`, `Department1`, `Acting`, `Remarks`) VALUES ('$From_Designation','$To_Designation','$From_BPS','$ToBps','$Promotion_Date','$Promotion_Number','$Department1','$Acting','$Remarks'";
 $query= mysqli_query($conn,$insertquery);
 if ($query)

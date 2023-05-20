@@ -41,12 +41,12 @@
                   Add Employee
                 </a>
                 
-                  <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
-                  <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a>
-                  <a id="section_c" onclick="validateSection2()" href="#">Qualification</a>
-                  <a id="section_d" onclick="validateSection3()" href="#">Treining Info</a>
-                  <a id="section_e" onclick="validateSection4()" href="#">Promotions</a>
-                  <a id="section_f" onclick="validateSection5()" href="#"> Transfer</a>
+                  <!-- <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
+                  <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a> -->
+                  <a id="" href="#">Qualification</a>
+                  <a id="" href="#">Treining Info</a>
+                  <a id="" href="#">Promotions</a>
+                  <a id="" href="#"> Transfer</a>
                
 
               <!-- <a href="EmployeeInitialAppointment.php" class="nav-link">

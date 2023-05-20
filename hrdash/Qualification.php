@@ -9,7 +9,7 @@ $GradeDivision = $_POST ['GradeDivision'];
 $Passing_Year_of_Degree = $_POST ['Passing_Year_of_Degree'];
 $Last_Institute = $_POST ['Last_Institute'];
 $PEC_Registration = $_POST ['PEC_Registration'];
-$CV = $_FILES ['CV'];
+$CV = $_FILES['CV'];
 $Institute_AddressCV = $_POST ['Institute_AddressCV'];
 $Major_Subject = $_POST ['Major_Subject'];
 $RemarksCV = $_POST ['RemarksCV'];
@@ -22,7 +22,7 @@ if($CV_error==0)
     // echo $CV_save;
     move_uploaded_file($CV_path, $CV_save);  
 }else{
-    echo '<script>alert("Picture is not uploaded Kindli update");</script>';
+    echo '<script>alert("CV is not uploaded Kindli update");</script>';
 }
 $insertquery = "INSERT INTO `$CNIC a`( `Qualification`, `GradeDivision`, `Passing_Year_of_Degree`, `Last_Institute`, `PEC_Registration`, `CV`, `Institute_AddressCV`, `Major_Subject`, `RemarksCV`) VALUES ('$Qualification','$GradeDivision','$Passing_Year_of_Degree','$Last_Institute','$PEC_Registration','$CV_name','$Institute_AddressCV','$Major_Subject','$RemarksCV')";
 $query= mysqli_query($conn,$insertquery);
@@ -41,7 +41,6 @@ if ($query)
   <body>
       <?php include ('link/desigene/sidebar.php')?>
     <div id="main">
-      <?php include('link/desigene/navbar.php')?>
       <?php
       $CNIC = $_GET['updat'];
       $select = mysqli_query($conn,"SELECT * FROM `employeeinfo` WHERE `CNIC` ='$CNIC' ");
@@ -402,11 +401,12 @@ if ($query)
 
           </div>
           <?php }?>
-          <form action="#" method="post">
+         
              <div class="container-fluid py-5">
                 <div id="section3" >
                   <div class="row my-4">
-                    <div class="col-md-12">
+                     <form action="#" method="post">
+                      <div class="col-md-12">
                       <div class="card card-success bg-light">
                         <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                           <div class="card-title">Employee Qualification</div>
@@ -474,9 +474,8 @@ if ($query)
                             </div>
                           </div>
                           <div class=" text-end">
-                            <button style="background-color: darkblue;"  type="button" class="btn text-white shadow float-right"><i class="fa-solid fa-plus"></i></button>
-                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip" >
-                            
+                            <button style="background-color: darkblue;" name="submit" type="submit" class="btn text-white shadow float-right"><i class="fa-solid fa-plus"></i></button>
+                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip">
                             <input type="submit"  onclick="backToSection2()"  style="background-color: darkblue;" class="btn text-white shadow float-right" value="Submit" name="submit" id="">
                           </div>
                         </div>
@@ -485,6 +484,8 @@ if ($query)
                       <!-- /.card -->
                     </div>
                     <!-- Col-12 -->
+                    </form>
+                 
                     <div class="card card2 text-center bg-light">
                         <div style="background-color: darkblue;" class="card-header ">
                           <div class="card-title text-white">Employee Qualification</div>
@@ -504,27 +505,34 @@ if ($query)
                                     <th scope="col">Update</th>
                                     <th scope="col">Delete</th>
                                 </tr></thead>
+                                
                                 <tbody>
+                                <?php   $CNIC = $_GET['updat'];
+                                  $select = mysqli_query($conn,"SELECT * FROM `$CNIC a`");
+                                  while($see=mysqli_fetch_array($select))
+                                  {
+                                  ?>
                                     <tr>
                                     <th scope="row">1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><?php echo $see ['Qualification'] ?></td>
+                                    <td><?php echo $see ['GradeDivision'] ?></td>
+                                    <td><?php echo $see ['Passing_Year_of_Degree'] ?></td>
+                                    <td><?php echo $see ['Last_Institute'] ?></td>
+                                    <td><?php echo $see ['PEC_Registration'] ?></td>
+                                    <td><?php echo $see ['Institute_AddressCV'] ?></td>
+                                    <td><?php echo $see ['Major_Subject'] ?></td>
                                     <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
                                     <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                  
                   </div>
                 </div>
               </div>
-          </form>
         </div>
   <script>
       function backToSection2() {
