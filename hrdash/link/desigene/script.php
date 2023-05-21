@@ -69,7 +69,7 @@
   // Create the specified number of divs and append them to the div container
   for (var i = 1; i <= numDivs; i++) {
     var div = document.createElement("div");
-    div.innerHTML = '  <div class="row"><div class="col-md-4"><label for="">Name</label><input type="text" class="form-control" name="child_name" placeholder="Name" id=""></div><div class="col-md-4"><label for="">Cnic / B form</label><input type="text" class="form-control" name="CNIC_child" placeholder="CNIC / B from" id=""></div><div class="col-md-4"><label for="">Date of birth</label><input type="text" class="form-control" name="DofB" placeholder="Date of birth" id=""></div><div class="col-md-4"><label for="">Gander</label><input type="text" class="form-control" name="Gander" placeholder="Gander" id=""></div></div>  ' + i;
+    div.innerHTML = '<div class="row"><div class="col-md-4"><label for="">Name</label><input type="text" class="form-control" name="child_name" placeholder="Name" id=""></div><div class="col-md-4"><label for="">Cnic / B form</label><input type="text" class="form-control" name="CNIC_child" placeholder="CNIC / B from" id=""></div><div class="col-md-4"><label for="">Date of birth</label><input type="date" class="form-control" name="DofB" placeholder="Date of birth" id=""></div><div class="col-md-4"><label>Gender</label><select id="Gender" name="gender" id="" class="form-control select2"><option value="">Choose</option><option value="">Male</option><option value="">Female</option></select></div></div> ' + i;
     divContainer.appendChild(div);
   }
 }

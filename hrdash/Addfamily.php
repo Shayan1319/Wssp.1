@@ -37,7 +37,7 @@
                         <td></td>
                         <td></td>
                         <td><a href="seewife.php"><i class="bi bi-people-fill"></i></a></td>
-                        <td><a href="HumanResource.php"><i class="bi bi-person-add"></i></a></td>
+                        <td><a href="famly.php"><i class="bi bi-person-add"></i></a></td>
                         <td><a href="profile.php"><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
                         <td><a href=""><i class="fa-solid fa-trash"></i></a></td>

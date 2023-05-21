@@ -5,8 +5,7 @@
   outline: none;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-}
+
 
 .dropdown-content {
   display: none;
@@ -19,8 +18,7 @@
   text-align: left;
 }
 
-.dropdown-content a:hover {
-}
+
 
 .dropdown:hover .dropdown-content {
   display: block;

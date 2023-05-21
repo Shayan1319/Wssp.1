@@ -68,7 +68,7 @@ if(isset($_POST['submit']))
           <div class="col-12 bg-white mt-5 px-2">
             <nav class="navbar bg-white">
               <div class="container-fluid">
-                <h4>Basic Info</h4>
+                <h4>Basic Information</h4>
               </div>
             </nav>
             <div class="row mt-5 p-3">
@@ -215,7 +215,7 @@ if(isset($_POST['submit']))
           <div class="col-12 bg-white mt-5 px-2">
                 <nav class="navbar bg-white">
                   <div class="container-fluid">
-                      <h4>Employement Info</h4>
+                      <h4>Employement Information</h4>
                   </div>
                 </nav>
                 <div class="row">
@@ -252,7 +252,7 @@ if(isset($_POST['submit']))
                                 </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>Grade</label>
+                                    <label>Training Namelabel>
                                     <h5><?php echo $see ['Grade_tma'] ?><?php echo $see ['Grande_tma'] ?></h5>
                                   </div>
                                 </div>
@@ -333,7 +333,7 @@ if(isset($_POST['submit']))
           <div class="col-12 bg-white mt-5 px-2">
             <nav class="navbar bg-white">
                <div class="container-fluid">
-                    <h4>Qualification Info</h4>
+                    <h4>Qualification Information</h4>
                   </div>
                 </nav>
                 <div>
@@ -423,9 +423,9 @@ if(isset($_POST['submit']))
                   </div>
               </div> -->
 
-            </div>
+        </div>
 
-          </div>
+      </div>
           <?php }?>
         
         <div id="section4" >
@@ -444,55 +444,55 @@ if(isset($_POST['submit']))
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Training Serial Number</label>
-                              <input type="text" name="Training_Serial_Number" placeholder="Training Serial Number" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Training_Serial_Number" placeholder="Training Serial Number" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Training Name</label>
-                              <input type="text" name="Training_Name" id="Training_Name" placeholder="Training Name" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Training_Name" id="Training_Name" placeholder="Training Name" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Institute</label>
-                              <input type="text" name="Institute" placeholder="Institute" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Institute" placeholder="Institute" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>City</label>
-                              <input type="text" name="City" placeholder="City" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="City" placeholder="City" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Institute Address</label>
-                              <input type="text" name="Institute_Address" placeholder="Institute Address" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Institute_Address" placeholder="Institute Address" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Oblige Sponsor</label>
-                              <input type="text" name="Oblige_Sponsor" placeholder="Oblige Sponsor" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Oblige_Sponsor" placeholder="Oblige Sponsor" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>From</label>
-                              <input type="Date" name="From" class="form-control" autocomplete="off" required="">
+                              <input type="Date" name="From" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>To</label>
-                              <input type="Date" name="To" class="form-control" autocomplete="off" required="">
+                              <input type="Date" name="To" class="form-control" autocomplete="off" >
                             </div>
                           </div> 
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Duration </label>
-                              <input type="text" name="Duration" placeholder="Duration" class="form-control" autocomplete="off" required="">
+                              <input type="text" name="Duration" placeholder="Duration" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-12 text-end mt-2">
@@ -508,7 +508,7 @@ if(isset($_POST['submit']))
                       <div class="col-12 bg-white mt-5 px-2"> 
                 <nav class="navbar bg-white">
                   <div class="container-fluid">
-                    <h4>Qualification Info</h4>
+                    <h4>Training Information</h4>
                   </div>
                 </nav>
                 <div>
@@ -516,14 +516,14 @@ if(isset($_POST['submit']))
                                 <thead>
                                     <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Qualification</th>
-                                    <th scope="col">Grade/Division</th>
-                                    <th scope="col">Passing Year of Degree</th>
-                                    <th scope="col">Last Institute</th>
-                                    <th scope="col">PEC Registration</th>
+                                    <th scope="col">Training Serial Number</th>
+                                    <th scope="col">Training Name</th>
+                                    <th scope="col">Institute</th>
+                                    <th scope="col">City</th>
                                     <th scope="col">Institute Address</th>
-                                    <th scope="col">Major Subject</th>
-                                    <th scope="col">CV</th>
+                                    <th scope="col">Oblige Sponsor</th>
+                                    <th scope="col">From</th>
+                                    <th scope="col">To</th>
                                     <th scope="col">Update</th>
                                     <th scope="col">Delete</th>
                                 </tr></thead>
@@ -543,8 +543,8 @@ if(isset($_POST['submit']))
                                     <td><?php echo $see ['Institute_Address'] ?></td>
                                     <td><?php echo $see ['Oblige_Sponsor'] ?></td>
                                     <td><?php echo $see ['From_Date'] ?></td>
-                                    <td><a href="../CV/<?php echo $see ['To_Date'] ?>"></a></td>
-                                    <td><a href="../CV/<?php echo $see ['Duration'] ?>"></a></td>
+                                    <td><?php echo $see ['To_Date'] ?></td>
+                                    <td><?php echo $see ['Duration'] ?></td>
                                     <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
                                     <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>

@@ -78,7 +78,7 @@ if ($query)
         <div class="col-12 bg-white mt-5 px-2">
           <nav class="navbar bg-white">
             <div class="container-fluid">
-              <h4>Basic Info</h4>
+              <h4>Basic Information</h4>
             </div>
           </nav>
           <div class="row mt-5 p-3">
@@ -225,7 +225,7 @@ if ($query)
             <div class="col-12 bg-white mt-5 px-2">
                 <nav class="navbar bg-white">
                   <div class="container-fluid">
-                      <h4>Employement Info</h4>
+                      <h4>Employement Information</h4>
                   </div>
                 </nav>
                 <div class="row">
@@ -418,31 +418,31 @@ if ($query)
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Qualification</label>
-                                <input type="text" name="Qualification" id="Qualification" placeholder="Qualification" class="form-control" autocomplete="off" required="">
+                                <input type="text" name="Qualification" id="Qualification" placeholder="Qualification" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Grade/Division</label>
-                                <input type="text" name="GradeDivision" placeholder="Grade/Division" class="form-control" autocomplete="off" required="">
+                                <input type="text" name="GradeDivision" placeholder="Grade/Division" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" required="">
+                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Last Institute</label>
-                                <input type="text" name="Last_Institute" placeholder="Last Institute" class="form-control" autocomplete="off" required="">
+                                <input type="text" name="Last_Institute" placeholder="Last Institute" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>PEC Registration</label>
-                                <input type="text" name="PEC_Registration" placeholder="Last Institute" class="form-control" autocomplete="off" required="">
+                                <input type="text" name="PEC_Registration" placeholder="Last Institute" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2 mt-4">
@@ -457,13 +457,13 @@ if ($query)
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Institute Address</label>
-                                <input type="text" name="Institute_AddressCV" id="Institute_Address" placeholder="Institute Address " class="form-control" autocomplete="off" required="">
+                                <input type="text" name="Institute_AddressCV" id="Institute_Address" placeholder="Institute Address " class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Major Subject</label>
-                                <input type="text" name="Major_Subject" placeholder="Major Subject" class="form-control" autocomplete="off" required="">
+                                <input type="text" name="Major_Subject" placeholder="Major Subject" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
