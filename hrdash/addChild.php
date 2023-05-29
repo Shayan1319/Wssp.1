@@ -8,7 +8,7 @@ $Name= $_POST['Spouse_Name'];
 $CNICC= $_POST['CNIC'];
 $Date_of_B= $_POST['Date_of_B'];
 $gender= $_POST['gender'];
-$insertquery = "INSERT INTO `123456`(`Child_Name`, `BForm`, `Date_Of_B`, `Gander`) VALUES ('$Name','$CNICC','$Date_of_B','$gender')";
+$insertquery = "INSERT INTO `$CNIC`(`Child_Name`, `BForm`, `Date_Of_B`, `Gander`) VALUES ('$Name','$CNICC','$Date_of_B','$gender')";
 $query= mysqli_query($conn,$insertquery);
 if ($query)
 {echo '<script>alert( "Data Insertaed");</script>';}
