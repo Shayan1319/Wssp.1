@@ -1,4 +1,16 @@
+<?php
+session_start();
+error_reporting(0);
+// links to database
 
+if ($_SESSION['loginid'] == 0) {
+?>   
+    <script>
+        location.replace('../logout.php')
+    </script>
+<?php
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
