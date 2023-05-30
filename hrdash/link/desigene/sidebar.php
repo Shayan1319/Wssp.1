@@ -5,8 +5,7 @@
   outline: none;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-}
+
 
 .dropdown-content {
   display: none;
@@ -19,8 +18,7 @@
   text-align: left;
 }
 
-.dropdown-content a:hover {
-}
+
 
 .dropdown:hover .dropdown-content {
   display: block;
@@ -43,10 +41,10 @@
                 
                   <!-- <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
                   <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a> -->
-                  <a id="" href="Qualufication.php">Qualification</a>
-                  <a id="" href="TreiningInfo.php">Treining Info</a>
-                  <a id="" href="Promotions.php">Promotions</a>
-                  <a id="" href="Transfer.php"> Transfer</a>
+                  <a id="" href="Qualuficationadd.php">Qualification</a>
+                  <a id="" href="TreiningInfoadd.php">Treining Info</a>
+                  <a id="" href="Promotionsadd.php">Promotions</a>
+                  <a id="" href="Transferadd.php"> Transfer</a>
                
 
               <!-- <a href="EmployeeInitialAppointment.php" class="nav-link">

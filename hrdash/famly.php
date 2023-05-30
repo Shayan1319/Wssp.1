@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-
+include '../link/desigene/db.php';
 if ($_SESSION['loginid'] == 0) {
 ?>   
     <script>
@@ -16,21 +16,28 @@ include('../link/desigene/db.php');
 if(isset($_POST['submit']))
 {
 $CNIC = $_GET['updat'];
-$Transfer_Order_Number= $_POST['Transfer_Order_Number'];
-$Designation= $_POST['Designation'];
-$BPS= $_POST['BPS'];
-$From_Department= $_POST['From_Department'];
-$To_Project= $_POST['To_Project'];
-$From_Station= $_POST['From_Station'];
-$To_Station= $_POST['To_Station'];
-$Worked_From= $_POST['Worked_From'];
-$Transfer_Date= $_POST['Worked_From'];
-$insertquery = "INSERT INTO `$CNIC d`( `Transfer_Order_Number`, `Designation`, `BPS`, `From_Department`, `To_Project`, `From_Station`, `To_Station`, `Worked_From`, `Transfer_Date`) VALUES ('$Transfer_Order_Number','$Designation','$BPS','$From_Department','$To_Project','$From_Station','$To_Station','$Worked_From','$Transfer_Date')";
+$Spouse_Name= $_POST['Spouse_Name'];
+$CNICW= $_POST['CNIC'];
+$Date_of_B= $_POST['Date_of_B'];
+$insertquery = "INSERT INTO `$CNIC e`( `Spouse_Name`, `CNIC`, `Date_of_B`) VALUES ('$Spouse_Name','$CNICW','$Date_of_B')";
 $query= mysqli_query($conn,$insertquery);
 if ($query)
 {echo '<script>alert( "Data Insertaed");</script>';
-    }
-
+    $sqlA = "CREATE TABLE `database_wssc`.`$CNICW`(
+        Id INT PRIMARY KEY AUTO_INCREMENT,
+        Child_Name  VARCHAR(255),
+        BForm VARCHAR(255),
+        Date_Of_B VARCHAR(255),
+        Gander VARCHAR(255)
+        )";
+      $tableA = $conn->query($sqlA);
+      if ( $tableA === TRUE) {
+        echo '<script>alert( "Table created successfully");</script>';
+      
+      } else {
+        echo "Error creating table: " ;
+      }  
+}
 }
 ?>
 <!DOCTYPE html>
@@ -489,119 +496,14 @@ if ($query)
                             </table>
                         </div>
               </div>
-             <!--  <div class="col-12 bg-white mt-5 px-2">
+              <div class="col-12 bg-white mt-5 px-2">
               <nav class="navbar bg-white">
               <div class="container-fluid">
                   <h4>Transfer Info</h4>
               </div>
               </nav>
                   <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div> 
-            <div class="col-12 bg-white mt-5 px-2">
-                  <nav class="navbar bg-white">
-                  <div class="container-fluid">
-                      <h4>Family Info</h4>
-                  </div>
-                  </nav>
-                  <div class="row">
-                    
-                  </div>
-              </div>
-            -->
-
-            </div>
-
-          </div>
-          <?php }?>
-        <div class="container-fluid py-5">
-             <form action="" method="post">
-             <div id="section6">
-                <div class="row my-4">
-                  <!-- left column -->
-                  <div class="col-md-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Employee Transfer</div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body bg-light">
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Transfer Order Number </label>
-                              <input type="text" name="Transfer_Order_Number" placeholder="Transfer Order Number" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>  
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Designation</label>
-                              <input type="text" name="Designation" placeholder="Designation" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>BPS</label>
-                              <input type="text" name="BPS" placeholder="From BPS" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From Department</label>
-                              <input type="text" name="From_Department" placeholder="From Deparment" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label> To Project</label>
-                              <input type="text" name="To_Project" placeholder="To Project" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>From Station</label>
-                              <input type="text" name="From_Station" placeholder="From  Station" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>To Station</label>
-                              <input type="text" name="To_Station" placeholder="To Station" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Worked From</label>
-                              <input type="text" name="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Transfer Date</label>
-                              <input type="Date" name="Transfer_Date" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-12 text-end mt-2">
-                          <button style="background-color: darkblue;" name="submit" type="submit" class="btn text-white shadow float-right"><i class="fa-solid fa-plus"></i></button>
-                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip">
-                            <input type="button"  onclick="backToSection2()"  style="background-color: darkblue;" class="btn text-white shadow float-right" value="Submit" name="" id="">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                  </div>
-                  <!-- Col-12 -->
-                  <div class="col-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Employee Promotions</div>
-                      </div>
-                    </div>
-                       <div>
+                          <div>
                             <table class="table bg-light">
                                 <thead>
                                     <tr>
@@ -634,8 +536,110 @@ if ($query)
                                     <td><?php echo $see ['To_Project'] ?></td>
                                     <td><?php echo $see ['From_Station'] ?></td>
                                     <td><?php echo $see ['To_Station'] ?></td>
-                                    <td><?php echo $see ['Worked_From'] ?>"</td>
-                                    <td><?php echo $see ['Transfer_Date'] ?></td>
+                                    <td><?php echo $see ['Worked_From'] ?></td>
+                                    <td><?php echo $see ['Transfer_Date'] ?>"</td>
+                                    <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                    <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                                    </tr>
+                                    <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                
+                  </div>
+              </div> 
+           <!--  <div class="col-12 bg-white mt-5 px-2">
+                  <nav class="navbar bg-white">
+                  <div class="container-fluid">
+                      <h4>Family Info</h4>
+                  </div>
+                  </nav>
+                  <div class="row">
+                    
+                  </div>
+              </div>
+            -->
+
+            </div>
+
+          </div>
+          <?php }?>
+        <div class="container-fluid py-5">
+             <form action="" method="post">
+             <div id="section6">
+                <div class="row my-4">
+                  <!-- left column -->
+                  <div class="col-md-12">
+                    <div class="card card-success">
+                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
+                        <div class="card-title">Employee Transfer</div>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body bg-light">
+                        <div class="row">
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Spouse Name</label>
+                              <input type="text" name="Spouse_Name" placeholder="Spouse Name" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>  
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>CNIC</label>
+                              <input type="text" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>Date of birth</label>
+                              <input type="date" name="Date_of_B" placeholder="Date of birth" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>
+                          <div class="col-md-12 text-end mt-2">
+                          <button style="background-color: darkblue;" name="submit" type="submit" class="btn text-white shadow float-right"><i class="fa-solid fa-plus"></i></button>
+                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Skip">
+                            <input type="button"  onclick="backToSection2()"  style="background-color: darkblue;" class="btn text-white shadow float-right" value="Submit" name="" id="">
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                  </div>
+                  <!-- Col-12 -->
+                  <div class="col-12">
+                    <div class="card card-success">
+                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
+                        <div class="card-title">Spouse Details</div>
+                      </div>
+                    </div>
+                       <div>
+                            <table class="table bg-light">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Spouse_Name</th>
+                                    <th scope="col">CNIC</th>
+                                    <th scope="col">Date of birth.</th>
+                                    <th scope="col">Add Child</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
+                                </tr></thead>
+                                
+                                <tbody>
+                                <?php   $CNIC = $_GET['updat'];
+                                  $select = mysqli_query($conn,"SELECT * FROM `$CNIC e`");
+                                  while($see=mysqli_fetch_array($select))
+                                  { 
+                                  ?>
+                                    <tr>
+                                    <th scope="row"><?php echo $see ['Id'] ?></th>
+                                    <td><?php echo $see ['Spouse_Name'] ?></td>
+                                    <td><?php echo $see ['CNIC'] ?></td>
+                                    <td><?php echo $see ['Date_of_B'] ?></td>
+                                    <td><a href="javascript:void(0);" onclick="openPopup('AddChild.php?updat=<?php echo $see['CNIC']?>')">
+                                    <i class="fa-solid fa-children"></i>
+                                        </a></td>
                                     <td><a href=""><i class="fa-solid fa-pen-to-square"></i></a></td>
                                     <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
                                     </tr>
@@ -654,9 +658,18 @@ if ($query)
     </div>
     <script>
       function backToSection2() {
-        <?php $CNIC = $_GET['updat'];?>
-        location.replace('famly.php?updat=<?php echo $CNIC?>');
+        location.replace('employeePersonalInfo.php>');
             }
+</script>
+<script>
+  function openPopup(url) {
+    var popup = window.open(url, "_blank", "width=500, height=500");
+    if (popup) {
+      popup.focus();
+    } else {
+      alert("Popup blocked! Please allow pop-ups for this website.");
+    }
+  }
 </script>
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

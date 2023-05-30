@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include '../link/desigene/db.php';
+
 if ($_SESSION['loginid'] == 0) {
 ?>   
     <script>
@@ -24,7 +24,7 @@ if ($_SESSION['loginid'] == 0) {
         <div class="col-lg-12">
           <div class="card card2 text-center bg-light">
             <div style="background-color: darkblue;" class="card-header ">
-              <div class="card-title text-white">Appraisal</div>
+              <div class="card-title text-white">Employee Family Information</div>
             </div>
             <div class="container">
                 <table class="table">
@@ -35,21 +35,23 @@ if ($_SESSION['loginid'] == 0) {
                         <th scope="col">CNIC</th>
                         <th scope="col">Employee NO</th>
                         <th scope="col">Employee Manager</th>
-                        <th scope="col">See Appraisal</th>
-                        <th scope="col">Update Appraisal</th>
-                        <th scope="col">Delete</th>
+                        <th scope="col">Promotions</th>
                     </thead>
                     <tbody>
+                    <?php 
+                    include ('../link/desigene/db.php');
+                    $select = mysqli_query($conn,"SELECT * FROM `employeeinfo`");
+                    while($see=mysqli_fetch_array($select)){
+                    ?>
                         <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a href=""><i class="fa-solid fa-eye"></i></a></td>
-                        <td><a href="Appraisaladd.php"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                        <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                        <th scope="row"><?php echo $see ['Id'] ?></th>
+                        <td><?php echo $see ['fName'];?> <?php echo $see ['mName'];?> <?php echo $see ['lName']?></td>
+                        <td><?php echo $see ['CNIC'] ?></td>
+                        <td><?php echo $see ['EmployeeNo_tma'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
+                        <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
+                        <td><a href="Promotions.php?updat=<?php echo $CNIC?>"><i class="fa-solid fa-rectangle-pro"></i></a></td>
                         </tr>
+                      <?php }?>
                     </tbody>
                 </table>
             </div>

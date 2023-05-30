@@ -40,6 +40,8 @@
               <a class="dropbtn nav-link" href="Master_entries.php">
                   Master entries
               </a>
+              <a href="signup.php" class="nav-link">Add Login</a>
+
 <!--                 
                   <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
                   <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a>
@@ -49,10 +51,7 @@
                   <a id="section_f" onclick="validateSection5()" href="#"> Transfer</a>
                 -->
 
-              <!-- <a href="EmployeeInitialAppointment.php" class="nav-link">
-                  Employement Info
-                </a> -->
-
+              
 
                 <!-- <a href="Addfamily.php" class="nav-link">
                   Family Information
