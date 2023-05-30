@@ -1,5 +1,7 @@
 <?php 
 include('../link/desigene/db.php');
+include('get_employee.php');
+$allEmployee = getEmployee($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +97,9 @@ include('../link/desigene/db.php');
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Employee No</label>
-                      <input type="text" class="form-control" id="employee_no" name="employee_no">
+                      <input type="text" class="form-control" id="employee_no" name="employee_no"
+                      <?php echo $allEmployee;?>
+                      >
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -552,7 +556,7 @@ include('../link/desigene/db.php');
                   <div class="col-md-1">
                     <div class="form-group">
                       <div class="clearfix">&nbsp;</div>
-                      <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                      <button id="btn_add_earn_deduc_fund" name="btn_add_earn_deduc_fund" type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
                     </div>
                   </div>
                   <div class="clearfix">&nbsp;</div>

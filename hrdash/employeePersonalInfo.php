@@ -1,5 +1,6 @@
 <?php 
 include('../link/desigene/db.php');
+
 if(isset($_POST['submit']))
 {
 $image = $_FILES ["image"];
