@@ -62,3 +62,35 @@ CREATE TABLE EmployeeInfo (
     Duty_Point_tma VARCHAR(255),
      Status VARCHAR(255)
 );
+
+
+/* -------------------------------------
+payroll table query
+-- payroll table query
+------------------------------------- */
+CREATE TABLE payroll (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  employee_id INT,
+  payment_mode VARCHAR(50),
+  employee_pay_group VARCHAR(50),
+  employee_pay_sub_group VARCHAR(50),
+  employee_pay_classification VARCHAR(50),
+  salary_bank VARCHAR(50),
+  salary_branch VARCHAR(50),
+  account_no VARCHAR(50),
+  pay_type VARCHAR(50),
+  eobi_no VARCHAR(50),
+  bill_waived_off VARCHAR(50),
+  working_days VARCHAR(50),
+  remarks TEXT,
+  fund_contrib DECIMAL(10, 2),
+  gross_pay DECIMAL(10, 2),
+  deduction DECIMAL(10, 2),
+  net_pay DECIMAL(10, 2),
+  earning_deduction_fund_description VARCHAR(100),
+  allowance_calc_mode VARCHAR(50),
+  earning_deduction_fund_type VARCHAR(50),
+  rate DECIMAL(10, 2),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (employee_id) REFERENCES EmployeeInfo(Id)
+);

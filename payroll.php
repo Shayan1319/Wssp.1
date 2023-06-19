@@ -1,7 +1,7 @@
 <?php 
 include('../link/desigene/db.php');
-include('get_employee.php');
-$allEmployee = getEmployee($con);
+// include('get_employee.php');
+// $allEmployee = getEmployee($con);
 ?>
 <!DOCTYPE html>
 <html lang="en">
