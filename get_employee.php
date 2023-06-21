@@ -1,3 +1,4 @@
+
 <?php 
 function getEmployee($con) {
   $query= "SELECT `Id`,`fName`,`father_Name`,`CNIC`,`email`,`pAddress`,`mNumber`,`ofphNumber`,`Alternate_Number`,

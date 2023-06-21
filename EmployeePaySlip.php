@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+session_start();
+error_reporting(0);
+// links to database
+include('../hrdash/link/desigene/db.php');
+if (strlen($_SESSION['loginid']==0)) {
+?>   <script>
+location.replace('../logout.php')
+</script><?php
+  } else{
+?><!DOCTYPE html>
 <html lang="en">
   <head>
     <?php include ('link/links.php')?>
@@ -47,4 +57,4 @@
     </div>
       <?php include('link/desigene/script.php')?>
   </body>
-</html>
+</html><?php }?>

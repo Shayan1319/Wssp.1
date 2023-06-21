@@ -1,4 +1,14 @@
-<?php 
+<?php
+session_start();
+error_reporting(0);
+// links to database
+include('../hrdash/link/desigene/db.php');
+if (strlen($_SESSION['loginid']==0)) {
+?>   <script>
+location.replace('../logout.php')
+</script><?php
+  } else{
+?><?php 
 include('../link/desigene/db.php');
 // include('get_employee.php');
 // $allEmployee = getEmployee($con);
@@ -610,4 +620,4 @@ include('../link/desigene/db.php');
   <?php include('link/desigene/script.php') ?>
 </body>
 
-</html>
+</html><?php }?>

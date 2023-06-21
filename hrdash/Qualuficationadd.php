@@ -2,14 +2,12 @@
 session_start();
 error_reporting(0);
 // links to database
-
-if ($_SESSION['loginid'] == 0) {
-?>   
-    <script>
-        location.replace('../logout.php')
-    </script>
-<?php
-}
+include('../hrdash/link/desigene/db.php');
+if (strlen($_SESSION['loginid']==0)) {
+?>   <script>
+location.replace('../logout.php')
+</script><?php
+  } else{
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,3 +67,4 @@ if ($_SESSION['loginid'] == 0) {
 <?php include('link/desigene/script.php')?>
 </body>
 </html>
+<?php }?>
