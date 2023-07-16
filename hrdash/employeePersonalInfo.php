@@ -3,7 +3,6 @@ session_start();
 error_reporting(0);
 // links to database
 include('../hrdash/link/desigene/db.php');
-
 if (strlen($_SESSION['loginid']==0)) {
 ?>   <script>
 location.replace('../logout.php')
@@ -58,24 +57,15 @@ $Last_Working_Date = $_POST ["Last_Working_Date"];
 $Attendance_Supervisor = $_POST ["Attendance_Supervisor"];
 $Duty_Location = $_POST ["Duty_Location"];
 $Duty_Point = $_POST ["Duty_Point"];
-$EmpGrupTma = $_POST ["EmpGrupTma"];
-$Employee_Class_tma = $_POST ["Employee_Class_tma"];
-$Employee_Group_tma = $_POST ["Employee_Group_tma"];
-$Employee_Sub_Group_tma = $_POST ["Employee_Sub_Group_tma"];
-$Employee_Quota_tma = $_POST ["Employee_Quota_tma"];
-$Grande_tma = $_POST ["Grande_tma"];
-$Department_name = $_POST ["Department_name"];
-$Job_Tiltle_tma = $_POST ["Job_Tiltle_tma"];
-$Salary_Mode_tma = $_POST ["Salary_Mode_tma"];
-$Status_tma = $_POST ["Status_tma"];
-$EmployeeNo_tma = $_POST ["EmployeeNo_tma"];
-$Employee_Manager_tma = $_POST ["Employee_Manager_tma"];
-$Joining_Date_tma = $_POST ["Joining_Date_tma"];
-$Contract_Expiry_Date_tma = $_POST ["Contract_Expiry_Date_tma"];
-$Last_Working_Day = $_POST ["Last_Working_Day"];
-$Attendance_Supervisor_tma = $_POST ["Attendance_Supervisor_tma"];
-$Duty_Location_tma = $_POST ["Duty_Location_tma"];
-$Duty_Point_tma = $_POST ["Duty_Point_tma"];
+$Salary_Bank = $_POST['Salary_Bank'];
+$Salary_Branch = $_POST['Salary_Branch'];
+$Account_No = $_POST['Account_No'];
+$Pay_Type = $_POST['Pay_Type'];
+$EOBI_No = $_POST['EOBI_No'];
+$Bill_Walved_Off = $_POST['Bill_Walved_Off'];
+$Weekly_Working_Days = $_POST['Weekly_Working_Days'];
+$Bill_Waived_Off = $_POST['Bill_Waived_Off'];
+$Employee_Pay_Classification = $_POST['Employee_Pay_Classification'];
 $Image_name =$image['name'];
 $Image_path = $image['tmp_name'];
 $Image_error = $image['error'];
@@ -87,7 +77,7 @@ if($Image_error==0)
 }else{
     echo '<script>alert("Picture is not uploaded Kindli update");</script>';
 }
-$insertquery = "INSERT INTO `employeeinfo`( `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Grade_tma`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Employee_Status`, `EmployeeNowssp`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `EmpGrupTma`, `Employee_Class_tma`, `Employee_Group_tma`, `Employee_Sub_Group_tma`, `Employee_Quota_tma`, `Grande_tma`, `Department_name`, `Job_Tiltle_tma`, `Salary_Mode_tma`, `Status_tma`, `EmployeeNo_tma`, `Employee_Manager_tma`, `Joining_Date_tma`, `Contract_Expiry_Date_tma`, `Last_Working_Day`, `Attendance_Supervisor_tma`, `Duty_Location_tma`, `Duty_Point_tma`, `Status`) VALUES ('$Image_name','$fName','$mName','$lName','$father_Name','$CNIC','$email','$pAddress','$cAddress','$city','$postAddress','$mNumber','$ofphNumber','$Alternate_Number','$DofB','$religion','$gender','$BlGroup','$Domicile','$MaritalStatus','$NextofKin','$NextofKinCellNumber','$ContactPerson','$CPCN','$Employement_Group','$Employee_Class','$Employee_Group','$Employee_Sub_Group','$Employee_Quota','$Grade_tma','$Department','$Job_Tiltle','$Salary_Mode','$Employee_Status','$EmployeeNowssp','$Employee_Manager','$Joining_Date','$Contract_Expiry_Date','$Last_Working_Date','$Attendance_Supervisor','$Duty_Location','$Duty_Point','$EmpGrupTma','$Employee_Class_tma','$Employee_Group_tma','$Employee_Sub_Group_tma','$Employee_Quota_tma','$Grande_tma','$Department_name','$Job_Tiltle_tma','$Salary_Mode_tma','$Status_tma','$EmployeeNo_tma','$Employee_Manager_tma','$Joining_Date_tma','$Contract_Expiry_Date_tma','$Last_Working_Day','$Attendance_Supervisor_tma','$Duty_Location_tma','$Duty_Point_tma','Block')";
+$insertquery = "INSERT INTO `employeedata`(`image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `Online Status`) VALUES ('$Image_name','$fName','$mName','$lName','$father_Name','$CNIC','$email','$pAddress','$cAddress','$city','$postAddress','$mNumber','$ofphNumber','$Alternate_Number','$DofB','$religion','$gender','$BlGroup','$Domicile','$MaritalStatus','$NextofKin','$NextofKinCellNumber','$ContactPerson','$CPCN','$Employement_Group','$Employee_Class','$Employee_Group','$Employee_Sub_Group','$Employee_Quota','$Grade_tma','$Department','$Job_Tiltle','$Salary_Mode','$Employee_Status','$EmployeeNowssp','$Employee_Manager','$Joining_Date','$Contract_Expiry_Date','$Last_Working_Date','$Attendance_Supervisor','$Duty_Location','$Duty_Point','$Salary_Bank','$Salary_Branch','$Account_No','$Pay_Type','$EOBI_No','$Bill_Walved_Off','$Weekly_Working_Days','$Bill_Waived_Off','$Employee_Pay_Classification','Block')";
 $query= mysqli_query($conn,$insertquery);
 if($query)
 {
@@ -355,6 +345,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                 </div>
               </div>
               <div id="section2" style="display: none;">
+                <!-- button to select wssc or tma -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active bg-primary text-white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">WSSC</button>
@@ -363,11 +354,13 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                     <button class="nav-link bg-success text-white" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">TMA</button>
                   </li>
                 </ul>
+                <!-- /button to select wssc or tma -->
                 <div class="tab-content" id="myTabContent">
                   <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                     <div class="row my-4">
                       <div class="col-md-12 ">
                         <div class="card card-success border border-2 border-dark bg-light">
+                          <!-- heading Nav  -->
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
@@ -379,7 +372,9 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               </div>
                             </div>  
                           </div>
+                          <!-- /heading Nav  -->
                           <br><!-- /.card-header -->
+                          <!-- Wssc Section  -->
                           <div class="card-body ">
                             <div class="row">
                               <div class="col-md-4 my-2">
@@ -447,8 +442,62 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
+                                  <label>Salary Bank</label>
+                                  <input type="text" class="form-control" name="Salary_Bank" placeholder="Salary Bank" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Salary Branch</label>
+                                  <input type="text" class="form-control" name="Salary_Branch" placeholder="Salary Branch" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Account No</label>
+                                  <input type="text" class="form-control" name="Account_No" placeholder="Account No" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Pay Type</label>
+                                  <input type="text" class="form-control" name="Pay_Type" placeholder="Pay Type" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>EOBI No</label>
+                                  <input type="text" class="form-control" name="EOBI_No" placeholder="EOBI No" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Bill Walved Off</label>
+                                  <input type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Walved Off" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Weekly Working Days</label>
+                                  <input type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Bill Waived Off</label>
+                                  <input type="text" class="form-control" name="Bill_Waived_Off" placeholder="Bill Waived Off" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Employee Pay Classification</label>
+                                  <input type="text" class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
                                   <label>Grade</label>
-                                  <select id="" name="Grade_tma" class="form-control">
+                                  <select id="" name="Grade" class="form-control">
                                     <option>Select</option>
                                     <option>CONTINGENT</option>
                                     <option>COVID-19</option>
@@ -596,7 +645,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee NO</label>
-                                  <input type="text" id="EmployeeNowssp" name="EmployeeNowssp" placeholder="Employee NO" class="form-control" autocomplete="off" >
+                                  <input type="text" id="EmployeeNowssp" name="EmployeeNo" placeholder="Employee NO" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -644,6 +693,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               </div>
                             </div>
                           </div>
+                          <!-- /Wssc Section  -->
                         </div>
                       </div>
                     </div>
@@ -669,7 +719,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
-                                  <select name="EmpGrupTma" class="form-control">
+                                  <select name="Employement_Group" class="form-control">
                                     <option>Choose Permanent/Daily Wages</option>
                                     <option>TMA PERMANENT</option>
                                     <option>TMA DAILY WAGES</option>
@@ -679,7 +729,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Class</label>
-                                  <select name="Employee_Class_tma" id="Employee_Class_Tma" class="form-control">
+                                  <select name="Employee_Class" id="Employee_Class_Tma" class="form-control">
                                     <option>Select</option>
                                     <option>Wssc Pay</option>
                                     <option>TMA Pay</option>
@@ -689,7 +739,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Group</label>
-                                  <select name="Employee_Group_tma" id="Employee_Group" class="form-control">
+                                  <select name="Employee_Group" id="Employee_Group" class="form-control">
                                     <option>Select</option>
                                     <option>TMA-ADMIN PAY</option>
                                     <option>TMA-COMMERCIAL</option>
@@ -701,7 +751,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Sub Group</label>
-                                  <select name="Employee_Sub_Group_tma" class="form-control">
+                                  <select name="Employee_Sub_Group" class="form-control">
                                     <option>Select</option>
                                     <option>TMA-ADMIN-PERMANENT PAY</option>
                                     <option>TMA-COMMERCIAL-PERMANENT PAY</option>
@@ -715,7 +765,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Quota</label>
-                                  <select name="Employee_Quota_tma" id="Employee_Quota_tma" class="form-control">
+                                  <select name="Employee_Quota" id="Employee_Quota_tma" class="form-control">
                                     <option>Select</option>
                                     <option>DECEASED SON</option>
                                     <option>DISABLED</option>
@@ -726,8 +776,62 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
+                                  <label>Salary Bank</label>
+                                  <input type="text" class="form-control" name="Salary_Bank" placeholder="Salary Bank" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Salary Branch</label>
+                                  <input type="text" class="form-control" name="Salary_Branch" placeholder="Salary Branch" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Account No</label>
+                                  <input type="text" class="form-control" name="Account_No" placeholder="Account No" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Pay Type</label>
+                                  <input type="text" class="form-control" name="Pay_Type" placeholder="Pay Type" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>EOBI No</label>
+                                  <input type="text" class="form-control" name="EOBI_No" placeholder="EOBI No" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Bill Walved Off</label>
+                                  <input type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Walved Off" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Weekly Working Days</label>
+                                  <input type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Bill Waived Off</label>
+                                  <input type="text" class="form-control" name="Bill_Waived_Off" placeholder="Bill Waived Off" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Employee Pay Classification</label>
+                                  <input type="text" class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" id="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
                                   <label>Grade</label>
-                                  <select name="Grande_tma" id="Grande_tma" class="form-control">
+                                  <select name="Grande" id="Grande" class="form-control">
                                     <option>Select</option>
                                     <option>BPS-2</option>
                                     <option>BPS-3</option>
@@ -746,7 +850,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department</label>
-                                  <select name="Department_name" id="Department_name" class="form-control">
+                                  <select name="Department" id="Department_name" class="form-control">
                                     <option>Select</option>
                                     <option>ADMINISTRATION</option>
                                     <option>COMMERCIAL</option>
@@ -758,7 +862,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div  class="form-group">
                                   <label>Job Tiltle</label>
-                                  <select name="Job_Tiltle_tma" id="Job_Tiltle" class="form-control">
+                                  <select name="Job_Tiltle" id="Job_Tiltle" class="form-control">
                                     <option>Select</option>
                                     <option>OFFICE ASSISTANT</option>
                                     <option>CLERK</option>
@@ -787,7 +891,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Mode</label>
-                                  <select name="Salary_Mode_tma" id="Salary_Mode" class="form-control">
+                                  <select name="Salary_Mode" id="Salary_Mode" class="form-control">
                                     <option>Select</option>
                                     <option>BANK TRANSFER</option>
                                     <option>CHEQUE</option>
@@ -797,7 +901,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Status</label>
-                                  <select name="Status_tma" id="Status_tma" class="form-control">
+                                  <select name="Status" id="Status_tma" class="form-control">
                                     <option>Select</option>
                                     <option>CONTRACT EXP</option>
                                     <option>ON-DUTY</option>
@@ -814,25 +918,25 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee NO</label>
-                                  <input id="EmployeeNo_tma"  type="text" name="EmployeeNo_tma" placeholder="Employee NO" class="form-control" autocomplete="off" >
+                                  <input id="EmployeeNo"  type="text" name="EmployeeNo" placeholder="Employee NO" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Manager</label>
-                                  <input type="text" name="Employee_Manager_tma" id="Employee_Manager" placeholder="Employee Manager" class="form-control" autocomplete="off" >
+                                  <input type="text" name="Employee_Manager" id="Employee_Manager" placeholder="Employee Manager" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Joining Date</label>
-                                  <input type="date" name="Joining_Date_tma" placeholder="Joining Date" class="form-control" autocomplete="off" >
+                                  <input type="date" name="Joining_Date" placeholder="Joining Date" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Contract Expiry Date</label>
-                                  <input type="date" name="Contract_Expiry_Date_tma" id="Contract_Expiry_Date_tma" placeholder="" class="form-control" autocomplete="off" >
+                                  <input type="date" name="Contract_Expiry_Date" id="Contract_Expiry_Date_tma" placeholder="" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -844,19 +948,19 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label> Attendance Supervisor</label>
-                                  <input class="form-control" type="text" placeholder="Attendance Supervisor" name="Attendance_Supervisor_tma" id="">
+                                  <input class="form-control" type="text" placeholder="Attendance Supervisor" name="Attendance_Supervisor" id="">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Duty Location</label>
-                                  <input type="text" name="Duty_Location_tma" id="Duty_Location" placeholder="Duty Location" class="form-control" autocomplete="off" >
+                                  <input type="text" name="Duty_Location" id="Duty_Location" placeholder="Duty Location" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Duty Point</label>
-                                <input type="text" name="Duty_Point_tma" placeholder="Duty Point" class="form-control" autocomplete="off" >
+                                <input type="text" name="Duty_Point" placeholder="Duty Point" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                           </div>
