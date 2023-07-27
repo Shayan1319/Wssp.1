@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include ('link/desigene/db.php');
 if (strlen($_SESSION['loginid']==0)) {
 ?>   <script>
 location.replace('../logout.php')
@@ -19,6 +19,7 @@ location.replace('../logout.php')
     <?php include('link/desigene/navbar.php')?>
     <div class="container-fluid py-5">
       <div class="row">
+      
         <div class="col-lg-12">
           <div class="card card2 text-center bg-light">
             <div style="background-color: darkblue;" class="card-header ">
@@ -26,10 +27,15 @@ location.replace('../logout.php')
             </div>
             <div class="container-fluid m-auto p-5 bg-light">
                 <div class="row">
+                    <?php
+                    $CNIC = $_GET['id'];
+                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = '$CNIC'");
+                    while($see=mysqli_fetch_array($select)){
+                    ?>
                     <div class="col-md-6 col-sm-12 col-lg-6">
                         <div class="row">
                             <div class="col-4"><img src="image/download.jfif" alt="" width="150px"></div>
-                            <div class="col-8"><h4 class="fw-bold">Name</h4><h5>Designation</h5><h5 class="text-primary">gmail@email.com</h5><h5>1111 111111</h5></div>
+                            <div class="col-8"><h4 class="fw-bold"><?php echo $see ['fName']?> <?php echo $see ['mName']?> <?php echo $see ['lName']?> </h4><h5>Designation</h5><h5 class="text-primary"><?php echo $see ['email']?> </h5><h5><?php echo $see ['EmployeeNo']?></h5></div>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-lg-6">
@@ -53,8 +59,29 @@ location.replace('../logout.php')
                     </div>
                     </nav>
                         <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                        <div class="col-md-6 col-lg-6 col-sm-12"></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['Id']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['image']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['fName']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['mName']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['lName']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['father_Name']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['CNIC']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['email']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['pAddress']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['cAddress']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['city']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['postAddress']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['mNumber']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['ofphNumber']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['Alternate_Number']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['DofB']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['religion']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['gender']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['BlGroup']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['Domicile']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['MaritalStatus']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['NextofKin']?></h5></div>
+                        <div class="col-md-6 col-lg-6 col-sm-12"><h5><?php echo $see['NextofKinCellNumber']?></h5></div>
                         </div>
                     </div>
                     <div class="col-12 bg-white mt-5 px-2">
@@ -123,10 +150,12 @@ location.replace('../logout.php')
                         <div class="col-md-6 col-lg-6 col-sm-12"></div>
                         </div>
                     </div>
+                    <?php }?>
                 </div>
             </div>
           </div>
         </div>
+        
         </div>
       </div>
     </div>

@@ -34,7 +34,8 @@ location.replace('../logout.php')
                         <th scope="col">CNIC</th>
                         <th scope="col">Employee NO</th>
                         <th scope="col">Employee Manager</th>
-                        <th scope="col">Qualification</th>
+                        <th scope="col">See</th>
+                        <th scope="col">Delete</th>
                     </thead>
                     <tbody>
                     <?php 
@@ -48,9 +49,34 @@ location.replace('../logout.php')
                         <td><?php echo $see ['CNIC'] ?></td>
                         <td><?php echo $see ['EmployeeNo_tma'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
-                        <td><a href="Qualification.php?updat=<?php echo $CNIC?>"><i class="fa-sharp fa-solid fa-graduation-cap"></i></a></td>
+                        <td><a href="profile.php?id=<?php echo $see['Id']?>" ><i class="fa-solid fa-eye"></i></a></td>
+                        <td><a href="EmployementData.php?id=<?php echo $see['CNIC']?>&delf=delete" onClick="return confirm('Are you sure you want to delete?')" ><i class="fa-solid fa-trash"></i></a></td>
                         </tr>
-                      <?php }?>
+                        <?php
+                        $aid=$aid+1;
+                    }if ($_GET['delf']) {
+                        $did = $_GET['id'];
+                        
+                        // It's not clear how the `$see` variable is defined. Make sure it contains the correct data.
+                        // The following line executes a DELETE query on the `employeedata` table to delete a record with the given ID.
+                        // However, we should use prepared statements to prevent SQL injection attacks.
+                        if (mysqli_query($conn, "DELETE FROM employeedata WHERE CNIC ='$did'")) {
+                            echo "<script>alert('Data Deleted');</script>";
+                            // The following line attempts to drop multiple tables named `$cnic A`, `$cnic B`, etc.
+                            // The table name format seems unconventional. Ensure that it's intentional and relevant to your database design.
+                            // As mentioned before, concatenating user input directly into the SQL query is dangerous and can lead to SQL injection.
+                            // Instead of using this approach, consider a different database design and handle table creation and deletion more securely.
+                            $sqlA="DROP TABLE `$did a`, `$did b`, `$did c`, `$did d`, `$did e`";
+                            $tableA = $conn->query($sqlA);
+                            if ($tableA) {
+                                echo "<script>alert('Table Deleted');</script>";
+                                echo "<script>location.replace('EmployementData.php')</script>";
+                            }
+                        }
+                    }
+                    ?>   
+                              
+                    
                     </tbody>
                 </table>
             </div>

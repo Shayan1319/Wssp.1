@@ -44,7 +44,7 @@ if ($query)
         <div class="container-fluid py-5">
         <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeeinfo` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">

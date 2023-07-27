@@ -35,6 +35,9 @@
 
   </div>                
               <a href="index.php" class="nav-link mt-3">Dashboard (MIS)</a>
+              <a href="EmployementData.php" class="nav-link">
+                  Employee
+                </a>
               <a class="dropbtn nav-link" href="employeePersonalInfo.php">
                   Add Employee
                 </a>
@@ -45,13 +48,6 @@
                   <a id="" href="TreiningInfoadd.php">Treining Info</a>
                   <a id="" href="Promotionsadd.php">Promotions</a>
                   <a id="" href="Transferadd.php"> Transfer</a>
-               
-
-              <!-- <a href="EmployeeInitialAppointment.php" class="nav-link">
-                  Employement Info
-                </a> -->
-
-
                 <a href="Addfamily.php" class="nav-link">
                   Family Information
                 </a>

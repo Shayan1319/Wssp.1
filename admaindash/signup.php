@@ -106,6 +106,38 @@ if(isset($_POST['submit']))
 
                                         </form>
                                     </div>
+                                    <div class="my-5">
+                                    <table class="table">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>FullName</th>
+                                                <th>Gander</th>
+                                                <th>Email</th>
+                                                <th>Password</th>
+                                                <th>Employeenumber</th>
+                                                <th>Designation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $select = mysqli_query($conn,"SELECT * FROM `login`");
+                                            while($see=mysqli_fetch_array($select)){
+                                            ?>
+                                            <tr>
+                                                <td> <?php echo $see ['FullName']?></td>
+                                                <td> <?php echo $see ['Gender']?></td>
+                                                <td> <?php echo $see ['Email']?></td>
+                                                <td> <?php echo $see ['Password']?></td>
+                                                <td> <?php echo $see ['EmployeeNumber']?></td>
+                                                <td> <?php echo $see ['Designation']?></td>
+                                            </tr>
+                                            <?php 
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

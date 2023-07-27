@@ -82,7 +82,7 @@ $query= mysqli_query($conn,$insertquery);
 if($query)
 {
     echo '<script>alert("Data is inserted");</script>';
-    $sqlA = "CREATE TABLE `database_wssc`.`$CNIC A`(
+    $sqlA = "CREATE TABLE `database_wssc`.`$CNIC a`(
     Id INT PRIMARY KEY AUTO_INCREMENT,
     Qualification  VARCHAR(255),
     GradeDivision VARCHAR(255),
@@ -94,7 +94,7 @@ if($query)
     Major_Subject VARCHAR(255),
     RemarksCV VARCHAR(255)
     )";
-     $sqlB = "CREATE TABLE `database_wssc`.`$CNIC B`(
+     $sqlB = "CREATE TABLE `database_wssc`.`$CNIC b`(
         Id INT PRIMARY KEY AUTO_INCREMENT,
         Training_Serial_Number VARCHAR(255),
         Training_Name VARCHAR(255),
@@ -106,7 +106,7 @@ if($query)
         To_Date DATE,
         Duration VARCHAR(255)
       )";
-      $sqlC = "CREATE TABLE `database_wssc`.`$CNIC C`(
+      $sqlC = "CREATE TABLE `database_wssc`.`$CNIC c`(
           Id INT PRIMARY KEY AUTO_INCREMENT,
           From_Designation VARCHAR(255),
           To_Designation VARCHAR(255),
@@ -118,7 +118,7 @@ if($query)
           Acting VARCHAR(255),
           Remarks VARCHAR(255)
       )";
-      $sqlD = "CREATE TABLE `database_wssc`.`$CNIC D`(
+      $sqlD = "CREATE TABLE `database_wssc`.`$CNIC d`(
         Id INT PRIMARY KEY AUTO_INCREMENT,
         Transfer_Order_Number VARCHAR(255),
         Designation VARCHAR(255),
@@ -130,7 +130,7 @@ if($query)
         Worked_From VARCHAR(255),
         Transfer_Date VARCHAR(255)
     )";
-    $sqlE = "CREATE TABLE `database_wssc`.`$CNIC E`(
+    $sqlE = "CREATE TABLE `database_wssc`.`$CNIC e`(
       Id INT PRIMARY KEY AUTO_INCREMENT,
       Spouse_Name VARCHAR(255),
       CNIC VARCHAR(255),

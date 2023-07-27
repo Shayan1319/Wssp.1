@@ -39,7 +39,7 @@ location.replace('../logout.php')
                     <tbody>
                     <?php 
                     include ('../link/desigene/db.php');
-                    $select = mysqli_query($conn,"SELECT * FROM `employeeinfo`");
+                    $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
                     while($see=mysqli_fetch_array($select)){
                     ?>
                         <tr>
