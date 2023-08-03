@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2023 at 09:29 PM
+-- Generation Time: Aug 03, 2023 at 09:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -80,8 +80,16 @@ CREATE TABLE `employeedata` (
   `Attendance_Supervisor` varchar(255) DEFAULT NULL,
   `Duty_Location` varchar(255) DEFAULT NULL,
   `Duty_Point` varchar(255) DEFAULT NULL,
-  `Online Status` varchar(255) NOT NULL
+  `Online Status` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employeedata`
+--
+
+INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `Online Status`, `type`) VALUES
+(8, '', '', '', '', '', '1213', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 'Choose Permanent/Daily Wages', 'Select', 'Select', 'Select', 'Select', '', 'Select', 'Select', 'Select', 'Select', '', '', '', '', '', '', '', '', '', '', '', '0000-00-00', '0000-00-00', '0000-00-00', '', '', '', 'Block', '');
 
 --
 -- Indexes for dumped tables
@@ -101,7 +109,7 @@ ALTER TABLE `employeedata`
 -- AUTO_INCREMENT for table `employeedata`
 --
 ALTER TABLE `employeedata`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
