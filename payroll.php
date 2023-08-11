@@ -13,11 +13,11 @@ if (isset($_POST['submit'])) {
   $message = '';
 
   try {
-    $con->beginTransaction();
+    $conn->beginTransaction();
 
     $query = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)
                 VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
-    $stmt = $con->prepare($query);
+    $stmt = $conn->prepare($query);
     $stmt->execute();
 
     if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
@@ -27,15 +27,15 @@ if (isset($_POST['submit'])) {
         $currentrateId = $rateInput[$i];
         $query = "INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`)
               VALUES('$currentrateId', '$employeeId', '$currentAllowanceId');";
-        $stmt = $con->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->execute();
       }
     }
 
-    $con->commit();
+    $conn->commit();
     $message = 'Payroll has been saved successfully.';
   } catch (PDOException $ex) {
-    $con->rollback();
+    $conn->rollback();
     echo $ex->getMessage();
     echo $ex->getTraceAsString();
     exit;
@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
   header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
 }
 
-$allEmployee = getEmployee($con);
-$allAllowance = getAllowances($con);
+$allEmployee = getEmployee($conn);
+$allAllowance = getAllowances($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">

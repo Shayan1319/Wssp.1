@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
   $query = "SELECT `id`, `fName`, `father_Name`, `Job_Tiltle`, `EmployeeNo`, `type`
   FROM `employeedata` WHERE `id` = :employeeid";
 
- $stmt = $con->prepare($query);
+ $stmt = $conn->prepare($query);
  $stmt->bindParam(':employeeid', $employeeid, PDO::PARAM_STR);
  $stmt->execute();
  $count = $stmt->rowCount();

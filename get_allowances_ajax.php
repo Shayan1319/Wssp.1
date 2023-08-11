@@ -6,7 +6,7 @@ if (isset($_GET['id'])) {
     $query = "SELECT id, allowance, fin_classification, rate_calc_mode, earning_deduction_fund, allowance_status 
               FROM `allowances` WHERE `id` = :description_id";
 
-    $stmt = $con->prepare($query);
+    $stmt = $conn->prepare($query);
     $stmt->bindParam(':description_id', $description_id, PDO::PARAM_INT);
     $stmt->execute();
     $count = $stmt->rowCount();

@@ -10,19 +10,19 @@ if (isset($_POST['update'])) {
   $allowance_status = $_POST["allowance_status"];
   $message = '';
   try {
-    $con->beginTransaction();
+    $conn->beginTransaction();
 
     // Prepare the update query
     $query = "UPDATE allowances SET allowance = '$description', fin_classification = '$fin_classification', 
               rate_calc_mode = '$rate_calc_mode', earning_deduction_fund = '$earning_deduction_fund', 
               allowance_status = $allowance_status WHERE id = $id";
 
-    $statement = $con->prepare($query);
+    $statement = $conn->prepare($query);
     $statement->execute();
-    $con->commit();
+    $conn->commit();
     $message = 'Allowance has been updated successfully.';
   } catch (PDOException $ex) {
-    $con->rollback();
+    $conn->rollback();
     echo $ex->getMessage();
     echo $ex->getTraceAsString();
     exit;
@@ -34,7 +34,7 @@ if (isset($_POST['update'])) {
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
   $query = "SELECT * FROM allowances WHERE id = :id";
-  $statement = $con->prepare($query);
+  $statement = $conn->prepare($query);
   $statement->bindParam(':id', $id);
   $statement->execute();
   $allowance = $statement->fetch(PDO::FETCH_ASSOC);

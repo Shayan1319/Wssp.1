@@ -1,8 +1,8 @@
 <?php 
-function getEmployee($con, $employeeId = 0) {
+function getEmployee($conn, $employeeId = 0) {
   $query= "select `id`, `fName`, `father_name`, 
   `job_tiltle`, `EmployeeNo` from employeedata;";
-  $stmt = $con->prepare($query);
+  $stmt = $conn->prepare($query);
   $stmt->execute();
 
   $data = '<option value="">Select Employee</option>';
@@ -17,9 +17,9 @@ function getEmployee($con, $employeeId = 0) {
   return $data;
 }
 
-function getAllowances($con, $allowancesId = 0) {
+function getAllowances($conn, $allowancesId = 0) {
   $query= "select `id`, `allowance` from allowances;";
-  $stmt = $con->prepare($query);
+  $stmt = $conn->prepare($query);
   $stmt->execute();
 
   $data = '<option value="">Select Description</option>';

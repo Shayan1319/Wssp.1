@@ -9,17 +9,17 @@ if (isset($_POST['submit'])) {
   $allowance_status = $_POST["allowance_status"];
   $message = '';
   try {
-    $con->beginTransaction();
+    $conn->beginTransaction();
 
     $query = "INSERT INTO allowances (allowance, fin_classification, rate_calc_mode, earning_deduction_fund, allowance_status)
               VALUES ( '$discription', '$fin_classification', '$rate_calc_mode', '$earning_deduction_fund', $allowance_status)";
 
-    $statement = $con->prepare($query);
+    $statement = $conn->prepare($query);
     $statement->execute();
-    $con->commit();
+    $conn->commit();
     $message = 'Allowance has been saved successfully.';
   } catch (PDOException $ex) {
-    $con->rollback();
+    $conn->rollback();
     echo $ex->getMessage();
     echo $ex->getTraceAsString();
   }
@@ -32,17 +32,17 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
   $message = '';
 
   try {
-    $con->beginTransaction();
+    $conn->beginTransaction();
 
     // Prepare the delete query
     $query = "DELETE FROM allowances WHERE id = :id";
     $statement = $con->prepare($query);
     $statement->bindParam(':id', $id);
     $statement->execute();
-    $con->commit();
+    $conn->commit();
     $message = 'Allowance has been deleted successfully.';
   } catch (PDOException $ex) {
-    $con->rollback();
+    $conn->rollback();
     echo $ex->getMessage();
     echo $ex->getTraceAsString();
     exit;
@@ -53,7 +53,7 @@ if (isset($_POST['delete']) && isset($_POST['id'])) {
 }
 
 $query = "SELECT * FROM allowances";
-$statement = $con->prepare($query);
+$statement = $conn->prepare($query);
 $statement->execute();
 $allAllowances = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
