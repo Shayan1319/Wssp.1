@@ -1,51 +1,51 @@
 <?php
 include('link/desigene/db.php');
-include('common_function/common_function.php');
+// include('common_function/common_function.php');
 
-if (isset($_POST['submit'])) {
-  $employeeId = $_POST['employee_no'];
-  $allowanceIds = $_POST['description_id'];
-  $fundInput = $_POST['fundInput'];
-  $grossPay = $_POST['grossPayInput'];
-  $deductionInput = $_POST['deductionInput'];
-  $netPayInput = $_POST['netPayInput'];
-  $rateInput = $_POST['rates'];
-  $message = '';
+// if (isset($_POST['submit'])) {
+//   $employeeId = $_POST['employee_no'];
+//   $allowanceIds = $_POST['description_id'];
+//   $fundInput = $_POST['fundInput'];
+//   $grossPay = $_POST['grossPayInput'];
+//   $deductionInput = $_POST['deductionInput'];
+//   $netPayInput = $_POST['netPayInput'];
+//   $rateInput = $_POST['rates'];
+//   $message = '';
 
-  try {
-    $con->beginTransaction();
+//   try {
+//     $con->beginTransaction();
 
-    $query = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)
-                VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
-    $stmt = $con->prepare($query);
-    $stmt->execute();
+//     $query = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)
+//                 VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
+//     $stmt = $con->prepare($query);
+//     $stmt->execute();
 
-    if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
-      $size = sizeof($allowanceIds);
-      for ($i = 0; $i < $size; $i++) {
-        $currentAllowanceId = $allowanceIds[$i];
-        $currentrateId = $rateInput[$i];
-        $query = "INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`)
-              VALUES('$currentrateId', '$employeeId', '$currentAllowanceId');";
-        $stmt = $con->prepare($query);
-        $stmt->execute();
-      }
-    }
+//     if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
+//       $size = sizeof($allowanceIds);
+//       for ($i = 0; $i < $size; $i++) {
+//         $currentAllowanceId = $allowanceIds[$i];
+//         $currentrateId = $rateInput[$i];
+//         $query = "INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`)
+//               VALUES('$currentrateId', '$employeeId', '$currentAllowanceId');";
+//         $stmt = $con->prepare($query);
+//         $stmt->execute();
+//       }
+//     }
 
-    $con->commit();
-    $message = 'Payroll has been saved successfully.';
-  } catch (PDOException $ex) {
-    $con->rollback();
-    echo $ex->getMessage();
-    echo $ex->getTraceAsString();
-    exit;
-  }
-  $goto = "payroll.php";
-  header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
-}
+//     $con->commit();
+//     $message = 'Payroll has been saved successfully.';
+//   } catch (PDOException $ex) {
+//     $con->rollback();
+//     echo $ex->getMessage();
+//     echo $ex->getTraceAsString();
+//     exit;
+//   }
+//   $goto = "payroll.php";
+//   header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
+// }
 
-$allEmployee = getEmployee($con);
-$allAllowance = getAllowances($con); 
+// $allEmployee = getEmployee($con);
+// $allAllowance = getAllowances($con); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -144,7 +144,7 @@ $allAllowance = getAllowances($con);
 
 <body>
   <div id="main">
-    <?php include('payroll/link/desigene/navbar.php'); ?>
+    <?php include('link/desigene/navbar.php'); ?>
     <div class="clearfix">&nbsp;</div>
     <div class="container-fluid">
       <form method="post">
@@ -162,8 +162,12 @@ $allAllowance = getAllowances($con);
                     <div class="form-group">
                       <label>Employee No</label>
                       <select name="employee_no" id="employee_no" class="form-control select2">
-                        <?php echo $allEmployee; ?>
+                       
+
                       </select>
+                      <div id="employee_no">
+                          
+                      </div>
                     </div>
                   </div>
                   <!-- Name -->
@@ -316,22 +320,53 @@ $allAllowance = getAllowances($con);
   </div>
   </div>
   </div>
-  <?php include('link/desigene/script.php'); ?>
-  <?php include('link/desigene/footer.php'); ?>
+  <?php include('../link/desigene/script.php'); ?>
+  <?php include('../link/desigene/footer.php'); ?>
   </div>
   <div class="clearfix">&nbsp;</div>
   <div class="clearfix">&nbsp;</div>
-  <script>
+<script>
     let addSerial = 0;
     $(function() {
       $(".select2").select2();
+    });
+
+$(document) .ready(function(){
+$("#employee_no").on("click", function(e){
+$.ajax({
+  url : "ajex/empid.php",
+  type : "POST",
+success : function(data){
+$("#employee_no") .html(data) ;
+}});});});
+
+
+$("#employee_no").change(function() {
+      let employeeId = $(this).val();
+      $.ajax({
+        url: "ajex/get_employee_ajax.php",
+        type: "GET",
+        data: {
+          "id": employeeId
+        },
+        cache: false,
+        async: false,
+        success: function(data) {
+          let employeeData = JSON.parse(data);
+
+          $("#empname").val(employeeData.firstName);
+          $("#father_name").val(employeeData.fatherName)
+          $("#job_title").val(employeeData.jobTitle);
+          $("#type").val(employeeData.type);
+        }
+      });
     });
 
     $(document).ready(function() {
       $("#description").change(function() {
         let descriptionId = $(this).val();
         $.ajax({
-          url: "get_allowances_ajax.php",
+          url: "ajex/get_allowances_ajax.php",
           type: "GET",
           data: {
             "id": descriptionId
@@ -357,26 +392,6 @@ $allAllowance = getAllowances($con);
       });
     });
 
-    $("#employee_no").change(function() {
-      let employeeId = $(this).val();
-      $.ajax({
-        url: "get_employee_ajax.php",
-        type: "GET",
-        data: {
-          "id": employeeId
-        },
-        cache: false,
-        async: false,
-        success: function(data) {
-          let employeeData = JSON.parse(data);
-
-          $("#empname").val(employeeData.firstName);
-          $("#father_name").val(employeeData.fatherName)
-          $("#job_title").val(employeeData.jobTitle);
-          $("#type").val(employeeData.type);
-        }
-      });
-    });
 
     $("#add").click(function() {
       let description = $("#description :selected").text();
@@ -495,7 +510,9 @@ $allAllowance = getAllowances($con);
     grossPayInput.addEventListener('input', calculateNetPay);
     deductionInput.addEventListener('input', calculateNetPay);
     fundInput.addEventListener('input', calculateNetPay);
-  </script>
+</script>
+
+
 
 </body>
 

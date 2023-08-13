@@ -3,8 +3,8 @@ include 'link/desigene/db.php';
 
 if (isset($_GET['id'])) {
   $employeeid = $_GET['id'];
-  $query = "SELECT `id`, `fName`, `father_Name`, `Job_Tiltle`, `EmployeeNo`, `type`
-  FROM `employeedata` WHERE `id` = :employeeid";
+  $query = mysqli_fetch_array($conn,"SELECT `id`, `fName`, `father_Name`, `Job_Tiltle`, `EmployeeNo`, `type`
+  FROM `employeedata` WHERE `id` = :employeeid");
 
  $stmt = $conn->prepare($query);
  $stmt->bindParam(':employeeid', $employeeid, PDO::PARAM_STR);
