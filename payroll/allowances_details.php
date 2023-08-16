@@ -110,8 +110,11 @@
                     <div class="form-group">
                       <label>Fin Classification</label>
                       <select name="fin_classification" id="fin_classification" class="form-control">
-                        <option value="GROSS PAY">GROSS PAY</option>
+                        <option value="Gross Pay">Gross Pay</option>
                         <option value="LOAN-EE">LOAN-EE</option>
+                        <option value="EOBI-EE">EOBI-EE</option>
+                        <option value="EOBI-ER">EOBI-ER</option>
+                        <option value="OTH-DED">OTH-DED</option>
                       </select>
                     </div>
                   </div>
@@ -119,8 +122,10 @@
                     <div class="form-group">
                       <label>Rate Calc. Mode</label>
                       <select name="rate_calc_mode" id="rate_calc_mode" class="form-control">
-                        <option value="PRESENT RATE">PRESENT RATE</option>
-                        <option value="RUNTIME VALUE">RUNTIME VALUE</option>
+                        <option value="PRESENT RATE">Present Rate</option>
+                        <option value="RUNTIME VALUE">Runtime Value</option>
+                        <option value="Prevailing Rate">Prevailing Rate</option>
+                        <option value="Employee pension">Employee pension</option>
                       </select>
                     </div>
                   </div>
@@ -128,9 +133,9 @@
                     <div class="form-group">
                       <label>Earning/Deduction/Fund</label>
                       <select name="earning_deduction_fund" id="earning_deduction_fund" class="form-control">
-                        <option value="Earning">Earning</option>
-                        <option value="Deduction">Deduction</option>
-                        <option value="Fund">Fund</option>
+                        <option value="EARNING">Earning</option>
+                        <option value="DEDUCTION">Deduction</option>
+                        <option value="FUND">Fund</option>
                       </select>
                     </div>
                   </div>
@@ -140,6 +145,7 @@
                       <select name="allowance_status" id="allowance_status" class="form-control">
                         <option value="">Select Status</option>
                         <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
                       </select>
                     </div>
                   </div>

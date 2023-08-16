@@ -19,14 +19,14 @@
 <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 <link rel="stylesheet" href="../dist/select2/select2.min.css">
 <link rel="stylesheet" href="../dist/sweat-alerts/sweetalert.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="../css/style.css">
 
 <!-- Custom JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script src="dist/select2/select2.min.js"></script>
-<script src="dist/js/validations.js"></script>
-<script src="dist/sweat-alerts/sweetalert.js"></script>
+<script src="../dist/select2/select2.min.js"></script>
+<script src="../dist/js/validations.js"></script>
+<script src="../dist/sweat-alerts/sweetalert.js"></script>
     <!-- CKEditor -->
     <!-- <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script> -->
     

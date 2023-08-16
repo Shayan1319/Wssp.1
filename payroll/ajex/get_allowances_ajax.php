@@ -1,8 +1,7 @@
 <?php
-include 'link/desigene/db.php';
+include '../link/desigene/db.php';
 
-if (isset($_GET['id'])) {
-    $description_id = $_GET['id'];
+    $description_id = $_POST['id'];
     $query = mysqli_query($conn,"SELECT * FROM `allowances` WHERE `id` = $description_id");
 
     // $stmt = $conn->prepare($query);
@@ -20,11 +19,10 @@ if (isset($_GET['id'])) {
             'earning_deduction_fund' => $row['earning_deduction_fund'],
             'allowance_status' => $row['allowance_status']
         );
-        
         $json = json_encode($data);
         echo $json;
         exit;
     }
-}}
+}
 
 ?>

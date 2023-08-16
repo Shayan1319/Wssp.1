@@ -1,30 +1,29 @@
-<?php  
-include 'link/desigene/db.php';
+<?php
+include '../link/desigene/db.php';
 
-if (isset($_GET['id'])) {
-  $employeeid = $_GET['id'];
-  $query = mysqli_query($conn, "SELECT `id`, `fName`, `father_Name`, `Job_Tiltle`, `EmployeeNo`, `type`
-                                 FROM `employeedata` WHERE `id` = :employeeid");
+    $empid = $_GET['id'];
+    $query = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $empid");
 
-  if (mysqli_num_rows($query) > 0) {
-    $data = array(); // Create an array to store all rows' data
-
-    while ($r = mysqli_fetch_assoc($query)) {
-      $employeeData = array(
-        'id' => $r['id'],
-        'firstName' => $r['fName'],
-        'fatherName' => $r['father_Name'],
-        'jobTitle' => $r['Job_Tiltle'],
-        'employeeNo' => $r['EmployeeNo'],
-        'type' => $r['type'],
-      );
-
-      $data[] = $employeeData; // Append each row's data to the array
+    // $stmt = $conn->prepare($query);
+    // $stmt->bindParam(':description_id', $description_id, PDO::PARAM_INT);
+    // $stmt->execute();
+    // $count = $stmt->rowCount();
+    
+    if (mysqli_num_rows($query)) {
+     while($row=mysqli_fetch_assoc($query)){
+        $data = array(
+            'id' => $row['Id'],
+            'fName' => $row['fName'],
+            'father_Name' => $row['father_Name'],
+            'type' => $row['type'],
+            'Job_Tiltle' => $row['Job_Tiltle'],
+            'Department' => $row['Department']
+        );
+        
+        $json = json_encode($data);
+        echo $json;
+        exit;
     }
-
-    $json = json_encode($data);
-    echo $json;
-    exit;
-  }
 }
+
 ?>
