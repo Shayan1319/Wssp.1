@@ -29,19 +29,10 @@
           <a class="nav-link active text-light" href="index.php">Profile</a>
         </li>  -->
         <li class="nav-item w-100">
-          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Travel_Request.php">Travel Request</a>
+          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="allowances_details.php">Allowance</a>
           </li>
         <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Leavereq.php">Leave Request</a>
-        </li>
-        <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="EmployeePaySlip.php">Pay Slip</a>
-        </li>
-        <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Cv.php">Employee CV</a>
-        </li>
-        <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Apraisal.php" >Add Appraisal</a>
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="oayroll.php">Payroll</a>
         </li>
         
       </ul>

@@ -1,49 +1,49 @@
 <?php
-include('link/desigene/db.php');
+// include('link/desigene/db.php');
 
-if (isset($_POST['update'])) {
-  $id = $_POST["id"];
-  $description = $_POST["description"];
-  $fin_classification = $_POST["fin_classification"];
-  $rate_calc_mode = $_POST["rate_calc_mode"];
-  $earning_deduction_fund = $_POST["earning_deduction_fund"];
-  $allowance_status = $_POST["allowance_status"];
-  $message = '';
-  try {
-    $conn->beginTransaction();
+// if (isset($_POST['update'])) {
+//   $id = $_POST["id"];
+//   $description = $_POST["description"];
+//   $fin_classification = $_POST["fin_classification"];
+//   $rate_calc_mode = $_POST["rate_calc_mode"];
+//   $earning_deduction_fund = $_POST["earning_deduction_fund"];
+//   $allowance_status = $_POST["allowance_status"];
+//   $message = '';
+//   try {
+//     $conn->beginTransaction();
 
-    // Prepare the update query
-    $query = "UPDATE allowances SET allowance = '$description', fin_classification = '$fin_classification', 
-              rate_calc_mode = '$rate_calc_mode', earning_deduction_fund = '$earning_deduction_fund', 
-              allowance_status = $allowance_status WHERE id = $id";
+//     // Prepare the update query
+//     $query = "UPDATE allowances SET allowance = '$description', fin_classification = '$fin_classification', 
+//               rate_calc_mode = '$rate_calc_mode', earning_deduction_fund = '$earning_deduction_fund', 
+//               allowance_status = $allowance_status WHERE id = $id";
 
-    $statement = $conn->prepare($query);
-    $statement->execute();
-    $conn->commit();
-    $message = 'Allowance has been updated successfully.';
-  } catch (PDOException $ex) {
-    $conn->rollback();
-    echo $ex->getMessage();
-    echo $ex->getTraceAsString();
-    exit;
-  }
-  $goto = "pay_allowances.php";
-  header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
-  exit;
-}
-if (isset($_GET['id'])) {
-  $id = $_GET['id'];
-  $query = "SELECT * FROM allowances WHERE id = :id";
-  $statement = $conn->prepare($query);
-  $statement->bindParam(':id', $id);
-  $statement->execute();
-  $allowance = $statement->fetch(PDO::FETCH_ASSOC);
+//     $statement = $conn->prepare($query);
+//     $statement->execute();
+//     $conn->commit();
+//     $message = 'Allowance has been updated successfully.';
+//   } catch (PDOException $ex) {
+//     $conn->rollback();
+//     echo $ex->getMessage();
+//     echo $ex->getTraceAsString();
+//     exit;
+//   }
+//   $goto = "pay_allowances.php";
+//   header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
+//   exit;
+// }
+// if (isset($_GET['id'])) {
+//   $id = $_GET['id'];
+//   $query = "SELECT * FROM allowances WHERE id = :id";
+//   $statement = $conn->prepare($query);
+//   $statement->bindParam(':id', $id);
+//   $statement->execute();
+//   $allowance = $statement->fetch(PDO::FETCH_ASSOC);
 
-  if (!$allowance) {
-    header("Location: pay_allowances.php");
-    exit();
-  }
-}
+//   if (!$allowance) {
+//     header("Location: pay_allowances.php");
+//     exit();
+//   }
+// }
 ?>
 
 <!DOCTYPE html>

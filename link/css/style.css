@@ -49,11 +49,6 @@
     }
 }
 
-.close {
-    background-color: #1873e8;
-    color: #fff;
-}
-
 .header {
     background-color: #0f1286;
 }
@@ -127,4 +122,9 @@
     margin-right: 10px;
     margin-top: 10px;
     border-radius: 12px;
+}
+
+.btn-close {
+    background-color: #ff0505;
+    color: #fff;
 }

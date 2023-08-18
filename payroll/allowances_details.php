@@ -110,7 +110,7 @@
                     <div class="form-group">
                       <label>Fin Classification</label>
                       <select name="fin_classification" id="fin_classification" class="form-control">
-                        <option value="Gross Pay">Gross Pay</option>
+                        <option value="GROSS PAY">GROSS PAY</option>
                         <option value="LOAN-EE">LOAN-EE</option>
                         <option value="EOBI-EE">EOBI-EE</option>
                         <option value="EOBI-ER">EOBI-ER</option>
@@ -167,6 +167,8 @@
                           <th>Rate Calc. Mode</th>
                           <th>Earning/Deduction/Fund?</th>
                           <th>Allowance Status</th>
+                          <th>Update</th>
+                          <th>Delete</th>
                         </tr>
                       </thead>
                       <tbody id="table-data">
@@ -186,6 +188,63 @@
       <!-- Col-12 -->
     </div>
   </div>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close btn btn-dange" style="background-color: #ff0505 !important; color: #fff !important;" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form id="formdata" enctype="multipart/form-data">
+                    <div class="form-group">
+                      <label>Allowance</label>
+                      <input type="text" class="form-control" id="discription_update" name="discription">
+                      <input type="text" class="form-control" hidden id="id_update" name="">
+                    </div>
+                    <div class="form-group">
+                      <label>Fin Classification</label>
+                      <select name="fin_classification" id="fin_classification_update" class="form-control">
+                        <option value="GROSS PAY">GROSS PAY</option>
+                        <option value="LOAN-EE">LOAN-EE</option>
+                        <option value="EOBI-EE">EOBI-EE</option>
+                        <option value="EOBI-ER">EOBI-ER</option>
+                        <option value="OTH-DED">OTH-DED</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Rate Calc. Mode</label>
+                      <select name="rate_calc_mode" id="rate_calc_mode_update" class="form-control">
+                        <option value="PRESENT RATE">Present Rate</option>
+                        <option value="RUNTIME VALUE">Runtime Value</option>
+                        <option value="PREVAILING RATE">Prevailing Rate</option>
+                        <option value="EMPLOYEE PENSION">Employee pension</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Earning/Deduction/Fund</label>
+                      <select name="earning_deduction_fund" id="earning_deduction_fund_update" class="form-control">
+                        <option value="EARNING">Earning</option>
+                        <option value="DEDUCTION">Deduction</option>
+                        <option value="FUND">Fund</option>
+                      </select>
+                    <div class="form-group">
+                      <label>Allowance Status</label>
+                      <select name="allowance_status" id="allowance_status_update" class="form-control">
+                        <option value="">Select Status</option>
+                        <option value="ACTIVE">Active</option>
+                        <option value="INACTIVE">Inactive</option>
+                      </select>
+                    </div>
+              </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updatenow">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="clearfix">&nbsp;</div>
   <div class="clearfix">&nbsp;</div>
   <?php include('../link/desigene/script.php') ?>
@@ -202,6 +261,90 @@
         });
       }
       loadTable();
+      
+    //  code for update 
+      
+      $(document).on("click", "#update",function(){
+        var update = $(this).data("eid");
+      // alert(update);
+        $.ajax({
+          url : "ajex/get_allowances_ajax.php",
+          type:"POST",
+          data : {id : update},
+          success : function(data){
+            var allowanceData = JSON.parse(data);
+            $("#discription_update").val(allowanceData.allowance);
+            $("#id_update").val(allowanceData.id);
+            $("#fin_classification_update").val(allowanceData.fin_classification);
+            // Assuming you have fetched data from the database as an ID
+            var fin_class = (allowanceData.fin_classification);
+            // Replace with the actual ID from the database
+            var Sfin = document.getElementById('fin_classification_update');
+            $("#rate_calc_mode_update").val(allowanceData.rate_calc_mode);
+            // Assuming you have fetched data from the database as an ID
+            var rate_calc = (allowanceData.rate_calc_mode);
+            // Replace with the actual ID from the database
+            var Sfin = document.getElementById('rate_calc_mode_update');
+            $("#earning_deduction_fund_update").val(allowanceData.earning_deduction_fund);
+            // Assuming you have fetched data from the database as an ID
+            var earning_deduction = (allowanceData.earning_deduction_fund);
+            // Replace with the actual ID from the database
+            var Sfin = document.getElementById('earning_deduction_fund_update');
+            $("#allowance_status_update").val(allowanceData.allowance_status);
+            // Assuming you have fetched data from the database as an ID
+            var allowance = (allowanceData.allowance_status);
+            // Replace with the actual ID from the database
+            var Sfin = document.getElementById('allowance_status_update');
+          }
+
+        });
+        
+      });
+      $(document).on("click", "#delete",function(){
+        var delet = $(this).data("did");
+      // alert(update);
+        $.ajax({
+          url : "ajex/delete_allowances_ajax.php",
+          type:"POST",
+          data : {id : delet},
+          success : function(data){
+            if(data == 1){
+            loadTable();
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+        
+      });
+      $("#updatenow").on("click",function(e){
+        e.preventDefault();
+        var discription_update = $("#discription_update").val();
+        var id_update = $("#id_update").val();
+        var fin_classification_update = $("#fin_classification_update").val();
+        var rate_calc_mode_update = $("#rate_calc_mode_update").val();
+        var earning_deduction_fund_update = $("#earning_deduction_fund_update").val();
+        var allowance_status_update = $("#allowance_status_update").val();
+        // alert(id_update);
+        $.ajax({
+          url:"ajex/ajax-update-allowance.php",
+          type:"Post", 
+          data:{id:id_update,discrip:discription_update,fin:fin_classification_update,rate:rate_calc_mode_update,earning:earning_deduction_fund_update,allowance:allowance_status_update},
+          success:function(data){
+            if(data == 1){
+            loadTable();
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+      //  loadTable();
+      //  /code for update 
       $("#save").on("click",function(e){
         e.preventDefault();
         var employee_ = $("#employee_no").val();
@@ -225,7 +368,7 @@
           }
 
         });
-            })
+            });
     });
   </script>
 </body>

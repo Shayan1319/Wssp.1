@@ -328,24 +328,26 @@ if (isset($_POST['submit'])) {
     });
 $(document) .ready(function(){
   function loadTable(){
-$.ajax({
-  url : "ajex/empid.php",
-  type : "POST",
-success : function(data){
-$("#employee_no") .html(data) ;
-}});
-}
-loadTable(); });
+    $.ajax({
+      url : "ajex/empid.php",
+      type : "POST",
+    success : function(data){
+    $("#employee_no") .html(data) ;
+    }});
+    }
+    loadTable(); 
+});
 $(document) .ready(function(){
   function loadAllowances(){
-$.ajax({
-  url : "ajex/allowances_ajax.php",
-  type : "POST",
-success : function(data){
-$("#description") .html(data) ;
-}});
-}
-loadAllowances(); 
+  $.ajax({
+      url : "ajex/allowances_ajax.php",
+      type : "POST",
+      success : function(data){
+        $("#description") .html(data) ;
+      }
+    });
+      }
+      loadAllowances(); 
 });
 $(document).ready(function() {
 $("#employee_no").change(function() {
