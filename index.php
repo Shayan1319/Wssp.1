@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid']=$row['Id'];
             ?>
             <script>
-                location.replace('payroll.php')
+                location.replace('payroll/payroll.php')
             </script>
             <?php
     }

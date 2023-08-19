@@ -32,7 +32,7 @@
           <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="allowances_details.php">Allowance</a>
           </li>
         <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="oayroll.php">Payroll</a>
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payroll.php">Payroll</a>
         </li>
         
       </ul>
