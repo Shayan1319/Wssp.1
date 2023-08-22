@@ -103,10 +103,10 @@ include('link/desigene/db.php');
   <div id="main">
     <?php include('link/desigene/navbar.php'); ?>
     <div class="container">
-    <div class="row">
+            <div class="row">
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4 p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#0C1C5F;">
-                        <div class="card-header">Rate</div>
+                        <div class="card-header">Total Amount Payroll of this mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -123,7 +123,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-light mb-3" style="max-width: 18rem;background-color:#2A64C4">
-                        <div class="card-header">Total Rate WSSC</div>
+                        <div class="card-header">Total Amount WSSC of This Mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -140,7 +140,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#61AFE4">
-                        <div class="card-header">Total Rate Tma</div>
+                        <div class="card-header">Total Amount Tma of This Mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -158,7 +158,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#0C6170">
-                        <div class="card-header">Rate Difference</div>
+                        <div class="card-header">Amount Difference b/w WSSC And TMA</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -177,7 +177,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-light mb-3" style="max-width: 18rem; background-color:#37BEB0">
-                        <div class="card-header">Rate Difference Previous Month</div>
+                        <div class="card-header">Amount Difference Previous Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -215,7 +215,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem; background-color:#3A93B0">
-                        <div class="card-header">Total Employees</div>
+                        <div class="card-header">Total Employees With Payroll</div>
                         <div class="card-body">
                             <h5 class="card-title">Number</h5>
                             <p class="card-text">
@@ -240,7 +240,7 @@ include('link/desigene/db.php');
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem; background-color:#6DBEC3">
-                        <div class="card-header">Total Employees</div>
+                        <div class="card-header">Total Employees Without Payroll</div>
                         <div class="card-body">
                             <h5 class="card-title">Number</h5>
                             <p class="card-text">
