@@ -9,6 +9,8 @@ if (isset($_POST['submit'])) {
   $deductionInput = $_POST['deductionInput'];
   $netPayInput = $_POST['netPayInput'];
   $rateInput = $_POST['rates'];
+  $date= date("Y-m-d");
+  $type=strtoupper($_POST['type']);
 
 //   try {
 //     $con->beginTransaction();
@@ -22,7 +24,7 @@ if (isset($_POST['submit'])) {
       for ($i = 0; $i < $size; $i++) {
         $currentAllowanceId = $allowanceIds[$i];
         $currentrateId = $rateInput[$i];
-        $rateinsert = mysqli_query($conn,"INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`)VALUES('$currentrateId', '$employeeId', '$currentAllowanceId')") ;
+        $rateinsert = mysqli_query($conn,"INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`, `EmployementType`, `Date`)VALUES('$currentrateId', '$employeeId', '$currentAllowanceId','$type', '$date')") ;
       }
     }
       $query=mysqli_query($conn,$Insert);
@@ -187,6 +189,7 @@ if (isset($_POST['submit'])) {
                       <input type="text" name="type" id="type" placeholder="Type" class="form-control" readonly autocomplete="off" required="">
                     </div>
                   </div>
+                  
                   <!-- Job Title -->
                   <div class="col-4">
                     <div class="form-group">
