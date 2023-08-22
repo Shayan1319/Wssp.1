@@ -15,6 +15,9 @@
   <?php include('link/links.php') ?>
 </head>
 <style>
+  .container-fluid{
+    padding: 0px !important;
+  }
   #fullDiv ul {
     margin: 0;
     padding: 0;
@@ -80,27 +83,27 @@
 </style>
 
 <body>
+  <div class="container-fluid">
   <div id="main">
+    <?php include ('link/desigene/sidebar.php')?>
     <?php include('link/desigene/navbar.php') ?>
     <div class="clearfix">&nbsp;</div>
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="card card-success border border-2 border-dark bg-light">
             <div style="background-color: darkblue;" class="card-header text-white fw-bold">
-              <div class="card-title text-white">Allowances Details</div>
-
-            </div>
-            <br>
-            <!-- /.card-header -->
-            <div class="card-body ">
-              <!-- form start -->
-              <form id="formdata" enctype="multipart/form-data">
-                <div class="row mt-2">
-                  
-                    <div class="clearfix">&nbsp;</div>
-                    <div class="row">
-                    <div class="col-md-2">
+            <div class="card-title text-white">Allowances Details</div>
+          </div>
+          <br>
+          <!-- /.card-header -->
+          <div class="card-body ">
+             <!-- form start -->
+             <form id="formdata" enctype="multipart/form-data">
+              <div class="row mt-2">
+                <div class="clearfix">&nbsp;</div>
+                <div class="row">
+                  <div class="col-md-2">
                     <div class="form-group">
                       <label>Allowance</label>
                       <input type="text" class="form-control" id="discription" name="discription">
@@ -149,7 +152,6 @@
                       </select>
                     </div>
                   </div>
-                  
                   <div class="col-md-2">
                     <div class="form-group">
                       <div class="clearfix">&nbsp;</div>
@@ -172,22 +174,22 @@
                         </tr>
                       </thead>
                       <tbody id="table-data">
+
                       </tbody>
                     </table>
                   </div>
-                    </div>
                 </div>
-                </div>
-              </form>
+              </div>
             </div>
-          </div>
-          <!-- /.card-body -->
+          </form>
         </div>
-        <!-- /.card -->
       </div>
-      <!-- Col-12 -->
+      <!-- /.card-body -->
     </div>
+    <!-- /.card -->
   </div>
+   <!-- Col-12 -->
+  
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -247,6 +249,9 @@
 </div>
   <div class="clearfix">&nbsp;</div>
   <div class="clearfix">&nbsp;</div>
+  </div>
+  
+  </div>
   <?php include('../link/desigene/script.php') ?>
   <!-- jequery  -->
   <script>

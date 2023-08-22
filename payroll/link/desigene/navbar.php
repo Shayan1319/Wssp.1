@@ -29,7 +29,7 @@
           <a class="nav-link active text-light" href="index.php">Profile</a>
         </li>  -->
         <li class="nav-item w-100">
-          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="allowances_details.php">Allowance</a>
+          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="index.php">Home</a>
           </li>
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payroll.php">Payroll</a>

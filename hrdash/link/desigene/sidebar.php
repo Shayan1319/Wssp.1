@@ -51,6 +51,9 @@
                 <a href="Addfamily.php" class="nav-link">
                   Family Information
                 </a>
+                <a href="allowances_details.php" class="nav-link">
+                  Allowances
+                </a>
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
