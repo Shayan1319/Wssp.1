@@ -2,13 +2,264 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
+    // Redirect to the logout page
+    header("Location: ../logout.php");
+    exit;
+} else {
+    // Your code for logged-in users goes here
+    $currentDate = date('Y-m-d');
+// Query to count the number of employees 
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata");
+$row = mysqli_fetch_array($query);
+$employeeCountotal = $row['total_employees'];
+// Query to count the number of employees with status 'PRESENT' on the current date
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCount FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'PRESENT' AND a.Date = '$currentDate'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCount = $row['employeeCount'];
+} else {
+    $employeeCount = 0;
+}
+// Query to count the number of employees with status 'ABSENT' on the current date
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountABSENT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'ABSENT' AND a.Date = '$currentDate'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountABSENT = $row['employeeCountABSENT'];
+} else {
+    $employeeCountABSENT = 0;
+}
+// Query to count the number of employees with DDorOT 'DOUBLE DUTY' on the current date
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountDDorOT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'DOUBLE DUTY' AND a.Date = '$currentDate'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountDDorOT = $row['employeeCountDDorOT'];
+} else {
+    $employeeCountDDorOT = 0;
+}
+// Query to count the number of employees with DDorOT 'OVERTIME' on the current date
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'OVERTIME' AND a.Date = '$currentDate'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountOVERTIME = $row['employeeCountOVERTIME'];
+} else {
+    $employeeCountOVERTIME = 0;
+} 
 
-if (strlen($_SESSION['loginid']==0)) {
-?>   <script>
-location.replace('../logout.php')
-</script><?php
-  } else{
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalPendingLeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE l.StatusofGm = 'PENDING' AND l.LeaveFrom >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalPendingLeaves = $row['totalPendingLeaves'];
+} else {
+    $totalPendingLeaves = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAcceptLeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE l.StatusofGm = 'ACCPET' AND l.Statusofmanger = 'ACCPET' AND l.LeaveFrom = '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalAcceptLeaves = $row['totalAcceptLeaves'];
+} else {
+    $totalAcceptLeaves = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAPROVELeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE l.StatusofGm = 'ACCPET' AND l.LeaveFrom >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalAPROVELeaves = $row['totalAPROVELeaves'];
+} else {
+    $totalAPROVELeaves = 0;
+}
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalREJECTEDLeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE l.StatusofGm = 'REJECTED' AND l.LeaveFrom >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalREJECTEDLeaves = $row['totalREJECTEDLeaves'];
+} else {
+    $totalREJECTEDLeaves = 0;
+}
+
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalLeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE  l.LeaveFrom >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalLeaves = $row['totalLeaves'];
+} else {
+    $totalLeaves = 0;
+}
+
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
+
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_rate = $result['total_rate'];
+    if($total_rate = 0){
+        $total_rate = 0;
+    }
+}
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE());");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_rate_wssc = $result['total_rate_wssc'];
+    if($total_rate_wssc = 0){
+        $total_rate_wssc = 0;
+    }
+}                          
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_rate_tma = $result['total_rate_tma'];
+    if($total_rate_tma = 0){
+        $total_rate_tma = 0;
+    }
+} 
+$query = mysqli_query($conn, "SELECT(SELECT SUM(rate) FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $rate_difference = $result['rate_difference'];
+    if($rate_difference = 0){
+        $rate_difference = 0;
+    }
+} 
+$query = mysqli_query($conn, "SELECT (SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(Date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)) AS rate_difference_previous_month;");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $rate_difference_previous_month = $result['rate_difference_previous_month'];
+    if($rate_difference_previous_month = 0){
+        $rate_difference_previous_month = 0;
+    }
+} 
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Online Status`='Pending'");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_employees = $result['total_employees'];
+    if($total_employees = 0){
+        $total_employees = 0;
+    }
+} 
+// Query to count the number of distinct employees with added payroll
+$query = mysqli_query($conn, "SELECT COUNT(DISTINCT employee_id) AS total_employees_witout_payroll FROM rate");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_employees_witout_payroll = $result['total_employees_witout_payroll'];
+    if($total_employees_witout_payroll = 0){
+        $total_employees_witout_payroll = 0;
+    }
+} 
+// Query to count the number of distinct employees with added payroll
+$query = mysqli_query($conn, "SELECT  COUNT(id) AS total_employees_payroll FROM rate");
+if ($query) {
+    $result = mysqli_fetch_assoc($query);
+    $total_employees_payroll = $result['total_employees_payroll'];
+    if($total_employees_payroll = 0){
+        $total_employees_payroll = 0;
+    }
+} 
+// taravel request
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReq
+        FROM employeedata AS e
+        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
+        WHERE t.DepartureOn >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $TravelReq = $row['TravelReq'];
+} else {
+    $TravelReq = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqAprove
+        FROM employeedata AS e
+        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
+        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DepartureOn >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $TravelReqAprove = $row['TravelReqAprove'];
+} else {
+    $TravelReqAprove = 0;
+}
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqPENDING
+        FROM employeedata AS e
+        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
+        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'PENDING' AND t.DepartureOn >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $TravelReqPENDING = $row['TravelReqPENDING'];
+} else {
+    $TravelReqPENDING = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqREJECTED
+        FROM employeedata AS e
+        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
+        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'REJECTED' AND t.DepartureOn >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $TravelReqREJECTED = $row['TravelReqREJECTED'];
+} else {
+    $TravelReqREJECTED = 0;
+}
+
+// Your database connection code here
+
+$sql = "SELECT COUNT(*) AS EmployeeCountexp
+        FROM employeedata
+        WHERE Contract_Expiry_Date <= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH)";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountexp = $row['EmployeeCountexp'];
+    
+} else {
+  $employeeCountexp =0;
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +267,7 @@ location.replace('../logout.php')
 
 <head>
     <?php include ('link/links.php')?>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <style>
     #fullDiv ul {
@@ -74,151 +326,387 @@ location.replace('../logout.php')
      ::-webkit-scrollbar-thumb:hover {
         background: #b30000;
     }
+    h4, h3 {
+      text-align: center;
+    }
 </style>
 <body>
     <div id="main">
         <?php include('link/desigene/navbar.php')?>
         <div class="container-fluid py-5">
-            <div class="row">
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <a href="exit-clear.php">
-                        <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-                            <div class="card-header">Employee Clearance</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <h5 class="card-title">Approval</h5>
-                                    </div>
-                                    <div class="col-6">
-                                        <p class="card-text float-end">#</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Employee Appraisal</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Employee Leave Request</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
-                        <div class="card-header">mployee Travel Request</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Employee PayRoll</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-info mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Employee Count</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Employee Contact Expiry</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-lg-3 col-md-3">
-                    <div class="card text-bg-dark mb-3" style="max-width: 18rem;">
-                        <div class="card-header">All Employee Details</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h5 class="card-title">Approval</h5>
-                                </div>
-                                <div class="col-6">
-                                    <p class="card-text float-end">#</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="bg-light border border-dark rounded p-5 border-3">
-                        <label for="">Message to all WSSC employee</label>
-                        <input type="text" class="form-control w-50 my-2" name="subject" placeholder="Subjext" id="">
-                        <textarea name="message" class="my-2" placeholder="Message" id="message"></textarea>
-                        <script>
-                            CKEDITOR.replace('message');
-                        </script>
-                    </div>
-                </div>
+        <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h1 style="color: darkblue;">WELCOME</h1>
+    </div>
 
-                <div class="col-sm-12 col-lg-6 col-md-6">
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#</h3>
+                  <h4>Employee Clearance</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#</h3>
+                  <h4>Employee Appraisal</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-person-circle-check"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><?php echo $employeeCountexp?></h3>
+                  <h4>Employee Contact Expiry</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-id-badge"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_employees?></h3>
+                  <h4>Total Employees Pending</h4>
+                </div>
+                <div class="icon"><i class="fa-solid fa-person-digging"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>Travel request</h2>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $TravelReq?>
+              <script> var TravelReq= <?php echo $TravelReq?>;</script>
+              </h3>
+                  <h4>Number of Travel Request</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $TravelReqAprove?>
+              <script> var TravelReqAprove= <?php echo $TravelReqAprove?>;</script>
+              </h3>
+                  <h4>Number of Travel Request Accepted</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            
+              <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="travelreq.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $TravelReqPENDING?>
+              <script> var TravelReqPENDING= <?php echo $TravelReqPENDING?>;</script>
+              </h3>
+                  <h4>Travel Request Pending</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="travelRejecet.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $TravelReqREJECTED?>
+              <script> var TravelReqREJECTED= <?php echo $TravelReqREJECTED?>;</script>
+              </h3>
+                  <h4>Travel Request REJECTED</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>PayRoll</h2>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_rate ?></h3>
+                  <h4>Total Amount Payroll of this Month</h4>
+                </div>
+                <div class="icon">
+                    <i class="fa-regular fa-credit-card"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_rate_wssc ?></h3>
+                  <h4>Total Amount WSSC of This Month</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-rupee-sign"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_rate_tma ?></h3>
+                  <h4>Total Amount TMA of This Month</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-rupee-sign"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $rate_difference ?></h3>
+                  <h4>Amount Difference b/w WSSC And TMA</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-arrow-up-wide-short"></i><i class="fa-solid fa-arrow-down-wide-short"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $rate_difference_previous_month ?></h3>
+                  <h4>Amount Difference Previous Month</h4>
+                </div>
+                <div class="icon"><i class="fa-solid fa-chart-column"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_employees_payroll?></h3>
+                  <h4>Total Employees Witho Payroll</h4>
+                </div>
+                <div class="icon"><i class="fa-solid fa-money-check-dollar"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                    <?php echo $total_employees_witout_payroll?></h3>
+                  <h4>Total Employees Without Payroll</h4>
+                </div>
+                <div class="icon"><i class="">💵</i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>TODAY'S ATTENDANCE</h2>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>
+                  <?php echo $employeeCountotal; ?>
+                  <script> var employeeCountotal=<?php echo $employeeCountotal?>;</script>
+                  </h3>
+                  <h4>TOTAL ATTENDANCE</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-user"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?php echo $employeeCount; ?>
+                <script> var employeeCount=<?php echo $employeeCount?>;</script>
+                </h3>
+                  <h4>PRESENT</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-user"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                <h3><?php echo $employeeCountABSENT; ?>
+              <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
+              </h3>
+                  <h4>ABSENT</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-ban"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                <div class="inner">
+                <h3><?php echo $totalAcceptLeaves?>
+              <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
+              </h3>
+                  <h4>LEAVE</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-running"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $employeeCountOVERTIME;?>
+              <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
+              </h3>
+                  <h4>OVER TIME</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-purple">
+                <div class="inner">
+                <h3><?php echo $employeeCountDDorOT;?>
+              <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
+              </h3>
+                  <h4>DOUBLE DUTY</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-gear"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <h2>LEAVE REQUESTS</h2>
+    </div>
+   
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-orange">
+                <div class="inner">
+                <h3><?php echo $totalLeaves?>
+              <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
+              </h3>
+                  <h4>TOTAL LEAVE REQUEST</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-bar-chart"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+             <a href="aprove.php" style="text-decoration: none;" >
+             <div class="small-box bg-green">
+                <div class="inner">
+                <h3><?php echo $totalAPROVELeaves?>
+              <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
+              </h3>
+                  <h4>APROVE</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-check"></i>
+                </div>
+              </div>
+             </a>
+            </div><!-- ./col -->
+          <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="Leavereq.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $totalPendingLeaves?>
+              <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
+              </h3>
+                  <h4>PENDING</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="Reject.php" style="text-decoration: none;" >
+              <div class="small-box bg-red">
+                <div class="inner">
+                <h3><?php echo $totalREJECTEDLeaves?>
+              <script> var vetsciencestotalREJECTEDLeaves= <?php echo $totalREJECTEDLeaves?>;</script>
+              </h3>
+                  <h4>REJECTED</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-ban"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            
+        
+            <div class="col-lg-12 col-sm-12">
+            <div class="row">
+            <div class="col-sm-12 col-lg-6 col-md-6">
                     <div class="p-4"><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px none; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
                         <canvas id="myChart" style="width: 520px; max-width: 600px; display: block; height: 259px;" width="780" height="388"></canvas>
                         <script>
-                            var xValues = ["Item1", "Item2", "Item3", "Item4", "Item5"];
-                            var yValues = [55, 49, 44, 24, 20];
+                            var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
+                            var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
                             var barColors = ["red", "green", "blue", "orange", "brown"];
 
                             new Chart("myChart", {
@@ -249,8 +737,8 @@ location.replace('../logout.php')
                         <canvas id="myChart1" style="width: 400px; max-width: 400px; display: block; height: 400px;" width="600" height="600"></canvas>
 
                         <script>
-                            var xValues = ["type1", "type2", "type3", "type4", "type5"];
-                            var yValues = [55, 49, 44, 24, 15];
+                            var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
+                            var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
                             var barColors = [
                                 "#b91d47",
                                 "#00aba9",
@@ -280,6 +768,10 @@ location.replace('../logout.php')
                     </div>
                 </div>
             </div>
+            </div>
+            </div>
+        
+        
         </div>
     </div>
 

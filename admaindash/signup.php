@@ -1,12 +1,13 @@
 <?php
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
 session_start();
 error_reporting(0);
 if (strlen($_SESSION['loginid']==0)) {
 ?>   <script>
 location.replace('../logout.php')
 </script><?php
-  } else{
+  } else
+  {
 if(isset($_POST['submit']))
 {
     $FullName = $_POST['FullName'];
@@ -15,15 +16,20 @@ if(isset($_POST['submit']))
     $Password = $_POST['Password'];
     $Employeenumber = $_POST['Employeenumber'];
     $Designation = $_POST['Designation'];
-    $insertquery = "INSERT INTO `login`( `FullName`, `Gender`, `Email`, `Password`, `EmployeeNumber`, `Designation`) VALUES ('$FullName','$Gander','$Email','$Password','$Employeenumber','$Designation')";
-    $query= mysqli_query($conn,$insertquery);
-    if($query)
-    {
-        echo '<script>alert( "Data insertedsuccessfully");</script>';
-    }
-    else {
-        echo '<script>alert("Sorry Data is not inserted");</script>'; 
-      }
+    $query = mysqli_query($conn, "INSERT INTO `login`(`FullName`, `Gender`, `Email`, `Password`, `EmployeeNumber`, `Designation`) VALUES ('$FullName','$Gander','$Email','$Password','$Employeenumber','$Designation')");
+if ($query) {
+    // Insertion was successful
+    ?>
+    <script>
+        alert("Data inserted successfully");
+        location.replace("signup.php");
+    </script>
+    <?php
+} else {
+    // Insertion failed
+    echo '<script>alert("Sorry, data was not inserted: ' . mysqli_error($conn) . '");</script>';
+}
+
 
 }
 
@@ -33,6 +39,25 @@ if(isset($_POST['submit']))
     <head>
     <?php include ('link/links.php')?>
     </head>
+    <style>
+         .select2-selection__rendered {
+      line-height: 31px !important;
+
+    }
+
+    .select2-container .select2-selection--single {
+      height: 40px !important;
+      border: 1px solid #ced4da;
+      border-radius: 0px;
+      width: 100% !important;
+    }
+
+    .select2-selection__arrow {
+      height: 30px !important;
+      
+
+    }
+    </style>
     <body>
         <?php include ('link/desigene/sidebar.php')?>
         <div id="main">
@@ -45,30 +70,23 @@ if(isset($_POST['submit']))
                                 <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                                     <div class="card-body p-4 p-md-5">
                                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
-                                        <form action="#" method="post">
+                                        <form method="post">
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
                                                         <input type="text" id="firstName" name="FullName" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="firstName">Full Name</label>
+                                                        <label class="form-label" id="empname" for="firstName">Full Name</label>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <h6 class="mb-2 pb-1">Gender: </h6>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="Gander" id="femaleGender"
-                                                        value="Female" checked />
-                                                        <label class="form-check-label" for="femaleGender">Female</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="Gander" id="maleGender"
-                                                        value="Male" >
-                                                        <label class="form-check-label" for="maleGender">Male</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="Gander" id="otherGender"
-                                                        value="Other" />
-                                                        <label class="form-check-label" for="otherGender">Other</label>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    
+                                                    <select id="Gender" name="Gender" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                                        <option value="">Choose</option>
+                                                        <option value="Mail">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                    <label class="form-label" >Gender</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 pb-2">
@@ -85,8 +103,9 @@ if(isset($_POST['submit']))
                                                 </div>
                                                 <div class="col-md-6 mb-4 pb-2">
                                                     <div class="form-outline">
-                                                        <input type="tel" id="Employeenumber" name="Employeenumber" class="form-control form-control-lg" required />
-                                                        <label class="form-label" for="Employeenumber">Employee Number</label>
+                                                    <select name="Employeenumber" id="employee_no" class="form-control select2">
+                                                    </select>
+                                                    <label class="form-label" for="Employeenumber">Employee Number</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -94,6 +113,7 @@ if(isset($_POST['submit']))
                                                         <option  disabled>Designation.</option>
                                                         <option value="HR manager">Humans Resource manager.</option>
                                                         <option value="Payroll manager">Payroll manager.</option>
+                                                        <option value="Manager">Manager</option>
                                                         <option value="CEO">CEO</option>
                                                         <option value="Employee">Employee</option>
                                                     </select>
@@ -146,6 +166,43 @@ if(isset($_POST['submit']))
             </div>
         </div>
     <?php include('link/desigene/script.php')?>
+    <script>
+     $(document).ready(function() {
+  $(".select2").select2();
+
+  function loadTable() {
+    $.ajax({
+      url: "ajex/empid.php",
+      type: "POST",
+      success: function(data) {
+        $("#employee_no").html(data);
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.error("AJAX error:", errorThrown);
+      }
+    });
+  }
+  loadTable();
+
+  $("#employee_no").change(function() {
+    var employeeId = $(this).val();
+    $.ajax({
+      url: "ajex/get_employee_ajax.php",
+      type: "GET",
+      data: {"id": employeeId},
+      success: function(data) {
+        var employeeData = JSON.parse(data);
+        $("#emailAddress").val(employeeData.emailAddress);
+        // Add similar lines for other fields if needed
+      },
+      error: function(xhr, textStatus, errorThrown) {
+        console.error("AJAX error:", errorThrown);
+      }
+    });
+  });
+});
+
+    </script>
     </body>
 </html>
 <?php }?>

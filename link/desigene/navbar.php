@@ -41,7 +41,7 @@
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Cv.php">Employee CV</a>
         </li>
         <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Apraisal.php" >Add Appraisal</a>
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Appraisaladd.php" >Add Appraisal</a>
         </li>
         
       </ul>

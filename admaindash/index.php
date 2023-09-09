@@ -3,7 +3,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
 
 if (strlen($_SESSION['loginid']==0)) {
 ?>   <script>

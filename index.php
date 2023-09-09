@@ -7,97 +7,63 @@ include 'link/desigene/db.php';
 if (isset($_POST['submit'])) {
     $Email = $_POST['Email'];
     $Password = $_POST['Password'];
+    $loginas = $_POST['loginas'];
+    
     $email_search = mysqli_query($conn,"SELECT * FROM `login` WHERE `Email`='$Email' && `Password`='$Password'");
-    $row=mysqli_fetch_array($email_search);
-    if($row["Designation"]=="Admin"){
-        $_SESSION['loginid']=$row['Id'];
-            ?>
-            <script>
-                location.replace('admaindash/index.php')
-            </script>
-            <?php
+    $row = mysqli_fetch_array($email_search);
+    
+    if ($row["Designation"] == "Admin" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: admaindash/index.php");
+        exit();
     }
-    elseif($row["Designation"]=="HR manager"){
-        $_SESSION['loginid']=$row['Id'];
-            ?>
-            <script>
-                location.replace('hrdash/index.php')
-            </script>
-            <?php
+    elseif ($row["Designation"] == "HR manager" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: hradmin/index.php");
+        exit();
     }
-    elseif($row["Designation"]=="Payroll manager"){
-        $_SESSION['loginid']=$row['Id'];
-            ?>
-            <script>
-                location.replace('payroll/payroll.php')
-            </script>
-            <?php
+    elseif ($row["Designation"] == "Payroll manager" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: payroll/payroll.php");
+        exit();
     }
-    elseif($row["Designation"]=="Employee"){
-        $_SESSION['loginid']=$row['Id'];
-            ?>
-            <script>
-                location.replace('Employe.php')
-            </script>
-            <?php
+    elseif ($row["Designation"] == "CEO" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: ceodash/index.php");
+        exit();
     }
-    elseif($row["Designation"]=="CEO"){
-        $_SESSION['loginid']=$row['Id'];
-            ?>
-            <script>
-                location.replace('ceodash/index.php')
-            </script>
-            <?php
+    elseif ($row["Designation"] == "Manager" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: Manager/index.php");
+        exit();
     }
-    else{
-
+    elseif ($loginas == "Employee") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        header("Location: Employee/index.php");
+        exit();
+    }
+    else {
+        // Handle the case where the login is not successful
+        echo '<script>alert("Sorry, the email or password is incorrect.");</script>';
     }
 }
-    // Use prepared statements with PDO
-    // $stmt = $conn->prepare("SELECT * FROM `login` WHERE `Email`=:Email AND `Password`=:Password");
-    // $stmt->bindParam(':Email', $Email);
-    // $stmt->bindParam(':Password', $Password);
-    // $stmt->execute();
-
-    // Fetch the result
-//     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-//     if ($row) {
-//         $_SESSION['loginid'] = $row['Id'];
-
-//         // Redirect based on the user's designation
-//         switch ($row['Designation']) {
-//             case "Admin":
-//                 header("Location: admaindash/index.php");
-//                 break;
-//             case "HR manager":
-//                 header("Location: hrdash/index.php");
-//                 break;
-//             case "Payroll manager":
-//                 header("Location: payrol.php");
-//                 break;
-//             case "CEO":
-//                 header("Location: ceodash/index.php");
-//                 break;
-//             case "Employee":
-//                 header("Location: Employe.php");
-//                 break;
-//             default:
-//                 // Invalid designation
-//                 echo '<script>alert("Sorry, the email or password is incorrect.");</script>';
-//                 header("Location: index.php");
-//                 break;
-//         }
-//         exit();
-//     } else {
-//         // Invalid email or password
-//         echo '<script>alert("Sorry, the email or password is incorrect.");</script>';
-//         header("Location: index.php");
-//         exit();
-//     }
-// }
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -110,18 +76,20 @@ if (isset($_POST['submit'])) {
 <body>
     <section class="ftco-section">
         <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section bg-indigo text-light">Login </h2>
-                </div>
-            </div>
             <div class="row justify-content-center">
                     <div class="login-wrap p-4 w-50 m-auto p-md-5">
                         <div class="icon d-flex align-items-center justify-content-center">
-                            <img src="image/1662096718940.jpg" class="rounded-circle border border-primary" width="100px" alt="">
+                            <img src="image/1662096718940.jpg" class="rounded-circle" width="300px" alt="">
                         </div>
                         <h3 class="text-center mb-4">Sign In</h3>
                         <form action="#" class="login-form" method="POST" >
+                            <div class="form-group">
+                                <select class="form-control mt-2 rounded-left" name="loginas" id="">
+                                  <option value="">Login As</option>
+                                  <option value="Employee">Employee</option>
+                                  <option value="Admin">Addmin</option>
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <input type="email" name="Email" class="form-control mt-2 rounded-left" placeholder="Username" required>
                             </div>

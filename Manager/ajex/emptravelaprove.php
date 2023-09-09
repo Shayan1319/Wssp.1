@@ -1,0 +1,29 @@
+<?php
+session_start();
+error_reporting(0);
+$currentDate = date('Y-m-d');
+$empid = $_SESSION['EmployeeNumber'];
+include('../link/desigene/db.php');
+            $sql = "SELECT * FROM employeedata AS e  INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'REJECTED' AND  t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                $a=1;
+                while($row=mysqli_fetch_array($result)){
+                    
+                    ?>
+                            <tr>
+                                <th scope="row"><?php echo $a?></th>
+                                <td><?php echo $row['EmployeeNo'] ?></td>
+                                <td><h5><?php echo $row['fName']?> <?php echo $row['lName']?></h5></td>
+                                <td><?php echo $row['Job_Tiltle'] ?></td>
+                                <td><?php echo $row['Employee_Class'] ?></td>
+                                <td><?php echo $row['RequestDate'] ?></td>
+                                <td><?php echo $row['FromCity'] ?></td>
+                                <td><?php echo $row['ToCity'] ?></td>
+                                <td><?php echo $row['DepartureOn'] ?></td>
+                                <td><?php echo $row['ReturnDate'] ?></td>
+                                <td><?php echo $row['Justification'] ?></td>
+                                <td><input type="submit" data-rejc="<?php echo $row['Id'] ?>" class="btn bg-danger text-white float-right shadow" value="Reject" id="Reject" name="Reject"></td>
+                        <?php
+                    $a=$a+1; } }
+                            ?>
