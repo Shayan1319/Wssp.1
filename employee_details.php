@@ -3,11 +3,11 @@ session_start();
 error_reporting(0);
 // links to database
 include('../hrdash/link/desigene/db.php');
-if (strlen($_SESSION['loginid']==0)) {
-?>   <script>
-location.replace('../logout.php')
-</script><?php
-  } else{
+// if (strlen($_SESSION['loginid']==0)) {
+// ?>   <script>
+// location.replace('../logout.php')
+// </script><?php
+//   } else{
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -165,4 +165,4 @@ location.replace('../logout.php')
 </body>
 
 </html>
-<?php }?>
+<?php //}?>

@@ -5,7 +5,7 @@ error_reporting(0);
 include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
     ?>   <script>
-        location.replace('../logout.php')
+        location.replace('../logout.php');
     </script><?php
   } else{
 
@@ -46,7 +46,7 @@ if(isset($_POST['submit'])){
   $LeaveAlreadyAvailed=$_POST['LeaveAlreadyAvailed'];
   $Description=$_POST['Description'];
   $date=date("Y-M-D");
-  $query = mysqli_query($conn, "INSERT INTO `leavereq`(`EmployeeNo`, `PhoneNumberOnLeave`, `LeaveType`, `LeaveFrom`, `LeaveTo`, `TotalDays`, `LeaveAvailed`, `Description`, `Statusofmanger`, `StatusofGm`, `DateofApply`, `DateOfAccepManager`, `DateOfAccepGm`) VALUES ('$Employee_number','$Number','$type','$Levefrom','$LeaveTo','$NumberofDay','$LeaveAlreadyAvailed','$Description','PENDING','PENDING','$date','','')");
+  $query = mysqli_query($conn, "INSERT INTO `leavereq`(`EmployeeNo`, `PhoneNumberOnLeave`, `LeaveType`, `LeaveFrom`, `LeaveTo`, `TotalDays`, `LeaveAvailed`, `Description`, `DateofApply`) VALUES ('$Employee_number','$Number','$type','$Levefrom','$LeaveTo','$NumberofDay','$LeaveAlreadyAvailed','$Description','$date')");
 if ($query) {
     // Insertion was successful
     ?>
