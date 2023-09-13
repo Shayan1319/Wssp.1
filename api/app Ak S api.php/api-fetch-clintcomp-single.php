@@ -30,7 +30,6 @@ include "config.php";
 
 // Use double quotes for interpolation
 $sql = "SELECT * FROM `clintcomp` WHERE Id = '$clintcomp_id'";
-
 $result = mysqli_query($conn, $sql) or die("SQL query failed");
 
 if (mysqli_num_rows($result) > 0) {

@@ -39,7 +39,7 @@ if (strlen($_SESSION['loginid'] == 0 && $_SESSION['EmpId'] == 0)) {
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        <?php include('link/links.php') ?>
+        <?php include('link/links.php')?>
     </head>
     <body>
     <div id="">

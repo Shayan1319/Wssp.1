@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                                 <select class="form-control mt-2 rounded-left" name="loginas" id="">
                                   <option value="">Login As</option>
                                   <option value="Employee">Employee</option>
-                                  <option value="Admin">Addmin</option>
+                                  <option value="Admin">Admin</option>
                                 </select>
                             </div>
                             <div class="form-group">

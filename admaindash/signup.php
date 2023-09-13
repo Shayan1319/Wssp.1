@@ -74,50 +74,50 @@ if ($query) {
                                             <div class="row">
                                                 <div class="col-md-6 mb-4">
                                                     <div class="form-outline">
-                                                        <input type="text" id="firstName" name="FullName" class="form-control form-control-lg" />
                                                         <label class="form-label" id="empname" for="firstName">Full Name</label>
+                                                        <input type="text" id="firstName" name="FullName" class="form-control form-control-lg" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <div class="form-group">
+                                                    <div class="form-outline">
                                                     
+                                                        <label class="form-label" >Gender</label>
                                                     <select id="Gender" name="Gender" class="form-control select2" tabindex="-1" aria-hidden="true">
                                                         <option value="">Choose</option>
                                                         <option value="Mail">Male</option>
                                                         <option value="Female">Female</option>
                                                     </select>
-                                                    <label class="form-label" >Gender</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 pb-2">
                                                     <div class="form-outline">
-                                                        <input type="email" name="Email" id="emailAddress" class="form-control form-control-lg" required />
                                                         <label class="form-label" for="emailAddress">Email</label>
+                                                        <input type="email" name="Email" id="emailAddress" class="form-control form-control-lg" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 pb-2">
                                                     <div class="form-outline">
-                                                        <input type="password" id="password" name="Password" class="form-control form-control-lg" value="Wssc@123" required />
                                                         <label class="form-label" for="emailAddress">Password</label>
+                                                        <input type="password" id="password" name="Password" class="form-control form-control-lg" value="Wssc@123" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 mb-4 pb-2">
                                                     <div class="form-outline">
+                                                        <label class="form-label" for="Employeenumber">Employee Number</label>
                                                     <select name="Employeenumber" id="employee_no" class="form-control select2">
                                                     </select>
-                                                    <label class="form-label" for="Employeenumber">Employee Number</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
+                                                    <label class="form-label select-label">Designation</label>
                                                     <select class="select form-control" name="Designation" required>
                                                         <option  disabled>Designation.</option>
-                                                        <option value="HR manager">Humans Resource manager.</option>
-                                                        <option value="Payroll manager">Payroll manager.</option>
+                                                        <option value="HR manager">Humans Resource Manager.</option>
+                                                        <option value="Payroll manager">Payroll Manager.</option>
                                                         <option value="Manager">Manager</option>
                                                         <option value="CEO">CEO</option>
                                                         <option value="Employee">Employee</option>
                                                     </select>
-                                                    <label class="form-label select-label">Designation</label>
                                                 </div>
                                             </div>
                                             <div class="mt-4 pt-2">

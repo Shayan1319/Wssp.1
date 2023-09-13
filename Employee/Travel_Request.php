@@ -31,7 +31,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
         <?php
     } else {
         // Insertion failed
-        echo '<script>alert("Sorry, data was not inserted: ' . mysqli_error($conn) . '");</script>';
+        echo '<script>alert("Sorry, data was not inserted: '. mysqli_error($conn) .'");</script>';
     }  
 
       
@@ -58,13 +58,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
               <!-- form start -->
               <form method="post" enctype="multipart/form-data">
               <?php 
-         $Empod = $_SESSION['EmployeeNumber'];
-         $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $Empod");
-     
-         if (mysqli_num_rows($select) > 0) {
-             while ($row = mysqli_fetch_array($select)) {
-                
-      ?>
+                  $Empod = $_SESSION['EmployeeNumber'];
+                  $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $Empod");
+                  if (mysqli_num_rows($select) > 0) {
+                      while ($row = mysqli_fetch_array($select)) {
+                          
+                ?>
                 <div class="row">
                   <div class="col-4">
                     <div class="form-group">
@@ -145,12 +144,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                              if( $row['Statusofmanger']=='REJECTED'||$row['StatusofGm']=='REJECTED'){
                               $status="REJECTED";
                               $color= "btn-danger";
+                              $tabill="none";
                              }else if( $row['Statusofmanger']=='ACCPET' && $row['StatusofGm']=='ACCPET'){
                               $status="Accepted";
                               $color= "btn-success";
-                             }else{
+                              $tabill="block";
+                             }else if( $row['Statusofmanger']=='PENDING' || $row['StatusofGm']=='PENDING'){
                               $status="Pending";
                               $color= "btn-primary";
+                              $tabill="none";
                              }
                             
                       ?>
@@ -168,12 +170,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                               if( $data['Statusofmanger']=='REJECTED'||$data['StatusofGm']=='REJECTED'){
                                 $datastatus="REJECTED";
                                 $datacolor= "btn-danger";
+                                $tabill="none";
                                }else if( $data['Statusofmanger']=='ACCPET' && $data['StatusofGm']=='ACCPET'){
                                 $datastatus="Accepted";
                                 $datacolor= "btn-success";
+                                $tabill="none";
                                }else{
                                 $datastatus="Pending";
                                 $datacolor= "btn-primary";
+                                $tabill="none";
                                }}}else{
                                 $datastatus="Empty";
                                 $datacolor= "btn-secondary";
@@ -181,7 +186,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                           ?>
                         <button type="button" class="btn <?php echo $datacolor?>"><?php echo $datastatus?></button>
                         </td>
-                        <td><a href="Tabil.php?Rid=<?php echo $row['RequestNo'];?>"><i class="fa-solid fa-file-invoice-dollar"></i></a></td>
+                        <td><a style="display: <?php echo $tabill ?>;" href="Tabil.php?Rid=<?php echo $row['RequestNo'];?>">TABill</a></td>
                       </tr>
                       <?php }}?>
                     </tbody>

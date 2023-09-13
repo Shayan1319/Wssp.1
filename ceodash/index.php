@@ -51,7 +51,7 @@ if ($result->num_rows > 0) {
     $employeeCountOVERTIME = 0;
 } 
 
-
+// leave 
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalPendingLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
@@ -120,7 +120,7 @@ if ($result->num_rows > 0) {
 } else {
     $totalLeaves = 0;
 }
-
+// Payroll
 $query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
 
 if ($query) {
@@ -162,14 +162,14 @@ if ($query) {
         $rate_difference_previous_month = 0;
     }
 } 
-$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Online Status`='Pending'");
-if ($query) {
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Online Status`='PENDING'");
+if (mysqli_num_rows($query)) {
     $result = mysqli_fetch_assoc($query);
     $total_employees = $result['total_employees'];
-    if($total_employees = 0){
+  }   else{
         $total_employees = 0;
     }
-} 
+
 // Query to count the number of distinct employees with added payroll
 $query = mysqli_query($conn, "SELECT COUNT(DISTINCT employee_id) AS total_employees_witout_payroll FROM rate");
 if ($query) {
@@ -259,86 +259,154 @@ if ($result->num_rows > 0) {
 } else {
   $employeeCountexp =0;
 }
+// Tabill
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS 
+        Tabill FROM employeedata AS e 
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate'";
 
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $Tabill = $row['Tabill'];
+} else {
+    $Tabill = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillAprove
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillAprove = $row['tabillAprove'];
+} else {
+    $tabillAprove = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillaccept
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillaccept = $row['tabillaccept'];
+} else {
+    $tabillaccept = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillPENDING
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'PENDING' AND t.DateofApply >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillPENDING = $row['tabillPENDING'];
+} else {
+    $tabillPENDING = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillREJECTED
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'REJECTED' AND t.DateofApply >= '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillREJECTED = $row['tabillREJECTED'];
+} else {
+    $tabillREJECTED = 0;
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <?php include ('link/links.php')?>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<style>
-    #fullDiv ul {
-        margin: 0;
-        padding: 0;
-    }
-    
-    #fullDiv li {
-        float: left;
-        display: block;
-        width: 14.2857%;
+  <head>
+      <?php include ('link/links.php')?>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  </head>
+  <style>
+      #fullDiv ul {
+          margin: 0;
+          padding: 0;
+      }
+      
+      #fullDiv li {
+          float: left;
+          display: block;
+          width: 14.2857%;
+          text-align: center;
+          list-style-type: none;
+      }
+      
+      #fullDiv li:nth-child(n+1):nth-child(-n+7) {
+          font-weight: 900;
+          color: #e67e22;
+      }
+      
+      #fullDiv li:nth-child(n+39),
+      #fullDiv li:nth-child(n+8):nth-child(-n+16) {
+          font-weight: 900;
+          color: rgba(0, 0, 0, .3);
+      }
+      
+      #fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
+      #fullDiv li:nth-child(17) {
+          border-radius: 5px;
+          background-color: #1abc9c;
+          color: #ecf0f1;
+      }
+      
+      .form-group label {
+          font-weight: bold;
+      }
+      /* width */
+      
+      ::-webkit-scrollbar {
+          width: 20px;
+      }
+      /* Track */
+      
+      ::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px grey;
+          border-radius: 10px;
+      }
+      /* Handle */
+      
+      ::-webkit-scrollbar-thumb {
+          background: red;
+          border-radius: 10px;
+      }
+      /* Handle on hover */
+      
+      ::-webkit-scrollbar-thumb:hover {
+          background: #b30000;
+      }
+      h4, h3 {
         text-align: center;
-        list-style-type: none;
-    }
-    
-    #fullDiv li:nth-child(n+1):nth-child(-n+7) {
-        font-weight: 900;
-        color: #e67e22;
-    }
-    
-    #fullDiv li:nth-child(n+39),
-    #fullDiv li:nth-child(n+8):nth-child(-n+16) {
-        font-weight: 900;
-        color: rgba(0, 0, 0, .3);
-    }
-    
-    #fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
-    #fullDiv li:nth-child(17) {
-        border-radius: 5px;
-        background-color: #1abc9c;
-        color: #ecf0f1;
-    }
-    
-    .form-group label {
-        font-weight: bold;
-    }
-    /* width */
-    
-     ::-webkit-scrollbar {
-        width: 20px;
-    }
-    /* Track */
-    
-     ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px grey;
-        border-radius: 10px;
-    }
-    /* Handle */
-    
-     ::-webkit-scrollbar-thumb {
-        background: red;
-        border-radius: 10px;
-    }
-    /* Handle on hover */
-    
-     ::-webkit-scrollbar-thumb:hover {
-        background: #b30000;
-    }
-    h4, h3 {
-      text-align: center;
-    }
-</style>
-<body>
+      }
+  </style>
+  <body>
     <div id="main">
         <?php include('link/desigene/navbar.php')?>
         <div class="container-fluid py-5">
-        <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1 style="color: darkblue;">WELCOME</h1>
-    </div>
-
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h1 style="color: darkblue;">WELCOME</h1>
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
@@ -376,16 +444,17 @@ if ($result->num_rows > 0) {
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
+              <a href="" style>
+                <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_employees?></h3>
+                  <h3><?php echo $total_employees?></h3>
                   <h4>Total Employees Pending</h4>
                 </div>
                 <div class="icon"><i class="fa-solid fa-person-digging"></i>
                 </div>
               </div>
+              </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>Travel request</h2>
@@ -418,8 +487,7 @@ if ($result->num_rows > 0) {
                 </div>
               </div>
             </div><!-- ./col -->
-            
-              <div class="col-lg-4 col-xs-6">
+            <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
               <div class="small-box bg-blue">
@@ -452,14 +520,92 @@ if ($result->num_rows > 0) {
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>TA Bill</h2>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $Tabill?>
+              <script> var Tabill= <?php echo $Tabill?>;</script>
+              </h3>
+                  <h4>Number of TA Bill</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillAprove?>
+              <script> var tabillAprove= <?php echo $tabillAprove?>;</script>
+              </h3>
+                  <h4>Number of TA Bill Accepted</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="aprovetabill.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillaccept?>
+              <script> var tabillaccept= <?php echo $tabillaccept?>;</script>
+              </h3>
+                  <h4>TA Bill Approved</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="tabill.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillPENDING?>
+              <script> var tabillPENDING= <?php echo $tabillPENDING?>;</script>
+              </h3>
+                  <h4>TA bill Pending</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="tabillRejecet.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillREJECTED?>
+              <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
+              </h3>
+                  <h4>TA bill REJECTED</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>PayRoll</h2>
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_rate ?></h3>
+                  <h3><?php echo $total_rate ?></h3>
                   <h4>Total Amount Payroll of this Month</h4>
                 </div>
                 <div class="icon">
@@ -471,8 +617,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_rate_wssc ?></h3>
+                  <h3><?php echo $total_rate_wssc ?></h3>
                   <h4>Total Amount WSSC of This Month</h4>
                 </div>
                 <div class="icon">
@@ -484,8 +629,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_rate_tma ?></h3>
+                  <h3><?php echo $total_rate_tma ?></h3>
                   <h4>Total Amount TMA of This Month</h4>
                 </div>
                 <div class="icon">
@@ -497,8 +641,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $rate_difference ?></h3>
+                  <h3><?php echo $rate_difference ?></h3>
                   <h4>Amount Difference b/w WSSC And TMA</h4>
                 </div>
                 <div class="icon">
@@ -510,8 +653,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $rate_difference_previous_month ?></h3>
+                  <h3><?php echo $rate_difference_previous_month ?></h3>
                   <h4>Amount Difference Previous Month</h4>
                 </div>
                 <div class="icon"><i class="fa-solid fa-chart-column"></i>
@@ -522,8 +664,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_employees_payroll?></h3>
+                  <h3><?php echo $total_employees_payroll?></h3>
                   <h4>Total Employees Witho Payroll</h4>
                 </div>
                 <div class="icon"><i class="fa-solid fa-money-check-dollar"></i>
@@ -534,8 +675,7 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>
-                    <?php echo $total_employees_witout_payroll?></h3>
+                  <h3><?php echo $total_employees_witout_payroll?></h3>
                   <h4>Total Employees Without Payroll</h4>
                 </div>
                 <div class="icon"><i class="">💵</i>
@@ -559,82 +699,80 @@ if ($result->num_rows > 0) {
                   <i class="fa fa-user"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
-            
-          <div class="col-lg-4 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-green">
-                <div class="inner">
-                  <h3><?php echo $employeeCount; ?>
-                <script> var employeeCount=<?php echo $employeeCount?>;</script>
+            </div><!-- ./col -->     
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                  <div class="inner">
+                    <h3><?php echo $employeeCount; ?>
+                  <script> var employeeCount=<?php echo $employeeCount?>;</script>
+                  </h3>
+                    <h4>PRESENT</h4>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-user"></i>
+                  </div>
+                </div>
+              </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                  <div class="inner">
+                  <h3><?php echo $employeeCountABSENT; ?>
+                <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
                 </h3>
-                  <h4>PRESENT</h4>
+                    <h4>ABSENT</h4>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-ban"></i>
+                  </div>
                 </div>
-                <div class="icon">
-                  <i class="fa fa-user"></i>
+              </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                  <div class="inner">
+                  <h3><?php echo $totalAcceptLeaves?>
+                <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
+                </h3>
+                    <h4>LEAVE</h4>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-running"></i>
+                  </div>
                 </div>
-              </div>
-            </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-red">
-                <div class="inner">
-                <h3><?php echo $employeeCountABSENT; ?>
-              <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
-              </h3>
-                  <h4>ABSENT</h4>
+              </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-blue">
+                  <div class="inner">
+                  <h3><?php echo $employeeCountOVERTIME;?>
+                <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
+                </h3>
+                    <h4>OVER TIME</h4>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-clock"></i>
+                  </div>
                 </div>
-                <div class="icon">
-                  <i class="fa fa-ban"></i>
+              </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-purple">
+                  <div class="inner">
+                  <h3><?php echo $employeeCountDDorOT;?>
+                <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
+                </h3>
+                    <h4>DOUBLE DUTY</h4>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-gear"></i>
+                  </div>
                 </div>
-              </div>
-            </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-yellow">
-                <div class="inner">
-                <h3><?php echo $totalAcceptLeaves?>
-              <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
-              </h3>
-                  <h4>LEAVE</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-running"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-blue">
-                <div class="inner">
-                <h3><?php echo $employeeCountOVERTIME;?>
-              <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
-              </h3>
-                  <h4>OVER TIME</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
-              <!-- small box -->
-              <div class="small-box bg-purple">
-                <div class="inner">
-                <h3><?php echo $employeeCountDDorOT;?>
-              <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
-              </h3>
-                  <h4>DOUBLE DUTY</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-gear"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h2>LEAVE REQUESTS</h2>
-    </div>
-   
+              </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>LEAVE REQUESTS</h2>
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-orange">
@@ -665,7 +803,7 @@ if ($result->num_rows > 0) {
               </div>
              </a>
             </div><!-- ./col -->
-          <div class="col-lg-4 col-xs-6">
+            <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
               <div class="small-box bg-blue">
@@ -697,8 +835,6 @@ if ($result->num_rows > 0) {
               </div>
               </a>
             </div><!-- ./col -->
-            
-        
             <div class="col-lg-12 col-sm-12">
             <div class="row">
             <div class="col-sm-12 col-lg-6 col-md-6">
@@ -769,15 +905,11 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
             </div>
-            </div>
-        
-        
+          </div>
         </div>
     </div>
-
-
     <?php include('link/desigene/script.php')?>
-</body>
+  </body>
 </html>
 <?php
   }

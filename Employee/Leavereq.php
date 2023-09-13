@@ -8,33 +8,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
         location.replace('../logout.php');
     </script><?php
   } else{
-
+ $Empod = $_SESSION['EmployeeNumber'];
 // Your database connection code here
 
 // SQL query
-$sql = "SELECT ed.LeaveAlreadyAvailed - SUM(lr.TotalDays) AS TotalDaysAfterSubtraction
-        FROM leavereq lr
-        INNER JOIN employeedata ed ON lr.EmployeeNo = ed.EmployeeNo
-        WHERE lr.Statusofmanger = 'ACCEPT' AND lr.StatusofGm = 'ACCEPT' AND YEAR(lr.DateofApply) = YEAR(CURRENT_DATE())
-        GROUP BY ed.EmployeeNo, ed.LeaveAlreadyAvailed";
 
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $totalDaysAfterSubtraction = $row['TotalDaysAfterSubtraction'];
-}
-else{
-  $Empod = $_SESSION['EmployeeNumber'];
-  $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $Empod");
 
-  if (mysqli_num_rows($select) > 0) {
-      while ($row = mysqli_fetch_array($select)) {
-     
-  $totalDaysAfterSubtraction = $row["leaveAlreadyAvailed"];
-      }
-}
-}
 // SQL query
 if(isset($_POST['submit'])){
   $Employee_number=$_SESSION['EmployeeNumber'];
@@ -234,7 +214,36 @@ if ($query) {
                 <div class="col-4 my-2">
                   <div class="form-group">
                     <label>Leave Already Availed</label>
-                    <input type="number"  name="LeaveAlreadyAvailed" value="<?php echo $totalDaysAfterSubtraction?>" placeholder="Leave Already Availed" class="form-control" autocomplete="off" disabled required="">
+                    <?php
+                      // Include your database connection script
+
+                      // Get the employee ID from the session
+                      $empid = $_SESSION['EmployeeNumber'];
+
+                      // SQL query to calculate available leave days
+                      $sql = "SELECT SUM(lr.TotalDays) - ed.leaveAlreadyAvailed AS TotalDaysAfterSubtraction
+                              FROM leavereq lr
+                              INNER JOIN employeedata ed ON lr.EmployeeNo = ed.EmployeeNo
+                              WHERE lr.Statusofmanger = 'ACCEPT' AND lr.StatusofGm = 'ACCEPT' AND YEAR(lr.DateofApply) = YEAR(CURRENT_DATE())
+                              AND ed.EmployeeNo = $empid";
+
+                      $result = $conn->query($sql);
+
+                      if ($result) {
+                          if ($result->num_rows > 0) {
+                              $row = $result->fetch_assoc();
+                              $totalDaysAfterSubtraction = $row['TotalDaysAfterSubtraction'];
+                          } else {
+                              // No leave request found, use the initial value from employeedata
+                              $totalDaysAfterSubtraction = $row["leaveAlreadyAvailed"];
+                          }
+                      } else {
+                          // Handle database query error
+                          die('MySQL Error: ' . mysqli_error($conn));
+                      }
+                      ?>
+
+                    <input type="number"  name="LeaveAlreadyAvailed" value="<?php  echo  $totalDaysAfterSubtraction;?>" placeholder="Leave Already Availed" class="form-control" autocomplete="off" disabled required="">
                   </div>
                 </div>
                 <div class="col-4 my-2">
@@ -252,6 +261,47 @@ if ($query) {
         <!-- /.card-body -->
       </div>
       <!-- /.card -->
+      <table class="table">
+        <thead class="text-white" style="background-color: darkblue;">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Leave Type</th>
+            <th scope="col" colspan="4">Description</th>
+            <th scope="col">Req,Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php 
+                      $select = mysqli_query($conn, "SELECT * FROM `leavereq` WHERE `EmployeeNo` = $Empod");
+     
+                      if (mysqli_num_rows($select) > 0) {
+                          $a=1;
+                           while ($row = mysqli_fetch_array($select)) {
+                            
+                             if( $row['Statusofmanger']=='REJECTED'||$row['StatusofGm']=='REJECTED'){
+                              $status="REJECTED";
+                              $color= "btn-danger";
+                             }else if( $row['Statusofmanger']=='ACCPET' && $row['StatusofGm']=='ACCPET'){
+                              $status="Accepted";
+                              $color= "btn-success";
+                             }else{
+                              $status="Pending";
+                              $color= "btn-primary";
+                             }
+                            
+                      ?>
+
+                      <tr>
+                        <td><?php echo $a?></td>
+                        <td><?php echo $row['DateofApply']?></td>
+                        <td><?php echo $row['LeaveType']?></td>
+                        <td colspan="4"><?php echo $row['Description']?></td>
+                      <td><button type="button" class="btn <?php echo $color?>"><?php echo $status?></button></td>
+                      </tr>
+                      <?php $a++; }}?>
+        </tbody>
+      </table>
     </div>
     <?php }}
     else{

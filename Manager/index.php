@@ -126,8 +126,9 @@ if ($result->num_rows > 0) {
     $totalLeaves = 0;
 }
 // travelrequest
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReq
-        FROM employeedata AS e
+// totle number of travle request
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS 
+        TravelReq FROM employeedata AS e 
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
         WHERE t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
 
@@ -191,6 +192,79 @@ if ($result->num_rows > 0) {
 } else {
     $TravelReqREJECTED = 0;
 }
+
+// Tabill
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS 
+        Tabill FROM employeedata AS e 
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $Tabill = $row['Tabill'];
+} else {
+    $Tabill = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillAprove
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillAprove = $row['tabillAprove'];
+} else {
+    $tabillAprove = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillaccept
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillaccept = $row['tabillaccept'];
+} else {
+    $tabillaccept = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillPENDING
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'PENDING' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillPENDING = $row['tabillPENDING'];
+} else {
+    $tabillPENDING = 0;
+}
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillREJECTED
+        FROM employeedata AS e
+        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
+        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'REJECTED' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $tabillREJECTED = $row['tabillREJECTED'];
+} else {
+    $tabillREJECTED = 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,12 +283,12 @@ if ($result->num_rows > 0) {
 
 <div class="container-fluid m-auto p-5">
     <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h1 style="color: darkblue;">WELCOME USER NAME</h1>
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <h2>TODAY'S ATTENDANCE</h2>
-    </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+              <h1 style="color: darkblue;">WELCOME USER NAME</h1>
+          </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+              <h2>TODAY'S ATTENDANCE</h2>
+          </div>
           <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
@@ -300,23 +374,23 @@ if ($result->num_rows > 0) {
                 </div>
               </div>
             </div><!-- ./col -->      
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-            <h2>LEAVE REQUESTS</h2>
-        </div>
-        <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-orange">
-                <div class="inner">
-                <h3><?php echo $totalLeaves?>
-              <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
-              </h3>
-                  <h4>TOTAL LEAVE REQUEST</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-bar-chart"></i>
-                </div>
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+              <h2>LEAVE REQUESTS</h2>
+          </div>
+          <div class="col-lg-4 col-xs-12">
+            <!-- small box -->
+            <div class="small-box bg-orange">
+              <div class="inner">
+              <h3><?php echo $totalLeaves?>
+            <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
+            </h3>
+                <h4>TOTAL LEAVE REQUEST</h4>
               </div>
-            </div><!-- ./col -->
+              <div class="icon">
+                <i class="fa fa-bar-chart"></i>
+              </div>
+            </div>
+          </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
@@ -437,6 +511,85 @@ if ($result->num_rows > 0) {
               <script> var TravelReqREJECTED= <?php echo $TravelReqREJECTED?>;</script>
               </h3>
                   <h4>Travel Request REJECTED</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>TA Bill</h2>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $Tabill?>
+              <script> var Tabill= <?php echo $Tabill?>;</script>
+              </h3>
+                  <h4>Number of TA Bill</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillAprove?>
+              <script> var tabillAprove= <?php echo $tabillAprove?>;</script>
+              </h3>
+                  <h4>Number of TA Bill Accepted</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="aprovetabill.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillaccept?>
+              <script> var tabillaccept= <?php echo $tabillaccept?>;</script>
+              </h3>
+                  <h4>TA Bill Approved</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div>
+              <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="tabill.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillPENDING?>
+              <script> var tabillPENDING= <?php echo $tabillPENDING?>;</script>
+              </h3>
+                  <h4>TA bill Pending</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="tabillRejecet.php" style="text-decoration: none;">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $tabillREJECTED?>
+              <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
+              </h3>
+                  <h4>TA bill REJECTED</h4>
                 </div>
                 <div class="icon">
                   <i class="fa fa-clock-o"></i>
