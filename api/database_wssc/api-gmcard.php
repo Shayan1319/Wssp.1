@@ -3,8 +3,6 @@ header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 include "../../link/desigene/db.php";
-// Your existing code for fetching data goes here...
-// Your code for logged-in users goes here
 $currentDate = date('Y-m-d');
 // Query to count the number of employees 
 $query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata");
@@ -326,35 +324,35 @@ if ($result->num_rows > 0) {
 } else {
     $tabillREJECTED = 0;
 }
-
 // Create an associative array to store the data
 $data = array(
-    'employeeCountexp' => $employeeCountexp,
-    'total_employees' => $total_employees,
-    'TravelReq' => $TravelReq,
-    'TravelReqAprove' => $TravelReqAprove,
-    'TravelReqPENDING' => $TravelReqPENDING,
-    'TravelReqREJECTED' => $TravelReqREJECTED,
-    'Tabill' => $Tabill,
-    'tabillAprove' => $tabillAprove,
-    'tabillaccept' => $tabillaccept,
-    'tabillPENDING' => $tabillPENDING,
-    'tabillREJECTED' => $tabillREJECTED,
-    'total_rate' => $total_rate,
-    'total_rate_wssc' => $total_rate_wssc,
-    'total_rate_tma' => $total_rate_tma,
-    'rate_difference' => $rate_difference,
-    'rate_difference_previous_month' => $rate_difference_previous_month,
-    'total_employees_payroll' => $total_employees_payroll,
-    'total_employees_witout_payroll' => $total_employees_witout_payroll,
-    'employeeCount' => $employeeCount,
-    'totalAcceptLeaves' => $totalAcceptLeaves,
-    'employeeCountOVERTIME' => $employeeCountOVERTIME,
-    'employeeCountDDorOT' => $employeeCountDDorOT,
-    'totalLeaves' => $totalLeaves,
-    'totalAPROVELeaves' => $totalAPROVELeaves,
-    'totalPendingLeaves' => $totalPendingLeaves,
-    'totalREJECTEDLeaves' => $totalREJECTEDLeaves
+    'employeeCount'=>$employeeCount,
+    'employeeCountABSENT'=>$employeeCountABSENT,
+    'employeeCountDDorOT'=>$employeeCountDDorOT,
+    'employeeCountOVERTIME'=>$employeeCountOVERTIME,
+    'totalPendingLeaves'=>$totalPendingLeaves,
+    'totalAcceptLeaves'=>$totalAcceptLeaves,
+    'totalAPROVELeaves'=>$totalAPROVELeaves,
+    'totalREJECTEDLeaves'=>$totalREJECTEDLeaves,
+    'totalLeaves'=>$totalLeaves,
+    'TravelReq'=>$TravelReq,
+    'TravelReqAprove'=>$TravelReqAprove,
+    'TravelReqPENDING'=>$TravelReqPENDING,
+    'TravelReqREJECTED'=>$TravelReqREJECTED,
+    'Tabill'=>$Tabill,
+    'tabillAprove'=>$tabillAprove,
+    'tabillaccept'=>$tabillaccept,
+    'tabillPENDING'=>$tabillPENDING,
+    'tabillREJECTED'=>$tabillREJECTED,
+    'total_employees'=>$total_employees,
+    'employeeCountexp'=>$employeeCountexp,
+    'total_rate'=> $total_rate,
+    'total_rate_wssc'=> $total_rate_wssc,
+    'total_rate_tma'=> $total_rate_tma,
+    'rate_difference'=> $rate_difference,
+    'rate_difference_previous_month'=> $rate_difference_previous_month,
+    'total_employees_witout_payroll'=> $total_employees_witout_payroll,
+    'total_employees_payroll'=> $total_employees_payroll
 );
 
 // Output the data as JSON

@@ -4,10 +4,10 @@ error_reporting(0);
 // links to database
 include('../hrdash/link/desigene/db.php');
 
-if (strlen($_SESSION['loginid']==0)) {
-?>   <script>
-location.replace('../logout.php')
-</script><?php
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
+    ?>   <script>
+        location.replace('../logout.php')
+    </script><?php
   } else{
 
 ?>
@@ -39,22 +39,33 @@ location.replace('../logout.php')
                                     <th scope="col">Reason of Leaving</th>
                                     <th scope="col">Employment Starting Date</th>
                                     <th scope="col">Leaving Date</th>
-                                    <th scope="col">Update Profile</th>
-                                    <th scope="col">Delete Profile</th>
+                                    <th scope="col">Fill the Form</th>
                                 </thead>
                                 <tbody>
+                                <?php
+                                include ('link/desigene/db.php');
+                                // Query to get the sum of rate column for the current month
+                                $query = mysqli_query($conn,"SELECT * FROM employee_exit AS e
+                                 INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
+                                WHERE e.HRMS IS NULL AND e.HRMS_Remarks IS NULL AND e.EOBI IS NULL AND e.EOBI_Remarks IS NULL AND e.Leve IS NULL AND e.Leve_Remarks IS NULL AND e.Gratuity IS NULL AND e.HR_Approved_Date IS NULL AND e.Gratuity_Remarks IS NULL; ");
+                                $num = 1;
+                                while($row = mysqli_fetch_array($query)){
+                                 // Use $query instead of $result
+                                ?>
                                     <tr>
-                                    <th scope="row">1</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a href="ecitclearance.php"><i class="fa-solid fa-check"></i><i class="fa-solid fa-person-walking-arrow-right"></i></a></td>
-                                    <td><a href=""><i class="fa-solid fa-trash"></i></a></td>
+                                        <th scope="row"><?php echo $num?></th>
+                                        <td><h4><?php echo $row ['fName']?> <?php echo $row ['mName']?> <?php echo $row ['lName']?></h4></td>
+                                        <td><?php echo $row ['CNIC']?></td>
+                                        <td><?php echo $row ['EmployeeNo']?></td>
+                                        <td><?php echo $row ['Employee_Group']?></td>
+                                        <td><?php echo $row ['Reason_of_Leaving']?></td>
+                                        <td><?php echo $row ['Joining_Date']?></td>
+                                        <td><?php echo $row ['Leaving_Date']?></td>
+                                        <td><a href="ecitclearance.php?id=<?php echo $row ['Id']?>"><i class="fa-solid fa-check"></i><i class="fa-solid fa-person-walking-arrow-right"></i></a></td>
                                     </tr>
+                                <?php
+                                $num++; }
+                                ?>
                                 </tbody>
                             </table>
                         </div>

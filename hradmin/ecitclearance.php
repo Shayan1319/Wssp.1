@@ -4,12 +4,42 @@ error_reporting(0);
 // links to database
 include('../hrdash/link/desigene/db.php');
 
-if (strlen($_SESSION['loginid']==0)) {
-?>   <script>
-location.replace('../logout.php')
-</script><?php
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
+    ?>   <script>
+        location.replace('../logout.php')
+    </script><?php
   } else{
+  if(isset($_POST['submit'])){
+    $id = $_GET ['id'];
+    $HRMS_Updated=$_POST['HRMS_Updated'];
+    $EOBI_Guidance=$_POST['EOBI_Guidance'];
+    $Last_Salary_Payment=$_POST['Last_Salary_Payment'];
+    $Leave_Encashment=$_POST['Leave_Encashment'];
+    $Gratuity=$_POST['Gratuity'];
+    $HRMS_UpdatedRemarks=$_POST['HRMS_UpdatedRemarks'];
+    $EOBI_GuidanceRemarks=$_POST['EOBI_GuidanceRemarks'];
+    $Last_Salary_PaymentRemarks=$_POST['Last_Salary_PaymentRemarks'];
+    $Leave_EncashmentRemarks=$_POST['Leave_EncashmentRemarks'];
+    $GratuityRemarks=$_POST['GratuityRemarks'];
+    $date= date('Y-M-D');
+    $insertQuery = "UPDATE `employee_exit` SET `HRMS`='$HRMS_Updated',`HRMS_Remarks`='$HRMS_UpdatedRemarks',`EOBI`='$EOBI_Guidance',`EOBI_Remarks`='$EOBI_GuidanceRemarks',`Leve`='$Leave_Encashment',`Leve_Remarks`='$Leave_EncashmentRemarks',`Gratuity`='$Gratuity',`HR_Approved_Date`='$date',`Gratuity_Remarks`='$GratuityRemarks' WHERE `Id`=$id";
+    $insertResult = mysqli_query($conn, $insertQuery);
 
+    if ($insertResult) {
+        ?>
+        <script>
+            alert("Data inserted successfully");
+            location.replace("EXITCLEARANCEFORM.php")
+        </script>
+        <?php
+    } else {
+        ?>
+        <script>
+            alert("Data not inserted");
+        </script>
+        <?php
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +68,6 @@ location.replace('../logout.php')
                                             <th scope="col">Item</th>
                                             <th scope="col">Yes/No</th>
                                             <th scope="col" colspan="4">Remarks</th>
-                                            <th scope="col">Date</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -47,95 +76,95 @@ location.replace('../logout.php')
                                                 <td>HRMS Updated </td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="HRMS_Updated" value="HRMS Updated Yes" id="HRMS_Updated1">
+                                                        <input class="form-check-input" type="radio" name="HRMS_Updated" value="Yes" id="HRMS_Updated1">
                                                         <label class="form-check-label" for="HRMS_Updated1">
                                                             Yes
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="HRMS_Updated" id="HRMS_Updated2" value="HRMS Updated No" checked>
+                                                        <input class="form-check-input" type="radio" name="HRMS_Updated" id="HRMS_Updated2" value="No" checked>
                                                         <label class="form-check-label" for="HRMS_Updated2">
                                                             No
                                                          </label>
                                                         </div>
                                                     </td>
                                                 <td colspan="4">
-                                                    <textarea class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="HRMS_UpdatedRemarks" class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </td>
-                                                <td><input type="date" name="" value=""></td>
+                                               
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
                                                 <td>EOBI Guidance </td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="EOBI_Guidance" value="EOBI Guidance Yes" id="EOBI_Guidance1">
+                                                        <input class="form-check-input" type="radio" name="EOBI_Guidance" value="Yes" id="EOBI_Guidance1">
                                                         <label class="form-check-label" for="EOBI_Guidance1">
                                                             Yes
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="EOBI_Guidance" id="EOBI_Guidance2" value="EOBI Guidance No" checked>
+                                                        <input class="form-check-input" type="radio" name="EOBI_Guidance" id="EOBI_Guidance2" value="No" checked>
                                                         <label class="form-check-label" for="EOBI_Guidance2">
                                                             No
                                                         </label>
                                                     </div>
                                                 </td>
                                                 <td colspan="4">
-                                                    <textarea class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="EOBI_GuidanceRemarks" class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </td>
-                                                <td><input type="date" name="" value=""></td>
+                                               
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td>Last Salary Payment</td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="Last_Salary_Payment" value="Last Salary Payment Yes" id="Last_Salary_Payment1">
+                                                        <input class="form-check-input" type="radio" name="Last_Salary_Payment" value="Yes" id="Last_Salary_Payment1">
                                                         <label class="form-check-label" for="Last_Salary_Payment1">
                                                             Yes
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="Last_Salary_Payment" value="Last Salary Payment No" id="Last_Salary_Payment2" checked>
+                                                        <input class="form-check-input" type="radio" name="Last_Salary_Payment" value="No" id="Last_Salary_Payment2" checked>
                                                         <label class="form-check-label" for="Last_Salary_Payment2">
                                                             No
                                                         </label>
                                                     </div>
                                                 </td>
                                                 <td colspan="4">
-                                                    <textarea class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="Last_Salary_PaymentRemarks" class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </td>
-                                                <td><input type="date" name="" value=""></td>
+                                               
                                             </tr>
                                             <tr>
                                                 <th scope="row">4</th>
                                                 <td>Leave Encashment</td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="Leave_Encashment" value="Leave Encashment Yes" id="Leave_Encashment1">
+                                                        <input class="form-check-input" type="radio" name="Leave_Encashment" value="Yes" id="Leave_Encashment1">
                                                         <label class="form-check-label" for="Leave_Encashment1">
                                                             Yes
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="Leave_Encashment" id="Leave_Encashment2" value="Leave Encashment No" checked>
+                                                        <input class="form-check-input" type="radio" name="Leave_Encashment" id="Leave_Encashment2" value="No" checked>
                                                         <label class="form-check-label" for="Leave_Encashment2">
                                                             No
                                                         </label>
                                                     </div>
                                                 </td>
                                                 <td colspan="4">
-                                                    <textarea class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="Leave_EncashmentRemarks" class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </td>
-                                                <td><input type="date" name="" value=""></td>
+                                               
                                             </tr>
                                             <tr>
                                                 <th scope="row">5</th>
                                                 <td>Gratuity</td>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="Gratuity" value="Gratuity Yes" id="Gratuity1">
+                                                        <input class="form-check-input" type="radio" name="Gratuity" value="Yes" id="Gratuity1">
                                                         <label class="form-check-label" for="Gratuity1">
                                                             Yes
                                                         </label>
@@ -148,12 +177,15 @@ location.replace('../logout.php')
                                                     </div>
                                                 </td>
                                                 <td colspan="4">
-                                                    <textarea class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="GratuityRemarks" class="form-control" placeholder="Remarks" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </td>
-                                                <td><input type="date" name="" value=""></td>
+                                               
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div class="col-md-12 text-end mt-2">
+                                        <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="submit">
+                                    </div>
                                     </div>
                                 </div>
                             

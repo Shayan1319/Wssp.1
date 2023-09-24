@@ -57,9 +57,9 @@
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
-                <a href="Apraisal.php" class="nav-link">
+                <!-- <a href="Apraisal.php" class="nav-link">
                  Appraisal form
-                </a>
+                </a> -->
                 <a href="Leaves.php" class="nav-link">
                  Leaves requests
                 </a>
