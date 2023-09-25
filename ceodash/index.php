@@ -330,6 +330,15 @@ if ($result->num_rows > 0) {
 } else {
     $tabillREJECTED = 0;
 }
+$query = mysqli_query($conn,"SELECT COUNT(*) AS exit_form FROM employee_exit AS e
+INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
+WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Soft_Data_Remarks IS NULL AND e.Heard_Data IS NULL AND e.Heard_Data_Remarks IS NULL AND e.IT_Other IS NULL AND e.IT_Remarks IS NULL AND e.IT_Approved_Date IS NULL; ");
+if ($query->num_rows > 0) {
+  $row = $query->fetch_assoc();
+  $exit_form = $row['exit_form'];
+} else {
+  $exit_form = 0;
+}
 
 ?>
 <!DOCTYPE html>
@@ -407,6 +416,18 @@ if ($result->num_rows > 0) {
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h1 style="color: darkblue;">WELCOME</h1>
             </div>
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                <h3><?php echo $exit_form?></h3>
+                  <h4>Employee Clearance Form</h4>
+                </div>
+                <div class="icon">
+                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">

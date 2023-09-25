@@ -44,6 +44,14 @@ if (isset($_POST['submit'])) {
         header("Location: ceodash/index.php");
         exit();
     }
+    elseif ($row["Designation"] == "AppAdmin" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: api/index.php");
+        exit();
+    }
     elseif ($row["Designation"] == "Manager" && $loginas == "Admin") {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];

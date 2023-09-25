@@ -34,14 +34,8 @@
   </div>
 
   </div>                
-              <a href="index.php" class="nav-link mt-3">Dashboard (MIS)</a>
-              <a href="Master_enteries.php" class="nav-link">
-              Master_enteries
-                </a>
-              <a class="dropbtn nav-link" href="signup.php">
-                  Login
-                </a>
-                <a href="EXITCLEARANCEFORM.php" class="nav-link">
-                  Exit clearance form
-                </a>
+              <a href="index.php" class="nav-link mt-3">Home</a>
+              <a href="Complaints.php" class="nav-link">Complaints</a>
+              <a class="dropbtn nav-link" href="signup.php">Login</a>
+              <a href="Customer.php" class="nav-link">New Customer</a>
 </div>
