@@ -27,32 +27,44 @@ location.replace('../logout.php')
               <div class="card-title text-white">Appraisal</div>
             </div>
             <div class="container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">CNIC</th>
-                        <th scope="col">Employee NO</th>
-                        <th scope="col">Employee Manager</th>
-                        <th scope="col">Number of Leaves</th>
-                        <th scope="col">Number of Travel</th>
-                        <th scope="col">See Profile</th>
-                        
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row">1</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><a href=""><i class="fa-solid fa-eye"></i></a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">CNIC</th>
+            <th scope="col">Employee NO</th>
+            <th scope="col">Employee Group</th>
+            <th scope="col">Number of Leaves</th>
+            <th scope="col">Number of Travel</th>
+            <th scope="col">See Profile</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $select = mysqli_query($conn, "SELECT e.EmployeeNo, e.fName, e.mName, e.lName, e.CNIC, e.EmployeeNo, e.Employee_Group, COUNT(DISTINCT l.Id) AS NumberOfLeaves, SUM(CASE WHEN l.Statusofmanger = 'ACCEPT' AND l.StatusofGm = 'ACCEPT' THEN 1 ELSE 0 END) AS LeavesAccepted, COUNT(DISTINCT t.RequestNo) AS NumberOfTravelRequests FROM employeedata e LEFT JOIN leavereq l ON e.EmployeeNo = l.EmployeeNo AND YEAR(l.DateofApply) = YEAR(CURRENT_DATE()) LEFT JOIN travelrequest t ON e.EmployeeNo = t.EmployeeNo AND YEAR(t.DepartureOn) = YEAR(CURRENT_DATE()) GROUP BY e.EmployeeNo, e.fName; ");
+        
+        $counter = 1;
+        
+        while ($row = mysqli_fetch_array($select)) {
+        ?>
+        <tr>
+            <th scope="row"><?php echo $counter; ?></th>
+            <td><?php echo $row['fName'];?> <?php echo $row['mName'];?> <?php echo $row['lName'];?></td>
+            <td><?php echo $row['CNIC']; ?></td>
+            <td><?php echo $row['EmployeeNo']; ?></td>
+            <td><?php echo $row['Employee_Group']; ?></td>
+            <td><?php echo $row['LeavesAccepted']; ?></td>
+            <td><?php echo $row['NumberOfTravelRequests']; ?></td>
+            <td><a href="profile.php?id=<?php echo $row['EmployeeNo']; ?>"><i class="fa-solid fa-eye"></i></a></td>
+        </tr>
+        <?php
+        $counter++;
+        }
+        ?>
+    </tbody>
+</table>
+
             </div>
         </div>
         </div>
