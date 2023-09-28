@@ -10,7 +10,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   } else{
     if (isset($_POST['submit'])) {
         // Retrieve user input and sanitize it (use mysqli_real_escape_string or prepared statements)
-        $empid = mysqli_real_escape_string($conn, $_POST['empid']);
+        $empid = $_POST['empid'];
         $JobDescription = mysqli_real_escape_string($conn, $_POST['JobDescription']);
         $Q1 = mysqli_real_escape_string($conn, $_POST['Q1']);
 
@@ -56,7 +56,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                                 <div class="row">
                                     <div class="col-md-4 my-2">
                                         <label for="empid">Employee Id</label>
-                                        <input type="text" class="form-control" value="<?php echo $_SESSION['EmployeeNumber'] ?>" placeholder="Employee Id"
+                                        <input type="text" disabled class="form-control" value="<?php echo $_SESSION['EmployeeNumber'] ?>" placeholder="Employee Id"
                                                name="empid" id="empid">
                                     </div>
                                     <!-- Other form fields... -->

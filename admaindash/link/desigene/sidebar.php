@@ -44,4 +44,7 @@
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
+                <a href="EXITCLEARANCEFORM copy.php" class="nav-link">
+                  Admin clearance form
+                </a>
 </div>

@@ -264,6 +264,46 @@ if ($result->num_rows > 0) {
 } else {
     $tabillREJECTED = 0;
 }
+$sql = "SELECT COUNT(*) AS Appraisals
+FROM employee_performance AS t
+INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
+WHERE
+    (
+        t.Intelligence IS NULL
+        AND t.ConfidenceAndWillPower IS NULL
+        AND t.AcceptanceOfResponsibility IS NULL
+        AND t.ReliabilityUnderPressure IS NULL
+        AND t.FinancialResponsibility IS NULL
+        AND t.RelationsWithSuperiors IS NULL
+        AND t.RelationsWithColleagues IS NULL
+        AND t.RelationsWithSubordinates IS NULL
+        AND t.BehaviorWithPublic IS NULL
+        AND t.AblityToDecideRoutineMatters IS NULL
+        AND t.KnowledgeOfRelavantLawsETC IS NULL
+    )
+    OR
+    (
+        t.Q2 IS NULL
+        AND t.Integrity IS NULL
+        AND t.Q3 IS NULL
+        AND t.SpecialAptitude IS NULL
+        AND t.RecommendedForFutureTraining IS NULL
+        AND t.OverallGradingByReportingOfficer IS NULL
+        AND t.OverallGradingByCountersigningOfficer IS NULL
+        AND t.FitnessForPromotionByReportingOfficer IS NULL
+        AND t.FitnessForPromotionByCountersigningOfficer IS NULL
+        AND t.NameOfReportingOfficer IS NULL
+        AND t.DesignationOfReportingOfficer IS NULL
+        AND t.DateOfReportingOfficer IS NULL
+    )
+    AND e.Employee_Manager = $empid;
+";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $Appraisals = $row['Appraisals'];
+        }
 
 ?>
 <!DOCTYPE html>
@@ -590,6 +630,25 @@ if ($result->num_rows > 0) {
               <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
               </h3>
                   <h4>TA bill REJECTED</h4>
+                </div>
+                <div class="icon">
+                  <i class="fa fa-clock-o"></i>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>Appraisals and others</h2>
+            </div>
+            <div class="col-lg-4 col-xs-6">
+              <!-- small box -->
+              <a href="aprasals.php">
+              <div class="small-box bg-blue">
+                <div class="inner">
+                <h3><?php echo $Appraisals?>
+              <script> var Appraisals= <?php echo $Appraisals?>;</script>
+              </h3>
+                  <h4>Appraisals</h4>
                 </div>
                 <div class="icon">
                   <i class="fa fa-clock-o"></i>

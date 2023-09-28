@@ -17,6 +17,7 @@ include '../link/desigene/db.php';
             'fin_classification' => $row['fin_classification'],
             'rate_calc_mode' => $row['rate_calc_mode'],
             'earning_deduction_fund' => $row['earning_deduction_fund'],
+            'price' => $row['price'],
             'allowance_status' => $row['allowance_status']
         );
         $json = json_encode($data);

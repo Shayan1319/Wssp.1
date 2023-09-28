@@ -27,6 +27,7 @@
 <script src="../dist/select2/select2.min.js"></script>
 <script src="../dist/js/validations.js"></script>
 <script src="../dist/sweat-alerts/sweetalert.js"></script>
-    <!-- CKEditor -->
-    <!-- <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script> -->
+
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+
     

@@ -14,10 +14,11 @@ include '../link/desigene/db.php';
         $data = array(
             'id' => $row['id'],
             'allowance' => $row['allowance'],
-            'fin_classification' => $row['fin_classification'],
+            'Fin_classification' => $row['fin_classification'],
             'rate_calc_mode' => $row['rate_calc_mode'],
             'earning_deduction_fund' => $row['earning_deduction_fund'],
-            'allowance_status' => $row['allowance_status']
+            'allowance_status' => $row['allowance_status'],
+            'rupes'=>$row['price']
         );
         $json = json_encode($data);
         echo $json;

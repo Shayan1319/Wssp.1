@@ -129,6 +129,9 @@ location.replace('../logout.php')
                         <option value="RUNTIME VALUE">Runtime Value</option>
                         <option value="Prevailing Rate">Prevailing Rate</option>
                         <option value="Employee pension">Employee pension</option>
+                        <option value="OFF PAY">OFF PAY</option>
+                        <option value="OVERTIME">OVERTIME</option>
+                        <option value="DOUBLE DUTY">DOUBLE DUTY</option>
                       </select>
                     </div>
                   </div>
@@ -221,6 +224,9 @@ location.replace('../logout.php')
                         <option value="RUNTIME VALUE">Runtime Value</option>
                         <option value="PREVAILING RATE">Prevailing Rate</option>
                         <option value="EMPLOYEE PENSION">Employee pension</option>
+                        <option value="OFF PAY">OFF PAY</option>
+                        <option value="OVERTIME">OVERTIME</option>
+                        <option value="DOUBLE DUTY">DOUBLE DUTY</option>
                       </select>
                     </div>
                     <div class="form-group">

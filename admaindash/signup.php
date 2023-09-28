@@ -115,8 +115,11 @@ if ($query) {
                                                         <option value="HR manager">Humans Resource Manager.</option>
                                                         <option value="Payroll manager">Payroll Manager.</option>
                                                         <option value="Manager">Manager</option>
+                                                        <option value="DYManager">DYManager</option>
                                                         <option value="CEO">CEO</option>
+                                                        <option value="GM">GM</option>
                                                         <option value="AppAdmin">App Admin</option>
+                                                        <option value="FinanceAdmin">Finance Admin</option>
                                                         <option value="Employee">Employee</option>
                                                     </select>
                                                 </div>

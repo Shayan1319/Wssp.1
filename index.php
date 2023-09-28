@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: admaindash/index.php");
         exit();
@@ -24,6 +25,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: hradmin/index.php");
         exit();
@@ -32,6 +34,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: payroll/payroll.php");
         exit();
@@ -40,6 +43,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: ceodash/index.php");
         exit();
@@ -48,22 +52,52 @@ if (isset($_POST['submit'])) {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: api/index.php");
+        exit();
+    }
+    elseif ($row["Designation"] == "FinanceAdmin" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: Finance/index.php");
         exit();
     }
     elseif ($row["Designation"] == "Manager" && $loginas == "Admin") {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
         header("Location: Manager/index.php");
+        exit();
+    }
+    elseif ($row["Designation"] == "DYManager" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: DYManager/index.php");
+        exit();
+    }
+    elseif ($row["Designation"] == "GM" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+        header("Location: GM/index.php");
         exit();
     }
     elseif ($loginas == "Employee") {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
         $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
         header("Location: Employee/index.php");
         exit();
     }

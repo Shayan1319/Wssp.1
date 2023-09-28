@@ -332,14 +332,36 @@ if ($result->num_rows > 0) {
 }
 $query = mysqli_query($conn,"SELECT COUNT(*) AS exit_form FROM employee_exit AS e
 INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
-WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Soft_Data_Remarks IS NULL AND e.Heard_Data IS NULL AND e.Heard_Data_Remarks IS NULL AND e.IT_Other IS NULL AND e.IT_Remarks IS NULL AND e.IT_Approved_Date IS NULL; ");
+WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Handover_Info_Remarks IS NULL AND e.Capital_Equipment IS NULL AND e.Capital_Remarks IS NULL AND e.HOD_Other IS NULL AND e.HOD_Remarks IS NULL AND e.HOD_Approved_Date IS NULL;");
 if ($query->num_rows > 0) {
   $row = $query->fetch_assoc();
   $exit_form = $row['exit_form'];
 } else {
   $exit_form = 0;
 }
+$query = mysqli_query($conn,"SELECT COUNT(*) AS exit_form FROM employee_exit AS e
+INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
+WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Handover_Info_Remarks IS NULL AND e.Capital_Equipment IS NULL AND e.Capital_Remarks IS NULL AND e.HOD_Other IS NULL AND e.HOD_Remarks IS NULL AND e.HOD_Approved_Date IS NULL;");
+if ($query->num_rows > 0) {
+  $row = $query->fetch_assoc();
+  $exit_form = $row['exit_form'];
+} else {
+  $exit_form = 0;
+}
+$sql = "SELECT COUNT(*) AS Appraisals
+FROM employee_performance AS t
+INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
+WHERE
+        t.RemarksOfSecondCountersigningOfficer IS NULL
+        AND t.NameOfSecondCountersigningOfficer IS NULL
+        AND t.DesignationOfSecondCountersigningOfficer IS NULL
+        AND t.DateOfSecondCountersigningOfficer IS NULL";
+        $result = $conn->query($sql);
 
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $Appraisals = $row['Appraisals'];
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -418,6 +440,7 @@ if ($query->num_rows > 0) {
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
+              <a href="EXITCLEARANCEFORM.php">
               <div class="small-box bg-aqua">
                 <div class="inner">
                 <h3><?php echo $exit_form?></h3>
@@ -427,30 +450,21 @@ if ($query->num_rows > 0) {
                 <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
                 </div>
               </div>
+              </a>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
+              <a href="aprasals.php">
+                <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>#</h3>
-                  <h4>Employee Clearance</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3>#</h3>
+                  <h3><?php echo $Appraisals?></h3>
                   <h4>Employee Appraisal</h4>
                 </div>
                 <div class="icon">
                 <i class="fa-solid fa-person-circle-check"></i>
                 </div>
               </div>
+              </a>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->

@@ -262,6 +262,12 @@ if (isset($_POST['submit'])) {
                     <!-- Allowance Calculation Mode -->
                     <div class="col-md-3">
                       <div class="form-group">
+                        <label>Fin Classification</label>
+                        <input type="text" class="form-control" name="Fin_Classification" id="Fin_Classification" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
                         <label>Allowance Calc. Mode</label>
                         <input type="text" class="form-control" name="allowance_calc_mode" id="allowance_calc_mode" readonly>
                       </div>
@@ -274,10 +280,17 @@ if (isset($_POST['submit'])) {
                       </div>
                     </div>
                     <!-- Rate -->
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                       <div class="form-group">
-                        <label>Rate</label>
-                        <input type="text" class="form-control integeronly" id="rate_input" name="rate_input">
+                        <div class="row">
+                          <div class="col-5" id="mutiplier" ><label>Rupees</label>
+                        <input type="text" class="form-control integeronly" id="rupees" name="rupees" readonly> </div>
+                        <div class="col-2"> <br> x </div>
+                          <div class="col-5"><label>Rate</label>
+                        <input type="text" class="form-control integeronly" id="rate_input" name="rate_input"></div>
+                        </div>
+                        
+                        
                       </div>
                     </div>
                     <!-- Add Button -->
@@ -296,8 +309,10 @@ if (isset($_POST['submit'])) {
                         <tr>
                           <th>S.No</th>
                           <th>Description</th>
+                          <th>Fin Classification</th>
                           <th>Allowance Calc. Mode</th>
                           <th>Earning/Deduction/Fund</th>
+                          <th>Rupees</th>
                           <th>Rate</th>
                           <th>Action</th>
                         </tr>
@@ -386,6 +401,8 @@ $(document).ready(function() {
             var allowanceData = JSON.parse(data);
             $("#allowance_calc_mode").val(allowanceData.rate_calc_mode);
             $("#earning_deduction_fund").val(allowanceData.earning_deduction_fund);
+            $("#Fin_Classification").val(allowanceData.Fin_classification);
+            $("#rupees").val(allowanceData.rupes);
             var allowanceCalcMode = allowanceData.rate_calc_mode;
             var rateInput = $("#rate_input");
             if (allowanceCalcMode == "RUNTIME VALUE") {
@@ -400,21 +417,32 @@ $(document).ready(function() {
         });
       });
     });
-    
+    var addedDescriptionIds = [];
     $("#add").click(function() {
       var description = $("#description :selected").text();
       var allowanceCalcMode = $('#allowance_calc_mode').val();
       var earningDeductionFund = $("#earning_deduction_fund").val();
       var descriptionId = $("#description").val();
+      var Fin_Classification = $("#Fin_Classification").val();
       var rate = parseFloat($("#rate_input").val());
+      var rupees = parseFloat($("#rupees").val());
+      // Check if the description ID has already been added
+  if (addedDescriptionIds.includes(descriptionId)) {
+    alert("This description has already been added.");
+    return; // Do not add it again
+  }
+  addedDescriptionIds.push(descriptionId); // Add the description ID to the list
+
       addSerial++;
       var descriptionIdInput = "<input type='hidden' name='description_id[]' value='" + descriptionId + "' />";
       var rateInput = "<input type='hidden' name='rates[]' value='" + rate + "' />";
       var newData = '<tr>';
       newData += '<td>' + addSerial + '</td>';
       newData += '<td>' + description + descriptionIdInput + rateInput + '</td>';
+      newData += '<td>' + Fin_Classification + '</td>';
       newData += '<td>' + allowanceCalcMode + '</td>';
       newData += '<td>' + earningDeductionFund + '</td>';
+      newData += '<td>' + rupees + '</td>';
       newData += '<td>' + rate + '</td>';
       var btnDel = "<button onclick='deleteRow(this)' type='button' class='btn btn-danger'><i class='fa fa-times'></i></button>";
       newData += '<td>' + btnDel + '</td>';
@@ -425,7 +453,9 @@ $(document).ready(function() {
       $('#description').val('');
       $('#allowance_calc_mode').val('');
       $('#earning_deduction_fund').val('');
+      $('#Fin_Classification').val('');
       $('#rate_input').val('');
+      $('#rupees').val('');
       $(".select2").select2();
       if (earningDeductionFund == "EARNING" && allowanceCalcMode == "PRESENT RATE") {
         var grossPay = parseFloat($('#grossPayInput').val()) || 0;
@@ -433,10 +463,33 @@ $(document).ready(function() {
       } else if (earningDeductionFund == "DEDUCTION" && allowanceCalcMode == "PRESENT RATE") {
         var deduction = parseFloat($('#deductionInput').val()) || 0;
         $('#deductionInput').val((deduction + rate).toFixed(2));
-      } else if (earningDeductionFund == "FUND" && allowanceCalcMode == "PRESENT RATE") {
+      }else if (earningDeductionFund === "FUND" && Fin_Classification === "EOBI-ER") {
+          // Add the rate to the fund input
+          var currentFund = parseFloat($("#fundInput").val()) || 0;
+          var newFund = currentFund + rate;
+          $("#fundInput").val(newFund.toFixed(2));
+  
+          // Subtract the rate from the gross pay input
+          var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+          var newGrossPay = grossPay - rate;
+          $("#grossPayInput").val(newGrossPay.toFixed(2));
+        }
+       else if (earningDeductionFund == "FUND" && allowanceCalcMode == "PRESENT RATE") {
         var fund = parseFloat($('#fundInput').val()) || 0;
         $('#fundInput').val((fund + rate).toFixed(2));
-      }else if (allowanceCalcMode == "RUNTIME VALUE") {
+      }
+      else if((allowanceCalcMode=="PREVAILING RATE" && earningDeductionFund=="EARNING") || (allowanceCalcMode=="OVERTIME" && earningDeductionFund=="EARNING") ||(allowanceCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING")){
+        var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+        var mulrate = rupees * rate;
+        var newGrossPay = grossPay + mulrate;
+        $("#grossPayInput").val(newGrossPay.toFixed(2));
+      }else if(allowanceCalcMode=="OFF PAY" && earningDeductionFund=="DEDUCTION"){
+        var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+        var mulrate = rupees * rate;
+        var newGrossPay = grossPay - mulrate;
+        $("#grossPayInput").val(newGrossPay.toFixed(2));
+      }
+      else if (allowanceCalcMode == "RUNTIME VALUE") {
         $('#rate_input').prop('disabled', true).val(null);
       } else {
         $('#rate_input').prop('disabled', false);
@@ -447,9 +500,11 @@ $(document).ready(function() {
       var row = $(btn).closest('tr');
       var tableId = row.closest('table').attr('id');
       var index = row[0].rowIndex;
-      var earningDeductionFund = row.find('td:nth-child(4)').text();
-      var allowanceCalcMode = row.find('td:nth-child(3)').text();
-      var rate = parseFloat(row.find('td:nth-child(5)').text());
+      var Fin_Classification = row.find('td:nth-child(3)').text();
+      var allowanceCalcMode = row.find('td:nth-child(4)').text();
+      var earningDeductionFund = row.find('td:nth-child(5)').text();
+      var rupees = row.find('td:nth-child(6)').text();
+      var rate = parseFloat(row.find('td:nth-child(7)').text());
       row.remove();
       reArrangeSerials(tableId);
       if (tableId == "employee_pay") {
@@ -463,11 +518,39 @@ $(document).ready(function() {
           if (!isNaN(deduction)) {
             $('#deductionInput').val((deduction - rate).toFixed(2));
           }
-        } else if (earningDeductionFund == "FUND" && allowanceCalcMode == "PRESENT RATE") {
+        }else if(earningDeductionFund === "FUND" && Fin_Classification === "EOBI-ER"){
+          var fund = parseFloat($("#fundInput").val()) || 0;
+          var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+          
+          if (!isNaN(grossPay)) {
+            $('#grossPayInput').val((grossPay + rate).toFixed(2));
+          }
+          if (!isNaN(fund)) {
+            $('#fundInput').val((fund - rate).toFixed(2));
+          }
+        }
+        else if((allowanceCalcMode=="PREVAILING RATE" && earningDeductionFund=="EARNING") || (allowanceCalcMode=="OVERTIME" && earningDeductionFund=="EARNING") ||(allowanceCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING")){
+        var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+        if(!isNaN(grossPay)){
+        var mulrate = rupees * rate;
+        var newGrossPay = grossPay - mulrate;
+        $("#grossPayInput").val(newGrossPay.toFixed(2));
+        }        
+      }
+      else if(allowanceCalcMode=="OFF PAY" && earningDeductionFund=="DEDUCTION"){
+        var grossPay = parseFloat($("#grossPayInput").val()) || 0;
+        if(!isNaN(grossPay)){
+        var mulrate = rupees * rate;
+        var newGrossPay = grossPay + mulrate;
+        $("#grossPayInput").val(newGrossPay.toFixed(2));
+        }        
+      }
+        else if (earningDeductionFund == "FUND" && allowanceCalcMode == "PRESENT RATE") {
           var fund = parseFloat($('#fundInput').val()) || 0;
           if (!isNaN(fund)) {
             $('#fundInput').val((fund - rate).toFixed(2));
           }
+          
         }
       }
       row.find('.description').val('');

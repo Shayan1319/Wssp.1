@@ -139,7 +139,7 @@ $calendar = new Calendar($date);
                     <?php echo $calendar?>
                 </div>  
                 </div>
-                <div class="col-sm-12 col-lg-3 col-md-3 my-4 p-2">
+                <div class="col-sm-12 col-lg-3 col-md-3 my-4  p-2">
                     <div class="bg-light h-100">
                             <div class="col-12">
                                 <label class="fs-6 fw-bolder" for="">Up Coming Events</label>
@@ -153,60 +153,77 @@ $calendar = new Calendar($date);
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4">
-                <div class="row">
-                       <div class="col-4">
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">1/2023</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Joining_Date']?></h6>
-                        </div>
-                         <div class="col-4">
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Work for</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">TMA/WSSC</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Employee_Group']?></h6>
-                        </div>
-                        
+                <div class="col-sm-12 col-lg-3 col-md-3 h-50  my-4  p-2 bg-light ">
+                    <h5 style="color: rgb(60, 59, 59);"><b>Basic Information</b></h5>
+                    <div class="row">
                         <div class="col-4">
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Day of Retirement</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">1/2024</h6>
-                            <h6 class="fs-5" style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Contract_Expiry_Date']?></h6>
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
+                        </div>
+                        <div class="col-4">
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
+                        </div>
+                        <div class="col-4">
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
                         </div>
                         <br>
                     </div>
+                    <br>
+                    <hr>
+                    <h5 style="color: rgb(60, 59, 59);"><b>Basic Information</b></h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Birth date</h6>
-                            <h6 class="fs-5" style="color:#000;">8/1999</h6>
-                            <h6 class="fs-5" style="color:#000;"><?php echo $row['DofB']?></h6>
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
                         </div>
                         <div class="col-6">
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Address</h6>
-                            <h6 class="fs-5" style="color:#000;">Address</h6>
-                            <h6 class="fs-5" style="color:#000;"><?php echo $row['pAdress']?></h6>
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
                         </div>
                         <br>
                     </div>
+                    <br>
+                    <hr>
+                    <h5 style="color: rgb(60, 59, 59);"><b>Occupation information</b></h5>
                     <div class="row">
-                        <div class="col-4 p-1">
+                        <div class="">
                             <i class="fa-solid fa-clock"></i>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Full time</h6>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);"><?php echo $row['Weekly_Working_Days']?></h6>
-                        </div>
-                        <div class="col-4 p-1">
-                        <i style='font-size:24px' class='fas'>&#xf7d9;</i>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Designation</h6>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);"><?php echo $row['Job_Tiltle']?></h6>
-                        </div>
-                        <div class="col-4 p-1">
-                        <i style='font-size:24px' class='fas'>&#xf3c5;</i>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);">Location</h6>
-                            <h6 class="fs-5" style="color:rgb(4, 111, 218);"><?php echo $row['cAddress']?></h6>
+                            <h6 style="color:rgb(4, 111, 218);">Full time</h6>
                         </div>
                         <br>
                     </div>
+                    <br>
+                    <hr>
                 </div>
-                <div class="col-sm-12 col-md-8 bg-light p-5">
-                        
+                <div class="col-sm-12 col-lg-8 col-md-8 m-4 bg-light "><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
+                    <canvas id="myChart" class="w-100 h-50" style=" display: block; height: 267px;"></canvas>
+                    <script>
+                        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+                        var yValues = [55, 49, 44, 24, 20];
+                        var barColors = ["red", "green", "blue", "orange", "brown"];
+
+                        new Chart("myChart", {
+                            type: "bar",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    backgroundColor: barColors,
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: ""
+                                }
+                            }
+                        });
+                    </script>
                 </div>
                 <?php }}else{ echo "data don't exet";}?>
             </div>

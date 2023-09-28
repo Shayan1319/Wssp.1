@@ -54,6 +54,9 @@
                 <a href="allowances_details.php" class="nav-link">
                   Allowances
                 </a>
+                <a href="allowancepay.php" class="nav-link">
+                 Add Allowances Rate
+                </a>
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
