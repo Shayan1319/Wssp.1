@@ -211,7 +211,7 @@ location.replace('../logout.php')
     $(document).ready(function(){
       function loadTable(){
         $.ajax({
-          url : "ajex/ajax-load-allowancerate.php",
+          url : "ajex/ajax-loadrate-allowancerate.php",
           type:"POST",
           success : function(data){
             $("#table-data").html(data);

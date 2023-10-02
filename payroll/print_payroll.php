@@ -1,5 +1,5 @@
 <?php 
-include('./pdflib/logics-builder-pdf.php');
+include('../pdflib/logics-builder-pdf.php');
 $title = "EMPLOYEE PAY SLIP";
 
 $today = date('d-M-Y');

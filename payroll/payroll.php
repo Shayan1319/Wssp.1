@@ -283,9 +283,9 @@ if (isset($_POST['submit'])) {
                     <div class="col-md-3">
                       <div class="form-group">
                         <div class="row">
-                          <div class="col-5" id="mutiplier" ><label>Rupees</label>
+                          <div class="col-5" id="mutiplier"  ><label>Rupees</label>
                         <input type="text" class="form-control integeronly" id="rupees" name="rupees" readonly> </div>
-                        <div class="col-2"> <br> x </div>
+                        <div class="col-2" id="mutiplier"  > <br> x </div>
                           <div class="col-5"><label>Rate</label>
                         <input type="text" class="form-control integeronly" id="rate_input" name="rate_input"></div>
                         </div>
@@ -387,6 +387,7 @@ $("#employee_no").change(function() {
       });
     });
   });
+
 $(document).ready(function() {
       $("#description").change(function() {
         var descriptionId = $(this).val();
@@ -405,7 +406,7 @@ $(document).ready(function() {
             $("#rupees").val(allowanceData.rupes);
             var allowanceCalcMode = allowanceData.rate_calc_mode;
             var rateInput = $("#rate_input");
-            if (allowanceCalcMode == "RUNTIME VALUE") {
+            if (allowanceCalcMode == "RUNTIME VALUE" || allowanceCalcMode == "OVERTIME" || allowanceCalcMode == "DOUBLE DUTY"|| allowanceCalcMode == "OFF PAY") {
               rateInput.prop('disabled', true).val('0');
             } else {
               rateInput.prop('disabled', false);
@@ -478,7 +479,7 @@ $(document).ready(function() {
         var fund = parseFloat($('#fundInput').val()) || 0;
         $('#fundInput').val((fund + rate).toFixed(2));
       }
-      else if((allowanceCalcMode=="PREVAILING RATE" && earningDeductionFund=="EARNING") || (allowanceCalcMode=="OVERTIME" && earningDeductionFund=="EARNING") ||(allowanceCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING")){
+      else if(allowanceCalcMode=="PREVAILING RATE" && earningDeductionFund=="EARNING"){
         var grossPay = parseFloat($("#grossPayInput").val()) || 0;
         var mulrate = rupees * rate;
         var newGrossPay = grossPay + mulrate;
@@ -489,7 +490,7 @@ $(document).ready(function() {
         var newGrossPay = grossPay - mulrate;
         $("#grossPayInput").val(newGrossPay.toFixed(2));
       }
-      else if (allowanceCalcMode == "RUNTIME VALUE") {
+      else if (allowanceCalcMode == "RUNTIME VALUE" || allowanceCalcMode == "OVERTIME" || allowanceCalcMode == "DOUBLE DUTY"|| allowanceCalcMode == "OFF PAY") {
         $('#rate_input').prop('disabled', true).val(null);
       } else {
         $('#rate_input').prop('disabled', false);

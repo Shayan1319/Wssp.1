@@ -34,7 +34,9 @@
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payroll.php">Payroll</a>
         </li>
-        
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payrollgen.php">Payroll Generate</a>
+        </li>        
       </ul>
     </div>
   </div>
