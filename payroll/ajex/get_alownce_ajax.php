@@ -19,7 +19,11 @@ if (mysqli_num_rows($query)) {
 ?>
         <tr>
             <td><?php echo $a ?></td>
-            <td><?php echo $row['allowance'] ?> <input type="text" value="<?php echo $row['allowances_id'] ?>" style="display: none;" name="allowances_id[]" id="allowances_id"> <input type="text" value="<?php echo $row['allowance'] ?>" style="display: none;" name="allowance[]" id="allowance"></td>
+            <td><?php echo $row['allowance'] ?>
+                <input type="text" value="<?php echo $a ?>" style="display: none;" name="allowanceIds[]" id="allowanceIds">
+                <input type="text" value="<?php echo $row['allowances_id'] ?>" style="display: none;" name="allowances_id[]" id="allowances_id">
+                <input type="text" value="<?php echo $row['allowance'] ?>" style="display: none;" name="allowance[]" id="allowance">
+            </td>
             <td><?php echo $row['fin_classification'] ?> <input type="text" value="<?php echo $row['fin_classification'] ?>" style="display: none;" name="fin_classification[]" id="fin_classification"> </td>
             <td><?php echo $row['rate_calc_mode'] ?> <input type="text" value="<?php echo $row['rate_calc_mode'] ?>" style="display: none;" name="rate_calc_mode[]" id="rate_calc_mode"></td>
             <td><?php echo $row['earning_deduction_fund'] ?> <input type="text" value="<?php echo $row['earning_deduction_fund'] ?>" style="display: none;" name="earning_deduction_fund[]" id="earning_deduction_fund"></td>

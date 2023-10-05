@@ -27,22 +27,28 @@ location.replace('../logout.php')
               <!-- /.card-header -->
               <div class="card-body bg-light">
                 <!-- form start -->
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" action="../printpayroll.php" enctype="multipart/form-data">
                   <div class="row">
+                    <div class="col-12">
+                    <div class="form-group">
+                        <label>Employee Number </label>
+                        <input type="number" name="empnumber" value="<?php echo $_SESSION['EmployeeNumber']?>" placeholder="Employee Number" class="form-control" autocomplete="off" readonly required="">
+                      </div>
+                    </div>
                     <div class="col-6">
                       <div class="form-group">
                         <label>From Month </label>
-                        <input type="date" name="" placeholder="From Month" class="form-control" autocomplete="off" required="">
+                        <input type="date" name="frommonth" placeholder="From Month" class="form-control" autocomplete="off" required="">
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
                         <label>To Month</label>
-                        <input type="date" name="" placeholder="To Month" class="form-control" autocomplete="off" required="">
+                        <input type="date" name="tomunth" placeholder="To Month" class="form-control" autocomplete="off" required="">
                       </div>
                     </div>
                     <div class="col-md-12 text-end mt-2">
-                      <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="saveUser1">
+                      <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="submit">
                     </div>
                     </div>
                 </form>

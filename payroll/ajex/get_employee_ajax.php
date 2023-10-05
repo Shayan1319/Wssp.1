@@ -12,12 +12,20 @@ include '../link/desigene/db.php';
     if (mysqli_num_rows($query)) {
      while($row=mysqli_fetch_assoc($query)){
         $data = array(
-            'id' => $row['Id'],
+            'EmployeeNo' => $row['EmployeeNo'],
             'fName' => $row['fName'],
             'father_Name' => $row['father_Name'],
-            'type' => $row['type'],
+            'CNIC' => $row['CNIC'],
+            'Joining_Date' => $row['Joining_Date'],
             'Job_Tiltle' => $row['Job_Tiltle'],
-            'Department' => $row['Department']
+            'Grade' => $row['Grade'],
+            'type' => $row['type'],
+            'Department' => $row['Department'],
+            'Employee_Group' => $row['Employee_Group'],
+            'Employee_Class' => $row['Employee_Class'],
+            'Employee_Sub_Group' => $row['Employee_Sub_Group'],
+            'Pay_Type' => $row['Pay_Type'],
+            'Account_No' => $row['Account_No']
         );
         
         $json = json_encode($data);

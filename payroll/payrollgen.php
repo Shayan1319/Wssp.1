@@ -2,13 +2,26 @@
 include('link/desigene/db.php');
 
 if (isset($_POST['submit'])) {
-  $employeeId = $_POST['employee_no'];
+  $employee_no=$_POST['employee_no'];
+  $EmployeeNo=$_POST['EmployeeNo'];
+  $empname=$_POST['empname'];
+  $father_name=$_POST['father_name'];
+  $type=$_POST['type'];
+  $job_title=$_POST['job_title'];
+  $CNIC=$_POST['CNIC'];
+  $Joining_Date=$_POST['Joining_Date'];
+  $Grade=$_POST['Grade'];
+  $Department=$_POST['Department'];
+  $Employee_Group=$_POST['Employee_Group'];
+  $Employee_Class=$_POST['Employee_Class'];
+  $Employee_Sub_Group=$_POST['Employee_Sub_Group'];
+  $Pay_Type=$_POST['Pay_Type'];
+  $Account_No=$_POST['Account_No'];
   $fundInput = $_POST['fundInput'];
   $grossPay = $_POST['grossPayInput'];
   $deductionInput = $_POST['deductionInput'];
   $netPayInput = $_POST['netPayInput'];
   $date= date("Y-m-d");
-  $type=strtoupper($_POST['type']);
   $allowances_id=$_POST['allowances_id'];
   $allowance=$_POST['allowance'];
   $fin_classification=$_POST['fin_classification'];
@@ -16,20 +29,28 @@ if (isset($_POST['submit'])) {
   $earning_deduction_fund=$_POST['earning_deduction_fund'];
   $rate=$_POST['rate'];
   $price=$_POST['price'];
+  $total=$_POST['total'];
+  $allowanceIds=$_POST['allowanceIds'];
 
 //   try {
 //     $con->beginTransaction();
 
-    $Insert = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
+    $Insert = "INSERT INTO `salary`( `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`) VALUES ('$EmployeeNo','$fundInput','$grossPay','$deductionInput','$netPayInput','$date')";
 //     $stmt = $con->prepare($query);
 //     $stmt->execute();
 
     if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
       $size = sizeof($allowanceIds);
       for ($i = 0; $i < $size; $i++) {
-        $currentAllowanceId = $allowanceIds[$i];
-        $currentrateId = $rateInput[$i];
-        $rateinsert = mysqli_query($conn,"INSERT INTO `payrole`( `EmpNo`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`, `AllowancesName`, `AllowancesId`, `Rate`, `Date`) VALUES ('[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]','[value-11]','[value-12]','[value-13]','[value-14]','[value-15]','[value-16]','[value-17]','[value-18]')") ;
+        $currentAllowanceId = $allowances_id[$i];
+        $currentrateId = $rate[$i];
+        $allowancearray=$allowance[$i];
+        $fin_classificationarray=$fin_classification[$i];
+        $rate_calc_modearray=$rate_calc_mode[$i];
+        $earning_deduction_fundarray=$earning_deduction_fund[$i];
+        $pricearray=$price[$i];
+        $totalarray=$total[$i];
+        $rateinsert = mysqli_query($conn,"INSERT INTO `payrole`( `EmpNo`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`) VALUES ('$employee_no','$empname','$father_name','$CNIC','$Joining_Date','$job_title','$Grade','$type','$Department','$Employee_Class','$Employee_Sub_Group','$Pay_Type','$Account_No','$allowancearray','$currentAllowanceId','$fin_classificationarray','$rate_calc_modearray','$earning_deduction_fundarray','$currentrateId','$pricearray','$totalarray','$date')") ;
       }
     }
       $query=mysqli_query($conn,$Insert);
@@ -37,7 +58,7 @@ if (isset($_POST['submit'])) {
         echo '<script>alert( "Data inserted success fully");</script>';
         ?>
         <script>
-          location.replace('payroll.php');
+          location.replace('payrollgen.php');
         </script>
         <?php 
         
@@ -202,6 +223,68 @@ if (isset($_POST['submit'])) {
                       <input type="text" name="job_title" id="job_title" placeholder="Job Title" class="form-control" readonly autocomplete="off" required="">
                     </div>
                   </div>
+                  <div class="col-4 d-none">
+                    <div class="form-group">
+                      <label>EmployeeNo</label>
+                      <input type="text" name="EmployeeNo" id="EmployeeNo" placeholder="EmployeeNo" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>CNIC</label>
+                      <input type="number" name="CNIC" id="CNIC" placeholder="CNIC" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Joining_Date</label>
+                      <input type="date" name="Joining_Date" id="Joining_Date" placeholder="Joining_Date" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Grade</label>
+                      <input type="text" name="Grade" id="Grade" placeholder="Grade" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Department</label>
+                      <input type="text" name="Department" id="Department" placeholder="Department" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Employee_Group</label>
+                      <input type="text" name="Employee_Group" id="Employee_Group" placeholder="Employee_Group" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Employee_Class</label>
+                      <input type="text" name="Employee_Class" id="Employee_Class" placeholder="Employee_Class" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Employee_Sub_Group</label>
+                      <input type="text" name="Employee_Sub_Group" id="Employee_Sub_Group" placeholder="Employee_Sub_Group" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Pay_Type</label>
+                      <input type="text" name="Pay_Type" id="Pay_Type" placeholder="Pay_Type" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Account_No</label>
+                      <input type="text" name="Account_No" id="Account_No" placeholder="Account_No" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -341,6 +424,16 @@ $("#employee_no").change(function() {
           $("#father_name").val(employeeData.father_Name)
           $("#job_title").val(employeeData.Job_Tiltle);
           $("#type").val(employeeData.type);
+          $("#EmployeeNo").val(employeeData.EmployeeNo);
+          $("#CNIC").val(employeeData.CNIC);
+          $("#Joining_Date").val(employeeData.Joining_Date);
+          $("#Grade").val(employeeData.Grade);
+          $("#Department").val(employeeData.Department);
+          $("#Employee_Group").val(employeeData.Employee_Group);
+          $("#Employee_Class").val(employeeData.Employee_Class);
+          $("#Employee_Sub_Group").val(employeeData.Employee_Sub_Group);
+          $("#Pay_Type").val(employeeData.Pay_Type);
+          $("#Account_No").val(employeeData.Account_No);
         }
       });
     });
