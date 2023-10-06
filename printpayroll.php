@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     // Check if data is fetched
     if ($row = mysqli_fetch_assoc($query)) {
         // HTML Template with placeholders replaced by actual database column names
-        $html = '
+       ?>
         <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -52,38 +52,38 @@ if (isset($_POST['submit'])) {
         <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>    
         </head>
         <body>
-         <div class="container">
+         <div id="content" class="container-fluid">
             <div class="row text-center">
-               <div class="col-4 p-5">
-                    <img src="image/1662096718940.jpg" class="w-100" alt="">
+               <div class="col-4 text-center">
+                    <img src="image/1662096718940.jpg" class="w-100 img-fluid " alt="">
                 </div>
-                <div class="col-8 text-center p-5 mt-5">
+                <div class="col-8 text-center mt-5">
                     <h3>Water & Sanitation Services Company</h3>
-                    <h5>Mingora Swat</h5>
+                    <h6>Mingora Swat</h6>
                 </div>
-                <p>Patslip - '. date("D-M-Y").'</p>
-                <div class="mt-5">
-                    <h5>Employee Details:</h5>
-                    <div class="container p-5 border border-dark">
+                <p>Patslip - <?php echo date("D-M-Y")?></p>
+                <div class="my-5">
+                    <h6>Employee Details:</h6>
+                    <div class="container border border-dark">
                         <div class="row">
                             <div class="col-6 text-center">
-                                <h5>Employee No: ' . $row['EmployeeNo'] . '</h5>
-                                <h5>Employee Name: ' . $row['fName'] .' ' . $row['mName'] .' ' . $row['lName'] .'</h5>
-                                <h5>Father Name:  ' . $row['father_Name'] .'</h5>
-                                <h5>Employee CNIC:  ' . $row['CNIC'] .'</h5>
+                                <h6> Employee No: <?php echo $row['EmployeeNo']?></h6>
+                                <h6>Employee Name: <?php echo $row['fName'] ?> <?php echo $row['mName'] ?> <?php echo $row['lName'] ?></h6>
+                                <h6>Father Name:  <?php echo $row['father_Name'] ?></h6>
+                                <h6>Employee CNIC:  <?php echo $row['CNIC'] ?></h6>
                             </div>
                             <div class="col-6">
-                                <h5>Grade: ' . $row['Grade'] .' </h5>
-                                <h5>Job Title:  ' . $row['JobTitle'] .'</h5>
-                                <h5>Department: ' . $row['Department'] .' </h5>
-                                </div>
+                                <h6>Grade: <?php echo $row['Grade'] ?> </h6>
+                                <h6>Job Title:  <?php echo $row['JobTitle'] ?></h6>
+                                <h6>Department: <?php echo $row['Department'] ?> </h6>
                             </div>
                         </div>
                     </div>
                 </div>
+                </div>
                 <div class="row">
-                    <div class="col-6 px-4">
-                        <h5>Earnings</h5>
+                    <div class="col-6 py-5">
+                        <h6>Earnings</h6>
                         <table class="table table-striped  table-bordered border-dark table-responsive" >
                             <thead class="table-light" >
                                 <tr>
@@ -93,25 +93,27 @@ if (isset($_POST['submit'])) {
                                     <th>Amount</th>
                                 </tr>
                             </thead>
-                            <tbody>.';
+                            <tbody>
+                                <?php
                             $EmpNo = $row['Id'];
                             $select = mysqli_query($conn, "SELECT * FROM `payrole` WHERE `EmpNo` = '$EmpNo' AND earning_deduction_fund ='EARNING'");
                             while ($fetch = mysqli_fetch_array($select)) {
-                                $html .= '<tr>
-                                <td>'.  $fetch["AllowancesName"] . '</td>
-                                <td>'. $fetch["Rate"].'</td>
-                                <td>'. $fetch["price"].'</td>
-                                <td>'. $fetch["total"].'</td>
-                            </tr>';
-                            }
-                            $html .= '<tr>
-                                    <td class="text-end"  colspan="4" >Total: '.$row['gross_pay'].'</td>
+                                ?>
+                            <tr>
+                                <td><?php echo   $fetch["AllowancesName"] ?></td>
+                                <td><?php echo  $fetch["Rate"]?></td>
+                                <td><?php echo  $fetch["price"]?></td>
+                                <td><?php echo  $fetch["total"]?></td>
+                            </tr>
+                            <?php }?>
+                           <tr>
+                                    <td class="text-end"  colspan="4" >Total: <?php echo $row['gross_pay']?></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-6 px-4">
-                        <h5>Deduction</h5>
+                    <div class="col-6 py-5">
+                        <h6>Deduction</h6>
                         <table class="table table-striped  table-bordered border-dark table-responsive " >
                                 <thead class="table-light" >
                                     <tr>
@@ -122,51 +124,52 @@ if (isset($_POST['submit'])) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    .';
+                                    <?php
                                     $EmpNo = $row['Id'];
                                     $select = mysqli_query($conn, "SELECT * FROM `payrole` WHERE `EmpNo` = '$EmpNo' AND earning_deduction_fund ='DEDUCTION'");
                                     while ($fetch = mysqli_fetch_array($select)) {
-                                        $html .= '<tr>
-                                        <td>'.  $fetch["AllowancesName"] . '</td>
-                                        <td>'. $fetch["Rate"].'</td>
-                                        <td>'. $fetch["price"].'</td>
-                                        <td>'. $fetch["total"].'</td>
-                                    </tr>';
-                                    }
-                                    $html .= '<tr>
-                                            <td class="text-end"  colspan="4" >Total: '.$row['deduction'].'</td>
+                                        ?>
+                                       <tr>
+                                        <td><?php echo   $fetch["AllowancesName"] ?></td>
+                                        <td><?php echo  $fetch["Rate"]?></td>
+                                        <td><?php echo  $fetch["price"]?></td>
+                                        <td><?php echo  $fetch["total"]?></td>
+                                    </tr>
+                                   <?php } ?>
+                                   <tr>
+                                            <td class="text-end"  colspan="4" >Total: <?php echo $row['deduction']?></td>
                                         </tr>
                                     </tbody>
                             </table>
                     </div>
-                    <div class="col-6 px-4 my-3">
-                        <h5>Year todate Summary</h5>
+                    <div class="col-6 px-4 my-5">
+                        <h6>Year todate Summary</h6>
                         <table class="table table-striped  table-bordered border-dark table-responsive " >
                             <tbody>
                                 <tr>
                                     <td>Gross Pay</td>
-                                    <td class="text-end">'.$row['gross_pay'].'</td>
+                                    <td class="text-end"><?php echo $row['gross_pay']?></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Net pay</td>
-                                    <td class="text-end">'.$row['net_pay'].'</td>
+                                    <td class="text-end"><?php echo $row['net_pay']?></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Fund</td>
-                                    <td class="text-end">'.$row['fund'].'</td>
+                                    <td class="text-end"><?php echo $row['fund']?></td>
                                 </tr>
                                 <tr>
                                     <td>Deduction</td>
-                                    <td class="text-end">'.$row['deduction'].'</td>
+                                    <td class="text-end"><?php echo $row['deduction']?></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-6 px-4 text-center">
-                        <h5>Net Pay</h5>
-                        <h1> PKR. '.$row['net_pay'].'</h1>
+                    <div class="col-6 px-4 my-5  text-center">
+                        <h6>Net Pay</h6>
+                        <h1> PKR: <?php echo $row['net_pay']?></h1>
                     </div>
                 </div>
                     <hr>
@@ -174,19 +177,32 @@ if (isset($_POST['submit'])) {
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
                 <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+
+                <hr>
+                <style>@media print {
+                .no-print {
+                    display: none;
+                }
+                }
+                </style>
+                <button type="button" id="print" class="btn btn-success no-print">Generate PDF</button>
             </div>
-        </div>
+        </div> 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+         $(document).ready(function(){
+            $('#print').click(function(){
+                window.print();
+            });
+        });
+
+        </script>
         </body>
-        </html>';
+        </html>
         
-        require_once __DIR__ . '/vendor/autoload.php' ;
-            $mpdf=new \Mpdf\Mpdf(['format'=>'A4']);
-
-            $mpdf->WriteHTML($htm1) ;
-
-            $file="report.pdf";
-
-            $mpdf->Output ($file, 'I');
+        
+       <?php
+    
 
     } else {
         // Handle case where no data is found

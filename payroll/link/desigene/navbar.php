@@ -36,6 +36,12 @@
         </li>
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payrollgen.php">Payroll Generate</a>
+        </li>  
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="EmployeePaySlip.php">Employee Pay Slip</a>
+        </li>   
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="All payroll.php">All Payroll</a>
         </li>        
       </ul>
     </div>

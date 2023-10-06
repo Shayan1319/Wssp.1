@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 //   try {
 //     $con->beginTransaction();
 
-    $Insert = "INSERT INTO `salary`( `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`) VALUES ('$EmployeeNo','$fundInput','$grossPay','$deductionInput','$netPayInput','$date')";
+    $Insert = "INSERT INTO `salary`( `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`) VALUES ('$EmployeeNo','$fundInput','$grossPay','$deductionInput','$netPayInput','$date','$empname','$father_name','$CNIC','$Joining_Date','$job_title','$Grade','$type','$Department','$Employee_Class','$Employee_Sub_Group','$Pay_Type','$Account_No')";
 //     $stmt = $con->prepare($query);
 //     $stmt->execute();
 
@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
         $earning_deduction_fundarray=$earning_deduction_fund[$i];
         $pricearray=$price[$i];
         $totalarray=$total[$i];
-        $rateinsert = mysqli_query($conn,"INSERT INTO `payrole`( `EmpNo`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`) VALUES ('$employee_no','$empname','$father_name','$CNIC','$Joining_Date','$job_title','$Grade','$type','$Department','$Employee_Class','$Employee_Sub_Group','$Pay_Type','$Account_No','$allowancearray','$currentAllowanceId','$fin_classificationarray','$rate_calc_modearray','$earning_deduction_fundarray','$currentrateId','$pricearray','$totalarray','$date')") ;
+        $rateinsert = mysqli_query($conn,"INSERT INTO `payrole`( `EmpNo`,`AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`) VALUES ('$employee_no','$allowancearray','$currentAllowanceId','$fin_classificationarray','$rate_calc_modearray','$earning_deduction_fundarray','$currentrateId','$pricearray','$totalarray','$date')") ;
       }
     }
       $query=mysqli_query($conn,$Insert);
