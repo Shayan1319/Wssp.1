@@ -31,9 +31,15 @@
         <li class="nav-item w-100">
           <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="index.php">Home</a>
           </li>
-        <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href=""></a>
-        </li>
+          <div class="dropstart">
+            <button type="button" class="btn text-white" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="profile.php?id=<?php echo $_SESSION['loginid']?>">See Profile</a></li>
+              <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+            </ul>
+          </div>
         
       </ul>
     </div>

@@ -5,10 +5,13 @@ error_reporting(0);
 // links to database
 include('../api/app Ak S api.php/config.php');
 
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
-    ?>   <script>
-        location.replace('../logout.php')
-    </script><?php
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'AppAdmin') {
+    // Log the unauthorized access attempt for auditing purposes
+    error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
+    
+    // Redirect to the logout page
+    header("Location: ../logout.php");
+    exit; // Ensure that the script stops execution after the header redirection
   } else{
 
 ?>

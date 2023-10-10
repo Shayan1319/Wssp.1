@@ -1,13 +1,16 @@
 <?php
 session_start();
 error_reporting(0);
-// Links to the database
-include('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
-    ?>   <script>
-        location.replace('../logout.php')
-    </script><?php
-  } else{
+// links to database
+include('../link/desigene/db.php');
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'CEO') {
+  // Log the unauthorized access attempt for auditing purposes
+  error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
+  
+  // Redirect to the logout page
+  header("Location: ../logout.php");
+  exit; // Ensure that the script stops execution after the header redirection
+} else{
     if (isset($_POST['submit'])) {
         // Retrieve user input and sanitize it (use mysqli_real_escape_string or prepared statements)
         $empid = $_GET['id'];

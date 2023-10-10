@@ -35,7 +35,7 @@
 
   </div>                
               <a href="index.php" class="nav-link mt-3">Dashboard (MIS)</a>
-              <a href="Master_enteries.php" class="nav-link">
+              <a href="Master_entries.php" class="nav-link">
               Master_enteries
                 </a>
               <a class="dropbtn nav-link" href="signup.php">

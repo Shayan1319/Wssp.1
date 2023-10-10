@@ -144,12 +144,10 @@ $calendar = new Calendar($date);
                             <div class="col-12">
                                 <label class="fs-6 fw-bolder" for="">Up Coming Events</label>
                             </div>
-                            <div class="col-12" style="overflow: scroll;height: 170px;">
-                            <div class="col-12" style="overflow: scroll;height: 350px;">
-                                <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                            <div class="col-12" style="overflow: scroll;height: 90%;">
+                                <div class="card text-bg-primary mb-3">
                                     <div class="card-header">Header</div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -158,15 +156,15 @@ $calendar = new Calendar($date);
                     <div class="row">
                         <div class="col-4">
                             <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Joining_Date']?></h6>
                         </div>
                         <div class="col-4">
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Contract expiry date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Contract_Expiry_Date']?></h6>
                         </div>
                         <div class="col-4">
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Last Working Date</h6>
+                            <h6 style="color:rgb(255, 254, 253); background-color:rgb(11, 102, 171) ;"><?php echo $row['Last_Working_Date']?></h6>
                         </div>
                         <br>
                     </div>
@@ -175,12 +173,12 @@ $calendar = new Calendar($date);
                     <h5 style="color: rgb(60, 59, 59);"><b>Basic Information</b></h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Addree</h6>
+                            <h6 style="color:rgb(4, 111, 218);"><?php echo $row['pAddress']?></h6>
                         </div>
                         <div class="col-6">
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
-                            <h6 style="color:rgb(4, 111, 218);">Hire date</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Date of birth</h6>
+                            <h6 style="color:rgb(4, 111, 218);"><?php echo $row['DofBc']?></h6>
                         </div>
                         <br>
                     </div>
@@ -190,15 +188,15 @@ $calendar = new Calendar($date);
                     <div class="row">
                         <div class="">
                             <i class="fa-solid fa-clock"></i>
-                            <h6 style="color:rgb(4, 111, 218);">Full time</h6>
+                            <h6 style="color:rgb(4, 111, 218);"><?php echo $row['Weekly_Working_Days']?></h6>
                         </div>
                         <br>
                     </div>
                     <br>
                     <hr>
                 </div>
-                <div class="col-sm-12 col-lg-8 col-md-8 m-4 bg-light "><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
-                    <canvas id="myChart" class="w-100 h-50" style=" display: block; height: 267px;"></canvas>
+                <div class="col-sm-12 col-lg-8 col-md-8 m-4 bg-light "><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px; margin: 0px; inset: 0px; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
+                    <canvas id="myChart" class="w-100 " style=" display: block;"></canvas>
                     <script>
                         var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
                         var yValues = [55, 49, 44, 24, 20];

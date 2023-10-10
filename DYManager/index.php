@@ -3,11 +3,14 @@ session_start();
 error_reporting(0);
 // links to database
 include('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
-    // Redirect to the logout page
-    header("Location: ../logout.php");
-    exit;
-} else {
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'DYManager') {
+  // Log the unauthorized access attempt for auditing purposes
+  error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
+  
+  // Redirect to the logout page
+  header("Location: ../logout.php");
+  exit; // Ensure that the script stops execution after the header redirection
+}else {
     // Your code for logged-in users goes here
     $currentDate = date('Y-m-d');
 
@@ -284,6 +287,9 @@ $sql = "SELECT COUNT(*) AS Appraisals
     h4, h3 {
       text-align: center;
     }
+    a{
+      text-decoration: none;
+    }
 
    </style>
 </head>
@@ -297,11 +303,11 @@ $sql = "SELECT COUNT(*) AS Appraisals
               <h1 style="color: darkblue;">WELCOME USER NAME</h1>
           </div>
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-              <h2>TODAY'S ATTENDANCE</h2>
+              <h2 style="color: darkblue;">TODAY'S ATTENDANCE</h2>
           </div>
           <div class="col-lg-4 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                   <h3>
                   <?php echo $employeeCountotal; ?>
@@ -316,7 +322,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-green">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                   <h3><?php echo $employeeCount; ?>
                 <script> var employeeCount=<?php echo $employeeCount?>;</script>
@@ -330,7 +336,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-red">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                 <h3><?php echo $employeeCountABSENT; ?>
               <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
@@ -344,7 +350,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-yellow">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                 <h3><?php echo $totalAcceptLeaves?>
               <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
@@ -358,7 +364,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                 <h3><?php echo $employeeCountOVERTIME;?>
               <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
@@ -372,7 +378,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-purple">
+              <div class="small-box text-white" style="background-color:darkblue" >
                 <div class="inner">
                 <h3><?php echo $employeeCountDDorOT;?>
               <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
@@ -385,18 +391,18 @@ $sql = "SELECT COUNT(*) AS Appraisals
               </div>
             </div><!-- ./col -->      
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-              <h2>LEAVE REQUESTS</h2>
+              <h2 style="color: darkblue;">LEAVE REQUESTS</h2>
           </div>
           <div class="col-lg-4 col-xs-12">
             <!-- small box -->
-            <div class="small-box bg-orange">
+            <div class="small-box text-white" style="background-color: #3784ff;" >
               <div class="inner">
               <h3><?php echo $totalLeaves?>
             <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
             </h3>
                 <h4>TOTAL LEAVE REQUEST</h4>
               </div>
-              <div class="icon">
+              <div class="icon" style="color: #f0f8ff7d;" >
                 <i class="fa fa-bar-chart"></i>
               </div>
             </div>
@@ -404,14 +410,14 @@ $sql = "SELECT COUNT(*) AS Appraisals
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
-             <div class="small-box bg-green">
+             <div class="small-box text-white" style="background-color: #3784ff;" >
                 <div class="inner">
                 <h3><?php echo $totalAPROVELeaves?>
               <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
               </h3>
                   <h4>APROVE</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="color: #f0f8ff7d;" >
                   <i class="fa fa-check"></i>
                 </div>
               </div>
@@ -420,14 +426,14 @@ $sql = "SELECT COUNT(*) AS Appraisals
           <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color: #3784ff;" >
                 <div class="inner">
                 <h3><?php echo $totalPendingLeaves?>
               <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
               </h3>
                   <h4>PENDING</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="color: #f0f8ff7d;" >
                   <i class="fa fa-clock-o"></i>
                 </div>
               </div>
@@ -436,14 +442,14 @@ $sql = "SELECT COUNT(*) AS Appraisals
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
-              <div class="small-box bg-red">
+              <div class="small-box text-white" style="background-color: #3784ff;" >
                 <div class="inner">
                 <h3><?php echo $totalREJECTEDLeaves?>
               <script> var vetsciencestotalREJECTEDLeaves= <?php echo $totalREJECTEDLeaves?>;</script>
               </h3>
                   <h4>REJECTED</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="color: #f0f8ff7d;" >
                   <i class="fa fa-ban"></i>
                 </div>
               </div>
@@ -451,12 +457,12 @@ $sql = "SELECT COUNT(*) AS Appraisals
             </div><!-- ./col -->
             
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2>Appraisals and others</h2>
+                <h2 style="color: darkblue;">Appraisals and others</h2>
             </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="aprasals.php">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color: #7EC8E3;" >
                 <div class="inner">
                 <h3><?php echo $Appraisals?>
               <script> var Appraisals= <?php echo $Appraisals?>;</script>
@@ -538,7 +544,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
               <script>
                             var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
                             var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
-                            var barColors = ["red", "green", "blue", "orange", "brown"];
+                            var barColors = ["darkblue", "#2b5797", "#145DA0",  "#2E8BC0", "#00aba9"];
 
                             new Chart("myChart", {
                                 type: "bar",
@@ -571,11 +577,11 @@ $sql = "SELECT COUNT(*) AS Appraisals
                             var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
                             var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
                             var barColors = [
-                                "#b91d47",
-                                "#00aba9",
+                                "darkblue",
                                 "#2b5797",
-                                "#e8c3b9",
-                                "#1e7145"
+                                "#145DA0",
+                                "#2E8BC0",
+                                "#00aba9"
                             ];
 
                             new Chart("myChart1", {

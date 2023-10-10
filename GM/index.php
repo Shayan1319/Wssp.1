@@ -3,10 +3,13 @@ session_start();
 error_reporting(0);
 // links to database
 include('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
-    // Redirect to the logout page
-    header("Location: ../logout.php");
-    exit;
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'GM') {
+  // Log the unauthorized access attempt for auditing purposes
+  error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
+  
+  // Redirect to the logout page
+  header("Location: ../logout.php");
+  exit; // Ensure that the script stops execution after the header redirection
 } else {
     // Your code for logged-in users goes here
     $currentDate = date('Y-m-d');
@@ -433,6 +436,9 @@ WHERE
       h4, h3 {
         text-align: center;
       }
+      a{
+        text-decoration: none;
+      }
   </style>
   <body>
     <div id="main">
@@ -440,17 +446,17 @@ WHERE
         <div class="container-fluid py-5">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1 style="color: darkblue;">WELCOME</h1>
+                <h1 style="color: darkblue;">Welcome <?php echo $_SESSION['name']?></h1>
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <a href="EXITCLEARANCEFORM.php">
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color:#050A30" >
                 <div class="inner">
                 <h3><?php echo $exit_form?></h3>
                   <h4>Employee Clearance Form</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="    color: #ffffff3d;" >
                 <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
                 </div>
               </div>
@@ -459,12 +465,12 @@ WHERE
             <div class="col-lg-4 col-xs-12">
               <a href="aprasals.php">
                 <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color:#050A30" >
                 <div class="inner">
                   <h3><?php echo $Appraisals?></h3>
                   <h4>Employee Appraisal</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="    color: #ffffff3d;" >
                 <i class="fa-solid fa-person-circle-check"></i>
                 </div>
               </div>
@@ -472,12 +478,12 @@ WHERE
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color:#050A30" >
                 <div class="inner">
                   <h3><?php echo $employeeCountexp?></h3>
                   <h4>Employee Contact Expiry</h4>
                 </div>
-                <div class="icon">
+                <div class="icon" style="    color: #ffffff3d;" >
                 <i class="fa-solid fa-id-badge"></i>
                 </div>
               </div>
@@ -485,12 +491,12 @@ WHERE
             <div class="col-lg-4 col-xs-12">
               <a href="" style>
                 <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color:#050A30" >
                 <div class="inner">
                   <h3><?php echo $total_employees?></h3>
                   <h4>Total Employees Pending</h4>
                 </div>
-                <div class="icon"><i class="fa-solid fa-person-digging"></i>
+                <div class="icon" style="    color: #ffffff3d;" ><i class="fa-solid fa-person-digging"></i>
                 </div>
               </div>
               </a>
@@ -500,7 +506,7 @@ WHERE
             </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#003060" >
                 <div class="inner">
                 <h3><?php echo $TravelReq?>
               <script> var TravelReq= <?php echo $TravelReq?>;</script>
@@ -514,7 +520,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#003060" >
                 <div class="inner">
                 <h3><?php echo $TravelReqAprove?>
               <script> var TravelReqAprove= <?php echo $TravelReqAprove?>;</script>
@@ -529,7 +535,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#003060" >
                 <div class="inner">
                 <h3><?php echo $TravelReqPENDING?>
               <script> var TravelReqPENDING= <?php echo $TravelReqPENDING?>;</script>
@@ -545,7 +551,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="travelRejecet.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#003060" >
                 <div class="inner">
                 <h3><?php echo $TravelReqREJECTED?>
               <script> var TravelReqREJECTED= <?php echo $TravelReqREJECTED?>;</script>
@@ -559,11 +565,95 @@ WHERE
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <h2>PayRoll</h2>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $total_rate ?></h3>
+                  <h4>Total Amount Payroll of this Month</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" >
+                    <i class="fa-regular fa-credit-card"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $total_rate_wssc ?></h3>
+                  <h4>Total Amount WSSC of This Month</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" >
+                <i class="fa-solid fa-rupee-sign"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $total_rate_tma ?></h3>
+                  <h4>Total Amount TMA of This Month</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" >
+                <i class="fa-solid fa-rupee-sign"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $rate_difference ?></h3>
+                  <h4>Amount Difference b/w WSSC And TMA</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" >
+                <i class="fa-solid fa-arrow-up-wide-short"></i><i class="fa-solid fa-arrow-down-wide-short"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $rate_difference_previous_month ?></h3>
+                  <h4>Amount Difference Previous Month</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" ><i class="fa-solid fa-chart-column"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $total_employees_payroll?></h3>
+                  <h4>Total Employees Witho Payroll</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" ><i class="fa-solid fa-money-check-dollar"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-12">
+              <!-- small box -->
+              <div class="small-box text-white" style="background-color: #202095;" >
+                <div class="inner">
+                  <h3><?php echo $total_employees_witout_payroll?></h3>
+                  <h4>Total Employees Without Payroll</h4>
+                </div>
+                <div class="icon" style="color: #ffffff85;" ><i class="">💵</i>
+                </div>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>TA Bill</h2>
             </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#055C9D" >
                 <div class="inner">
                 <h3><?php echo $Tabill?>
               <script> var Tabill= <?php echo $Tabill?>;</script>
@@ -577,7 +667,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#055C9D" >
                 <div class="inner">
                 <h3><?php echo $tabillAprove?>
               <script> var tabillAprove= <?php echo $tabillAprove?>;</script>
@@ -592,7 +682,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="aprovetabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#055C9D" >
                 <div class="inner">
                 <h3><?php echo $tabillaccept?>
               <script> var tabillaccept= <?php echo $tabillaccept?>;</script>
@@ -608,7 +698,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="tabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#055C9D" >
                 <div class="inner">
                 <h3><?php echo $tabillPENDING?>
               <script> var tabillPENDING= <?php echo $tabillPENDING?>;</script>
@@ -624,7 +714,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="tabillRejecet.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color:#055C9D" >
                 <div class="inner">
                 <h3><?php echo $tabillREJECTED?>
               <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
@@ -637,96 +727,12 @@ WHERE
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2>PayRoll</h2>
-            </div>
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $total_rate ?></h3>
-                  <h4>Total Amount Payroll of this Month</h4>
-                </div>
-                <div class="icon">
-                    <i class="fa-regular fa-credit-card"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $total_rate_wssc ?></h3>
-                  <h4>Total Amount WSSC of This Month</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-rupee-sign"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $total_rate_tma ?></h3>
-                  <h4>Total Amount TMA of This Month</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-rupee-sign"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $rate_difference ?></h3>
-                  <h4>Amount Difference b/w WSSC And TMA</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-arrow-up-wide-short"></i><i class="fa-solid fa-arrow-down-wide-short"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $rate_difference_previous_month ?></h3>
-                  <h4>Amount Difference Previous Month</h4>
-                </div>
-                <div class="icon"><i class="fa-solid fa-chart-column"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $total_employees_payroll?></h3>
-                  <h4>Total Employees Witho Payroll</h4>
-                </div>
-                <div class="icon"><i class="fa-solid fa-money-check-dollar"></i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
-              <!-- small box -->
-              <div class="small-box bg-aqua">
-                <div class="inner">
-                  <h3><?php echo $total_employees_witout_payroll?></h3>
-                  <h4>Total Employees Without Payroll</h4>
-                </div>
-                <div class="icon"><i class="">💵</i>
-                </div>
-              </div>
-            </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>TODAY'S ATTENDANCE</h2>
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-aqua">
+              <div class="small-box text-white" style="background-color: #0E86D4;" >
                 <div class="inner">
                   <h3>
                   <?php echo $employeeCountotal; ?>
@@ -741,7 +747,7 @@ WHERE
             </div><!-- ./col -->     
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-green">
+                <div class="small-box text-white" style="background-color: #0E86D4;" >
                   <div class="inner">
                     <h3><?php echo $employeeCount; ?>
                   <script> var employeeCount=<?php echo $employeeCount?>;</script>
@@ -755,7 +761,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-red">
+                <div class="small-box text-white" style="background-color: #0E86D4;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountABSENT; ?>
                 <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
@@ -769,7 +775,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box text-white" style="background-color: #0E86D4;" >
                   <div class="inner">
                   <h3><?php echo $totalAcceptLeaves?>
                 <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
@@ -783,7 +789,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-blue">
+                <div class="small-box text-white" style="background-color: #0E86D4;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountOVERTIME;?>
                 <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
@@ -797,7 +803,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-purple">
+                <div class="small-box text-white" style="background-color: #0E86D4;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountDDorOT;?>
                 <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
@@ -814,7 +820,7 @@ WHERE
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
-              <div class="small-box bg-orange">
+              <div class="small-box text-white" style="background-color: #68BBE3;" >
                 <div class="inner">
                 <h3><?php echo $totalLeaves?>
               <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
@@ -829,7 +835,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
-             <div class="small-box bg-green">
+             <div class="small-box text-white" style="background-color: #68BBE3;" >
                 <div class="inner">
                 <h3><?php echo $totalAPROVELeaves?>
               <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
@@ -845,7 +851,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
+              <div class="small-box text-white" style="background-color: #68BBE3;" >
                 <div class="inner">
                 <h3><?php echo $totalPendingLeaves?>
               <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
@@ -861,7 +867,7 @@ WHERE
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
-              <div class="small-box bg-red">
+              <div class="small-box text-white" style="background-color: #68BBE3;" >
                 <div class="inner">
                 <h3><?php echo $totalREJECTEDLeaves?>
               <script> var vetsciencestotalREJECTEDLeaves= <?php echo $totalREJECTEDLeaves?>;</script>
@@ -882,7 +888,7 @@ WHERE
                         <script>
                             var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
                             var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
-                            var barColors = ["red", "green", "blue", "orange", "brown"];
+                            var barColors = ["#000C66", "#0000FF", "#055C9D", "#0E86D4", "#68BBE3"];
 
                             new Chart("myChart", {
                                 type: "bar",
@@ -915,11 +921,11 @@ WHERE
                             var xValues = ["Employee Coun", "Present", "Over Time", "Duble Duty", "Leaves"];
                             var yValues = [employeeCountotal, employeeCount, employeeOVERTIME, DDorOT, Leaves];
                             var barColors = [
-                                "#b91d47",
-                                "#00aba9",
-                                "#2b5797",
-                                "#e8c3b9",
-                                "#1e7145"
+                                "#000C66",
+                                "#0000FF",
+                                "#055C9D",
+                                "#0E86D4",
+                                "#68BBE3"
                             ];
 
                             new Chart("myChart1", {
