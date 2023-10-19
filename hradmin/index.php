@@ -55,7 +55,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4 p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#0C1C5F;">
-                        <div class="card-header">Total Amount Payroll of this mounth</div>
+                        <div class="card-header">Total Amount Payroll for this mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -72,7 +72,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-light mb-3" style="max-width: 18rem;background-color:#2A64C4">
-                        <div class="card-header">Total Amount WSSC of This Mounth</div>
+                        <div class="card-header">Total Amount WSSC for This Mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -89,7 +89,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#61AFE4">
-                        <div class="card-header">Total Amount Tma of This Mounth</div>
+                        <div class="card-header">Total Amount TMAfor This Mounth</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">

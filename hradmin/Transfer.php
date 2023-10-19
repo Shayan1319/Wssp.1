@@ -427,6 +427,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                  <th scope="col">Department</th>
                  <th scope="col">Acting</th>
                  <th scope="col">Remarks</th>
+                 <th scope="col">file</th>
                  </tr>
                  </thead>
                  <tbody>
@@ -446,6 +447,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                  <td><?php echo $see ['Department1'] ?></td>
                  <td><?php echo $see ['Acting'] ?></td>
                  <td><?php echo $see ['Remarks'] ?></td>
+                 <td><a href="../CV/<?php echo $see ['file'] ?>">Download</a></td>
                  </tr>
                  <?php }?>
                  </tbody>
@@ -514,13 +516,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Worked From</label>
-                              <input type="text" name="Worked_From" id="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Worked_From" id="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Transfer Date</label>
-                              <input type="Date" name="Transfer_Date" id="Transfer_Date" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Transfer_Date" id="Transfer_Date" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>File</label>
+                              <input type="file" name="file" id="file" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class=" text-end">
@@ -625,13 +633,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <div class="my-2">
                             <div class="form-group">
                               <label>Worked From</label>
-                              <input type="text" name="Worked_From" id="Worked_From_update" placeholder="Worked From" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Worked_From" id="Worked_From_update" placeholder="Worked From" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">
                             <div class="form-group">
                               <label>Transfer Date</label>
-                              <input type="Date" name="Transfer_Date" id="Transfer_Date_update" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Transfer_Date" id="Transfer_Date_update" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>
+                          <div class="my-2">
+                            <div class="form-group">
+                              <label>File</label>
+                              <input type="file" name="file_update" id="file_update" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           </form>
@@ -665,34 +679,57 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     loadTable();
  
     $("#save").on("click", function(e) {
-      e.preventDefault();
-        var employee_id = "<?php echo $_GET['updat']; ?>";
-        var Transfer_Order_Number = $("#Transfer_Order_Number").val();
-        var Designation = $("#Designation").val();
-        var BPS = $("#BPS").val();
-        var From_Department = $("#From_Department").val();
-        var To_Project = $("#To_Project").val();
-        var From_Station = $("#From_Station").val();
-        var To_Station = $("#To_Station").val();
-        var Worked_From = $("#Worked_From").val();
-        var Transfer_Date = $("#Transfer_Date").val();
-       
-        $.ajax({
-            url: "ajex/Transferinsert.php",
-            type: "POST",
-            data: { employee_id:employee_id,Transfer_Order_Number:Transfer_Order_Number,Designation:Designation,BPS:BPS,From_Department:From_Department,To_Project:To_Project,From_Station:From_Station,To_Station:To_Station,Worked_From:Worked_From,Transfer_Date:Transfer_Date},
-            success: function(data) {
-                if (data == 1) {
-                    loadTable();
-                    $("#formdata").trigger("reset");
-                } else {
-                    alert("Can't Save Record");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-        console.log("AJAX Error:", textStatus, errorThrown);
-        }});
+    e.preventDefault();
+
+    var employee_id = "<?php echo $_GET['updat']; ?>";
+    var Transfer_Order_Number = $("#Transfer_Order_Number").val();
+    var Designation = $("#Designation").val();
+    var BPS = $("#BPS").val();
+    var From_Department = $("#From_Department").val();
+    var To_Project = $("#To_Project").val();
+    var From_Station = $("#From_Station").val();
+    var To_Station = $("#To_Station").val();
+    var Worked_From = $("#Worked_From").val();
+    var Transfer_Date = $("#Transfer_Date").val();
+    var file = $("#file")[0].files[0]; // Get the selected file
+
+    var formData = new FormData();
+    formData.append('employee_id', employee_id);
+    formData.append('Transfer_Order_Number', Transfer_Order_Number);
+    formData.append('Designation', Designation);
+    formData.append('BPS', BPS);
+    formData.append('From_Department', From_Department);
+    formData.append('To_Project', To_Project);
+    formData.append('From_Station', From_Station);
+    formData.append('To_Station', To_Station);
+    formData.append('Worked_From', Worked_From);
+    formData.append('Transfer_Date', Transfer_Date);
+    formData.append('file', file); // Append the file to the formData object
+
+    $.ajax({
+        url: "ajex/Transferinsert.php",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+          if(data == 0.1){
+              alert("Can't Save file");
+            }
+            if (data == 1) {
+                loadTable();
+                $("#formdata").trigger("reset");
+            }
+             else {
+                alert("Can't Save Record");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("AJAX Error:", textStatus, errorThrown);
+        }
     });
+});
+
     $(document).on("click", "#delete",function(){
         var delet = $(this).data("did");
         $.ajax({
@@ -732,33 +769,40 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         }
     });
 });
+$("#updatenow").on("click", function(e) {
+    e.preventDefault();
+    var formData = new FormData($("#formdata")[0]);
+    formData.append("id", $("#id_update").val());
+    formData.append("Transfer_Order_Number_update", $("#Transfer_Order_Number_update").val());
+    formData.append("Designation_update", $("#Designation_update").val());
+    formData.append("BPS_update", $("#BPS_update").val());
+    formData.append("From_Department_update", $("#From_Department_update").val());
+    formData.append("To_Project_update", $("#To_Project_update").val());
+    formData.append("From_Station_update", $("#From_Station_update").val());
+    formData.append("To_Station_update", $("#To_Station_update").val());
+    formData.append("Worked_From_update", $("#Worked_From_update").val());
+    formData.append("Transfer_Date_update", $("#Transfer_Date_update").val());
+    formData.append("file_update", $("#file_update")[0].files[0]); // Get the file object
 
-      $("#updatenow").on("click",function(e){
-        e.preventDefault();
-        var id_update = $("#id_update").val();
-        var Transfer_Order_Number_update = $("#Transfer_Order_Number_update").val();
-        var Designation_update = $("#Designation_update").val();
-        var BPS_update = $("#BPS_update").val();
-        var From_Department_update = $("#From_Department_update").val();
-        var To_Project_update = $("#To_Project_update").val();
-        var From_Station_update = $("#From_Station_update").val();
-        var To_Station_update = $("#To_Station_update").val();
-        var Worked_From_update = $("#Worked_From_update").val();
-        var Transfer_Date_update = $("#Transfer_Date_update").val();
-        // alert(id_update);
-        $.ajax({
-          url:"ajex/ajax-update-employee-Transfer-allowance.php",
-          type:"POST", 
-          data:{id:id_update,Transfer_Order_Number_update:Transfer_Order_Number_update,Designation_update:Designation_update,BPS_update:BPS_update,From_Department_update:From_Department_update,To_Project_update:To_Project_update,From_Station_update:From_Station_update,To_Station_update:To_Station_update,Worked_From_update:Worked_From_update,Transfer_Date_update:Transfer_Date_update},
-          success:function(data){
-            if(data == 1){
-            loadTable();
+    $.ajax({
+        url: "ajex/ajax-update-employee-Transfer-allowance.php",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            if (data == 0.1) {
+                alert("Can't Save Image");
+            } else if (data == 1) {
+                loadTable();
+                $("#formdata").trigger("reset");
+            } else {
+                alert("Can't Save Record");
             }
-            else{
-              alert ("Can't Save Record");
-            }
-          } });
-        });
+        }
+    });
+});
+
 });
 
 </script>

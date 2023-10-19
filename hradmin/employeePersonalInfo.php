@@ -237,11 +237,11 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
-                      <div class="form-group">
-                        <label>Middle Name</label>
-                        <input id="mName" type="text" name="mName" placeholder="Middle Name" class="form-control" autocomplete="off">
+                        <div class="form-group">
+                          <label>Middle Name</label>
+                          <input id="mName" type="text" name="mName" placeholder="Middle Name" class="form-control" autocomplete="off">
+                        </div>
                       </div>
-                    </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Last Name</label>
@@ -323,7 +323,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Gender</label>
-                          <select id="Gender" name="gender" id="" class="form-control select2">
+                          <select name="gender" id="" class="form-control select2">
                               <option value="">Choose</option>
                               <option value="Mail">Male</option>
                               <option value="Female">Female</option>
@@ -366,7 +366,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       </div>                   
                       <div class="col-md-4 my-2">
                         <div class="form-group">
-                          <label>Contact Person</label>
+                          <label>Name of Contact Person</label>
                           <input id="ContactPerson" type="text" name="ContactPerson" placeholder="Contact Person " class="form-control" autocomplete="off" >
                         </div>
                       </div>                    
@@ -379,7 +379,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                   </div>     
                   <div class=" text-end">
                       <button style="background-color: darkblue;" class="btn text-white shadow float-right" type="button" onclick="validateSection1()">Next</button>
-                    </div>
+                  </div>
                 </div>
               </div>
               <div id="section2" style="display: none;">
@@ -397,292 +397,152 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                     <div class="row my-4">
                       <div class="col-md-12 ">
                         <div class="card card-success border border-2 border-dark bg-light">
-                       
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width: fit-content;">Employement Information
+                                <div class="card-title text-white" style="width:fit-content;">Employement Information
                                 </div>
                               </div>
                               <div class="col-sm-12 col-lg-7">
-                                <h3 class="bg-primary p-2 rounded" style="width: fit-content;">WSSC</h3>
+                                <h3 class="bg-primary p-2 rounded" style="width:fit-content;">WSSC</h3>
                               </div>
                             </div>  
                           </div>
-                       
                           <br>
                           <div class="card-body ">
                             <div class="row">
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
-                                  <select id="EmpGroup" name="Employement_Group" class="form-control select2">
-                                    <option value="">Choose CONTRACTUAL/CONTINGENT</option>
-                                    <option value="WSSC CONTRACTUAL">WSSC CONTRACTUAL</option>
-                                    <option value="WSSC CONTINGENT">WSSC CONTINGENT</option>
+                                  <select name="Employement_Group" id="Employement_Group_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Class</label>
-                                  <select id="Employee_Class" name="Employee_Class" class="form-control select2">
-                                    <option value="Wssc Pay">Wssc Pay</option>
-                                    <option value="TMA Pay">TMA Pay</option>
+                                  <select name="Employee_Class" id="Employee_Class_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Group</label>
-                                  <select id="Employee_Group" name="Employee_Group" class="form-control select2">
-                                    
-                                    <option value="WSSCS-ADMIN PAY">WSSCS-ADMIN PAY</option>
-                                    <option value="WSSCS-COMMERCIAL">WSSCS-COMMERCIAL</option>
-                                    <option value="WSSCS-MANAGEMENT">WSSCS-MANAGEMENT</option>
-                                    <option value="WSSCS-MSW PAY">WSSCS-MSW PAY</option>
-                                    <option value="WSSCS-WATER PAY">WSSCS-WATER PAY</option>
-                                  </select>
+                                   <select name="Employee_Group_drop" id="Employee_Group_drop" class="form-control select2">
+                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Sub Group</label>
-                                  <select name="Employee_Sub_Group" class="form-control select2" >
-                                    <option value="WSSCS-ADMIN-CONTINGENT PAY">WSSCS-ADMIN-CONTINGENT PAY</option>
-                                    <option value="WSSCS-ADMIN-CONTRACTUAL PAY">WSSCS-ADMIN-CONTRACTUAL PAY</option>
-                                    <option value="WSSCS-COMMERCIAL-CONTINGENT">WSSCS-COMMERCIAL-CONTINGENT</option>
-                                    <option value="WSSCS-COMMERCIAL-CONTRACT">WSSCS-COMMERCIAL-CONTRACT</option>
-                                    <option value="WSSCS-MANAGEMENT">WSSCS-MANAGEMENT</option>
-                                    <option value="WSSCS-MSW-CONTINGENT PAY">WSSCS-MSW-CONTINGENT PAY</option>
-                                    <option value="WSSCS-MSW-CONTINGENT PAY (EXT.)">WSSCS-MSW-CONTINGENT PAY (EXT.)</option>
-                                    <option value="WSSCS-MSW-CONTRACTUAL PAY">WSSCS-MSW-CONTRACTUAL PAY</option>
-                                    <option value="WSSCS-WATER-CONTINGENT PAY">WSSCS-WATER-CONTINGENT PAY</option>
-                                    <option value="WSSCS-WATER-CONTRACTUAL PAY">WSSCS-WATER-CONTRACTUAL PAY</option>
+                                  <select name="Employee_Sub_Group" id="Employee_Sub_Group_drop" class="form-control select2" >
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Quota</label>
-                                  <select id="Employee_Quota" name="Employee_Quota" class="form-control select2">
-                                    <option value="DECEASED SON">DECEASED SON</option>
-                                    <option value="DISABLED">DISABLED</option>
-                                    <option value="LETTER OF INTEREST">LETTER OF INTEREST</option>
-                                    <option value="MINORITIES">MINORITIES</option>
+                                  <select name="Employee_Quota" id="Employee_Quota_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Bank</label>
-                                  <input type="text" class="form-control" name="Salary_Bank" placeholder="Salary Bank" id="">
+                                  <input type="text" class="form-control" name="Salary_Bank" placeholder="Salary Bank" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Salary Branch</label>
-                                  <input type="text" class="form-control" name="Salary_Branch" placeholder="Salary Branch" id="">
+                                  <label>Salary Bank Branch</label>
+                                  <input type="text" class="form-control" name="Salary_Branch" placeholder="Salary Branch">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Account No</label>
-                                  <input type="text" class="form-control" name="Account_No" placeholder="Account No" id="">
+                                  <input type="text" class="form-control" name="Account_No" placeholder="Account No" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Pay Type</label>
-                                  <input type="text" class="form-control" name="Pay_Type" placeholder="Pay Type" id="">
+                                  <input type="text" class="form-control" name="Pay_Type" placeholder="Pay Type">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>EOBI No</label>
-                                  <input type="text" class="form-control" name="EOBI_No" placeholder="EOBI No" id="">
+                                  <input type="text" class="form-control" name="EOBI_No" placeholder="EOBI No" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Bill Walved Off</label>
-                                  <input type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Walved Off" id="">
+                                  <input type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Walved Off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Weekly Working Days</label>
-                                  <input type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" id="">
+                                  <input type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Bill Waived Off</label>
-                                  <input type="text" class="form-control" name="Bill_Waived_Off" placeholder="Bill Waived Off" id="">
+                                  <input type="text" class="form-control" name="Bill_Waived_Off" placeholder="Bill Waived Off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Pay Classification</label>
-                                  <input type="text" class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" id="">
+                                  <input type="text" class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Grade</label>
-                                  <select id="" name="Grade" class="form-control select2">
-                                    <option value="CONTINGENT" >CONTINGENT</option>
-                                    <option value="COVID-19" >COVID-19</option>
-                                    <option value="DAILY WAGE" >DAILY WAGE</option>
-                                    <option value="INTERNSHIP" >INTERNSHIP</option>
-                                    <option value="M–1" >M–1</option>
-                                    <option value="M–3" >M–3</option>
-                                    <option value="M–4" >M–4</option>
-                                    <option value="M–5" >M–5</option>
-                                    <option value="M–6" >M–6</option>
-                                    <option value="M–7" >M–7</option>
-                                    <option value="S–1" >S–1</option>
-                                    <option value="S–2" >S–2</option>
-                                    <option value="S–3" >S–3</option>
-                                    <option value="S–4" >S–4</option>
-                                    <option value="STREAM" >STREAM</option>
+                                  <select name="Grade" id="Grade_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department</label>
-                                  <select name="Department" id="Department" class="form-control select2">
-                                    <option value="ADMINISTRATION" >ADMINISTRATION</option>
-                                    <option value="COMMERCIAL" >COMMERCIAL</option>
-                                    <option value="SANITATION" >SANITATION</option>
-                                    <option value="WATER SUPPLY" >WATER SUPPLY</option>
+                                  <select name="Department" id="Department_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Job Tiltle</label>
-                                  <select name="Job_Tiltle" class="form-control select2">
-                                    <option value="CHIEF EXECUTIVE OFFICER" >CHIEF EXECUTIVE OFFICER</option>
-                                    <option value="CHIEF FINANCIAL OFFICER" >CHIEF FINANCIAL OFFICER</option>
-                                    <option value="GM (HR, ADMIN & PROCUREMENT)" >GM (HR, ADMIN & PROCUREMENT)</option>
-                                    <option value="GM OPERATIONS & ENGINEERING SERVICES" >GM OPERATIONS & ENGINEERING SERVICES</option>
-                                    <option value="SENIOR MANAGER COMMERCIAL" >SENIOR MANAGER COMMERCIAL</option>
-                                    <option value="MANAGER SOLID WASTE" >MANAGER SOLID WASTE</option>
-                                    <option value="COMPLAINT MANAGEMENT OFFICER" >COMPLAINT MANAGEMENT OFFICER</option>
-                                    <option value="MANAGER WATER SUPPLY OPERATIONS" >MANAGER WATER SUPPLY OPERATIONS</option>
-                                    <option value="DY_MANAGER-ADMIN & PROCUREMENT" >DY.MANAGER-ADMIN & PROCUREMENT</option>
-                                    <option value="DY_MANAGER-SOLID WASTE" >DY.MANAGER-SOLID WASTE</option>
-                                    <option value="DY_MANAGER ACCOUNTS" >DY.MANAGER ACCOUNTS</option>
-                                    <option value="ASST_MANAGER-WATER SUPPLY" >ASST.MANAGER-WATER SUPPLY</option>
-                                    <option value="ASST_MANAGER FINANCE" >ASST.MANAGER FINANCE</option>
-                                    <option value="ASST_MANAGER SOLID WASTE" >ASST.MANAGER SOLID WASTE</option>
-                                    <option value="ASST_MANAGER HUMAN RESOURCE" >ASST.MANAGER HUMAN RESOURCE</option>
-                                    <option value="PAYROLL OFFICER" >PAYROLL OFFICER</option>
-                                    <option value="MECHANICAL OFFICER" >MECHANICAL OFFICER</option>
-                                    <option value="ADMIN AND PROCUREMENT OFFICER" >ADMIN AND PROCUREMENT OFFICER</option>
-                                    <option value="ACCOUNTS JUNIOR" >ACCOUNTS JUNIOR</option>
-                                    <option value="BILLING OFFICER" >BILLING OFFICER</option>
-                                    <option value="COMPUTER OPERATOR" >COMPUTER OPERATOR</option>
-                                    <option value="ACCOUNTS OFFICER" >ACCOUNTS OFFICER</option>
-                                    <option value="ASSOCIATE ENGINEER" >ASSOCIATE ENGINEER</option>
-                                    <option value="FLEET CUM MECHANICAL OFFICER" >FLEET CUM MECHANICAL OFFICER</option>
-                                    <option value="IT ASSISTANT" >IT ASSISTANT</option>
-                                    <option value="BILLING OFFICER" >BILLING OFFICER</option>
-                                    <option value="TECHNICAL EXPERT NETWORK & SYSTEMS" >TECHNICAL EXPERT NETWORK & SYSTEMS</option>
-                                    <option value="RECEPTIONIST" >RECEPTIONIST</option>
-                                    <option value="CAMERA MAN" >CAMERA MAN</option>
-                                    <option value="LEGAL ADVISOR" >LEGAL ADVISOR</option>
-                                    <option value="ADMIN ASSISTANT" >ADMIN ASSISTANT</option>
-                                    <option value="DATA ENTRY ASSISTANT">DATA ENTRY ASSISTANT</option>
-                                    <option value="MEDIA OFFICER" >MEDIA OFFICER</option>
-                                    <option value="OFFICE BOY" >OFFICE BOY</option>
-                                    <option value="DRIVER" >DRIVER</option>
-                                    <option value="TW OPERATOR" >TW OPERATOR</option>
-                                    <option value="LINE MAN" >LINE MAN</option>
-                                    <option value="ASSIST TO MANAGER OPS" >ASSIST TO MANAGER OPS</option>
-                                    <option value="VALVE MAN" >VALVE MAN</option>
-                                    <option value="WELDER" >WELDER</option>
-                                    <option value="BILLING SUPERVISOR" >BILLING SUPERVISOR</option>
-                                    <option value="LINE INSPECTOR" >LINE INSPECTOR</option>
-                                    <option value="HELPER" >HELPER</option>
-                                    <option value="WATER SUPPLY INSPECTOR" >WATER SUPPLY INSPECTOR</option>
-                                    <option value="BILLING BOY" >BILLING BOY</option>
-                                    <option value="VALVE WOMAN" >VALVE WOMAN</option>
-                                    <option value="SANITARY WORKER" >SANITARY WORKER</option>
-                                    <option value="WATCHMAN" >WATCHMAN</option>
-                                    <option value="SANITARY SUPERVISOR" >SANITARY SUPERVISOR</option>
-                                    <option value="SANITARY CONDUCTOR" >SANITARY CONDUCTOR</option>
-                                    <option value="INTERN-CIVIL ENGINEER" >INTERN-CIVIL ENGINEER</option>
-                                    <option value="SANITARY DRIVER" >SANITARY DRIVER</option>
-                                    <option value="STREAM INSPECTOR" >STREAM INSPECTOR</option>
-                                    <option value="STREAM WORKER" >STREAM WORKER</option>
-                                    <option value="DRIVER TO CEO" >DRIVER TO CEO</option>
-                                    <option value="EXCAVATOR OPERATOR" >EXCAVATOR OPERATOR</option>
-                                    <option value="INTERN-ASSOCIATE ENGINEER" >INTERN-ASSOCIATE ENGINEER</option>
-                                    <option value="LEGAL ADVISOR" >LEGAL ADVISOR</option>
-                                    <option value="LETIGATION CLER" >LETIGATION CLERK</option>
-                                    <option value="MSW SORTING SPECIALIST" >MSW SORTING SPECIALIST</option>
-                                    <option value="MANAGMENT TRAINEE OFFICER" >MANAGMENT TRAINEE OFFICER</option>
-                                    <option value="COVID19 WORKER" >COVID19 WORKER</option>
-                                    <option value="WELDER" >WELDER</option>
-                                    <option value="HELPER TO PIPE FITTER" >HELPER TO PIPE FITTER</option>
-                                    <option value="SANITARY DRIVER" >SANITARY DRIVER</option>
-                                    <option value="BCC SUPERVISOR" >BCC SUPERVISOR</option>
-                                    <option value="BCC COORDINATOR" >BCC COORDINATOR</option>
-                                    <option value="INTERN-ELECTRICAL ENGINEER" >INTERN-ELECTRICAL ENGINEER</option>
-                                    <option value="INTERN-MEDIA COMMUNICATION" >INTERN-MEDIA COMMUNICATION</option>
-                                    <option value="WATER SUPPLY SPECIALIST" >WATER SUPPLY SPECIALIST</option>
-                                    <option value="ASSOCIATE ENGINEER" >ASSOCIATE ENGINEER</option>
-                                    <option value="VALVE MAN" >VALVE MAN</option>
-                                    <option value="COOK" >COOK</option>
-                                    <option value="OFFICE ASSISTANT" >OFFICE ASSISTANT</option>
-                                    <option value="INTERNEE" >INTERNEE</option>      
-                                  </select>
+                                  <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control select2">
+                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Type</label>
-                                  <select name="Type" id="Status" class="form-control select2">
-                                    <option value="CHIEF" >CHIEF</option>
-                                    <option value="GM" >GM</option>
-                                    <option value="MANAGER" >MANAGER</option>
-                                    <option value="DY_MANAGER" >DY_MANAGER</option>
-                                    <option value="ASST_MANAGER" >ASST_MANAGER</option>
-                                    <option value="SUPERVISO" >SUPERVISO</option>
-                                    <option value="PAYROLL" >PAYROLL</option>
-                                    <option value="WORKER" >WORKER</option>
+                                  <select name="Type" id="Type_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Mode</label>
-                                  <select name="Salary_Mode" class="form-control select2">
-                                    <option value="BANK TRANSFER" >BANK TRANSFER</option>
-                                    <option value="CHEQUE" >CHEQUE</option>
-                                  </select>
+                                  <select name="Salary_Mode" id="Salary_Mode_drop" class="form-control select2">
+                                    </select>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Status</label>
-                                  <select name="Status" id="Status" class="form-control select2">
-                                    <option value="CONTRACT EXP" >CONTRACT EXP</option>
-                                    <option value="ON-DUTY" >ON-DUTY</option>
-                                    <option value="OTHER" >OTHER</option>
-                                    <option value="PROBATION" >PROBATION</option>
-                                    <option value="REPATRIATED" >REPATRIATED</option>
-                                    <option value="RESIGNED" >RESIGNED</option>
-                                    <option value="RETIRED" >RETIRED</option>
-                                    <option value="SALARY HOLD" >SALARY HOLD</option>
-                                    <option value="TERMINATED" >TERMINATED</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="Status" id="Status_drop" class="form-control select2">
+                                      </select>
+                                    </div>
+                                  </div>
+                                <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee NO</label>
                                   <input type="text" id="EmployeeNowssp" name="EmployeeNo" placeholder="Employee NO" class="form-control" autocomplete="off" required >
@@ -706,7 +566,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                 </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>DY.Supervisor </label>
+                                    <label>DY.Manager </label>
                                     <select name="DY_Supervisor" id="DY_Supervisor" class="form-control select2">
                                     </select>
                                   </div>
@@ -759,10 +619,10 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width: fit-content;">Employement Information</div>
+                                <div class="card-title text-white" style="width:fit-content;">Employement Information</div>
                               </div>
                               <div class="col-sm-12 col-lg-7">
-                                <h3 class="bg-success p-2 rounded" style="width: fit-content;">TMA</h3>
+                                <h3 class="bg-success p-2 rounded" style="width:fit-content;">TMA</h3>
                               </div>
                             </div>
                           </div>
@@ -772,204 +632,134 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
-                                  <select name="Employement_Group_TMA" class="form-control select2">
-                                    <option value="TMA PERMANENT" >TMA PERMANENT</option>
-                                    <option value="TMA DAILY WAGES" >TMA DAILY WAGES</option>
+                                  <select name="Employement_Group_TMA" id="Employement_Group_TMA_drop" class="form-control select2">
+                                  
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Class</label>
-                                  <select name="Employee_Class_TMA" id="Employee_Class" class="form-control select2">
-                                    <option value="WsscPay" >Wssc Pay</option>
-                                    <option value="TMA Pay" >TMA Pay</option>
+                                  <select name="Employee_Class_TMA" id="Employee_Class_TMA_drop" class="form-control select2">
+                                   
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Group</label>
-                                  <select name="Employee_Group_TMA" id="Employee_Group" class="form-control select2">
-                                    <option value="TMA-ADMIN PAY" >TMA-ADMIN PAY</option>
-                                    <option value="TMA-COMMERCIAL" >TMA-COMMERCIAL</option>
-                                    <option value="TMA-MSW PAY" >TMA-MSW PAY</option>
-                                    <option value="TMA-WATER PAY" >TMA-WATER PAY</option>
+                                    <select name="Employee_Group_TMA" id="Employee_Group_TMA_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Sub Group</label>
-                                  <select name="Employee_Sub_Group_TMA" class="form-control select2">
-                                    <option value="TMA-ADMIN-PERMANENT PAY" >TMA-ADMIN-PERMANENT PAY</option>
-                                    <option value="TMA-COMMERCIAL-PERMANENT PAY" >TMA-COMMERCIAL-PERMANENT PAY</option>
-                                    <option value="TMA-MSW-DAILY WAGES" >TMA-MSW-DAILY WAGES PAY</option>
-                                    <option value="TMA-MSW-PARMANENT PAY" >TMA-MSW-PARMANENT PAY</option>
-                                    <option value="TMA-WATER-DAILY WAGES PAY" >TMA-WATER-DAILY WAGES PAY</option>
-                                    <option value="TMA-WATER-PERMANENT PAY" >TMA-WATER-PERMANENT PAY</option>
-                                  </select>
+                                  <select name="Employee_Sub_Group_TMA" id="Employee_Sub_Group_TMA_drop" class="form-control select2">
+                                    </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Quota</label>
-                                  <select name="Employee_Quota_TMA" id="Employee_Quota_tma" class="form-control select2">
-                                    <option value="DECEASED SON" >DECEASED SON</option>
-                                    <option value="DISABLED" >DISABLED</option>
-                                    <option value="LETTER OF INTEREST" >LETTER OF INTEREST</option>
-                                    <option value="MINORITIES" >MINORITIES</option>
+                                    <select name="Employee_Quota_TMA" id="Employee_Quota_TMA_drop" class="form-control select2">
+                                   
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Bank</label>
-                                  <input type="text" class="form-control" name="Salary_Bank_TMA" placeholder="Salary Bank" id="">
+                                  <input type="text" class="form-control" name="Salary_Bank_TMA" placeholder="Salary Bank">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Salary Branch</label>
-                                  <input type="text" class="form-control" name="Salary_Branch_TMA" placeholder="Salary Branch" id="">
+                                  <label>Salary Bank Branch</label>
+                                  <input type="text" class="form-control" name="Salary_Branch_TMA" placeholder="Salary Branch">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Account No</label>
-                                  <input type="text" class="form-control" name="Account_No_TMA" placeholder="Account No" id="">
+                                  <input type="text" class="form-control" name="Account_No_TMA" placeholder="Account No">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Pay Type</label>
-                                  <input type="text" class="form-control" name="Pay_Type_TMA" placeholder="Pay Type" id="">
+                                  <input type="text" class="form-control" name="Pay_Type_TMA" placeholder="Pay Type">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>EOBI No</label>
-                                  <input type="text" class="form-control" name="EOBI_No_TMA" placeholder="EOBI No" id="">
+                                  <input type="text" class="form-control" name="EOBI_No_TMA" placeholder="EOBI No">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Bill Walved Off</label>
-                                  <input type="text" class="form-control" name="Bill_Walved_Off_TMA" placeholder="Bill Walved Off" id="">
+                                  <input type="text" class="form-control" name="Bill_Walved_Off_TMA" placeholder="Bill Walved Off">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Weekly Working Days</label>
-                                  <input type="text" class="form-control" name="Weekly_Working_Days_TMA" placeholder="Weekly Working Days" id="">
+                                  <input type="text" class="form-control" name="Weekly_Working_Days_TMA" placeholder="Weekly Working Days">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Bill Waived Off</label>
-                                  <input type="text" class="form-control" name="Bill_Waived_Off_TMA" placeholder="Bill Waived Off" id="">
+                                  <input type="text" class="form-control" name="Bill_Waived_Off_TMA" placeholder="Bill Waived Off">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Pay Classification</label>
-                                  <input type="text" class="form-control" name="Employee_Pay_Classification_TMA" placeholder="Employee Pay Classification" id="">
+                                  <input type="text" class="form-control" name="Employee_Pay_Classification_TMA" placeholder="Employee Pay Classification">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Grade</label>
-                                  <select name="Grade_TMA" id="Grade" class="form-control select2">
-                                    <option value="BPS-2" >BPS-2</option>
-                                    <option value="BPS-3" >BPS-3</option>
-                                    <option value="BPS-4" >BPS-4</option>
-                                    <option value="BPS-5" >BPS-5</option>
-                                    <option value="BPS-6" >BPS-6</option>
-                                    <option value="BPS-7" >BPS-7</option>
-                                    <option value="BPS-9" >BPS-9</option>
-                                    <option value="BPS-11" >BPS-11</option>
-                                    <option value="BPS-14" >BPS-14</option>
-                                    <option value="BPS-16" >BPS-16</option>
-                                    <option value="BPS-17" >BPS-17</option>
+                                  <select name="Grade_TMA" id="Grade_TMA_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department</label>
-                                  <select name="Department_TMA" id="Department_name" class="form-control select2">
-                                    <option value="ADMINISTRATION" >ADMINISTRATION</option>
-                                    <option value="COMMERCIAL" >COMMERCIAL</option>
-                                    <option value="SANITATION" >SANITATION</option>
-                                    <option value="WATER SUPPLY" >WATER SUPPLY</option>
+                                  <select name="Department_TMA" id="Department_TMA_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div  class="form-group">
                                   <label>Job Tiltle</label>
-                                  <select name="Job_Tiltle_TMA" id="Job_Tiltle" class="form-control select2">
-                                    <option value="OFFICE ASSISTANT" >OFFICE ASSISTANT</option>
-                                    <option value="CLER" >CLERK</option>
-                                    <option value="JUNIOR CLERK" >JUNIOR CLERK</option>
-                                    <option value="DRAFTSMAN" >DRAFTSMAN</option>
-                                    <option value="DRIVER" >DRIVER</option>
-                                    <option value="NAIB QASID" >NAIB QASID</option>
-                                    <option value="SANITARY SUPERVISOR" >SANITARY SUPERVISOR</option>
-                                    <option value="PIPE FITTER" >PIPE FITTER</option>
-                                    <option value="LINE MAN" >LINE MAN</option>
-                                    <option value="TW OPERATOR" >TW OPERATOR</option>
-                                    <option value="VALVE MAN" >VALVE MAN</option>
-                                    <option value="HELPER TO PIPE FITTER" >HELPER TO PIPE FITTER</option>
-                                    <option value="WELDER" >WELDER</option>
-                                    <option value="CHIEF SANITARY INSPECTOR" >CHIEF SANITARY INSPECTOR</option>
-                                    <option value="ASSTT:SANITARY INSPECTOR" >ASSTT:SANITARY INSPECTOR</option>
-                                    <option value="BLACKSMITH" >BLACKSMITH</option>
-                                    <option value="SANITARY WORKER" >SANITARY WORKER</option>
-                                    <option value="MALARIA INSPECTOR" >MALARIA INSPECTOR</option>
-                                    <option value="MALARIA SUPERVISOR" >MALARIA SUPERVISOR</option>
-                                    <option value="MOTOR TRANSPORT OFFICER" >MOTOR TRANSPORT OFFICER</option>
-                                    <option value="WATER RATE COLLECTOR" >WATER RATE COLLECTOR</option>
-                                  </select>
+                                  <select name="Job_Tiltle_TMA" id="Job_Tiltle_TMA_drop" class="form-control select2">
+                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Type</label>
-                                  <select name="Type_TMA" id="Status" class="form-control select2">
-                                    <option value="CHIEF" >CHIEF</option>
-                                    <option value="GM" >GM</option>
-                                    <option value="MANAGER" >MANAGER</option>
-                                    <option value="DY_MANAGER" >DY_MANAGER</option>
-                                    <option value="ASST_MANAGER" >ASST_MANAGER</option>      
-                                    <option value="SUPERVISO" >SUPERVISO</option>
-                                    <option value="PAYROLL" >PAYROLL</option>
-                                    <option value="WORKER" >WORKER</option>
+                                    <select name="Type_TMA" id="Type_TMA_drop" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Mode</label>
-                                  <select name="Salary_Mode_TMA" id="Salary_Mode" class="form-control select2">
-                                    <option value="BANK TRANSFER" >BANK TRANSFER</option>
-                                    <option value="CHEQUE" >CHEQUE</option>
+                                    <select name="Salary_Mode_TMA" id="Salary_Mode_TMA_drop" id="Salary_Mode" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Status</label>
-                                  <select name="Status_TMA" id="Status_tma" class="form-control select2">
-                                    <option value="CONTRACT EXP" >CONTRACT EXP</option>
-                                    <option value="ON-DUTY" >ON-DUTY</option>
-                                    <option value="OTHER" >OTHER</option>
-                                    <option value="PROBATION" >PROBATION</option>
-                                    <option value="REPATRIATED" >REPATRIATED</option>
-                                    <option value="RESIGNED" >RESIGNED</option>
-                                    <option value="RETIRED" >RETIRED</option>
-                                    <option value="SALARY HOLD" >SALARY HOLD</option>
-                                    <option value="TERMINATED" >TERMINATED</option>
+                                  <select name="Status_TMA" id="Status_TMA_drop" id="Status_tma" class="form-control select2">
                                   </select>
                                 </div>
                               </div>
@@ -998,7 +788,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               
                               <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label> DY.Supervisor </label>
+                                    <label> DY.Manager </label>
                                     <select name="DY_Supervisor_TMA" id="DY_Supervisor" class="form-control select2">
                                     </select>
                                   </div>
@@ -1054,20 +844,20 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
     </div>
     <script>
       $(function() {
-      $(".select2").select2();
-    });
+          $(".select2").select2();
+             });
     $(document) .ready(function(){
-  function loadTable(){
-    $.ajax({
-      url : "ajex/empid.php",
-      type : "POST",
-    success : function(data){
-    $("#employee_no") .html(data) ;
-    }});
-    }
-    loadTable(); 
-   
-});
+      function loadTable(){
+              $.ajax({
+                url : "ajex/empid.php",
+                type : "POST",
+              success : function(data){
+              $("#employee_no") .html(data) ;
+              }});
+              }
+              loadTable(); 
+            
+          });
 $(document) .ready(function(){
   function loadTable(){
     $.ajax({
@@ -1104,6 +894,9 @@ $(document) .ready(function(){
     loadTable(); 
    
 });
+
+</script>
+<script>
 $(document) .ready(function(){
   function loadTable(){
     $.ajax({
@@ -1115,6 +908,237 @@ $(document) .ready(function(){
     }
     loadTable(); 
    
+
+    function loadEmpGroup(){ // renamed the function here
+        $.ajax({
+            url : "ajex/EmpGroup - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#Employement_Group_drop").html(data);
+            }
+        });
+    }
+      loadEmpGroup();
+      
+      function loadEmployee_Class(){
+        $.ajax({
+          url : "ajex/Employee_Class - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Class_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Class();
+
+      function loadEmployee_Group(){
+        $.ajax({
+          url : "ajex/Employee_Group - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Group_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Group();
+
+      
+      function loadEmployee_Sub_Group(){
+        $.ajax({
+          url : "ajex/Employee_Sub_Group - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Sub_Group_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Sub_Group();
+
+      function loadEmployee_Quota(){
+        $.ajax({
+          url : "ajex/Employee_Quota - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Quota_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Quota();
+
+      function loadGrade(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Grade_drop").html(data);
+          }
+        });
+      }
+      loadGrade();
+      function loadDepartment(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Department_drop").html(data);
+          }
+        });
+      }
+      loadDepartment();
+      function loadJob_Tiltle(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#Job_Tiltle_drop").html(data);
+       }
+     });
+   }
+   loadJob_Tiltle();
+
+      function loadType(){
+        $.ajax({
+          url : "ajex/Type - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Type_drop").html(data);
+          }
+        });
+      }
+      loadType();
+      function loadSalary_Mode(){
+        $.ajax({
+          url : "ajex/Salary_Mode - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Salary_Mode_drop").html(data);
+          }
+        });
+      }
+      loadSalary_Mode();
+      function loadStatus(){
+        $.ajax({
+          url : "ajex/Status - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Status_drop").html(data);
+          }
+        });
+      }
+      loadStatus();
+      function loadEmployement_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employement_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employement_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployement_Group_TMA();
+      function loadEmployee_Class_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Class_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Class_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Class_TMA();
+      function loadEmployee_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Group_TMA();
+      function loadEmployee_Sub_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Sub_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Sub_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Sub_Group_TMA();
+      function loadEmployee_Quota_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Quota_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Quota_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Quota_TMA();
+       function loadGrade_TMA(){
+        $.ajax({
+          url : "ajex/Grade_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Grade_TMA_drop").html(data);
+          }
+        });
+      }
+      loadGrade_TMA();
+      function loadDepartment_TMA(){
+        $.ajax({
+          url : "ajex/Department_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Department_TMA_drop").html(data);
+          }
+        });
+      }
+      loadDepartment_TMA();
+      function loadJob_Tiltle_TMA(){
+        $.ajax({
+          url : "ajex/Job_Tiltle_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Job_Tiltle_TMA_drop").html(data);
+          }
+        });
+      }
+      loadJob_Tiltle_TMA();
+      function loadType_TMA(){
+        $.ajax({
+          url : "ajex/Type_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Type_TMA_drop").html(data);
+          }
+        });
+      }
+      loadType_TMA();
+      function loadSalary_Mode_TMA(){
+        $.ajax({
+          url : "ajex/Salary_Mode_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Salary_Mode_TMA_drop").html(data);
+          }
+        });
+      }
+      loadSalary_Mode_TMA();
+      function loadStatus_TMA(){
+        $.ajax({
+          url : "ajex/Status_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Status_TMA_drop").html(data);
+          }
+        });
+      }
+      loadStatus_TMA();
+
+    
 });
 
 function validateSection1() {

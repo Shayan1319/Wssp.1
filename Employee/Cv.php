@@ -25,18 +25,6 @@ location.replace('../logout.php')
             <div class="col-8"><h4 class="fw-bold">Name</h4><h5>Designer</h5><h5 class="text-primary">gmail@email.com</h5><h5>1111 111111</h5></div>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12 col-lg-6">
-        <div class="float-end bg-white">
-            <div class="card" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Action</li>
-                </ul>
-                <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Edit</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <br>
     <hr>
     <div class="col-12 bg-white mt-5 px-2">

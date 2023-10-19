@@ -14,14 +14,20 @@
 <nav class="navbar header">
   <div class="row w-100">
     <div class="col-lg-11 col-md-11 col-sm-12"></div>
-    <div class="col-lg-1 col-md-1 col-sm-12">
-    <div class="dropstart">
+      <div class="col-lg-1 col-md-1 col-sm-12">
+        <div class="dropstart">
             <button type="button" class="btn text-white" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="profile.php?id=<?php echo $_SESSION['loginid']?>">See Profile</a></li>
+              <?php 
+              $id = $_SESSION['EmployeeNumber'];
+              $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
+              while($row = mysqli_fetch_array($insert)){
+              ?>
+              <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['CNIC']?>">See Profile</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+              <?php }?>
             </ul>
           </div>
     </div>

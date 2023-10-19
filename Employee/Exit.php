@@ -60,7 +60,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                                     <div class="col-md-4 my-2">
                                         <label for="empid">Leaveing date</label>
                                         <input type="date" class="form-control" value="<?php echo date('Y-m-d') ?>" placeholder="Employee Id" name="date" id="empid">
-
                                     </div>
                                     
                                     <!-- Other form fields... -->
@@ -69,8 +68,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                         </div>
                         <div class="card card2 bg-light my-5">
                             <div class="container">
-                                <h4>Regional of leaving </h4>
+                                <h4>Reason of leaving </h4>
                                 <textarea name="JobDescription" id="JobDescription"></textarea>
+                                <script>
+                                    CKEDITOR.replace('JobDescription');
+                                </script>
                             </div>
                         </div>
                         <div class="col-md-12 text-end mt-2">

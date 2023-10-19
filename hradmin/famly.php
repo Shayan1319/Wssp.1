@@ -446,6 +446,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                  <td><?php echo $see ['Department1'] ?></td>
                  <td><?php echo $see ['Acting'] ?></td>
                  <td><?php echo $see ['Remarks'] ?></td>
+                 <td><a href="../CV/<?php echo $see ['file'] ?>">Download</a></td>
                  </tr>
                  <?php }?>
                  </tbody>
@@ -473,8 +474,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <th scope="col">To Station</th>
                 <th scope="col">Worked From</th>
                 <th scope="col">Transfer Date</th>
-                <th scope="col">Update</th>
-                <th scope="col">Delete</th>
+                <th scope="col">file</th>
                 </tr></thead>
                 
                 <tbody>
@@ -494,6 +494,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   <td><?php echo $see ['To_Station'] ?></td>
                   <td><?php echo $see ['Worked_From'] ?></td>
                   <td><?php echo $see ['Transfer_Date'] ?></td>
+                  <td><a href="../CV/<?php echo $see ['file']?>">Download</a></td>
                 </tr>
                 <?php }?>
                 </tbody>

@@ -429,7 +429,7 @@ WHERE
       ::-webkit-scrollbar-thumb:hover {
           background: #b30000;
       }
-      h4, h3 {
+      h5, h3 {
         text-align: center;
       }
       a{
@@ -439,439 +439,372 @@ WHERE
   <body>
     <div id="main">
         <?php include('link/desigene/navbar.php')?>
-        <div class="container-fluid py-5">
+        <div class="container px-3 py-5">
           <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1 style="color: darkblue;">Welcome <?php echo $_SESSION['name']?></h1>
+                
             </div>
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
               <a href="EXITCLEARANCEFORM.php">
-              <div style="background-color: #050e4f; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
                 <div class="inner">
                 <h3><?php echo $exit_form?></h3>
-                  <h4>Employee Clearance Form</h4>
+                  <h5>Employee Clearance Form</h5>
                 </div>
-                <div class="icon">
-                <i style="color: #f0f8ff45;" class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
-                </div>
+                
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <a href="aprasals.php">
                 <!-- small box -->
-              <div style="background-color: #050e4f; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
                 <div class="inner">
                   <h3><?php echo $Appraisals?></h3>
-                  <h4>Employee Appraisal</h4>
-                </div>
-                <div class="icon">
-                <i style="color: #f0f8ff45;" class="fa-solid fa-person-circle-check"></i>
+                  <h5>Employee Appraisal</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div style="background-color: #050e4f; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
                 <div class="inner">
                   <h3><?php echo $employeeCountexp?></h3>
-                  <h4>Employee Contact Expiry</h4>
-                </div>
-                <div class="icon">
-                <i style="color: #f0f8ff45;" class="fa-solid fa-id-badge"></i>
+                  <h5>Employee Contact Expiry</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <a href="" style>
                 <!-- small box -->
-              <div style="background-color: #050e4f; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
                 <div class="inner">
                   <h3><?php echo $total_employees?></h3>
-                  <h4>Total Employees Pending</h4>
-                </div>
-                <div class="icon"><i style="color: #f0f8ff45;" class="fa-solid fa-person-digging"></i>
+                  <h5>Total Employees Pending</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 style="color: darkblue;">Travel request</h2>
+                <h3 style="color: darkblue;">Travel request</h3>
             </div>
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color:#0216a9 !important;" >
+              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReq?>
               <script> var TravelReq= <?php echo $TravelReq?>;</script>
               </h3>
-                  <h4>Number of Travel Request</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;">
-                <i class="fa-solid fa-route"></i>
+                  <h5>Total Number of Travel Request</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color:#0216a9 !important;" >
+              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqAprove?>
               <script> var TravelReqAprove= <?php echo $TravelReqAprove?>;</script>
               </h3>
-                  <h4>Number of Travel Request Accepted</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;">
-                <i class="fa-solid fa-check-double"></i>
+                  <h5>Number of Travel Request Accepted</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color:#0216a9 !important;" >
+              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqPENDING?>
               <script> var TravelReqPENDING= <?php echo $TravelReqPENDING?>;</script>
               </h3>
-                  <h4>Travel Request Pending</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;">
-                  <i class="fa fa-clock-o" ></i>
+                  <h5>Travel Request Pending</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="travelRejecet.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color:#0216a9 !important;" >
+              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqREJECTED?>
               <script> var TravelReqREJECTED= <?php echo $TravelReqREJECTED?>;</script>
               </h3>
-                  <h4>Travel Request REJECTED</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;">
-                <i class="fa-solid fa-rectangle-xmark"></i>
+                  <h5>Travel Request Rejected</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 style="color: darkblue;">TA Bill</h2>
+                <h3 style="color: darkblue;">TA Bill</h3>
             </div>
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue" style="background-color: #0000FF;">
+              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+                        <d;">
                 <div class="inner">
                 <h3><?php echo $Tabill?>
               <script> var Tabill= <?php echo $Tabill?>;</script>
               </h3>
-                  <h4>Number of TA Bill</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-file-invoice"></i>
+                  <h5>Total Number of TA Bill</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box bg-blue" style="background-color: #0000FF;">
+              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+                        <d;">
                 <div class="inner">
                 <h3><?php echo $tabillAprove?>
               <script> var tabillAprove= <?php echo $tabillAprove?>;</script>
               </h3>
-                  <h4>Number of TA Bill Accepted</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <h5>Number of TA Bill Accepted</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="aprovetabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue" style="background-color: #0000FF;">
+              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+                            <d;">
                 <div class="inner">
                 <h3><?php echo $tabillaccept?>
               <script> var tabillaccept= <?php echo $tabillaccept?>;</script>
               </h3>
-                  <h4>TA Bill Approved</h4>
-                </div>
-                <div class="icon">
-                <i class="fa-solid fa-person-circle-check fa-flip-horizontal"></i>
+                  <h5>TA Bill Approved</h5>
                 </div>
               </div>
               </a>
             </div>
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="tabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue" style="background-color: #0000FF;">
+              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+                            <d;">
                 <div class="inner">
                 <h3><?php echo $tabillPENDING?>
               <script> var tabillPENDING= <?php echo $tabillPENDING?>;</script>
               </h3>
-                  <h4>TA bill Pending</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
+                  <h5>TA Bill Pending</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="tabillRejecet.php" style="text-decoration: none;">
-              <div class="small-box bg-blue" style="background-color: #0000FF;">
+              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+                            <d;">
                 <div class="inner">
                 <h3><?php echo $tabillREJECTED?>
               <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
               </h3>
-                  <h4>TA bill REJECTED</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45";>
-                <i class="fa-regular fa-circle-xmark"></i>
+                  <h5>TA Bill Rejected</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 style="color: darkblue;">PayRoll</h2>
+                <h3 style="color: darkblue;">PayRoll</h3>
             </div>
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate ?></h3>
-                  <h4>Total Amount Payroll of this Month</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45";>
-                    <i class="fa-regular fa-credit-card"></i>
+                  <h5>Total Amount Payroll for this Month</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate_wssc ?></h3>
-                  <h4>Total Amount WSSC of This Month</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45";>
-                <i class="fa-solid fa-rupee-sign"></i>
+                  <h5>Total Amount WSSC for this Month</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate_tma ?></h3>
-                  <h4>Total Amount TMA of This Month</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45";>
-                <i class="fa-solid fa-rupee-sign"></i>
+                  <h5>Total Amount TMA for this Month</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $rate_difference ?></h3>
-                  <h4>Amount Difference b/w WSSC And TMA</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45";>
-                <i class="fa-solid fa-arrow-up-wide-short"></i><i class="fa-solid fa-arrow-down-wide-short"></i>
+                  <h5>Amount Difference b/w WSSC And TMA</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $rate_difference_previous_month ?></h3>
-                  <h4>Amount Difference Previous Month</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;"><i class="fa-solid fa-chart-column"></i>
+                  <h5>Amount Difference Previous Month</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $total_employees_payroll?></h3>
-                  <h4>Total Employees Witho Payroll</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;"><i class="fa-solid fa-money-check-dollar"></i>
+                  <h5>Total Employees Witho Payroll</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #4B7BF5;" >
+              <div class="small-box text-white" style="background-color: #919df3;">
+                        <d;" >
                 <div class="inner">
                   <h3><?php echo $total_employees_witout_payroll?></h3>
-                  <h4>Total Employees Without Payroll</h4>
-                </div>
-                <div class="icon" style="color: #f0f8ff45;"><i class="">💵</i>
+                  <h5>Total Employees Without Payroll</h5>
                 </div>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 style="color: darkblue;">TODAY'S ATTENDANCE</h2>
+                <h3 style="color: darkblue;">TODAY'S ATTENDANCE</h3>
             </div>
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #79A9F5;" >
+              <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                 <div class="inner">
                   <h3>
                   <?php echo $employeeCountotal; ?>
                   <script> var employeeCountotal=<?php echo $employeeCountotal?>;</script>
                   </h3>
-                  <h4>TOTAL ATTENDANCE</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-user"></i>
+                  <h5>TOTAL ATTENDANCE</h5>
                 </div>
               </div>
             </div><!-- ./col -->     
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #79A9F5;" >
+                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                   <div class="inner">
                     <h3><?php echo $employeeCount; ?>
                   <script> var employeeCount=<?php echo $employeeCount?>;</script>
                   </h3>
-                    <h4>PRESENT</h4>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-user"></i>
+                    <h5>PRESENT</h5>
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #79A9F5;" >
+                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountABSENT; ?>
                 <script> var employeeCountABSENT=<?php echo $employeeCountABSENT?>;</script>
                 </h3>
-                    <h4>ABSENT</h4>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-ban"></i>
+                    <h5>ABSENT</h5>
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #79A9F5;" >
+                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                   <div class="inner">
                   <h3><?php echo $totalAcceptLeaves?>
                 <script> var Leaves = <?php echo $totalAcceptLeaves?>;</script>
                 </h3>
-                    <h4>LEAVE</h4>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-running"></i>
+                    <h5>LEAVE</h5>
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #79A9F5;" >
+                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountOVERTIME;?>
                 <script> var employeeOVERTIME = <?php echo $employeeCountOVERTIME?>;</script>
                 </h3>
-                    <h4>OVER TIME</h4>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-clock"></i>
+                    <h5>OVER TIME</h5>
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #79A9F5;" >
+                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                        <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountDDorOT;?>
                 <script> var DDorOT = <?php echo $employeeCountDDorOT?>;</script>
                 </h3>
-                    <h4>DOUBLE DUTY</h4>
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-gear"></i>
+                    <h5>DOUBLE DUTY</h5>
                   </div>
                 </div>
               </div><!-- ./col -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h2 style="color: darkblue;">LEAVE REQUESTS</h2>
+                <h3 style="color: darkblue;">LEAVE REQUESTS</h3>
             </div>
-            <div class="col-lg-4 col-xs-12">
+            <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-black" style="background:#C2E2F5;" >
+              <div class="small-box text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalLeaves?>
               <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
               </h3>
-                  <h4>TOTAL LEAVE REQUEST</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-bar-chart"></i>
+                  <h5>TOTAL LEAVE REQUEST</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
-             <div class="small-box text-black" style="background:#C2E2F5;" >
+             <div class="small-box text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalAPROVELeaves?>
               <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
               </h3>
-                  <h4>APROVE</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-check"></i>
+                  <h5>APROVE</h5>
                 </div>
               </div>
              </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
-              <div class="small-box text-black" style="background:#C2E2F5;" >
+              <div class="small-box text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalPendingLeaves?>
-              <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
-              </h3>
-                  <h4>PENDING</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
+                <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
+                </h3>
+                    <h5>PENDING</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-6">
+            <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
-              <div class="small-box text-black" style="background:#C2E2F5;" >
+              <div class="small-box text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalREJECTEDLeaves?>
               <script> var vetsciencestotalREJECTEDLeaves= <?php echo $totalREJECTEDLeaves?>;</script>
               </h3>
-                  <h4>REJECTED</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-ban"></i>
+                  <h5>Rejected</h5>
                 </div>
               </div>
               </a>

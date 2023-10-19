@@ -39,6 +39,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
         <?php include('link/links.php')?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
+    <style>
+        h1 h2 h3 h4 h5 h6{
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
     <body>
     <div id="">
         <?php include('link/desigene/navbar.php') ?>

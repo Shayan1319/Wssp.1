@@ -22,7 +22,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div id="main">
         <?php include('link/desigene/navbar.php')?>
         <div class="container-fluid m-auto p-5">
-        <div id="section2" style="display: block;">
+            <div id="section2" style="display: block;">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active bg-primary text-white" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">WSSC</button>
@@ -49,58 +49,27 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div>
                           <br><!-- /.card-header -->
                           <div class="card-body ">
+                            <form action="" id="form" >
                             <div class="row">
-                              <div class="col-md-4 my-2">
+                            <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                    <label>Employement Group</label>
-                                    <div class="row my-2">
-                                      <div class="col-9">
-                                          <input class="form-control" type="text" placeholder="Add Option" name="" id="">
-                                      </div>
-                                      <div class="col-3">
-                                          <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                      </div>
+                                  <label>Employement Group</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="EmpGroup">
                                     </div>
-                                  <div class="dropdown">
+                                    <div class="col-3">
+                                        <button id="EmpGroup_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
                                       <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
                                       Select
                                       </button>
-                                      <ul class="dropdown-menu">
-                                        <li>
-                                          <div class="row" >
-                                            <div class="col-8">Choose CONTRACTUAL/CONTINGENT</div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
-                                            </div>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div class="row" >
-                                            <div class="col-8">WSSC CONTRACTUAL</div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
-                                            </div>
-                                          </div>
-                                        </li>
-                                        <li>
-                                          <div class="row" >
-                                            <div class="col-8">WSSC CONTINGENT</div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                            <div class="col-2">
-                                            <a class="dropdown-item form-control" href="#"><i class="fa-solid fa-edit"></i></a>
-                                            </div>
-                                          </div>
-                                        </li>
+                                      <ul class="dropdown-menu" id="EmpGroup_drop" >
+
                                       </ul>
-                                  </div>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -108,17 +77,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Class</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Class" id="Employee_Class">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Class_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select id="Employee_Class" name="Employee_Class" class="form-control">
-                                    <option>Select</option>
-                                    <option>Wssc Pay</option>
-                                    <option>TMA Pay</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Class_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -126,20 +98,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Group" id="Employee_Group">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select id="Employee_Group" name="Employee_Group" class="form-control">
-                                    <option>Select</option>
-                                    <option>WSSCS-ADMIN PAY</option>
-                                    <option>WSSCS-COMMERCIAL</option>
-                                    <option>WSSCS-MANAGEMENT</option>
-                                    <option>WSSCS-MSW PAY</option>
-                                    <option>WSSCS-WATER PAY</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Group_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -147,25 +119,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Sub Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Sub_Group" id="Employee_Sub_Group">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Sub_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Employee_Sub_Group" class="form-control">
-                                    <option>Select</option>
-                                    <option>WSSCS-ADMIN-CONTINGENT PAY</option>
-                                    <option>WSSCS-ADMIN-CONTRACTUAL PAY</option>
-                                    <option>WSSCS-COMMERCIAL-CONTINGENT</option>
-                                    <option>WSSCS-COMMERCIAL-CONTRACT</option>
-                                    <option>WSSCS-MANAGEMENT</option>
-                                    <option>WSSCS-MSW-CONTINGENT PAY</option>
-                                    <option>WSSCS-MSW-CONTINGENT PAY (EXT.)</option>
-                                    <option>WSSCS-MSW-CONTRACTUAL PAY</option>
-                                    <option>WSSCS-WATER-CONTINGENT PAY</option>
-                                    <option>WSSCS-WATER-CONTRACTUAL PAY</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Sub_Group_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -173,19 +140,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Quota</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Quota" id="Employee_Quota">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Quota_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select id="Employee_Quota" name="Employee_Quota" class="form-control">
-                                    <option>Select</option>
-                                    <option>DECEASED SON</option>
-                                    <option>DISABLED</option>
-                                    <option>LETTER OF INTEREST</option>
-                                    <option>MINORITIES</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Quota_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -193,30 +161,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Grade</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Grade" id="Grade">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Grade_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select id="" name="Grade_tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>CONTINGENT</option>
-                                    <option>COVID-19</option>
-                                    <option>DAILY WAGE</option>
-                                    <option>INTERNSHIP</option>
-                                    <option>M–1</option>
-                                    <option>M–3</option>
-                                    <option>M–4</option>
-                                    <option>M–5</option>
-                                    <option>M–6</option>
-                                    <option>M–7</option>
-                                    <option>S–1</option>
-                                    <option>S–2</option>
-                                    <option>S–3</option>
-                                    <option>S–4</option>
-                                    <option>STREAM</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Grade_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -224,19 +182,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Department</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Department" id="Department">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Department_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Department" id="Department" class="form-control">
-                                    <option>Select</option>
-                                    <option>ADMINISTRATION</option>
-                                    <option>COMMERCIAL</option>
-                                    <option>SANITATION</option>
-                                    <option>WATER SUPPLY</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Department_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -244,93 +203,41 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Job Tiltle</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Job_Tiltle" id="Job_Tiltle">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Job_Tiltle_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Job_Tiltle" class="form-control">
-                                    <option>Select</option>
-                                    <option>CHIEF EXECUTIVE OFFICER</option>
-                                    <option>GM (HR, ADMIN &amp; PROCUREMENT)</option>
-                                    <option>MANAGER SOLID WASTE</option>
-                                    <option>SENIOR MANAGER COMMERCIAL</option>
-                                    <option>DY.MANAGER-ADMIN &amp; PROCUREMENT</option>
-                                    <option>AM-WATER SUPPLY</option>
-                                    <option>DY.MANAGER-SOLID WASTE</option>
-                                    <option>MANAGER WATER SUPPLY OPERATIONS</option>
-                                    <option>COMPLAINT MANAGEMENT OFFICER</option>
-                                    <option>MECHANICAL OFFICER</option>
-                                    <option>ASST.MANAGER HUMAN RESOURCE</option>
-                                    <option>CHIEF FINANCIAL OFFICER</option>
-                                    <option>DY.MANAGER ACCOUNTS</option>
-                                    <option>ADMIN AND PROCUREMENT OFFICER</option>
-                                    <option>AM-WATER SUPPLY</option>
-                                    <option>ACCOUNTS JUNIOR</option>
-                                    <option>BILLING OFFICER</option>
-                                    <option>COMPUTER OPERATOR</option>
-                                    <option>ACCOUNTS OFFICER</option>
-                                    <option>ASSOCIATE ENGINEER</option>
-                                    <option>FLEET CUM MECHANICAL OFFICER</option>
-                                    <option>IT ASSISTANT</option>
-                                    <option>AM-SOLID WASTE</option>
-                                    <option>BILLING OFFICER</option>
-                                    <option>ADMIN AND PROCUREMENT OFFICER</option>
-                                    <option>TECHNICAL EXPERT NETWORK &amp; SYSTEMS</option>
-                                    <option>RECEPTIONIST</option>
-                                    <option>CAMERA MAN</option>
-                                    <option>LEGAL ADVISOR</option>
-                                    <option>ADMIN ASSISTANT</option>
-                                    <option>DATA ENTRY ASSISTANT</option>
-                                    <option>AM–FINANCE</option>
-                                    <option>MEDIA OFFICER</option>
-                                    <option>OFFICE BOY</option>
-                                    <option>PAYROLL OFFICER</option>
-                                    <option>DRIVER</option>
-                                    <option>GM OPERATIONS &amp; ENGINEERING SERVICES</option>
-                                    <option>TW OPERATOR</option>
-                                    <option>LINE MAN</option>
-                                    <option>ASSIST TO MANAGER OPS</option>
-                                    <option>VALVE MAN</option>
-                                    <option>WELDER</option>
-                                    <option>BILLING SUPERVISOR</option>
-                                    <option>LINE INSPECTOR</option>
-                                    <option>HELPER</option>
-                                    <option>WATER SUPPLY INSPECTOR</option>
-                                    <option>BILLING BOY</option>
-                                    <option>VALVE WOMAN</option>
-                                    <option>SANITARY WORKER</option>
-                                    <option>WATCHMAN</option>
-                                    <option>SANITARY SUPERVISOR</option>
-                                    <option>SANITARY CONDUCTOR</option>
-                                    <option>INTERN-CIVIL ENGINEER</option>
-                                    <option>SANITARY DRIVER</option>
-                                    <option>STREAM INSPECTOR</option>
-                                    <option>STREAM WORKER</option>
-                                    <option>DRIVER TO CEO</option>
-                                    <option>EXCAVATOR OPERATOR</option>
-                                    <option>INTERN-ASSOCIATE ENGINEER</option>
-                                    <option>LEGAL ADVISOR</option>
-                                    <option>LETIGATION CLERK</option>
-                                    <option>MSW SORTING SPECIALIST</option>
-                                    <option>MANAGMENT TRAINEE OFFICER</option>
-                                    <option>COVID19 WORKER</option>
-                                    <option>WELDER</option>
-                                    <option>HELPER TO PIPE FITTER</option>
-                                    <option>SANITARY DRIVER</option>
-                                    <option>HELPER</option>
-                                    <option>BCC SUPERVISOR</option>
-                                    <option>BCC COORDINATOR</option>
-                                    <option>INTERN-ELECTRICAL ENGINEER</option>
-                                    <option>INTERN-MEDIA COMMUNICATION</option>
-                                    <option>WATER SUPPLY SPECIALIST</option>
-                                    <option>ASSOCIATE ENGINEER</option>
-                                    <option>VALVE MAN</option>
-                                    <option>COOK</option>
-                                    <option>OFFICE ASSISTANT</option>
-                                    <option>INTERNEE</option>      
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Job_Tiltle_drop" >
+
+                                      </ul>
+                                  </div>                                
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Type</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Type" id="Type">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="Type_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Type_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -338,17 +245,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Salary Mode</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Salary_Mode" id="Salary_Mode">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Salary_Mode_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Salary_Mode" class="form-control">
-                                    <option>Select</option>
-                                    <option>BANK TRANSFER</option>
-                                    <option>CHEQUE</option>
-                                  </select>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Salary_Mode_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -356,75 +266,24 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Status</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Status" id="Status">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Status_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Status" id="Status" class="form-control">
-                                    <option>Select</option>
-                                    <option>CONTRACT EXP</option>
-                                    <option>ON-DUTY</option>
-                                    <option>OTHER</option>
-                                    <option>PROBATION</option>
-                                    <option>REPATRIATED</option>
-                                    <option>RESIGNED</option>
-                                    <option>RETIRED</option>
-                                    <option>SALARY HOLD</option>
-                                    <option>TERMINATED</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee NO</label>
-                                  <input type="text" id="EmployeeNowssp" name="EmployeeNowssp" placeholder="Employee NO" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Manager</label>
-                                  <input type="text" name="Employee_Manager" id="Employee_Manager" placeholder="Employee Manager" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Joining Date</label>
-                                  <input type="date" name="Joining_Date" id="Joining_Date" placeholder="Joining Date" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Contract Expiry Date</label>
-                                  <input type="date" name="Contract_Expiry_Date" placeholder="" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Last Working Date</label>
-                                  <input type="date" name="Last_Working_Date" placeholder="" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Attendance Supervisor</label>
-                                  <input type="text" class="form-control" placeholder="Attendance Supervisor" name="Attendance_Supervisor" id="Attendance_Supervisor">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Duty Location</label>
-                                  <input type="text" name="Duty_Location" id="Duty_Location" placeholder="Duty Location" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Duty Point</label>
-                                  <input type="text" name="Duty_Point" id="Duty_Point" placeholder="Duty Point" class="form-control" autocomplete="off">
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Status_drop" >
+
+                                      </ul>
+                                  </div>                                
                                 </div>
                               </div>
                             </div>
+                            </form>
                           </div>
                         </div>
                       </div>
@@ -448,22 +307,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <!-- /.card-header -->
                           <div class="card-body ">
                             <div class="row">
-                              <div class="col-md-4 my-2">
+                            <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employement_Group_TMA" id="Employement_Group_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employement_Group_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="EmpGrupTma" class="form-control">
-                                    <option>Choose Permanent/Daily Wages</option>
-                                    <option>TMA PERMANENT</option>
-                                    <option>TMA DAILY WAGES</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employement_Group_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -471,17 +333,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Class</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Class_TMA" id="Employee_Class_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Class_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Employee_Class_tma" id="Employee_Class_Tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>Wssc Pay</option>
-                                    <option>TMA Pay</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Class_TMA_drop" >
+
+                                      </ul>
+                                  </div>
+                                   
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -489,19 +355,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Group_TMA" id="Employee_Group_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Group_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Employee_Group_tma" id="Employee_Group" class="form-control">
-                                    <option>Select</option>
-                                    <option>TMA-ADMIN PAY</option>
-                                    <option>TMA-COMMERCIAL</option>
-                                    <option>TMA-MSW PAY</option>
-                                    <option>TMA-WATER PAY</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Group_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -509,21 +376,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Sub Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Sub_Group_TMA" id="Employee_Sub_Group_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Sub_Group_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Employee_Sub_Group_tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>TMA-ADMIN-PERMANENT PAY</option>
-                                    <option>TMA-COMMERCIAL-PERMANENT PAY</option>
-                                    <option>TMA-MSW-DAILY WAGES PAY</option>
-                                    <option>TMA-MSW-PARMANENT PAY</option>
-                                    <option>TMA-WATER-DAILY WAGES PAY</option>
-                                    <option>TMA-WATER-PERMANENT PAY</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Sub_Group_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -531,19 +397,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Employee Quota</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Quota_TMA" id="Employee_Quota_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Employee_Quota_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Employee_Quota_tma" id="Employee_Quota_tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>DECEASED SON</option>
-                                    <option>DISABLED</option>
-                                    <option>LETTER OF INTEREST</option>
-                                    <option>MINORITIES</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Quota_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -551,26 +418,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Grade</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Grade_TMA" id="Grade_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Grade_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Grande_tma" id="Grande_tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>BPS-2</option>
-                                    <option>BPS-3</option>
-                                    <option>BPS-4</option>
-                                    <option>BPS-5</option>
-                                    <option>BPS-6</option>
-                                    <option>BPS-7</option>
-                                    <option>BPS-9</option>
-                                    <option>BPS-11</option>
-                                    <option>BPS-14</option>
-                                    <option>BPS-16</option>
-                                    <option>BPS-17</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Grade_TMA_drop">
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -578,56 +439,62 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Department</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Department_TMA" id="Department_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Department_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Department_name" id="Department_name" class="form-control">
-                                    <option>Select</option>
-                                    <option>ADMINISTRATION</option>
-                                    <option>COMMERCIAL</option>
-                                    <option>SANITATION</option>
-                                    <option>WATER SUPPLY</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Department_TMA_drop" >
+
+                                      </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div  class="form-group">
+                                  <label>Job Tiltle</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Job_Tiltle_TMA" id="Job_Tiltle_TMA">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="Job_Tiltle_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Job_Tiltle_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Job Tiltle</label>
+                                  <label>Type</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Type_TMA" id="Type_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Type_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Job_Tiltle_tma" id="Job_Tiltle" class="form-control">
-                                    <option>Select</option>
-                                    <option>OFFICE ASSISTANT</option>
-                                    <option>CLERK</option>
-                                    <option>JUNIOR CLERK</option>
-                                    <option>DRAFTSMAN</option>
-                                    <option>DRIVER</option>
-                                    <option>NAIB QASID</option>
-                                    <option>SANITARY SUPERVISOR</option>
-                                    <option>PIPE FITTER</option>
-                                    <option>LINE MAN</option>
-                                    <option>TW OPERATOR</option>
-                                    <option>VALVE MAN</option>
-                                    <option>HELPER TO PIPE FITTER</option>
-                                    <option>WELDER</option>
-                                    <option>CHIEF SANITARY INSPECTOR</option>
-                                    <option>ASSTT:SANITARY INSPECTOR</option>
-                                    <option>BLACKSMITH</option>
-                                    <option>SANITARY WORKER</option>
-                                    <option>MALARIA INSPECTOR</option>
-                                    <option>MALARIA SUPERVISOR</option>
-                                    <option>MOTOR TRANSPORT OFFICER</option>
-                                    <option>WATER RATE COLLECTOR</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Type_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -635,17 +502,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Salary Mode</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Salary_Mode_TMA" id="Salary_Mode_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Salary_Mode_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Salary_Mode_tma" id="Salary_Mode" class="form-control">
-                                    <option>Select</option>
-                                    <option>BANK TRANSFER</option>
-                                    <option>CHEQUE</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Salary_Mode_TMA_drop">
+
+                                      </ul>
+                                  </div>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -653,75 +523,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   <label>Status</label>
                                   <div class="row my-2">
                                     <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Status_TMA" id="Status_TMA">
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                        <button id="Status_TMA_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                  <select name="Status_tma" id="Status_tma" class="form-control">
-                                    <option>Select</option>
-                                    <option>CONTRACT EXP</option>
-                                    <option>ON-DUTY</option>
-                                    <option>OTHER</option>
-                                    <option>PROBATION</option>
-                                    <option>REPATRIATED</option>
-                                    <option>RESIGNED</option>
-                                    <option>RETIRED</option>
-                                    <option>SALARY HOLD</option>
-                                    <option>TERMINATED</option>
-                                  </select>
+                                 <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Status_TMA_drop" >
+
+                                      </ul>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee NO</label>
-                                  <input id="EmployeeNo_tma" type="text" name="EmployeeNo_tma" placeholder="Employee NO" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Manager</label>
-                                  <input type="text" name="Employee_Manager_tma" id="Employee_Manager" placeholder="Employee Manager" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Joining Date</label>
-                                  <input type="date" name="Joining_Date_tma" placeholder="Joining Date" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Contract Expiry Date</label>
-                                  <input type="date" name="Contract_Expiry_Date_tma" id="Contract_Expiry_Date_tma" placeholder="" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Last Working Day</label>
-                                  <input type="date" name="Last_Working_Day" id="Last_Working_Day" placeholder="" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label> Attendance Supervisor</label>
-                                  <input class="form-control" type="text" placeholder="Attendance Supervisor" name="Attendance_Supervisor_tma" id="">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Duty Location</label>
-                                  <input type="text" name="Duty_Location_tma" id="Duty_Location" placeholder="Duty Location" class="form-control" autocomplete="off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                              <div class="form-group">
-                                <label>Duty Point</label>
-                                <input type="text" name="Duty_Point_tma" placeholder="Duty Point" class="form-control" autocomplete="off">
                               </div>
                             </div>
-                          </div>
                           </div>
                       </div>
                       </div>
@@ -737,6 +555,694 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         </div>
     </div>
 <?php include('link/desigene/script.php')?>
+
+<script>
+   $(document).ready(function(){
+    $("#EmpGroup_btn").on("click",function(e){
+        e.preventDefault();
+        var EmpGroup = $("#EmpGroup").val();
+        $.ajax({
+          url:"ajex/EmpGroup.php",
+          type:"Post", 
+          data:{EmpGroup:EmpGroup},
+          success:function(data){
+            if(data == 1){
+            loadEmpGroup();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Class_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Class = $("#Employee_Class").val();
+        $.ajax({
+          url:"ajex/Employee_Class.php",
+          type:"Post", 
+          data:{Employee_Class:Employee_Class},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Class();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Group_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Group = $("#Employee_Group").val();
+        $.ajax({
+          url:"ajex/Employee_Group.php",
+          type:"Post", 
+          data:{Employee_Group:Employee_Group},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Group();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Sub_Group_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Sub_Group = $("#Employee_Sub_Group").val();
+        $.ajax({
+          url:"ajex/Employee_Sub_Group.php",
+          type:"Post", 
+          data:{Employee_Sub_Group:Employee_Sub_Group},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Sub_Group();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+
+            $("#Employee_Quota_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Quota = $("#Employee_Quota").val();
+        $.ajax({
+          url:"ajex/Employee_Quota.php",
+          type:"Post", 
+          data:{Employee_Quota:Employee_Quota},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Quota();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Grade_btn").on("click",function(e){
+        e.preventDefault();
+        var Grade = $("#Grade").val();
+        $.ajax({
+          url:"ajex/Grade.php",
+          type:"Post", 
+          data:{Grade:Grade},
+          success:function(data){
+            if(data == 1){
+            loadGrade();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Department_btn").on("click",function(e){
+        e.preventDefault();
+        var Department = $("#Department").val();
+        $.ajax({
+          url:"ajex/Department.php",
+          type:"Post", 
+          data:{Department:Department},
+          success:function(data){
+            if(data == 1){
+            loadDepartment();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Job_Tiltle_btn").on("click",function(e){
+        e.preventDefault();
+        var Job_Tiltle = $("#Job_Tiltle").val();
+        $.ajax({
+          url:"ajex/Job_Tiltle.php",
+          type:"Post", 
+          data:{Job_Tiltle:Job_Tiltle},
+          success:function(data){
+            if(data == 1){
+            loadJob_Tiltle();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Type_btn").on("click",function(e){
+        e.preventDefault();
+        var Type = $("#Type").val();
+        $.ajax({
+          url:"ajex/Type.php",
+          type:"Post", 
+          data:{Type:Type},
+          success:function(data){
+            if(data == 1){
+            loadType();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Salary_Mode_btn").on("click",function(e){
+        e.preventDefault();
+        var Salary_Mode = $("#Salary_Mode").val();
+        $.ajax({
+          url:"ajex/Salary_Mode.php",
+          type:"Post", 
+          data:{Salary_Mode:Salary_Mode},
+          success:function(data){
+            if(data == 1){
+            loadSalary_Mode();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Status_btn").on("click",function(e){
+        e.preventDefault();
+        var Status = $("#Status").val();
+        $.ajax({
+          url:"ajex/Status.php",
+          type:"Post", 
+          data:{Status:Status},
+          success:function(data){
+            if(data == 1){
+            loadStatus();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employement_Group_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Employement_Group_TMA = $("#Employement_Group_TMA").val();
+        $.ajax({
+          url:"ajex/Employement_Group_TMA.php",
+          type:"Post", 
+          data:{Employement_Group_TMA:Employement_Group_TMA},
+          success:function(data){
+            if(data == 1){
+            loadEmployement_Group_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Class_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Class_TMA = $("#Employee_Class_TMA").val();
+        $.ajax({
+          url:"ajex/Employee_Class_TMA.php",
+          type:"Post", 
+          data:{Employee_Class_TMA:Employee_Class_TMA},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Class_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Group_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Group_TMA = $("#Employee_Group_TMA").val();
+        $.ajax({
+          url:"ajex/Employee_Group_TMA.php",
+          type:"Post", 
+          data:{Employee_Group_TMA:Employee_Group_TMA},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Group_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Sub_Group_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Sub_Group_TMA = $("#Employee_Sub_Group_TMA").val();
+        $.ajax({
+          url:"ajex/Employee_Sub_Group_TMA.php",
+          type:"Post", 
+          data:{Employee_Sub_Group_TMA:Employee_Sub_Group_TMA},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Sub_Group_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Employee_Quota_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Quota_TMA = $("#Employee_Quota_TMA").val();
+        $.ajax({
+          url:"ajex/Employee_Quota_TMA.php",
+          type:"Post", 
+          data:{Employee_Quota_TMA:Employee_Quota_TMA},
+          success:function(data){
+            if(data == 1){
+            loadEmployee_Quota_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Grade_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Grade_TMA = $("#Grade_TMA").val();
+        $.ajax({
+          url:"ajex/Grade_TMA.php",
+          type:"Post", 
+          data:{Grade_TMA:Grade_TMA},
+          success:function(data){
+            if(data == 1){
+            loadGrade_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Department_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Department_TMA = $("#Department_TMA").val();
+        $.ajax({
+          url:"ajex/Department_TMA.php",
+          type:"Post", 
+          data:{Department_TMA:Department_TMA},
+          success:function(data){
+            if(data == 1){
+            loadDepartment_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Job_Tiltle_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Job_Tiltle_TMA = $("#Job_Tiltle_TMA").val();
+        $.ajax({
+          url:"ajex/Job_Tiltle_TMA.php",
+          type:"Post", 
+          data:{Job_Tiltle_TMA:Job_Tiltle_TMA},
+          success:function(data){
+            if(data == 1){
+            loadJob_Tiltle_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Type_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Type_TMA = $("#Type_TMA").val();
+        $.ajax({
+          url:"ajex/Type_TMA.php",
+          type:"Post", 
+          data:{Type_TMA:Type_TMA},
+          success:function(data){
+            if(data == 1){
+            loadType_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Salary_Mode_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Salary_Mode_TMA = $("#Salary_Mode_TMA").val();
+        $.ajax({
+          url:"ajex/Salary_Mode_TMA.php",
+          type:"Post", 
+          data:{Salary_Mode_TMA:Salary_Mode_TMA},
+          success:function(data){
+            if(data == 1){
+            loadSalary_Mode_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Status_TMA_btn").on("click",function(e){
+        e.preventDefault();
+        var Status_TMA = $("#Status_TMA").val();
+        $.ajax({
+          url:"ajex/Status_TMA.php",
+          type:"Post", 
+          data:{Status_TMA:Status_TMA},
+          success:function(data){
+            if(data == 1){
+            loadStatus_TMA();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+    
+
+
+            function loadEmpGroup(){ // renamed the function here
+        $.ajax({
+            url : "ajex/EmpGroup - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#EmpGroup_drop").html(data);
+            }
+        });
+    }
+      loadEmpGroup();
+      function loadEmployee_Class(){
+        $.ajax({
+          url : "ajex/Employee_Class - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Class_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Class();
+      function loadEmployee_Group(){
+        $.ajax({
+          url : "ajex/Employee_Group - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Group_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Group();
+      function loadEmployee_Sub_Group(){
+        $.ajax({
+          url : "ajex/Employee_Sub_Group - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Sub_Group_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Sub_Group();
+      function loadEmployee_Quota(){
+        $.ajax({
+          url : "ajex/Employee_Quota - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Quota_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Quota();
+      function loadGrade(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Grade_drop").html(data);
+          }
+        });
+      }
+      loadGrade();
+      function loadDepartment(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Department_drop").html(data);
+          }
+        });
+      }
+      loadDepartment();
+      function loadJob_Tiltle(){
+        $.ajax({
+          url : "ajex/Job_Tiltle - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Job_Tiltle_drop").html(data);
+          }
+        });
+      }
+      loadJob_Tiltle();
+      function loadType(){
+        $.ajax({
+          url : "ajex/Type - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Type_drop").html(data);
+          }
+        });
+      }
+      loadType();
+      function loadSalary_Mode(){
+        $.ajax({
+          url : "ajex/Salary_Mode - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Salary_Mode_drop").html(data);
+          }
+        });
+      }
+      loadSalary_Mode();
+      function loadStatus(){
+        $.ajax({
+          url : "ajex/Status - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Status_drop").html(data);
+          }
+        });
+      }
+      loadStatus();
+      function loadEmployement_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employement_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employement_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployement_Group_TMA();
+      function loadEmployee_Class_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Class_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Class_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Class_TMA();
+      function loadEmployee_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Group_TMA();
+      function loadEmployee_Sub_Group_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Sub_Group_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Sub_Group_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Sub_Group_TMA();
+      function loadEmployee_Quota_TMA(){
+        $.ajax({
+          url : "ajex/Employee_Quota_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Quota_TMA_drop").html(data);
+          }
+        });
+      }
+      loadEmployee_Quota_TMA();
+       function loadGrade_TMA(){
+        $.ajax({
+          url : "ajex/Grade_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Grade_TMA_drop").html(data);
+          }
+        });
+      }
+      loadGrade_TMA();
+      function loadDepartment_TMA(){
+        $.ajax({
+          url : "ajex/Department_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Department_TMA_drop").html(data);
+          }
+        });
+      }
+      loadDepartment_TMA();
+      function loadJob_Tiltle_TMA(){
+        $.ajax({
+          url : "ajex/Job_Tiltle_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Job_Tiltle_TMA_drop").html(data);
+          }
+        });
+      }
+      loadJob_Tiltle_TMA();
+      function loadType_TMA(){
+        $.ajax({
+          url : "ajex/Type_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Type_TMA_drop").html(data);
+          }
+        });
+      }
+      loadType_TMA();
+      function loadSalary_Mode_TMA(){
+        $.ajax({
+          url : "ajex/Salary_Mode_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Salary_Mode_TMA_drop").html(data);
+          }
+        });
+      }
+      loadSalary_Mode_TMA();
+      function loadStatus_TMA(){
+        $.ajax({
+          url : "ajex/Status_TMA - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Status_TMA_drop").html(data);
+          }
+        });
+      }
+      loadStatus_TMA();
+
+
+      $(document).on("click", ".delete-btn", function() {
+    var did = $(this).data('did');
+    $.ajax({
+        url: "ajex/deleteEmpGroup.php",
+        type: "POST",
+        data: { did: did },
+        success: function(data) {
+            if (data == 1) {
+              loadEmpGroup();
+              loadEmployee_Class();
+              loadEmployee_Group();
+              loadEmployee_Sub_Group();
+              loadEmployee_Quota();
+              loadGrade();
+              loadDepartment();
+              loadJob_Tiltle();
+              loadType();
+              loadSalary_Mode();
+              loadStatus();
+              loadEmployement_Group_TMA();
+              loadEmployee_Class_TMA();
+              loadEmployee_Group_TMA();
+              loadEmployee_Sub_Group_TMA();
+              loadEmployee_Quota_TMA();
+              loadGrade_TMA();
+              loadDepartment_TMA();
+              loadJob_Tiltle_TMA();
+              loadType_TMA();
+              loadSalary_Mode_TMA();
+              loadStatus_TMA(); // Refresh the list after deletion
+            } else {
+                alert("Can't Delete Record");
+            }
+        }
+    });
+});
+
+
+   });
+</script>
+
 </body>
 </html>
 <?php 

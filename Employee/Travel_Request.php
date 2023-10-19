@@ -51,7 +51,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
         <div class="col-md-12">
           <div class="card card-success">
             <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-              <div class="card-title">Request</div>
+              <div class="card-title">Travel Request</div>
             </div>
             <!-- /.card-header -->
             <div class="card-body bg-light">
@@ -71,13 +71,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                       <input type="text" name="EmployeeNo" disabled value="<?php echo $row['EmployeeNo']?>" placeholder="Employee No" class="form-control" autocomplete="off" required="">
                     </div>
                   </div>
-
-                  <div class="col-4">
-                    <div class="form-group">
-                      <label>Request No</label>
-                      <input type="number" name="RequestNo" placeholder="Request No" class="form-control" autocomplete="off" required="">
-                    </div>
-                  </div>  
                   <div class="col-4">
                     <div class="form-group">
                       <label>From City</label>
@@ -123,7 +116,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
               <div class="row my-3">
                 <div class="col-12">
                   <table class="table">
-                    <thead class="text-white" style="background-color: darkblue;">
+                    <thead class="text-white" style="background-color: darkblue; color:white !important">
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Date</th>

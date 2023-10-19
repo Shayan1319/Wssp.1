@@ -57,7 +57,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <div class="col-lg-12">
                     <div class="card card2 text-center bg-light">
                         <div style="background-color: darkblue;" class="card-header ">
-                            <div class="card-title text-white">Exitclearance Form</div>
+                            <div class="card-title text-white fw-bolder">Exit Clearance Form</div>
                         </div>
                         <div class="container">
                             <form action="" method="post">
