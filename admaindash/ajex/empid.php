@@ -1,6 +1,6 @@
 <?php
 include ('../link/desigene/db.php');
-$select = mysqli_query($conn,"SELECT * FROM `employeedata`");
+$select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Online Status`='ACCPET'");
 if(mysqli_num_rows($select)>0){
     ?>
     <option value="">Select</option>

@@ -38,7 +38,7 @@
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="EmployeePaySlip.php">Pay Slip</a>
         </li>
         <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Cv.php">Employee CV</a>
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="profile.php">Employee CV</a>
         </li>
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Appraisaladd.php" >Add Appraisal</a>
@@ -51,14 +51,10 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
-              <?php 
-              $id = $_SESSION['EmployeeNumber'];
-              $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
-              while($row = mysqli_fetch_array($insert)){
-              ?>
-              <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['CNIC']?>">See Profile</a></li>
+             
+              <li><a class="dropdown-item" href="profile.php">See Profile</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
-              <?php }?>
+              
             </ul>
           </div>
       </ul>

@@ -143,6 +143,7 @@ if ($query) {
                                                 <th>Password</th>
                                                 <th>Employeenumber</th>
                                                 <th>Designation</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -157,6 +158,7 @@ if ($query) {
                                                 <td> <?php echo $see ['Password']?></td>
                                                 <td> <?php echo $see ['EmployeeNumber']?></td>
                                                 <td> <?php echo $see ['Designation']?></td>
+                                                <td> <a href="deletsiginup.php?did=<?php echo $see['Id']?>" class="btn btn-dark" ><i class="fa-solid fa-trash"></i></a></td>
                                             </tr>
                                             <?php 
                                             }

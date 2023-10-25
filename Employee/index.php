@@ -9,9 +9,105 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   } else{
     include '../Calendar.php';
     $date= date("Y/m/d") ;
+    $currentMonth = date('m'); // Get the current month
+$currentYear = date('Y'); // Get the current year
+
 $calendar = new Calendar($date);
+$empid= $_SESSION['EmployeeNumber'];
 // $calendar->add_event('^', $date, 1, 'green');
+include('link/desigene/db.php'); // Include your database connection file
+
+// SQL query to get the total number of attendees for the current month with status 'present'
+$query = "SELECT COUNT(*) as total_attendees 
+          FROM atandece 
+          WHERE MONTH(Date) = MONTH(CURRENT_DATE()) 
+          AND YEAR(Date) = YEAR(CURRENT_DATE()) 
+          AND status = 'PRESENT'";
+
+$result = mysqli_query($conn, $query); // Execute the query
+if($row = mysqli_fetch_assoc($result)){
+    $total_attendees = $row['total_attendees'];
+} // Fetch the result as an associative array
+else{
+    $total_attendees = 0;
+}
+ 
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReq
+        FROM employeedata AS e
+        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
+        WHERE t.Statusofmanger = 'ACCPET' 
+        AND t.StatusofGM = 'ACCPET' 
+        AND MONTH(t.DepartureOn) = $currentMonth
+        AND YEAR(t.DepartureOn) = $currentYear
+        AND e.EmployeeNo = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $TravelReq = $row['TravelReq'];
+} else {
+    $TravelReq = 0;
+}
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAcceptLeaves
+        FROM employeedata AS e
+        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
+        WHERE l.StatusofGm = 'ACCPET' 
+        AND l.Statusofmanger = 'ACCPET' 
+        AND DATE(l.LeaveFrom) = '$currentDate' 
+        AND e.EmployeeNo = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $totalAcceptLeaves = $row['totalAcceptLeaves'];
+} else {
+    $totalAcceptLeaves = 0;
+}
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME 
+        FROM employeedata AS e 
+        INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid 
+        WHERE a.DDorOT = 'OVERTIME' 
+        AND DATE(a.Date) = '$currentDate' 
+        AND e.EmployeeNo = $empid";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountOVERTIME = $row['employeeCountOVERTIME'];
+} else {
+    $employeeCountOVERTIME = 0;
+}
+
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountDDorOT 
+        FROM employeedata AS e 
+        INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid 
+        WHERE a.DDorOT = 'DOUBLE DUTY' 
+        AND DATE(a.Date) = '$currentDate'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCountDDorOT = $row['employeeCountDDorOT'];
+} else {
+    $employeeCountDDorOT = 0;
+}
+
 ?>
+<script> 
+var total_attendees= <?php echo $total_attendees?>;
+var TravelReq= <?php echo $TravelReq?>;
+var totalAcceptLeaves= <?php echo $totalAcceptLeaves?>;
+var employeeCountOVERTIME= <?php echo $employeeCountOVERTIME?>;
+var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
+
+</script>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,7 +212,7 @@ $calendar = new Calendar($date);
                 <div class="col-sm-12 col-lg-5 col-md-5 my-4 p-3">
                     <div class="row bg-light">
                         <div class="col-4">
-                            <img class="w-100" src="image/download.jfif" alt="">
+                            <img class="w-100" src="../image/<?php echo $row['image']?>" alt="">
                         </div>
                         <div class="col-8">
                             <h3>Employee Details</h3>
@@ -188,7 +284,7 @@ $calendar = new Calendar($date);
                     <div class="row">
                         <div class="">
                             <i class="fa-solid fa-clock"></i>
-                            <h6 style="color:rgb(4, 111, 218);"><?php echo $row['Weekly_Working_Days']?></h6>
+                            <h6 style="color:rgb(4, 111, 218);"><?php echo $row['Weekly_Working_Days']?> days/week</h6>
                         </div>
                         <br>
                     </div>
@@ -198,8 +294,8 @@ $calendar = new Calendar($date);
                 <div class="col-sm-12 col-lg-8 col-md-8 m-4 bg-light "><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px; margin: 0px; inset: 0px; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
                     <canvas id="myChart" class="w-100 " style=" display: block;"></canvas>
                     <script>
-                        var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-                        var yValues = [55, 49, 44, 24, 20];
+                        var xValues = ["Total Attendees", "Travel Request", "Total Accept Leaves", "Employee Count OVERTIME", "Employee Count Double Duty"];
+                        var yValues = [total_attendees, TravelReq, totalAcceptLeaves, employeeCountOVERTIME, employeeCountDDorOT];
                         var barColors = ["red", "green", "blue", "orange", "brown"];
 
                         new Chart("myChart", {

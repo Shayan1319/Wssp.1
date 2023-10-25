@@ -215,33 +215,28 @@ if ($query) {
                   <div class="form-group">
                     <label>Leave Already Availed</label>
                     <?php
-                      // Include your database connection script
+                      include ('link/desigene/db.php');
+                        // Get the employee ID from the session
+                        $empid = $_SESSION['EmployeeNumber'];
 
-                      // Get the employee ID from the session
-                      $empid = $_SESSION['EmployeeNumber'];
+                        // SQL query to calculate available leave days
+                        $sql = "SELECT COALESCE(SUM(lr.TotalDays), 0) - COALESCE(ed.leaveAlreadyAvailed, 0) AS TotalDaysAfterSubtraction
+                                FROM leavereq lr
+                                INNER JOIN employeedata ed ON lr.EmployeeNo = ed.EmployeeNo
+                                WHERE lr.Statusofmanger = 'ACCEPT' AND lr.StatusofGm = 'ACCEPT' AND YEAR(lr.DateofApply) = YEAR(CURRENT_DATE())
+                                AND ed.EmployeeNo = $empid";
 
-                      // SQL query to calculate available leave days
-                      $sql = "SELECT SUM(lr.TotalDays) - ed.leaveAlreadyAvailed AS TotalDaysAfterSubtraction
-                              FROM leavereq lr
-                              INNER JOIN employeedata ed ON lr.EmployeeNo = ed.EmployeeNo
-                              WHERE lr.Statusofmanger = 'ACCEPT' AND lr.StatusofGm = 'ACCEPT' AND YEAR(lr.DateofApply) = YEAR(CURRENT_DATE())
-                              AND ed.EmployeeNo = $empid";
+                        $result = $conn->query($sql);
 
-                      $result = $conn->query($sql);
-
-                      if ($result) {
-                          if ($result->num_rows > 0) {
-                              $row = $result->fetch_assoc();
-                              $totalDaysAfterSubtraction = $row['TotalDaysAfterSubtraction'];
-                          } else {
-                              // No leave request found, use the initial value from employeedata
-                              $totalDaysAfterSubtraction = $row["leaveAlreadyAvailed"];
-                          }
-                      } else {
-                          // Handle database query error
-                          die('MySQL Error: ' . mysqli_error($conn));
-                      }
-                      ?>
+                        if ($result) {
+                            if ($result->num_rows > 0) {
+                                $row = $result->fetch_assoc();
+                                $totalDaysAfterSubtraction = $row['TotalDaysAfterSubtraction'];
+                            } else {
+                                // No leave request found, use the initial value from employeedata
+                                $totalDaysAfterSubtraction = 0; // or any other default value
+                            }
+                        }                       ?>
 
                     <input type="number"  name="LeaveAlreadyAvailed" value="<?php  echo  $totalDaysAfterSubtraction;?>" placeholder="Leave Already Availed" class="form-control" autocomplete="off" disabled required="">
                   </div>

@@ -357,7 +357,7 @@ if (isset($_POST['submit'])) {
 $(document) .ready(function(){
   function loadTable(){
     $.ajax({
-      url : "ajex/empid.php",
+      url : "ajex/empid copy.php",
       type : "POST",
     success : function(data){
     $("#employee_no") .html(data) ;

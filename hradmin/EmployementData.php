@@ -51,7 +51,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="row"><?php echo $see ['Id'] ?></th>
                         <td><?php echo $see ['fName'];?> <?php echo $see ['mName'];?> <?php echo $see ['lName']?></td>
                         <td><?php echo $see ['CNIC']?></td>
-                        <td><?php echo $see ['EmployeeNo_tma'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
+                        <td><?php echo $see ['EmployeeNo'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
                         <td><a href="profile.php?updat=<?php echo $see['CNIC']?>" ><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="updateemp.php?id=<?php echo $see['Id']?>"><i class="fa-solid fa-file-pen"></i></a></td>

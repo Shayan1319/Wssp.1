@@ -365,6 +365,42 @@ WHERE
             $row = $result->fetch_assoc();
             $Appraisals = $row['Appraisals'];
         }
+
+// Establish a database connection (assuming $conn is your connection variable)
+// ... (your database connection code)
+
+// SQL query to count total employees
+$sql = "SELECT COUNT(*) AS totalEmployeesupdate FROM employeedataupdate";
+
+// Execute the query
+$result = mysqli_query($conn, $sql);
+
+// Check if the query was successful
+if ($result) {
+    // Fetch the result as an associative array
+    $row = mysqli_fetch_assoc($result);
+
+    // Get the total number of employees
+    $totalEmployeesupdate = $row['totalEmployeesupdate'];
+
+}
+$query = "SELECT 
+            (SELECT COUNT(*) FROM transfer WHERE`Status`='PENDING') +
+            (SELECT COUNT(*) FROM training WHERE`Status`='PENDING') +
+            (SELECT COUNT(*) FROM spouse WHERE`Status`='PENDING') +
+            (SELECT COUNT(*) FROM qualification WHERE `Status`='PENDING') +
+            (SELECT COUNT(*) FROM promotion WHERE `Status`='PENDING') +
+            (SELECT COUNT(*) FROM child WHERE `Status`='PENDING') AS total_rows_new_update";
+
+$result = mysqli_query($conn, $query);
+
+if ($result) {
+    $row = mysqli_fetch_assoc($result);
+    $total_rows_new_update = $row['total_rows_new_update'];
+} else {
+  $total_rows_new_update = 0;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -442,12 +478,12 @@ WHERE
         <div class="container px-3 py-5">
           <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                
+                <h3>Employee Status</h3>
             </div>
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
               <a href="EXITCLEARANCEFORM.php">
-              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                 <h3><?php echo $exit_form?></h3>
                   <h5>Employee Clearance Form</h5>
@@ -459,7 +495,7 @@ WHERE
             <div class="col-md-3 col-xs-12">
               <a href="aprasals.php">
                 <!-- small box -->
-              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                   <h3><?php echo $Appraisals?></h3>
                   <h5>Employee Appraisal</h5>
@@ -469,7 +505,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                   <h3><?php echo $employeeCountexp?></h3>
                   <h5>Employee Contact Expiry</h5>
@@ -477,22 +513,48 @@ WHERE
               </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
-              <a href="" style>
+              <a href="new_employee.php" style>
                 <!-- small box -->
-              <div style="background-color: #6471d3; text-decoration:none;" class="small-box text-white">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                   <h3><?php echo $total_employees?></h3>
-                  <h5>Total Employees Pending</h5>
+                  <h5>New Employees</h5>
                 </div>
               </div>
               </a>
             </div><!-- ./col -->
+
+            <div class="col-md-3 col-xs-12">
+              <a href="new_employeeupdate.php" >
+                <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                  <h3><?php echo $totalEmployeesupdate?></h3>
+                  <h5>Total Employees Update</h5>
+                </div>
+              </div>
+              </a>
+            </div>
+
+            <div class="col-md-3 col-xs-12">
+              <a href="total_rows_new_update.php" style>
+                <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                  <h3><?php echo $total_rows_new_update?></h3>
+                  <h5>Update</h5>
+                </div>
+              </div>
+              </a>
+            </div><!-- ./col -->
+
+            
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h3 style="color: darkblue;">Travel request</h3>
             </div>
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
+              <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReq?>
               <script> var TravelReq= <?php echo $TravelReq?>;</script>
@@ -503,7 +565,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
+              <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqAprove?>
               <script> var TravelReqAprove= <?php echo $TravelReqAprove?>;</script>
@@ -515,7 +577,7 @@ WHERE
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
+              <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqPENDING?>
               <script> var TravelReqPENDING= <?php echo $TravelReqPENDING?>;</script>
@@ -528,7 +590,7 @@ WHERE
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="travelRejecet.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color:#7887f8 !important;" >
+              <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqREJECTED?>
               <script> var TravelReqREJECTED= <?php echo $TravelReqREJECTED?>;</script>
@@ -543,7 +605,7 @@ WHERE
             </div>
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+              <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                         <d;">
                 <div class="inner">
                 <h3><?php echo $Tabill?>
@@ -553,9 +615,9 @@ WHERE
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-6 py-2">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+              <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                         <d;">
                 <div class="inner">
                 <h3><?php echo $tabillAprove?>
@@ -565,10 +627,10 @@ WHERE
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-6 py-2">
               <!-- small box -->
               <a href="aprovetabill.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+              <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                             <d;">
                 <div class="inner">
                 <h3><?php echo $tabillaccept?>
@@ -579,10 +641,10 @@ WHERE
               </div>
               </a>
             </div>
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-6 py-2">
               <!-- small box -->
               <a href="tabill.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+              <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                             <d;">
                 <div class="inner">
                 <h3><?php echo $tabillPENDING?>
@@ -593,10 +655,10 @@ WHERE
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-6 py-2">
               <!-- small box -->
               <a href="tabillRejecet.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background-color: #7d8bf7e0;">
+              <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                             <d;">
                 <div class="inner">
                 <h3><?php echo $tabillREJECTED?>
@@ -612,7 +674,7 @@ WHERE
             </div>
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate ?></h3>
@@ -622,7 +684,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate_wssc ?></h3>
@@ -632,7 +694,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $total_rate_tma ?></h3>
@@ -642,7 +704,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $rate_difference ?></h3>
@@ -652,7 +714,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $rate_difference_previous_month ?></h3>
@@ -662,7 +724,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $total_employees_payroll?></h3>
@@ -672,7 +734,7 @@ WHERE
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #919df3;">
+              <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
                 <div class="inner">
                   <h3><?php echo $total_employees_witout_payroll?></h3>
@@ -685,7 +747,7 @@ WHERE
             </div>
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background-color: #b0b8fa;">
+              <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                 <div class="inner">
                   <h3>
@@ -698,7 +760,7 @@ WHERE
             </div><!-- ./col -->     
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                   <div class="inner">
                     <h3><?php echo $employeeCount; ?>
@@ -710,7 +772,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountABSENT; ?>
@@ -722,7 +784,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                   <div class="inner">
                   <h3><?php echo $totalAcceptLeaves?>
@@ -734,7 +796,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountOVERTIME;?>
@@ -746,7 +808,7 @@ WHERE
               </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box text-white" style="background-color: #b0b8fa;">
+                <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
                   <div class="inner">
                   <h3><?php echo $employeeCountDDorOT;?>
@@ -761,7 +823,7 @@ WHERE
             </div>
             <div class="col-md-3 col-xs-12">
               <!-- small box -->
-              <div class="small-box text-white" style="background:#c7cdff;;" >
+              <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalLeaves?>
               <script> var vetsciencestotalLeaves= <?php echo $totalLeaves?>;</script>
@@ -773,7 +835,7 @@ WHERE
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
-             <div class="small-box text-white" style="background:#c7cdff;;" >
+             <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalAPROVELeaves?>
               <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
@@ -786,7 +848,7 @@ WHERE
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
-              <div class="small-box text-white" style="background:#c7cdff;;" >
+              <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalPendingLeaves?>
                 <script> var vetsciencestotalPendingLeaves= <?php echo $totalPendingLeaves?>;</script>
@@ -799,7 +861,7 @@ WHERE
             <div class="col-md-3 col-xs-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
-              <div class="small-box text-white" style="background:#c7cdff;;" >
+              <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
                 <div class="inner">
                 <h3><?php echo $totalREJECTEDLeaves?>
               <script> var vetsciencestotalREJECTEDLeaves= <?php echo $totalREJECTEDLeaves?>;</script>

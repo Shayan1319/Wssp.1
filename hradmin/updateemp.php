@@ -12,28 +12,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   exit; // Ensure that the script stops execution after the header redirection
 } else
   {
- 
+
+?>
+<?php 
+
 if(isset($_POST['submit']))
 {
-  $id = $_GET['id'];
-  if(isset($_POST['image'])){
-    $image = $_FILES['image'];
-    $Image_name =$image['name'];
-    $Image_path = $image['tmp_name'];
-    $Image_error = $image['error'];
-    if($Image_error==0)
-    {
-        $Image_save='../image/'.$Image_name;
-        move_uploaded_file($Image_path, $Image_save);  
-    }else{
-        echo '<script>alert("Picture is not uploaded Kindli update");</script>';
-    }
-  }else{
-    $sqldata = mysqli_query($conn,'SELECT * FROM `employeedata` WHERE `Id`=$id'); 
-    while($row = mysqli_fetch_array($sqldata)){
-      $Image_name=$row['image'];
-    }
-  }
+  $IdUpdate=$_POST['Id'];
 $image = $_FILES ["image"];
 $fName = $_POST ["fName"];
 $mName = $_POST ["mName"];
@@ -63,12 +48,12 @@ $Employee_Class = $_POST["Employee_Class"];
 $Employee_Group = $_POST ["Employee_Group"];
 $Employee_Sub_Group = $_POST ["Employee_Sub_Group"];
 $Employee_Quota = $_POST ["Employee_Quota"];
-$Grade = $_POST ["Grade"]; 
+$Grade_tma = $_POST ["Grade"]; 
 $Department = $_POST ["Department"];
 $Job_Tiltle = $_POST ["Job_Tiltle"];
 $Salary_Mode = $_POST ["Salary_Mode"];
 $Employee_Status = $_POST ["Status"];
-$EmployeeNo = $_POST ["EmployeeNo"];
+$EmployeeNowssp = $_POST ["EmployeeNo"];
 $Employee_Manager = $_POST ["Employee_Manager"];
 $Joining_Date = $_POST ["Joining_Date"];
 $Contract_Expiry_Date = $_POST ["Contract_Expiry_Date"];
@@ -87,42 +72,35 @@ $Bill_Waived_Off = $_POST['Bill_Waived_Off'];
 $Employee_Pay_Classification = $_POST['Employee_Pay_Classification'];
 $Type=$_POST['Type'];
 $DY_Supervisor=$_POST['DY_Supervisor'];
-$insertquery = "UPDATE `employeedata` SET `image`='$Image_name',`fName`='$fName',`mName`='$mName',`lName`='$lName',`father_Name`='$father_Name',`CNIC`='$CNIC',`email`='$email',`pAddress`='$pAddress',`cAddress`='$cAddress',`city`='$city',`postAddress`='$postAddress',`mNumber`='$mNumber',`ofphNumber`='$ofphNumber',`Alternate_Number`='$Alternate_Number',`DofB`='$DofB',`religion`='$religion',`gender`='$gender',`BlGroup`='$BlGroup',`Domicile`='$Domicile',`MaritalStatus`='$MaritalStatus',`NextofKin`='$NextofKin',`NextofKinCellNumber`='$NextofKinCellNumber',`ContactPerson`='$ContactPerson',`CPCN`='$CPCN',`Employement_Group`='$Employee_Group',`Employee_Class`='$Employee_Class',`Employee_Group`='$Employee_Group',`Employee_Sub_Group`='$Employee_Sub_Group',`Employee_Quota`='$Employee_Quota',`Salary_Bank`='$Salary_Bank',`Salary_Branch`='$Salary_Branch',`Account_No`='$Account_No',`Pay_Type`='$Pay_Type',`EOBI_No`='$EOBI_No',`Bill_Walved_Off`='$Bill_Walved_Off',`Weekly_Working_Days`='$Weekly_Working_Days',`Bill_Waived_Off`='$Bill_Waived_Off',`Employee_Pay_Classification`='$Employee_Pay_Classification',`Grade`='$Grade',`Department`='$Department',`Job_Tiltle`='$Job_Tiltle',`Salary_Mode`='$Salary_Mode',`Status`='$Employee_Status',`EmployeeNo`='$EmployeeNo',`Employee_Manager`='$Employee_Manager',`Joining_Date`='$Joining_Date',`Contract_Expiry_Date`='$Contract_Expiry_Date',`Last_Working_Date`='$Last_Working_Date',`Attendance_Supervisor`='$Attendance_Supervisor',`Duty_Location`='$Duty_Location',`Duty_Point`='$Duty_Point',`Online Status`='PENDING',`type`='$Type',`DY_Supervisor`='$DY_Supervisor',`leaveAlreadyAvailed`='34' WHERE `Id`='$id'";
-$query= mysqli_query($conn,$insertquery);
-if($query)
+$Image_name =$image['name'];
+$Image_path = $image['tmp_name'];
+$Image_error = $image['error'];
+if($Image_error==0)
 {
+    $Image_save='../image/'.$Image_name;
+    // echo $Image_save;
+    move_uploaded_file($Image_path, $Image_save);  
+}else{
+    echo '<script>alert("Picture is not uploaded Kindli update");</script>';
+}
+// SQL query for insertion
+$insertquery = "INSERT INTO `employeedataupdate`( `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `OnlineUpdate Status`, `typeUpdate`, `DY_SupervisorUpdate`, `leaveAlreadyAvailedUpdate`) VALUES ( '$IdUpdate', '$Image_name', '$fName', '$mName', '$lName', '$father_Name', '$CNIC', '$email', '$pAddress', '$cAddress', '$city', '$postAddress', '$mNumber', '$ofphNumber', '$Alternate_Number', '$DofB', '$religion', '$gender', '$BlGroup', '$Domicile', '$MaritalStatus', '$NextofKin', '$NextofKinCellNumber', '$ContactPerson', '$CPCN', '$Employement_Group', '$Employee_Class', '$Employee_Group', '$Employee_Sub_Group', '$Employee_Quota', '$Salary_Bank', '$Salary_Branch', '$Account_No', '$Pay_Type', '$EOBI_No', '$Bill_Walved_Off', '$Weekly_Working_Days', '$Bill_Waived_Off', '$Employee_Pay_Classification', '$Grade_tma', '$Department', '$Job_Tiltle', '$Salary_Mode', '$Employee_Status', '$EmployeeNowssp', '$Employee_Manager', '$Joining_Date', '$Contract_Expiry_Date', '$Last_Working_Date', '$Attendance_Supervisor', '$Duty_Location', '$Duty_Point', 'PENDING', '$Type', '$DY_Supervisor', '34')";
+
+// Execute the query
+$query = mysqli_query($conn, $insertquery);
+
+// Check if the query was successful
+if ($query) {
     echo '<script>alert("Data is inserted");</script>';
-     ?>
-            <script>
-                location.replace('Qualification.php?updat=<?php echo $CNIC?>#section3');
-            </script>
-     <?php
+    header("Location: Qualification.php?updat=" . urlencode($CNIC) . "#section3");
+    exit();
+} else {
+    echo "Error: " . mysqli_error($conn);
 }
-else{
-echo '<script>alert("Sorry Data is not inserted");</script>'; 
-}
-}
-else if(isset($_POST['submit_TMA']))
+}else if(isset($_POST['submit_TMA']))
 {
-  $id = $_GET['id'];
-  if(isset($_POST['image'])){
-    $image = $_FILES['image'];
-    $Image_name =$image['name'];
-    $Image_path = $image['tmp_name'];
-    $Image_error = $image['error'];
-    if($Image_error==0)
-    {
-        $Image_save='../image/'.$Image_name;
-        move_uploaded_file($Image_path, $Image_save);  
-    }else{
-        echo '<script>alert("Picture is not uploaded Kindli update");</script>';
-    }
-  }else{
-    $sqldata = mysqli_query($conn,'SELECT * FROM `employeedata` WHERE `Id`=$id') or die(mysqli_error($conn)); 
-    while($row = mysqli_fetch_array($sqldata)){
-      $Image_name=$row['image'];
-    }
-  }
+
+  $IdUpdate=$_POST['Id'];
 $image = $_FILES ["image"];
 $fName = $_POST ["fName"];
 $mName = $_POST ["mName"];
@@ -152,12 +130,12 @@ $Employee_Class = $_POST["Employee_Class_TMA"];
 $Employee_Group = $_POST ["Employee_Group_TMA"];
 $Employee_Sub_Group = $_POST ["Employee_Sub_Group_TMA"];
 $Employee_Quota = $_POST ["Employee_Quota_TMA"];
-$Grade = $_POST ["Grade_TMA"]; 
+$Grade_tma = $_POST ["Grade_TMA"]; 
 $Department = $_POST ["Department_TMA"];
 $Job_Tiltle = $_POST ["Job_Tiltle_TMA"];
 $Salary_Mode = $_POST ["Salary_Mode_TMA"];
 $Employee_Status = $_POST ["Status_TMA"];
-$EmployeeNo = $_POST ["EmployeeNo_TMA"];
+$EmployeeNowssp = $_POST ["EmployeeNo_TMA"];
 $Employee_Manager = $_POST ["Employee_Manager_TMA"];
 $Joining_Date = $_POST ["Joining_Date_TMA"];
 $Contract_Expiry_Date = $_POST ["Contract_Expiry_Date_TMA"];
@@ -176,22 +154,34 @@ $Bill_Waived_Off = $_POST['Bill_Waived_Off_TMA'];
 $Employee_Pay_Classification = $_POST['Employee_Pay_Classification_TMA'];
 $Type=$_POST['Type_TMA'];
 $DY_Supervisor=$_POST['DY_Supervisor_TMA'];
-$insertquery = "UPDATE `employeedata` SET `image`='$Image_name',`fName`='$fName',`mName`='$mName',`lName`='$lName',`father_Name`='$father_Name',`CNIC`='$CNIC',`email`='$email',`pAddress`='$pAddress',`cAddress`='$cAddress',`city`='$city',`postAddress`='$postAddress',`mNumber`='$mNumber',`ofphNumber`='$ofphNumber',`Alternate_Number`='$Alternate_Number',`DofB`='$DofB',`religion`='$religion',`gender`='$gender',`BlGroup`='$BlGroup',`Domicile`='$Domicile',`MaritalStatus`='$MaritalStatus',`NextofKin`='$NextofKin',`NextofKinCellNumber`='$NextofKinCellNumber',`ContactPerson`='$ContactPerson',`CPCN`='$CPCN',`Employement_Group`='$Employee_Group',`Employee_Class`='$Employee_Class',`Employee_Group`='$Employee_Group',`Employee_Sub_Group`='$Employee_Sub_Group',`Employee_Quota`='$Employee_Quota',`Salary_Bank`='$Salary_Bank',`Salary_Branch`='$Salary_Branch',`Account_No`='$Account_No',`Pay_Type`='$Pay_Type',`EOBI_No`='$EOBI_No',`Bill_Walved_Off`='$Bill_Walved_Off',`Weekly_Working_Days`='$Weekly_Working_Days',`Bill_Waived_Off`='$Bill_Waived_Off',`Employee_Pay_Classification`='$Employee_Pay_Classification',`Grade`='$Grade',`Department`='$Department',`Job_Tiltle`='$Job_Tiltle',`Salary_Mode`='$Salary_Mode',`Status`='$Employee_Status',`EmployeeNo`='$EmployeeNo',`Employee_Manager`='$Employee_Manager',`Joining_Date`='$Joining_Date',`Contract_Expiry_Date`='$Contract_Expiry_Date',`Last_Working_Date`='$Last_Working_Date',`Attendance_Supervisor`='$Attendance_Supervisor',`Duty_Location`='$Duty_Location',`Duty_Point`='$Duty_Point',`Online Status`='PENDING',`type`='$Type',`DY_Supervisor`='$DY_Supervisor',`leaveAlreadyAvailed`='34' WHERE `Id`='$id'";
-$query= mysqli_query($conn,$insertquery);
-if($query)
+$Image_name =$image['name'];
+$Image_path = $image['tmp_name'];
+$Image_error = $image['error'];
+if($Image_error==0)
 {
-    echo '<script>alert("Data is inserted");</script>';
-     ?>
-            <script>
-                location.replace('Qualification.php?updat=<?php echo $CNIC?>#section3');
-            </script>
-     <?php
+    $Image_save='../image/'.$Image_name;
+    // echo $Image_save;
+    move_uploaded_file($Image_path, $Image_save);  
+}else{
+    echo '<script>alert("Picture is not uploaded Kindli update");</script>';
 }
-else{
-echo '<script>alert("Sorry Data is not inserted");</script>'; 
+// SQL query for insertion
+$insertquery = "INSERT INTO `employeedataupdate`( `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `OnlineUpdate Status`, `typeUpdate`, `DY_SupervisorUpdate`, `leaveAlreadyAvailedUpdate`) VALUES ( '$IdUpdate', '$Image_name', '$fName', '$mName', '$lName', '$father_Name', '$CNIC', '$email', '$pAddress', '$cAddress', '$city', '$postAddress', '$mNumber', '$ofphNumber', '$Alternate_Number', '$DofB', '$religion', '$gender', '$BlGroup', '$Domicile', '$MaritalStatus', '$NextofKin', '$NextofKinCellNumber', '$ContactPerson', '$CPCN', '$Employement_Group', '$Employee_Class', '$Employee_Group', '$Employee_Sub_Group', '$Employee_Quota', '$Salary_Bank', '$Salary_Branch', '$Account_No', '$Pay_Type', '$EOBI_No', '$Bill_Walved_Off', '$Weekly_Working_Days', '$Bill_Waived_Off', '$Employee_Pay_Classification', '$Grade_tma', '$Department', '$Job_Tiltle', '$Salary_Mode', '$Employee_Status', '$EmployeeNowssp', '$Employee_Manager', '$Joining_Date', '$Contract_Expiry_Date', '$Last_Working_Date', '$Attendance_Supervisor', '$Duty_Location', '$Duty_Point', 'PENDING', '$Type', '$DY_Supervisor', '34')";
+
+// Execute the query
+$query = mysqli_query($conn, $insertquery);
+
+// Check if the query was successful
+if ($query) {
+    echo '<script>alert("Data is inserted");</script>';
+    header("Location: Qualification.php?updat=" . urlencode($CNIC) . "#section3");
+    exit();
+} else {
+    echo "Error: " . mysqli_error($conn);
 }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -247,13 +237,14 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2"></div>
                       <div class="col-md-4 my-2 ">
                         <div class="form-group mr-3 mt-0">
-                          <img id="log1" class="shadow" style="border: 1px blue solid; border-radius: 10%; margin-top: -4%" src="../images/<?php echo $fetchdata['image']?>" width="120px;" height="130px">
+                          <img id="log1" class="shadow" style="border: 1px blue solid; border-radius: 10%; margin-top: -4%" src="../image/<?php echo $fetchdata['image']?>" width="120px;" height="130px">
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>First Name</label>
                           <input value="<?php echo $fetchdata['fName']?>" id="fName" type="text" name="fName" placeholder="First Name" class="form-control" autocomplete="off" >
+                          <input type="number"  name="Id" readonly hidden value="<?php  echo $fetchdata['Id'];?>">
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -1145,7 +1136,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee NO</label>
-                                  <input value="<?php echo $fetchdata['']?>" id="EmployeeNo"  type="text" name="EmployeeNo_TMA" placeholder="Employee NO" class="form-control" autocomplete="off" >
+                                  <input value="<?php echo $fetchdata['EmployeeNo']?>" id="EmployeeNo"  type="text" name="EmployeeNo_TMA" placeholder="Employee NO" class="form-control" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -1153,64 +1144,83 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                   <label>Manager ID No</label>
                                   <div>
                                   <select name="Employee_Manager_TMA" id="employee_noTMA" class="form-control ">
-                                <?php
+                                  <?php
                                     include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Manager'");
+                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='MANAGER' ");
                                     if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employee_Manager'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
+                                        ?>
+                                        
+                                        <option value="">select</option>
+                                        
+                                        <?php
                                         while($row=mysqli_fetch_assoc($select)){
                                         ?>
-                                        <option <?php echo ($fetchdata['Employee_Manager'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+
+
+
+                                    <option <?php echo ($fetchdata['Employee_Manager']==$row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
+                                        
+                                        
+                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
+                                    
+                                    </option>
+                                        
                                         <?php   
                                         }
                                     }
-                                    ?>  
-                                </select>
-                                  </div>
-                                </div>
-                                <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label> Attendance Supervisor</label>
-                                    <select name="Attendance_Supervisor_TMA" id="superviserTMA" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Attendance_Supervisor'");
-                                    if(mysqli_num_rows($select)>0){
                                     ?>
-                                        <option value="" <?php echo ($fetchdata['Attendance_Supervisor'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Attendance_Supervisor'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>    
                                 </select>
                                   </div>
                                 </div>
                               </div>
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label> Attendance Supervisor</label>
+                                    <select name="Attendance_Supervisor_TMA" id="superviserTMA" class="form-control ">
+                                    <?php
+                                   include ('../link/desigene/db.php');
+                                   $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='SUPERVISO' ");
+                                   if(mysqli_num_rows($select)>0){
+                                       ?><option value="">select</option><?php
+                                       while($row=mysqli_fetch_assoc($select)){
+                                       ?>
+                                   <option <?php echo ($fetchdata['Attendance_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
+                                       
+                                       
+                                       <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
+                                   
+                                   </option>
+                                       
+                                       <?php   
+                                       }
+                                   }
+                                   ?>   
+                                </select>
+                                  </div>
+                                </div>
                               
                               <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label> DY.Manager </label>
                                     <select name="DY_Supervisor_TMA" id="DY_Supervisor" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='DY_Supervisor'");
+                                    <?php include ('../link/desigene/db.php');
+                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='DY_MANAGER' ");
                                     if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['DY_Supervisor'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
+                                        ?><option value="">select</option><?php
                                         while($row=mysqli_fetch_assoc($select)){
                                         ?>
-                                        <option <?php echo ($fetchdata['DY_Supervisor'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                    <option <?php echo ($fetchdata['DY_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> 
+                                    value="<?php echo $row['EmployeeNo']?>">
+                                        
+                                        
+                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
+                                    
+                                    </option>
+                                        
                                         <?php   
                                         }
                                     }
-                                    ?>    
+                                    ?>      
                                 </select>
                                   </div>
                                 </div>

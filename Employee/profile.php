@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 // links to database
 include ('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
   
@@ -17,14 +17,14 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    <?php include ('link/links.php')?>
 </head>
 <body>
-    <?php include ('link/desigene/sidebar.php')?>
-  <div id="main">
+  <div id="">
     <?php include('link/desigene/navbar.php')?>
     <div class="container-fluid py-5">
     <?php
-      $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
-      while($see1=mysqli_fetch_all($select)){
+    $empid = $_SESSION['EmployeeNumber'];
+      $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE EmployeeNo = $empid");
+      if(mysqli_num_rows($select) > 0) {
+          while($see1 = mysqli_fetch_assoc($select)) {
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
         <div class="row">
@@ -331,7 +331,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </tr>
           </thead>
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+          <?php   $CNIC =  $see1 ['CNIC'] ;
           $select = mysqli_query($conn,"SELECT * FROM `qualification` WHERE `Employee_id`=$CNIC");
           while($see2=mysqli_fetch_array($select))
           {
@@ -374,7 +374,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </tr>
           </thead>
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+          <?php   $CNIC =  $see1 ['CNIC'] ;
           $select = mysqli_query($conn,"SELECT * FROM `training` WHERE `Employee_id`=$CNIC");
           while($see3=mysqli_fetch_array($select))
           { 
@@ -419,7 +419,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </tr>
           </thead>
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+          <?php   $CNIC =  $see1 ['CNIC'] ;
           $select = mysqli_query($conn,"SELECT * FROM `promotion` WHERE `Employee_id`=$CNIC");
           while($see4=mysqli_fetch_array($select))
           { 
@@ -467,7 +467,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </tr></thead>
           
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+          <?php   $CNIC =  $see1 ['CNIC'] ;
           $select = mysqli_query($conn,"SELECT * FROM `transfer` WHERE `employee_id`=$CNIC");
           while($see5=mysqli_fetch_array($select))
           { 
@@ -498,7 +498,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </nav>
           <div class="row">
           <div>
-          <?php $CNIC = $_GET['updat'];
+          <?php $CNIC =  $see1 ['CNIC'] ;
           $selectM = mysqli_query($conn,"SELECT * FROM `spouse` WHERE `employee_id`=$CNIC");
           $row=mysqli_num_rows($selectM);
           for($i=1;$i<=$row;$i++)
@@ -558,7 +558,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           
           </tbody>
           </table>
-         <?php }?>
+         <?php }}
+         else{
+          echo '<h1>data not exest</h1>';
+         }
+         ?>
         
           </div>
           </div>

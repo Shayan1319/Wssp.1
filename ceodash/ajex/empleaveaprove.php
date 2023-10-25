@@ -7,8 +7,9 @@ include('../link/desigene/db.php');
             $sql = "SELECT * FROM employeedata AS e INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo WHERE l.StatusofGm = 'ACCPET' AND l.LeaveFrom >= '$currentDate'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
-                while($row=mysqli_fetch_array($result)){
-                    $a=1;
+               $a=1;
+                 while($row=mysqli_fetch_array($result)){
+                   
                     ?>
                             <tr>
                                 <th scope="row"><?php echo $a?></th>
