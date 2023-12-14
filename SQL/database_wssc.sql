@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 09:02 AM
+-- Generation Time: Dec 14, 2023 at 11:04 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -37,21 +37,6 @@ CREATE TABLE `allowances` (
   `price` int(255) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `allowances`
---
-
-INSERT INTO `allowances` (`id`, `allowance`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `allowance_status`, `price`) VALUES
-(1, 'SAERY', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
-(2, 'OFFPAY', 'GROSS PAY', 'OFF PAY', 'DEDUCTION', 'ACTIVE', 1),
-(3, 'OVERTIME', 'GROSS PAY', 'OVERTIME', 'EARNING', 'ACTIVE', 800),
-(4, 'DOUBLEDUTY', 'GROSS PAY', 'DOUBLE DUTY', 'EARNING', 'ACTIVE', 1600),
-(5, 'FULE', 'GROSS PAY', 'PREVAILING RATE', 'EARNING', 'ACTIVE', 280),
-(6, 'PENTION', 'EOBI-ER', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
-(7, 'EID', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
-(8, 'DEDUCTION', 'GROSS PAY', 'PRESENT RATE', 'DEDUCTION', 'ACTIVE', 1),
-(9, 'HOUSERENT', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -66,15 +51,6 @@ CREATE TABLE `allowancesrateupdate` (
   `allownce_id` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `allowancesrateupdate`
---
-
-INSERT INTO `allowancesrateupdate` (`ID`, `timeperiod`, `discription`, `price`, `allownce_id`) VALUES
-(1, 3, '', 270, 5),
-(2, 3, 'FULE', 270, 5),
-(3, 1, 'FULE', 280, 5);
-
 -- --------------------------------------------------------
 
 --
@@ -87,15 +63,6 @@ CREATE TABLE `announcement` (
   `Q1` text NOT NULL,
   `ceodata` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `announcement`
---
-
-INSERT INTO `announcement` (`id`, `Subject`, `Q1`, `ceodata`) VALUES
-(1, 'Subject', '', '2023-12-10'),
-(2, 'test 2', '', '2023-12-10'),
-(3, 'Test', '', '2023-12-10');
 
 -- --------------------------------------------------------
 
@@ -120,67 +87,6 @@ CREATE TABLE `atandece` (
   `PayrollStatusDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `atandece`
---
-
-INSERT INTO `atandece` (`id`, `Employeeid`, `Shift`, `Tehsil`, `Area`, `Date`, `DDorOT`, `status`, `ManagerStatus`, `ManagerStatusDate`, `GMStatus`, `GMStatusData`, `PayrollStatus`, `PayrollStatusDate`) VALUES
-(1, 100003, NULL, NULL, NULL, '2023-11-10', 'OVERTIME', NULL, 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(2, 100004, NULL, NULL, NULL, '2023-11-11', NULL, 'ABSENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(3, 100003, NULL, NULL, NULL, '2023-12-09', NULL, 'ABSENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(4, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-01', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(5, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-02', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(6, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-03', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(7, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-04', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(8, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-06', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(9, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-07', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(10, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-08', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(11, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-09', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(12, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-10', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(13, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-11', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(14, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-13', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(15, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-14', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(16, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-15', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(17, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-16', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(18, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-17', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(19, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-18', NULL, 'ABSENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(20, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-20', NULL, 'ABSENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(21, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-21', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(22, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-22', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(23, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-23', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(24, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-24', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(25, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-25', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(26, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-27', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(27, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-28', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(28, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-29', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(29, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-11-30', NULL, 'PTESENT', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27', 'ACCEPT', '2023-11-27'),
-(30, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-01', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(31, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-02', 'DOUBLE DUTY', 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(32, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-04', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(33, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-05', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(34, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-06', 'OVERTIME', 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(35, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-07', NULL, 'ABSENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(36, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-08', NULL, 'ABSENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(37, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-09', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(38, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-11', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(39, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-12', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(40, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-13', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(41, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-14', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(42, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-15', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(43, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-16', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(44, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-18', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(45, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-18', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(46, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-20', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(47, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-21', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(48, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-22', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(49, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-23', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(50, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-25', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(51, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-26', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(52, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-27', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(53, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-28', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(54, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-29', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02'),
-(55, 100005, 'Morning', 'Lahore', 'Jehangira', '2023-12-30', NULL, 'PTESENT', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02', 'ACCEPT', '2023-12-02');
-
 -- --------------------------------------------------------
 
 --
@@ -197,15 +103,6 @@ CREATE TABLE `child` (
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `child`
---
-
-INSERT INTO `child` (`id`, `Name`, `CNIC`, `Date_of_B`, `MouterCNIC`, `Gender`, `Status`) VALUES
-(1, 'XYZ', '34567', '2023-10-10', '123456', 'MALE', 'PENDING'),
-(2, 'SON', '1231', '2023-10-02', '2323', 'MALE', 'PENDING'),
-(3, 'DOUG', '', '2023-10-02', '2323', 'FEMALE', 'PENDING');
-
 -- --------------------------------------------------------
 
 --
@@ -220,13 +117,6 @@ CREATE TABLE `earning_deduction_fund` (
   `deduction` decimal(10,2) DEFAULT NULL,
   `net_pay` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `earning_deduction_fund`
---
-
-INSERT INTO `earning_deduction_fund` (`id`, `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`) VALUES
-(1, 8, 0.00, 50500.00, 0.00, 50500.00);
 
 -- --------------------------------------------------------
 
@@ -299,11 +189,7 @@ CREATE TABLE `employeedata` (
 
 INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `Online Status`, `type`, `DY_Supervisor`, `leaveAlreadyAvailed`) VALUES
 (1, '', 'Admin', 'Wssc', '-', '-', '12345', 'admin@wssc.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-05', '-', 'Male', '-', '-', 'Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'WSSC PAY', 'WSSC - COMMERCIAL', '', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 6, '-', '-', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'CONTRACT EXP', 100001, 100006, '2023-10-10', '2023-10-10', '2023-10-31', 100004, '-', '-', 'ACCPET', '', '', 34),
-(2, '', 'Emp1', 'name', '-', '-', '123455431', 'email@email.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-07', '-', 'Male', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'TMA PAY', 'WSSC - COMMERCIAL', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 5, '-', '-', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'CONTRACT EXP', 100002, 100006, '2023-09-30', '2023-10-27', '2023-10-27', NULL, '-', '-', 'ACCPET', '', '100003', 34),
-(6, '', '', '', '', '', '123', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 'WSSC CONTRACTUAL', 'Wssc Pay', 'WSSCS-ADMIN PAY', 'WSSCS-ADMIN-CONTINGENT PAY', 'DECEASED SON', '', '', '', '', '', '', 6, '', '', 'CONTINGENT', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 100003, 100006, '0000-00-00', '0000-00-00', '0000-00-00', 100004, '', '', 'ACCPET', 'DY_MANAGER', '', 34),
-(7, '', 'kjsdfj', 'lksjdfklj', 'lkjadsklfj', '', '2131243', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', '', 'Wssc Pay', 'WSSCS-ADMIN PAY', 'WSSCS-ADMIN-CONTINGENT PAY', 'DECEASED SON', '', '', '', '', '', '', 6, '', '', 'CONTINGENT', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 100004, 100006, '0000-00-00', '0000-00-00', '0000-00-00', NULL, '', '', 'ACCPET', 'SUPERVISO', '', 34),
-(8, '1.png', 'Shayan', 'Khan', 'Kurtlar', 'Riayat Khan', '41234235', 'kurtlar1215225@gmail.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-24', '-', 'Mail', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'WSSC PAY ', '', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '12345', '-', '-', '-', '-', '-', 5, '-', '-', 'M-1', 'COMMERCIAL', 'MANAGER SOLID WASTE', 'CHEQUE', 'ON-DUTY', 100005, 100006, '2023-09-24', '2023-10-20', '2023-10-26', 100004, '-', '-', 'ACCPET', 'FINANCE', '100003', 34),
-(9, 'apple-touch-icon.png', 'Shayan', 'Khan', 'kurtlar', 'Riayat Khan', '1234235', 'kurtlar1215225@gmail.com', '-', '-', '-', '-', '-', '-', '-', '2023-10-03', '-', 'Mail', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'TMA PAY', '', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 6, '-', '-', 'M-1', 'COMMERCIAL', 'MANAGER SOLID WASTE', 'CHEQUE', 'ON-DUTY', 100006, 100002, '2023-10-02', '2023-10-28', '2023-10-25', NULL, '-', '-', 'ACCPET', 'MANAGER', '100003', 34);
+(2, '', 'Emp1', 'name', '-', '-', '123455431', 'email@email.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-07', '-', 'Male', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'TMA PAY', 'WSSC - COMMERCIAL', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 5, '-', '-', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'CONTRACT EXP', 100002, 100006, '2023-09-30', '2023-10-27', '2023-10-27', NULL, '-', '-', 'ACCPET', '', '100003', 34);
 
 -- --------------------------------------------------------
 
@@ -371,14 +257,6 @@ CREATE TABLE `employeedataupdate` (
   `leaveAlreadyAvailedUpdate` int(255) NOT NULL DEFAULT 34
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `employeedataupdate`
---
-
-INSERT INTO `employeedataupdate` (`Id`, `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `OnlineUpdate Status`, `typeUpdate`, `DY_SupervisorUpdate`, `leaveAlreadyAvailedUpdate`) VALUES
-(3, 2, '', 'Emp1', 'name', '-', '-', '123455431', 'email@email.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-07', '-', 'Male', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC CONTRACTUAL', 'TMA PAY', 'WSSC - COMMERCIAL', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 5, '-', '-', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'CONTRACT EXP', 100002, 0, '0000-00-00', '0000-00-00', '0000-00-00', 0, '-', '-', 'PENDING', 'MANAGER', '', 34),
-(4, 1, '', 'Admin', 'Wssc', '-', '-', '12345', 'admin@wssc.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-05', '-', 'Male', '-', '-', ' Unmarried', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'WSSC PAY', 'WSSC - COMMERCIAL', '', 'DECEASED SON', '-', '-', '-', '-', '-', '-', 6, '-', '-', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'CONTRACT EXP', 100001, 100006, '2023-10-10', '2023-10-10', '2023-10-31', 0, '-', '-', 'PENDING', '', '', 34);
-
 -- --------------------------------------------------------
 
 --
@@ -437,13 +315,6 @@ CREATE TABLE `employee_exit` (
   `CEO_Approved_Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `employee_exit`
---
-
-INSERT INTO `employee_exit` (`Id`, `Employee_id`, `Reason_of_Leaving`, `Leaving_Date`, `HRMS`, `HRMS_Remarks`, `EOBI`, `EOBI_Remarks`, `Leve`, `Leve_Remarks`, `Gratuity`, `HR_Approved_Date`, `Gratuity_Remarks`, `Email_Suspension`, `Email_Susp_Remarks`, `Soft_Data`, `Soft_Data_Remarks`, `Heard_Data`, `Heard_Data_Remarks`, `IT_Other`, `IT_Remarks`, `IT_Approved_Date`, `Handover_File`, `Handover_File_Remarks`, `Handover_Info`, `Handover_Info_Remarks`, `Capital_Equipment`, `Capital_Remarks`, `HOD_Other`, `HOD_Remarks`, `HOD_Approved_Date`, `Uniform`, `Uniform_Remarks`, `Equipment`, `Equipment_Remarks`, `Assets`, `Assets_Remarks`, `Admin_Other`, `Admin_Remarks`, `Admin_Approved_Date`, `Loan`, `Loan_Remarks`, `OverPay`, `OverPay_Remarks`, `Finance_Other`, `Finance_Remarks`, `Finance_Approved_Date`, `Approved_CEO`, `CEO_Approved_Date`) VALUES
-(0, '100001', '<p>fguiguifyfdvyi</p>\r\n', '0000-00-00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -489,13 +360,6 @@ CREATE TABLE `employee_performance` (
   `DateOfSecondCountersigningOfficer` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `employee_performance`
---
-
-INSERT INTO `employee_performance` (`Id`, `EmployeeID`, `JobDescription`, `Q1`, `Intelligence`, `ConfidenceAndWillPower`, `AcceptanceOfResponsibility`, `ReliabilityUnderPressure`, `FinancialResponsibility`, `RelationsWithSuperiors`, `RelationsWithColleagues`, `RelationsWithSubordinates`, `BehaviorWithPublic`, `AblityToDecideRoutineMatters`, `KnowledgeOfRelavantLawsETC`, `Q2`, `Integrity`, `Q3`, `SpecialAptitude`, `RecommendedForFutureTraining`, `OverallGradingByReportingOfficer`, `OverallGradingByCountersigningOfficer`, `FitnessForPromotionByReportingOfficer`, `FitnessForPromotionByCountersigningOfficer`, `NameOfReportingOfficer`, `DesignationOfReportingOfficer`, `DateOfReportingOfficer`, `CEOQ1`, `CEOQ2`, `NameOfCountersigningOfficer`, `DesignationOfCountersigningOfficer`, `DateOfCountersigningOfficer`, `RemarksOfSecondCountersigningOfficer`, `NameOfSecondCountersigningOfficer`, `DesignationOfSecondCountersigningOfficer`, `DateOfSecondCountersigningOfficer`) VALUES
-(1, '', '<p><em><strong>jggyufio</strong></em></p>\r\n', '<p>uiuhuihioljkljkl</p>\r\n', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -509,23 +373,6 @@ CREATE TABLE `holidays` (
   `Day` varchar(10) DEFAULT NULL,
   `Type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `holidays`
---
-
-INSERT INTO `holidays` (`ID`, `DateOfSub`, `Date`, `Day`, `Type`) VALUES
-(1, '2023-11-10', '2023-11-09', 'Thursday', 'Public Holiday'),
-(2, '2023-11-20', '2023-12-25', 'Monday', 'Public Holiday'),
-(3, '2023-11-26', '2023-11-05', 'Sunday', 'Weekly Holiday'),
-(4, '2023-11-26', '2023-11-12', 'Sunday', 'Weekly Holiday'),
-(5, '2023-11-26', '2023-11-19', 'Sunday', 'Weekly Holiday'),
-(6, '2023-11-26', '2023-11-26', 'Sunday', 'Weekly Holiday'),
-(7, '2023-12-01', '2023-12-03', 'Sunday', 'Weekly Holiday'),
-(8, '2023-12-01', '2023-12-10', 'Sunday', 'Weekly Holiday'),
-(9, '2023-12-01', '2023-12-17', 'Sunday', 'Weekly Holiday'),
-(10, '2023-12-01', '2023-12-24', 'Sunday', 'Weekly Holiday'),
-(11, '2023-12-01', '2023-12-31', 'Sunday', 'Weekly Holiday');
 
 -- --------------------------------------------------------
 
@@ -550,13 +397,6 @@ CREATE TABLE `leavereq` (
   `DateOfAccepGm` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `leavereq`
---
-
-INSERT INTO `leavereq` (`Id`, `EmployeeNo`, `PhoneNumberOnLeave`, `LeaveType`, `LeaveFrom`, `LeaveTo`, `TotalDays`, `LeaveAvailed`, `Description`, `Statusofmanger`, `StatusofGm`, `DateofApply`, `DateOfAccepManager`, `DateOfAccepGm`) VALUES
-(1, 100001, '+123456', 'Sick', '2023-12-21', '2023-12-23', 3, 0, 'i am sick', 'PENDING', 'PENDING', '2023-10-20', '0000-00-00', '0000-00-00');
-
 -- --------------------------------------------------------
 
 --
@@ -578,15 +418,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`Id`, `FullName`, `Gender`, `Email`, `Password`, `EmployeeNumber`, `Designation`) VALUES
-(1, 'Admin', 'Male', 'admin@wssc.com', 'Wssc@123', 100001, 'Admin'),
-(2, 'Payroll', NULL, 'payroll@wssc.com', 'Wssc@123', 100002, 'Payroll manager'),
-(3, 'Hr Admin', '', 'hr@wssc.com', 'Wssc@123', 100002, 'HR manager'),
-(4, 'CEO', '', 'ceo@wssc.com', 'Wssc@123', 100003, 'CEO'),
-(5, 'paryroll', '', 'payroll@gmail.com', 'Wssc@123', 100003, 'Payroll manager'),
-(7, 'GM', '', 'gm12@wssc.com', 'Wssc@123', 100004, 'GM'),
-(8, 'Manager', '', 'manag@wssc.com', 'Wssc@123', 100006, 'Manager'),
-(9, 'Finance', '', 'finance125225@wssc.com', 'Wssc@123', 100005, 'FinanceAdmin'),
-(10, 'InternalAuditor', '', 'internalauditor@gmail.com', 'Wssc@123', 100001, 'Internal Auditor');
+(1, NULL, NULL, 'admin@wssc.com', 'Wssc@123', 100001, 'Admin'),
+(2, NULL, NULL, 'hr@wssc.com', 'Wssc@123', 100002, 'HR manager');
 
 -- --------------------------------------------------------
 
@@ -599,50 +432,6 @@ CREATE TABLE `master` (
   `drop` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `master`
---
-
-INSERT INTO `master` (`id`, `drop`, `name`) VALUES
-(3, 'WSSC - ADMIN PAY', 'EmpGroup'),
-(4, 'WSSC CONTRACTUAL', 'EmpGroup'),
-(5, 'WSSC - MSW PAY', 'EmpGroup'),
-(6, 'TMA PAY', 'Employee_Class'),
-(7, 'WSSC PAY', 'Employee_Class'),
-(9, 'WSSC - COMMERCIAL', 'Employee_Group'),
-(10, 'TMA - ADMIN - PERMANENT PAY', 'Employee_Sub_Group'),
-(11, 'DECEASED SON', 'Employee_Quota'),
-(12, 'DISABLED', 'Employee_Quota'),
-(13, 'MINORITIES', 'Employee_Quota'),
-(21, 'M-1', 'Grade'),
-(22, 'M-2', 'Grade'),
-(23, 'S-1', 'Grade'),
-(24, 'S-2', 'Grade'),
-(26, 'COMMERCIAL', 'Department'),
-(27, 'CHIEF EXECUTIVE OFFICER', 'Job_Tiltle'),
-(28, 'GM (HR, ADMIN & PROCUREMENT)', 'Job_Tiltle'),
-(29, 'MANAGER SOLID WASTE', 'Job_Tiltle'),
-(30, 'DY- MANAGER - ADMIN & PROCUREMENT', 'Job_Tiltle'),
-(31, 'SUPERVISOR', 'Job_Tiltle'),
-(32, 'CEO', 'Type'),
-(33, 'MANAGER', 'Type'),
-(34, 'DY_ MANAGER', 'Type'),
-(35, 'HR MANAGER', 'Type'),
-(36, 'ADMIN', 'Type'),
-(37, 'SUPERVISOR', 'Type'),
-(38, 'EMPLOYEE', 'Type'),
-(39, '', 'EmpGroup'),
-(40, 'GM', 'Type'),
-(41, 'FINANCE', 'Type'),
-(42, 'PAYROLL', 'Type'),
-(45, 'CHEQUE', 'Salary_Mode'),
-(46, 'BANK TRANSFER', 'Salary_Mode'),
-(47, 'ADMINISTRATION', 'Department'),
-(48, 'CONTRACT EXP', 'Status'),
-(49, 'ON-DUTY', 'Status'),
-(50, 'OTHER', 'Status'),
-(51, 'PROBATION', 'Status');
 
 -- --------------------------------------------------------
 
@@ -664,19 +453,6 @@ CREATE TABLE `payrole` (
   `Date` date DEFAULT NULL,
   `timeperiod` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `payrole`
---
-
-INSERT INTO `payrole` (`Allownceid`, `EmpNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`, `timeperiod`) VALUES
-(1, 8, 'SAERY', 1, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 30000.00, 1, '30000', '2023-12-10', 1),
-(2, 8, 'OFFPAY', 2, 'GROSS PAY', 'OFF PAY', ' DEDUCTION', 3.00, 2295, '6885', '2023-12-10', 1),
-(3, 8, 'OVERTIME', 3, 'GROSS PAY', 'OVERTIME', ' EARNING', 3.00, 800, '2400', '2023-12-10', 1),
-(4, 8, 'DOUBLEDUTY', 4, 'GROSS PAY', 'DOUBLE DUTY', ' EARNING', 4.00, 1600, '6400', '2023-12-10', 1),
-(5, 8, 'FULE', 5, 'GROSS PAY', 'PREVAILING RATE', ' EARNING', 50.00, 280, '14000', '2023-12-10', 1),
-(6, 8, 'PENTION', 6, 'EOBI-ER', 'PRESENT RATE', ' EARNING', 2000.00, 1, '2000', '2023-12-10', 1),
-(7, 8, 'HOUSERENT', 9, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 5000.00, 1, '5000', '2023-12-10', 1);
 
 -- --------------------------------------------------------
 
@@ -700,15 +476,6 @@ CREATE TABLE `promotion` (
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `promotion`
---
-
-INSERT INTO `promotion` (`Id`, `From_Designation`, `To_Designation`, `From_BPS`, `ToBps`, `Promotion_Date`, `Promotion_Number`, `Department1`, `Acting`, `Remarks`, `file`, `employee_id`, `Status`) VALUES
-(1, 'S–4', 'M–1', '', 'UNDEFINED', '2023-10-01', '1213', 'WSSC', 'REGULAR', 'KDJFLAJDDFJLK', 'Appraisal 2023 Blank.docx', '123', 'PENDING'),
-(2, 'S–4', 'M–1', '', 'UNDEFINED', '2023-10-01', '1213', 'WSSC', 'REGULAR', 'KDJFLAJDDFJLK', 'Appraisal 2023 Blank.docx', '123', 'PENDING'),
-(3, 'S–4', 'M–1', '', 'UNDEFINED', '2023-10-01', '1213', 'WSSC', 'REGULAR', 'KDJFLAJDDFJLK', 'Appraisal 2023 Blank.docx', '123', 'PENDING');
-
 -- --------------------------------------------------------
 
 --
@@ -730,16 +497,6 @@ CREATE TABLE `qualification` (
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `qualification`
---
-
-INSERT INTO `qualification` (`Id`, `Qualification`, `Grade/Division`, `Passing Year of Degree`, `Last Institute`, `PEC Registration`, `CV`, `Institute Address`, `Major Subject`, `Remarks`, `Employee_id`, `Status`) VALUES
-(1, 'DFA', 'SDFASD', '', '', '', '', '', '', '', '2131243', 'PENDING'),
-(2, 'BS', '-', '-', '-', '-', '', '-', '-', 'XYZ', '41234235', 'PENDING'),
-(3, 'BS', '-', '2023', '', '-', '', '', '-', '-', '1234235', 'PENDING'),
-(4, 'BS', '3.5', '23', 'KFJASD', 'WSFSD', '', 'SDFSD', 'WSDGSD', 'SDFSD', '12345', 'PENDING');
-
 -- --------------------------------------------------------
 
 --
@@ -754,19 +511,6 @@ CREATE TABLE `rate` (
   `EmployementType` varchar(255) DEFAULT NULL,
   `Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `rate`
---
-
-INSERT INTO `rate` (`id`, `rate`, `employee_id`, `allowances_id`, `EmployementType`, `Date`) VALUES
-(1, 30000.00, 8, 1, 'FINANCE', '2023-11-27'),
-(2, 0.00, 8, 2, 'FINANCE', '2023-11-27'),
-(3, 0.00, 8, 3, 'FINANCE', '2023-11-27'),
-(4, 0.00, 8, 4, 'FINANCE', '2023-11-27'),
-(5, 50.00, 8, 5, 'FINANCE', '2023-11-27'),
-(6, 2000.00, 8, 6, 'FINANCE', '2023-11-27'),
-(7, 5000.00, 8, 9, 'FINANCE', '2023-11-27');
 
 -- --------------------------------------------------------
 
@@ -805,13 +549,6 @@ CREATE TABLE `salary` (
   `InternalAuditordate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `salary`
---
-
-INSERT INTO `salary` (`id`, `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`, `timeperiod`, `HrReview`, `HrReviewDate`, `finace`, `finacedate`, `ceo`, `ceodata`, `InternalAuditor`, `InternalAuditordate`) VALUES
-(1, 100005, 0.00, 36210.00, 4590.00, 31620.00, '2023-11-30', 'Shayan Khan Kurtlar', 'Riayat Khan', '41234235', '2023-09-24', 'MANAGER SOLID WASTE', 'M-1', 'FINANCE', 'COMMERCIAL', ' WSSC PAY ', 'TMA - ADMIN - PERMANENT PAY', '-', '-', 1, 'ACCEPT', '2023-12-01', 'ACCEPT', '2023-12-01', 'PENDING', '2023-12-01', '', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -826,14 +563,6 @@ CREATE TABLE `spouse` (
   `Date_of_B` date DEFAULT NULL,
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `spouse`
---
-
-INSERT INTO `spouse` (`id`, `employee_id`, `Spouse_Name`, `CNIC`, `Date_of_B`, `Status`) VALUES
-(1, '123', 'XYZ', '123456', '2023-10-03', 'ACCPET'),
-(2, '1234235', 'XYZ', '2323', '2023-10-17', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -874,14 +603,6 @@ CREATE TABLE `timeperiod` (
   `DateOfHRStatus` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `timeperiod`
---
-
-INSERT INTO `timeperiod` (`ID`, `DateOfSub`, `FromDate`, `ToDate`, `WrokingDays`, `HRStatus`, `DateOfHRStatus`) VALUES
-(1, '2023-11-26', '2023-11-01', '2023-11-30', 26, 'ACCEPT', '2023-11-26'),
-(2, '2023-12-01', '2023-12-01', '2023-12-31', 26, 'ACCEPT', '2023-12-01');
-
 -- --------------------------------------------------------
 
 --
@@ -902,13 +623,6 @@ CREATE TABLE `training` (
   `employee_id` varchar(255) NOT NULL,
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `training`
---
-
-INSERT INTO `training` (`Id`, `Training_Serial_Number`, `Training_Name`, `Institute`, `City`, `Institute_Address`, `Oblige_Sponsor`, `From`, `To`, `Duration`, `employee_id`, `Status`) VALUES
-(1, 'BLUE', 'FRUNT', 'IMG', '', '', '', '0000-00-00', '0000-00-00', '', '12345', 'PENDING');
 
 -- --------------------------------------------------------
 
@@ -932,14 +646,6 @@ CREATE TABLE `transfer` (
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `transfer`
---
-
-INSERT INTO `transfer` (`id`, `Transfer_Order_Number`, `Designation`, `BPS`, `From_Department`, `To_Project`, `From_Station`, `To_Station`, `Worked_From`, `Transfer_Date`, `file`, `employee_id`, `Status`) VALUES
-(1, 'DATA', 'GASDFD', 'SDFASD', 'DSFSDF', 'SDGSD', 'QSDGFSDF', 'QSDFSDF', '2023-10-18', '2023-10-06', '', 123, 'ACCPET'),
-(2, '2SSDFSF', 'FSKLJLJK', 'KDJKASD', 'KKLJLJKSD', 'KJKDFKJ', 'LKKLJASFD', 'LKLJLJKSDF', '2023-10-03', '2023-10-12', 'Attendance.pdf', 123, 'REJECT');
-
 -- --------------------------------------------------------
 
 --
@@ -962,14 +668,6 @@ CREATE TABLE `travelrequest` (
   `DateOfAccepManager` date DEFAULT NULL,
   `DateOfAccepGm` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `travelrequest`
---
-
-INSERT INTO `travelrequest` (`id`, `EmployeeNo`, `RequestNo`, `RequestDate`, `FromCity`, `ToCity`, `DepartureOn`, `ReturnDate`, `TravelMode`, `Justification`, `Statusofmanger`, `StatusofGm`, `DateOfAccepManager`, `DateOfAccepGm`) VALUES
-(9, 100002, 0, '2023-12-12', 'xyz', 'xyz', '2023-11-09', '2023-12-13', 'onyear', 'juc', 'PENDING', 'PENDING', NULL, NULL),
-(10, 100001, 0, '0000-00-00', 'sdfkj', 'kjsdfjk', '2023-10-01', '2023-10-11', 'kjklsdf', ';ljl', 'PENDING', 'PENDING', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1141,37 +839,37 @@ ALTER TABLE `travelrequest`
 -- AUTO_INCREMENT for table `allowances`
 --
 ALTER TABLE `allowances`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `allowancesrateupdate`
 --
 ALTER TABLE `allowancesrateupdate`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `atandece`
 --
 ALTER TABLE `atandece`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `child`
 --
 ALTER TABLE `child`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `earning_deduction_fund`
 --
 ALTER TABLE `earning_deduction_fund`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employeedata`
@@ -1183,73 +881,73 @@ ALTER TABLE `employeedata`
 -- AUTO_INCREMENT for table `employeedataupdate`
 --
 ALTER TABLE `employeedataupdate`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employee_performance`
 --
 ALTER TABLE `employee_performance`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `holidays`
 --
 ALTER TABLE `holidays`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `leavereq`
 --
 ALTER TABLE `leavereq`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payrole`
 --
 ALTER TABLE `payrole`
-  MODIFY `Allownceid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Allownceid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `promotion`
 --
 ALTER TABLE `promotion`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `qualification`
 --
 ALTER TABLE `qualification`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rate`
 --
 ALTER TABLE `rate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `spouse`
 --
 ALTER TABLE `spouse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tabill`
@@ -1261,19 +959,19 @@ ALTER TABLE `tabill`
 -- AUTO_INCREMENT for table `timeperiod`
 --
 ALTER TABLE `timeperiod`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `training`
 --
 ALTER TABLE `training`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `transfer`
 --
 ALTER TABLE `transfer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `travelrequest`
