@@ -104,7 +104,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
              <!-- form start -->
              <form id="formdata" enctype="multipart/form-data">
               <div class="row mt-2">
-                <div class="clearfix">&nbsp;</div>
                 <div class="row">
                   <div class="col-md-2">
                     <div class="form-group">

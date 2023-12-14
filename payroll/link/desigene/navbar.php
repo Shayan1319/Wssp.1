@@ -4,7 +4,7 @@
     background-color: #f1f1f1;
 }
 </style>
-<nav class="navbar header">
+<nav id="header" class="navbar header">
     <div class="row w-100">
         <div class="col-md-3 col-lg-2 col-sm-12 mx-auto">
             <img class="float-end" src="../image/1662096718940.jpg" width="180px" alt="">
@@ -25,18 +25,31 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav w-100">
-        <!-- <li class="nav-item">
-          <a class="nav-link active text-light" href="index.php">Profile</a>
-        </li>  -->
-        <li class="nav-item w-100">
-          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="index.php">Home</a>
-          </li>
+        
+     
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payroll.php">Payroll</a>
         </li>
         <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payrollgen.php">Payroll Generate</a>
-        </li>  
+          <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="employeeCountotal.php">Attendance</a>
+        </li> 
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="timepriod.php">Time Priod</a>
+        </li>
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light m-auto links" href="holyday.php">Holyday</a>
+        </li>    
+        <li class="nav-item dropdown">
+          <a class="nav-link text-center rounded-pill active text-light m-auto links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Monthly payroll
+          </a>
+          <ul class=" dropdown-menu">
+            <li><a class="dropdown-item" href="payrollgen.php">Salary of employee</a></li>
+            <li><a class="dropdown-item" href="payrollgen copy.php">Salary in process</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="payrollgen copy 2.php">Salary rejected</a></li>
+          </ul>
+        </li>
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="EmployeePaySlip.php">Employee Pay Slip</a>
         </li>   

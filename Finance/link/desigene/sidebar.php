@@ -38,6 +38,12 @@
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
+                <a href="employeeCountotal.php" class="nav-link">
+                  Employee salary
+                </a>
+                <a href="EmployeePaySlip.php" class="nav-link">
+                  Employee Pay slip
+                </a>
                 <!-- <a href="EXITCLEARANCEFORM copy.php" class="nav-link">
                   Admin clearance form
                 </a> -->

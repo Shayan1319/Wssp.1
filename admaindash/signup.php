@@ -124,6 +124,7 @@ if ($query) {
                                                         <option value="AppAdmin">App Admin</option>
                                                         <option value="FinanceAdmin">Finance Admin</option>
                                                         <option value="Employee">Employee</option>
+                                                        <option value="Internal Auditor">Internal Auditor</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -158,7 +159,7 @@ if ($query) {
                                                 <td> <?php echo $see ['Password']?></td>
                                                 <td> <?php echo $see ['EmployeeNumber']?></td>
                                                 <td> <?php echo $see ['Designation']?></td>
-                                                <td> <a href="deletsiginup.php?did=<?php echo $see['Id']?>" class="btn btn-dark" ><i class="fa-solid fa-trash"></i></a></td>
+                                                <td> <a href="ajex/deletsiginup.php?did=<?php echo $see['Id']?>" class="btn btn-dark" ><i class="fa-solid fa-trash"></i></a></td>
                                             </tr>
                                             <?php 
                                             }
@@ -193,22 +194,6 @@ if ($query) {
   }
   loadTable();
 
-  $("#employee_no").change(function() {
-    var employeeId = $(this).val();
-    $.ajax({
-      url: "ajex/get_employee_ajax.php",
-      type: "GET",
-      data: {"id": employeeId},
-      success: function(data) {
-        var employeeData = JSON.parse(data);
-        $("#emailAddress").val(employeeData.emailAddress);
-        // Add similar lines for other fields if needed
-      },
-      error: function(xhr, textStatus, errorThrown) {
-        console.error("AJAX error:", errorThrown);
-      }
-    });
-  });
 });
 
     </script>

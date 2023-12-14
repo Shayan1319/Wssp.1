@@ -39,18 +39,56 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       </select>
                     </div>
                   </div>
-                    <div class="col-6">
+                  <div class="col-md-6 my-4">
                       <div class="form-group">
                         <label>From Month </label>
-                        <input type="date" name="frommonth" placeholder="From Month" class="form-control" autocomplete="off" required="">
+                        <select name="frommonth" required id="timeperiod" class="form-control select2">
+                        <?php
+                        $select = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `HRStatus`='ACCEPT' ORDER BY `ID` DESC");
+
+                        if (mysqli_num_rows($select) > 0) {
+                            ?>
+                            <option value="">Select</option>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($select)) {
+                                // Format the date using date() function with the month in English
+                                $formattedDate = date('d-M-Y', strtotime($row['FromDate']));
+                                
+                                echo '<option value="' . $row['FromDate'] . '">' . $formattedDate . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">No time periods found</option>';
+                        }
+                        ?>
+
+                        </select>
                       </div>
-                    </div>
-                    <div class="col-6">
+                  </div>
+                  <div class="col-md-6 my-4">
                       <div class="form-group">
-                        <label>To Month</label>
-                        <input type="date" name="tomunth" placeholder="To Month" class="form-control" autocomplete="off" required="">
+                        <label>To Month </label>
+                        <select name="tomunth" required id="totimeperiod" class="form-control select2">
+                        <?php
+                        $select = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `HRStatus`='ACCEPT' ORDER BY `ID` DESC");
+
+                        if (mysqli_num_rows($select) > 0) {
+                            ?>
+                            <option value="">Select</option>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($select)) {
+                                // Format the date using date() function with the month in English
+                                $formattedDate = date('d-M-Y', strtotime($row['FromDate']));
+                                
+                                echo '<option value="' . $row['FromDate'] . '">' . $formattedDate . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">No time periods found</option>';
+                        }
+                        ?>
+
+                        </select>
                       </div>
-                    </div>
+                  </div>
                     <div class="col-md-12 text-end mt-2">
                       <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="submit">
                     </div>

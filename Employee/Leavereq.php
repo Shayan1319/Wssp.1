@@ -218,25 +218,23 @@ if ($query) {
                       include ('link/desigene/db.php');
                         // Get the employee ID from the session
                         $empid = $_SESSION['EmployeeNumber'];
-
+                        $empleave=$row['leaveAlreadyAvailed'];
+                        $currentYear = date('Y');
                         // SQL query to calculate available leave days
-                        $sql = "SELECT COALESCE(SUM(lr.TotalDays), 0) - COALESCE(ed.leaveAlreadyAvailed, 0) AS TotalDaysAfterSubtraction
-                                FROM leavereq lr
-                                INNER JOIN employeedata ed ON lr.EmployeeNo = ed.EmployeeNo
-                                WHERE lr.Statusofmanger = 'ACCEPT' AND lr.StatusofGm = 'ACCEPT' AND YEAR(lr.DateofApply) = YEAR(CURRENT_DATE())
-                                AND ed.EmployeeNo = $empid";
+                        $sql = "SELECT COUNT(*) AS totalLeaveEntries
+                        FROM atandece
+                        WHERE Employeeid = '$empid'
+                          AND YEAR(`Date`) = '$currentYear'
+                          AND `status` = 'LEAVE'";
 
                         $result = $conn->query($sql);
 
                         if ($result) {
-                            if ($result->num_rows > 0) {
-                                $row = $result->fetch_assoc();
-                                $totalDaysAfterSubtraction = $row['TotalDaysAfterSubtraction'];
-                            } else {
-                                // No leave request found, use the initial value from employeedata
-                                $totalDaysAfterSubtraction = 0; // or any other default value
-                            }
-                        }                       ?>
+                                $rowleave = $result->fetch_assoc();
+                                $leave=$rowleave['totalLeaveEntries'];
+                                $totalDaysAfterSubtraction = $empleave-$leave;
+                        }
+                        ?>
 
                     <input type="number"  name="LeaveAlreadyAvailed" value="<?php  echo  $totalDaysAfterSubtraction;?>" placeholder="Leave Already Availed" class="form-control" autocomplete="off" disabled required="">
                   </div>

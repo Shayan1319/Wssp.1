@@ -32,6 +32,16 @@ if (isset($_POST['submit'])) {
         header("Location: hradmin/index.php");
         exit();
     }
+    elseif ($row["Designation"] == "Internal Auditor" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+        
+        header("Location: InternalAuditor/index.php");
+        exit();
+    }
     elseif ($row["Designation"] == "Payroll manager" && $loginas == "Admin") {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];

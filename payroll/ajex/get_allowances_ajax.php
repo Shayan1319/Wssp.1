@@ -1,14 +1,7 @@
 <?php
 include '../link/desigene/db.php';
-
     $description_id = $_POST['id'];
     $query = mysqli_query($conn,"SELECT * FROM `allowances` WHERE `id` = $description_id");
-
-    // $stmt = $conn->prepare($query);
-    // $stmt->bindParam(':description_id', $description_id, PDO::PARAM_INT);
-    // $stmt->execute();
-    // $count = $stmt->rowCount();
-    
     if (mysqli_num_rows($query)) {
      while($row=mysqli_fetch_assoc($query)){
         $data = array(
@@ -25,5 +18,4 @@ include '../link/desigene/db.php';
         exit;
     }
 }
-
 ?>

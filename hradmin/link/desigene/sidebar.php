@@ -57,12 +57,16 @@
                 <a href="allowancepay.php" class="nav-link">
                  Add Allowances Rate
                 </a>
+                <a href="employeeCountotal.php" class="nav-link">
+                 Employee salaries
+                </a>
+                <a href="timepriod.php" class="nav-link">
+                 Time Period
+                </a>
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
-                <!-- <a href="Apraisal.php" class="nav-link">
-                 Appraisal form
-                </a> -->
+                
                 <a href="Leaves.php" class="nav-link">
                  Leaves requests
                 </a>

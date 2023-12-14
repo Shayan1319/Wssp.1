@@ -1,14 +1,14 @@
 <?php
-include ('../link/desigene/db.php');
-$select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Online Status`='ACCPET'");
-if(mysqli_num_rows($select)>0){
-    ?>
-    <option value="">Select</option>
-    <?php while($row=mysqli_fetch_assoc($select)){
-     ?>
-     <option value="<?php echo $row['EmployeeNo']?>"><h4><?php echo $row['EmployeeNo']?></h4> </option>
-    
-     <?php   
+include('../link/desigene/db.php');
+
+$select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Online Status`='ACCPET'");
+
+if (mysqli_num_rows($select) > 0) {
+    echo '<option value="">Select</option>';
+    while ($row = mysqli_fetch_assoc($select)) {
+        echo '<option value="' . $row['EmployeeNo'] . '">' . $row['EmployeeNo'] . '</option>';
     }
+} else {
+    echo '<option value="">No employees found</option>';
 }
 ?>

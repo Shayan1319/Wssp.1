@@ -6,7 +6,6 @@ include('../link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Payroll manager') {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
-  
   // Redirect to the logout page
   header("Location: ../logout.php");
   exit; // Ensure that the script stops execution after the header redirection
@@ -122,10 +121,29 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <p class="card-text">
                                 <?php
                                 include ('link/desigene/db.php');
-                                // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
-                                echo $row['total_rate'];
+                                // Retrieve the last time period
+                                $queryLastTimePeriod = mysqli_query($conn, "SELECT `ID` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 1");
+                                $rowLastTimePeriod = mysqli_fetch_array($queryLastTimePeriod);
+
+                                // Check if there are results
+                                if ($rowLastTimePeriod['ID'] !== null) {
+                                    // Use the ID of the last time period in the salary query
+                                    $lastTimePeriodId = $rowLastTimePeriod['ID'];
+
+                                    // Query to get the sum of net_pay for the last time period
+                                    $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId");
+                                    $rowSalary = mysqli_fetch_array($querySalary);
+
+                                    // Check if there are results
+                                    if ($rowSalary['total_rate'] !== null) {
+                                        echo $rowSalary['total_rate'];
+                                    } else {
+                                        echo "No salary data found for the last time period.";
+                                    }
+                                } else {
+                                    echo "No data found for the last time period in the timeperiod table.";
+                                }
+
                                 ?>
                             </p>
                         </div>
@@ -139,10 +157,30 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <p class="card-text">
                                 <?php
                                 include ('link/desigene/db.php');
-                                // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE());");
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
-                                echo $row['total_rate_wssc'];
+                                  // Retrieve the last time period
+                                  $queryLastTimePeriod = mysqli_query($conn, "SELECT `ID` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 1");
+                                  $rowLastTimePeriod = mysqli_fetch_array($queryLastTimePeriod);
+  
+                                  // Check if there are results
+                                  if ($rowLastTimePeriod['ID'] !== null) {
+                                      // Use the ID of the last time period in the salary query
+                                      $lastTimePeriodId = $rowLastTimePeriod['ID'];
+  
+                                      // Query to get the sum of net_pay for the last time period
+                                      $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId && `ClassGroup`= ' WSSC PAY '");
+                                      $rowSalary = mysqli_fetch_array($querySalary);
+  
+                                      // Check if there are results
+                                      if ($rowSalary['total_rate'] !== null) {
+                                          $wsscpay= $rowSalary['total_rate'];
+                                          echo $wsscpay;
+                                      } else {
+                                        $wsscpay=0;
+                                          echo "No salary data found for the last time period.";
+                                      }
+                                  } else {
+                                      echo "No data found for the last time period in the timeperiod table.";
+                                  }  
                                 ?>
                             </p>
                         </div>
@@ -157,10 +195,28 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <?php
                                 include ('link/desigene/db.php');
                                 // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
-                                
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
-                                echo $row['total_rate_tma'];
+                                $queryLastTimePeriod = mysqli_query($conn, "SELECT `ID` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 1");
+                                  $rowLastTimePeriod = mysqli_fetch_array($queryLastTimePeriod);
+  
+                                  // Check if there are results
+                                  if ($rowLastTimePeriod['ID'] !== null) {
+                                      // Use the ID of the last time period in the salary query
+                                      $lastTimePeriodId = $rowLastTimePeriod['ID'];
+  
+                                      // Query to get the sum of net_pay for the last time period
+                                      $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId && `ClassGroup`= ' TMA PAY '");
+                                      $rowSalary = mysqli_fetch_array($querySalary);
+                                      // Check if there are results
+                                      if ($rowSalary['total_rate'] !== null) {
+                                          $tmapay= $rowSalary['total_rate'];
+                                          echo $tmapay;
+                                      } else {
+                                        $tmapay =0;
+                                          echo "No salary data found for the last time period.";
+                                      }
+                                  } else {
+                                      echo "No data found for the last time period in the timeperiod table.";
+                                  }  
                                 ?>
                             </p>
                         </div>
@@ -173,13 +229,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
                                 <?php
-                                include ('link/desigene/db.php');
-                                // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn, "SELECT
-                                (SELECT SUM(rate) FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -
-                                (SELECT SUM(rate) FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
-                                echo $row['rate_difference'];
+                                $defrate=$tmapay-$wsscpay;
+                                echo $defrate;
                                 ?>
                             </p>
                         </div>
@@ -191,15 +242,35 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
-                                <?php
-                                include ('link/desigene/db.php');
-                                // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn, "SELECT
-                                (SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -
-                                (SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(Date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)) AS rate_difference_previous_month;");
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
-                                echo $row['rate_difference_previous_month'];
-                                ?>
+                            <?php
+                            include ('link/desigene/db.php');
+
+                            // Retrieve the last two time periods
+                            $queryLastTwoTimePeriods = mysqli_query($conn, "SELECT `ID` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 2");
+                            $rowsLastTwoTimePeriods = mysqli_fetch_all($queryLastTwoTimePeriods, MYSQLI_ASSOC);
+
+                            // Check if there are at least two results
+                            if (count($rowsLastTwoTimePeriods) >= 2) {
+                                // Use the IDs of the last two time periods in the salary query
+                                $lastTimePeriodId1 = $rowsLastTwoTimePeriods[0]['ID'];
+                                $lastTimePeriodId2 = $rowsLastTwoTimePeriods[1]['ID'];
+
+                                // Query to get the sum of net_pay for the last two time periods
+                                $querySalary1 = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId1");
+                                $querySalary2 = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId2");
+
+                                $rowSalary1 = mysqli_fetch_array($querySalary1);
+                                $rowSalary2 = mysqli_fetch_array($querySalary2);
+
+                                    // Calculate the difference
+                                    $difference = abs($rowSalary1['total_rate'] - $rowSalary2['total_rate']);
+                                    echo $difference;
+                               
+                            } else {
+                                echo "Not enough data found in the timeperiod table to calculate the difference between the last two time periods.";
+                            }
+                            ?>
+
                             </p>
                         </div>
                     </div>

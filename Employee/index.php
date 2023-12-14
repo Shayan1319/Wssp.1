@@ -10,69 +10,45 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
     include '../Calendar.php';
     $date= date("Y/m/d") ;
     $currentMonth = date('m'); // Get the current month
-$currentYear = date('Y'); // Get the current year
+    $currentYear = date('Y'); // Get the current year
 
 $calendar = new Calendar($date);
 $empid= $_SESSION['EmployeeNumber'];
 // $calendar->add_event('^', $date, 1, 'green');
-include('link/desigene/db.php'); // Include your database connection file
+$selecttime = mysqli_query($conn, "SELECT `ID`, `FromDate`, `ToDate`, `WrokingDays` FROM `timeperiod` WHERE `ID`='1' # ORDER BY `ID` DESC LIMIT 1");
 
-// SQL query to get the total number of attendees for the current month with status 'present'
-$query = "SELECT COUNT(*) as total_attendees 
-          FROM atandece 
-          WHERE MONTH(Date) = MONTH(CURRENT_DATE()) 
-          AND YEAR(Date) = YEAR(CURRENT_DATE()) 
-          AND status = 'PRESENT'";
-
-$result = mysqli_query($conn, $query); // Execute the query
-if($row = mysqli_fetch_assoc($result)){
-    $total_attendees = $row['total_attendees'];
-} // Fetch the result as an associative array
+while ($rowtime = mysqli_fetch_array($selecttime)) {
+   $fromdate= $rowtime['FromDate'];
+   $todate= $rowtime['ToDate'];
+   $workingdate= $rowtime['WrokingDays'];
+}
+$query = "SELECT COUNT(*) as total_attendees FROM atandece # WHERE `Employeeid`='$empid' AND `Date`>='$fromdate' AND `Date`<='$todate' AND `status`='PTESENT'";
+$resultatd = mysqli_query($conn, $query);
+if($rowatd = mysqli_fetch_assoc($resultatd)){
+    $total_attendees = $rowatd['total_attendees'];
+} 
 else{
     $total_attendees = 0;
 }
- 
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReq
-        FROM employeedata AS e
-        INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' 
-        AND t.StatusofGM = 'ACCPET' 
-        AND MONTH(t.DepartureOn) = $currentMonth
-        AND YEAR(t.DepartureOn) = $currentYear
-        AND e.EmployeeNo = $empid";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $TravelReq = $row['TravelReq'];
+$sqltrl = "SELECT COUNT(*) AS TravelReq FROM `travelrequest` WHERE `DepartureOn`>='$fromdate' AND `DepartureOn`<='$todate' AND `EmployeeNo`='$empid'";
+$resulttrl = $conn->query($sqltrl);
+if ($resulttrl->num_rows > 0) {
+    $rowtrl = $resulttrl->fetch_assoc();
+    $TravelReq = $rowtrl['TravelReq'];
 } else {
     $TravelReq = 0;
 }
+$sqlleave = "SELECT COUNT(*) as totalAcceptLeaves FROM atandece WHERE `Employeeid`='$empid' AND `Date`>='$fromdate' AND `Date`<='$todate'  AND `status`='LEAVE'";
+$resultleave = $conn->query($sqlleave);
 
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAcceptLeaves
-        FROM employeedata AS e
-        INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.StatusofGm = 'ACCPET' 
-        AND l.Statusofmanger = 'ACCPET' 
-        AND DATE(l.LeaveFrom) = '$currentDate' 
-        AND e.EmployeeNo = $empid";
-
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $totalAcceptLeaves = $row['totalAcceptLeaves'];
+if ($resultleave->num_rows > 0) {
+    $rowleave = $resultleave->fetch_assoc();
+    $totalAcceptLeaves = $rowleave['totalAcceptLeaves'];
 } else {
     $totalAcceptLeaves = 0;
 }
 
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME 
-        FROM employeedata AS e 
-        INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid 
-        WHERE a.DDorOT = 'OVERTIME' 
-        AND DATE(a.Date) = '$currentDate' 
-        AND e.EmployeeNo = $empid";
+$sql = "SELECT COUNT(*) as employeeCountOVERTIME FROM atandece WHERE `Employeeid`='$empid' AND `Date`>='$fromdate' AND `Date`<='$todate' AND `DDorOT`='OVERTIME'";
 
 $result = $conn->query($sql);
 
@@ -83,11 +59,7 @@ if ($result->num_rows > 0) {
     $employeeCountOVERTIME = 0;
 }
 
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountDDorOT 
-        FROM employeedata AS e 
-        INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid 
-        WHERE a.DDorOT = 'DOUBLE DUTY' 
-        AND DATE(a.Date) = '$currentDate'";
+$sql = "SELECT COUNT(*) as employeeCountDDorOT FROM atandece WHERE `Employeeid`='$empid' AND `Date`>='$fromdate' AND `Date`<='$todate' AND `DDorOT`='DOUBLE DUTY'";
 
 $result = $conn->query($sql);
 
@@ -101,13 +73,11 @@ if ($result->num_rows > 0) {
 ?>
 <script> 
 var total_attendees= <?php echo $total_attendees?>;
-var TravelReq= <?php echo $TravelReq?>;
+var TravelReq= <?php echo  $TravelReq?>;
 var totalAcceptLeaves= <?php echo $totalAcceptLeaves?>;
 var employeeCountOVERTIME= <?php echo $employeeCountOVERTIME?>;
 var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
-
 </script>
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,11 +173,8 @@ var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
                 <?php 
                 $Empod = $_SESSION['EmployeeNumber'];
                 $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $Empod");
-            
                 if (mysqli_num_rows($select) > 0) {
-                    while ($row = mysqli_fetch_array($select)) {
-                        
-                
+                    while ($row = mysqli_fetch_array($select)) {                
                 ?>
                 <div class="col-sm-12 col-lg-5 col-md-5 my-4 p-3">
                     <div class="row bg-light">
@@ -230,10 +197,13 @@ var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
                     </div>
                 </div>
                 <div class="col-sm-12 col-lg-4 col-md-4 my-4  p-2">
-                   
-                <div class="content home">
-                    <?php echo $calendar?>
-                </div>  
+                    <div class="content home">
+                    <?php  
+                        $selectanndata = mysqli_query($conn,"SELECT * FROM `announcement` WHERE MONTH(`ceodata`) = MONTH(CURDATE()) AND YEAR(`ceodata`) = YEAR(CURDATE());");
+                        while($rowanndata=mysqli_fetch_array($selectanndata)){   
+                        }
+                         echo $calendar?>
+                    </div>  
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 my-4  p-2">
                     <div class="bg-light h-100">
@@ -241,10 +211,35 @@ var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
                                 <label class="fs-6 fw-bolder" for="">Up Coming Events</label>
                             </div>
                             <div class="col-12" style="overflow: scroll;height: 90%;">
+                                <?php  
+                                $selectann = mysqli_query($conn,"SELECT * FROM `announcement` WHERE MONTH(`ceodata`) = MONTH(CURDATE()) AND YEAR(`ceodata`) = YEAR(CURDATE());");
+                                while($rowann=mysqli_fetch_array($selectann)){
+                                ?>
                                 <div class="card text-bg-primary mb-3">
-                                    <div class="card-header">Header</div>
+                                    <button type="button" id="seeall" class="btn w-100" data-bs-toggle="modal"  data-eid="<?php echo $rowann['id'] ?>" data-bs-target="#exampleModal">
+                                        <div class="card-header"><?php echo $rowann['Subject']?></div>
+                                    </button>
                                 </div>
-                        </div>
+                                <?php }?>
+                            </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" id="table-time" >
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
                     </div>
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 h-50  my-4  p-2 bg-light ">
@@ -317,6 +312,19 @@ var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
                                 }
                             }
                         });
+                    $(document).ready(function(){
+                        $(document).on("click", "#seeall",function(){
+                            var update = $(this).data("eid");
+                            $.ajax({
+                            url : "ajex/announcement.php",
+                            type:"POST",
+                            data : {id : update},
+                            success : function(data){
+                                $("#table-time") .html(data) ;
+                            }
+                            });
+                        });
+                    });
                     </script>
                 </div>
                 <?php }}else{ echo "data don't exet";}?>

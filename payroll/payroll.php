@@ -12,23 +12,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   exit; // Ensure that the script stops execution after the header redirection
 } else{
 if (isset($_POST['submit'])) {
-  $employeeId = $_POST['employee_no'];
-  $allowanceIds = $_POST['description_id'];
-  $fundInput = $_POST['fundInput'];
-  $grossPay = $_POST['grossPayInput'];
-  $deductionInput = $_POST['deductionInput'];
-  $netPayInput = $_POST['netPayInput'];
-  $rateInput = $_POST['rates'];
-  $date= date("Y-m-d");
-  $type=strtoupper($_POST['type']);
-
-//   try {
-//     $con->beginTransaction();
-
+    $employeeId = $_POST['employee_no'];
+    $allowanceIds = $_POST['description_id'];
+    $fundInput = $_POST['fundInput'];
+    $grossPay = $_POST['grossPayInput'];
+    $deductionInput = $_POST['deductionInput'];
+    $netPayInput = $_POST['netPayInput'];
+    $rateInput = $_POST['rates'];
+    $date= date("Y-m-d");
+    $type=strtoupper($_POST['type']);
+    $select=mysqli_query($conn,"SELECT * FROM `earning_deduction_fund` WHERE `employee_id`=$employeeId");
+    if(mysqli_num_rows($select)){echo '<script>alert( "Payroll already exist");</script>';}else{
     $Insert = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
-//     $stmt = $con->prepare($query);
-//     $stmt->execute();
-
     if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
       $size = sizeof($allowanceIds);
       for ($i = 0; $i < $size; $i++) {
@@ -47,17 +42,7 @@ if (isset($_POST['submit'])) {
         <?php 
         
         
-      }
-//     $con->commit();
-//     $message = 'Payroll has been saved successfully.';
-//   } catch (PDOException $ex) {
-//     $con->rollback();
-//     echo $ex->getMessage();
-//     echo $ex->getTraceAsString();
-//     exit;
-//   }
-//   $goto = "payroll.php";
-//   header("location:congratulation.php?go_to=" . $goto . "&success_message=" . $message);
+      }}
 }
 ?>
 <!DOCTYPE html>
@@ -378,34 +363,34 @@ $(document) .ready(function(){
       loadAllowances(); 
 });
 $(document).ready(function() {
-$("#employee_no").change(function() {
-      var employeeId = $(this).val();
-      // alert(employeeId);
-      $.ajax({
-        url: "ajex/get_employee_ajax.php",
-        type: "GET",
-        data: {"id": employeeId},
-        // cache: false,
-        // async: false,
-        success: function(data) {
-          var employeeData = JSON.parse(data);
-          $("#empname").val(employeeData.fName);
-          $("#father_name").val(employeeData.father_Name)
-          $("#job_title").val(employeeData.Job_Tiltle);
-          $("#type").val(employeeData.type);
-        }
-      });
+    $("#employee_no").change(function() {
+        var empid = $(this).val();
+        $.ajax({
+            url: "ajex/get_employee_ajax.php",
+            type: "POST",
+            data: { "id": empid },
+            dataType: 'json',
+            success: function(data) {
+                $("#empname").val(data.fName);
+                $("#father_name").val(data.father_Name);
+                $("#type").val(data.type);
+                $("#job_title").val(data.Job_Tiltle);
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
     });
-  });
+});
 
 $(document).ready(function() {
       $("#description").change(function() {
         var descriptionId = $(this).val();
-        // alert(descriptionId);
+        alert(descriptionId);
         $.ajax({
           url: "ajex/get_allowances_ajax.php",
           type: "POST",
-          data: { "id": descriptionId},   
+          data: { "id": descriptionId},
           // cache: false,
           // async: false,
           success: function(data) {
@@ -442,7 +427,8 @@ $(document).ready(function() {
     alert("This description has already been added.");
     return; // Do not add it again
   }
-  addedDescriptionIds.push(descriptionId); // Add the description ID to the list
+  addedDescriptionIds.push(descriptionId); 
+  // Add the description ID to the list
 
       addSerial++;
       var descriptionIdInput = "<input type='hidden' name='description_id[]' value='" + descriptionId + "' />";
@@ -479,7 +465,6 @@ $(document).ready(function() {
           var currentFund = parseFloat($("#fundInput").val()) || 0;
           var newFund = currentFund + rate;
           $("#fundInput").val(newFund.toFixed(2));
-  
           // Subtract the rate from the gross pay input
           var grossPay = parseFloat($("#grossPayInput").val()) || 0;
           var newGrossPay = grossPay - rate;

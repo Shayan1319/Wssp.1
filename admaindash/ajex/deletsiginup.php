@@ -1,7 +1,6 @@
 <?php
 include('../link/desigene/db.php');
 
-if(isset($_POST['did'])) {
     $did = $_GET['did'];
 
     // Delete query
@@ -24,7 +23,4 @@ if(isset($_POST['did'])) {
     </script>
     <?php // Failed to delete
     }
-} else {
-    echo 0; // Invalid request
-}
 ?>

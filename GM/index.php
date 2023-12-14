@@ -44,6 +44,14 @@ if ($result->num_rows > 0) {
 } else {
     $employeeCountDDorOT = 0;
 }
+$sql = "SELECT COUNT(*) AS timeperiod FROM salary WHERE `HrReview` = 'ACCEPT' AND `finace` = 'ACCEPT' AND `ceo` = 'PENDING'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $timeperiod = $row['timeperiod'];
+} else {
+    $timeperiod = 0;
+}
 // Query to count the number of employees with DDorOT 'OVERTIME' on the current date
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'OVERTIME' AND a.Date = '$currentDate'";
 $result = $conn->query($sql);
@@ -165,13 +173,14 @@ if ($query) {
         $rate_difference_previous_month = 0;
     }
 } 
-$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Online Status`='PENDING'");
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM atandece WHERE `GMStatus`='PENDING'");
 if (mysqli_num_rows($query)) {
     $result = mysqli_fetch_assoc($query);
     $total_employees = $result['total_employees'];
   }   else{
         $total_employees = 0;
     }
+  
 
 // Query to count the number of distinct employees with added payroll
 $query = mysqli_query($conn, "SELECT COUNT(DISTINCT employee_id) AS total_employees_witout_payroll FROM rate");
@@ -183,7 +192,7 @@ if ($query) {
     }
 } 
 // Query to count the number of distinct employees with added payroll
-$query = mysqli_query($conn, "SELECT  COUNT(id) AS total_employees_payroll FROM rate");
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees_payroll FROM rate");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $total_employees_payroll = $result['total_employees_payroll'];
@@ -456,12 +465,12 @@ WHERE
                 <h3><?php echo $exit_form?></h3>
                   <h4>Employee Clearance Form</h4>
                 </div>
-                <div class="icon" style="    color: #ffffff3d;" >
+                <div class="icon" style=" color: #ffffff3d;" >
                 <i class="fa-solid fa-person-walking-dashed-line-arrow-right"></i>
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <a href="aprasals.php">
                 <!-- small box -->
@@ -475,7 +484,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#6471d3" >
@@ -487,20 +496,34 @@ WHERE
                 <i class="fa-solid fa-id-badge"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
-              <a href="" style>
+              <a href="employeeCountotal.php" style>
                 <!-- small box -->
               <div class="small-box text-white" style="background-color:#6471d3" >
                 <div class="inner">
                   <h3><?php echo $total_employees?></h3>
-                  <h4>Total Employees Pending</h4>
+                  <h4>Total Employees Attendees Pending</h4>
                 </div>
-                <div class="icon" style="    color: #ffffff3d;" ><i class="fa-solid fa-person-digging"></i>
+                <div class="icon" style=" color: #ffffff3d;" ><i class="fa-solid fa-person-digging"></i>
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
+            
+            <div class="col-lg-4 col-xs-12">
+              <a href="employeeCountotal copy.php" style>
+                <!-- small box -->
+              <div class="small-box text-white" style="background-color:#6471d3" >
+                <div class="inner">
+                  <h3><?php echo $timeperiod ?></h3>
+                  <h4>Employee pay</h4>
+                </div>
+                <div class="icon" style=" color: #ffffff3d;" ><i class="fa-solid fa-person-digging"></i>
+                </div>
+              </div>
+              </a>
+            </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>Travel request</h2>
             </div>
@@ -517,7 +540,7 @@ WHERE
                   <i class="fa fa-clock-o"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#7887f8" >
@@ -531,7 +554,7 @@ WHERE
                   <i class="fa fa-clock-o"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
@@ -547,7 +570,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="travelRejecet.php" style="text-decoration: none;">
@@ -563,7 +586,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>PayRoll</h2>
             </div>
@@ -578,7 +601,7 @@ WHERE
                     <i class="fa-regular fa-credit-card"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#7d8bf7e0;" >
@@ -590,7 +613,7 @@ WHERE
                 <i class="fa-solid fa-rupee-sign"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#7d8bf7e0;" >
@@ -602,7 +625,7 @@ WHERE
                 <i class="fa-solid fa-rupee-sign"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#7d8bf7e0;" >
@@ -614,7 +637,7 @@ WHERE
                 <i class="fa-solid fa-arrow-up-wide-short"></i><i class="fa-solid fa-arrow-down-wide-short"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#7d8bf7e0;" >
@@ -625,7 +648,7 @@ WHERE
                 <div class="icon" style="color: #ffffff85;" ><i class="fa-solid fa-chart-column"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#919df3;" >
@@ -636,7 +659,7 @@ WHERE
                 <div class="icon" style="color: #ffffff85;" ><i class="fa-solid fa-money-check-dollar"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#919df3;" >
@@ -647,7 +670,7 @@ WHERE
                 <div class="icon" style="color: #ffffff85;" ><i class="">💵</i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>TA Bill</h2>
             </div>
@@ -664,7 +687,7 @@ WHERE
                   <i class="fa fa-clock-o"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <div class="small-box text-white" style="background-color:#919df3" >
@@ -678,7 +701,7 @@ WHERE
                   <i class="fa fa-clock-o"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="aprovetabill.php" style="text-decoration: none;">
@@ -710,7 +733,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="tabillRejecet.php" style="text-decoration: none;">
@@ -726,7 +749,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>TODAY'S ATTENDANCE</h2>
             </div>
@@ -744,7 +767,7 @@ WHERE
                   <i class="fa fa-user"></i>
                 </div>
               </div>
-            </div><!-- ./col -->     
+            </div>     
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box text-white" style="background-color:#b0b8fa;" >
@@ -758,7 +781,7 @@ WHERE
                     <i class="fa fa-user"></i>
                   </div>
                 </div>
-              </div><!-- ./col -->
+              </div>
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box text-white" style="background-color:#b0b8fa;" >
@@ -772,7 +795,7 @@ WHERE
                     <i class="fa fa-ban"></i>
                   </div>
                 </div>
-              </div><!-- ./col -->
+              </div>
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box text-white" style="background-color:#b0b8fa;" >
@@ -786,7 +809,7 @@ WHERE
                     <i class="fa fa-running"></i>
                   </div>
                 </div>
-              </div><!-- ./col -->
+              </div>
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box text-white" style="background-color:#b0b8fa;" >
@@ -800,7 +823,7 @@ WHERE
                     <i class="fa fa-clock"></i>
                   </div>
                 </div>
-              </div><!-- ./col -->
+              </div>
             <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box text-white" style="background-color:#b0b8fa;" >
@@ -814,7 +837,7 @@ WHERE
                     <i class="fa fa-gear"></i>
                   </div>
                 </div>
-              </div><!-- ./col -->
+              </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <h2>LEAVE REQUESTS</h2>
             </div>
@@ -831,7 +854,7 @@ WHERE
                   <i class="fa fa-bar-chart"></i>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
@@ -847,7 +870,7 @@ WHERE
                 </div>
               </div>
              </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
@@ -863,7 +886,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-4 col-xs-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
@@ -879,7 +902,7 @@ WHERE
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
+            </div>
             <div class="col-lg-12 col-sm-12">
             <div class="row">
             <div class="col-sm-12 col-lg-6 col-md-6">

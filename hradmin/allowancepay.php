@@ -106,7 +106,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               <div class="row mt-2">
                 <div class="clearfix">&nbsp;</div>
                 <div class="row">
-                
                   <div class="clearfix">&nbsp;</div>
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
                     <table id="employee_pay" class="table table-bordered">
@@ -129,8 +128,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
       <!-- /.card-body -->
@@ -140,61 +139,43 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    <!-- Col-12 -->
   
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
         <button type="button" class="btn-close btn btn-dange" style="background-color: #ff0505 !important; color: #fff !important;" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form id="formdata" enctype="multipart/form-data">
-                    <div class="form-group">
-                      <label>Allowance</label>
-                      <input type="text" class="form-control" id="discription_update" name="discription">
-                      <input type="text" class="form-control" hidden id="id_update" name="">
-                    </div>
-                    <div class="form-group">
-                      <label>Fin Classification</label>
-                      <select name="fin_classification" id="fin_classification_update" class="form-control">
-                        <option value="GROSS PAY">GROSS PAY</option>
-                        <option value="LOAN-EE">LOAN-EE</option>
-                        <option value="EOBI-EE">EOBI-EE</option>
-                        <option value="EOBI-ER">EOBI-ER</option>
-                        <option value="OTH-DED">OTH-DED</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Rate Calc. Mode</label>
-                      <select name="rate_calc_mode" id="rate_calc_mode_update" class="form-control">
-                        <option value="PRESENT RATE">Present Rate</option>
-                        <option value="RUNTIME VALUE">Runtime Value</option>
-                        <option value="PREVAILING RATE">Prevailing Rate</option>
-                        <option value="EMPLOYEE PENSION">Employee pension</option>
-                        <option value="OFF PAY">OFF PAY</option>
-                        <option value="OVERTIME">OVERTIME</option>
-                        <option value="DOUBLE DUTY">DOUBLE DUTY</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label>Earning/Deduction/Fund</label>
-                      <select name="earning_deduction_fund" id="earning_deduction_fund_update" class="form-control">
-                        <option value="EARNING">Earning</option>
-                        <option value="DEDUCTION">Deduction</option>
-                        <option value="FUND">Fund</option>
-                      </select>
-                    <div class="form-group">
-                      <label>Allowance Status</label>
-                      <select name="allowance_status" id="allowance_status_update" class="form-control">
-                        <option value="">Select Status</option>
-                        <option value="ACTIVE">Active</option>
-                        <option value="INACTIVE">Inactive</option>
-                      </select>
-                    </div>
-                     <div class="form-group">
-                      <label>Rate</label>
-                      <input type="text" class="form-control" id="price" name="price">
-                    </div>
-              </form>
+        <form id="formdata" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>Time Period</label>
+            <select name="timeperiod" required id="timepertod" class="form-control select2">
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Allowance</label>
+            <input type="text" class="form-control" id="discription_update" name="discription">
+            <input type="text" class="form-control" hidden id="id_update" name="">
+          </div>
+           <div class="form-group">
+            <label>Rate</label>
+            <input type="text" class="form-control" id="price" name="price">
+          </div>
+        </form>
+        <table id="employee_pay" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID.No</th>
+              <th>Time Period</th>
+              <th>Allowance</th>
+              <th>Price</th>
+              <th>Allownce Id</th>
+            </tr>
+          </thead>
+          <tbody id="table-time">
+
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -203,14 +184,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     </div>
   </div>
 </div>
-  <div class="clearfix">&nbsp;</div>
-  <div class="clearfix">&nbsp;</div>
   </div>
-  
   </div>
   <?php include('../link/desigene/script.php') ?>
   <!-- jequery  -->
   <script>
+     $(document) .ready(function(){
+       $(function() {
+         $(".select2").select2();
+       });
+     function loadTable(){
+       $.ajax({
+         url : "ajex/timeperiod.php",
+         type : "POST",
+       success : function(data){
+       $("#timepertod") .html(data) ;
+       }});
+       }
+       loadTable();
+      });
     $(document).ready(function(){
       function loadTable(){
         $.ajax({
@@ -222,12 +214,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadTable();
-      
-    //  code for update 
-      
       $(document).on("click", "#update",function(){
         var update = $(this).data("eid");
-      // alert(update);
+        $.ajax({
+          url : "ajex/ajax-loadrate-allowancerate copy.php",
+          type:"POST",
+          data : {id : update},
+          success : function(data){
+            $("#table-time") .html(data) ;
+          }
+        });
+      });
+      $(document).on("click", "#update",function(){
+        var update = $(this).data("eid");
         $.ajax({
           url : "ajex/get_allowances_ajax.php",
           type:"POST",
@@ -258,13 +257,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             // Replace with the actual ID from the database
             var Sfin = document.getElementById('allowance_status_update');
           }
-
         });
-        
       });
       $(document).on("click", "#delete",function(){
         var delet = $(this).data("did");
-      // alert(update);
         $.ajax({
           url : "ajex/delete_allowances_ajax.php",
           type:"POST",
@@ -274,33 +270,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             loadTable();
             }
             else{
-              alert ("Can't Save Record");
+              alert ("Can't Delete Record");
             }
           }
-
         });
-        
       });
       $("#updatenow").on("click",function(e){
         e.preventDefault();
         var discription_update = $("#discription_update").val();
         var id_update = $("#id_update").val();
-        var fin_classification_update = $("#fin_classification_update").val();
-        var rate_calc_mode_update = $("#rate_calc_mode_update").val();
-        var earning_deduction_fund_update = $("#earning_deduction_fund_update").val();
-        var allowance_status_update = $("#allowance_status_update").val();
+        var timepertod = $("#timepertod").val();
         var price = $("#price").val();
-        // alert(id_update);
         $.ajax({
-          url:"ajex/ajax-update-allowance.php",
+          url:"ajex/ajax-update-allowance copy.php",
           type:"Post", 
-          data:{id:id_update,
-            discrip:discription_update,
-            fin:fin_classification_update,
-            rate:rate_calc_mode_update,
-            earning:earning_deduction_fund_update,
-            allowance:allowance_status_update,
-            price:price},
+          data:{id:id_update,discrip:discription_update,timepertod:timepertod,price:price},
           success:function(data){
             if(data == 1){
             loadTable();
@@ -311,30 +295,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           } });
             });
        loadTable();
-      $("#save").on("click",function(e){
-        e.preventDefault();
-        var employee_ = $("#employee_no").val();
-        var discripti = $("#discription").val();
-        var classification = $("#fin_classification").val();
-        var calc_mode = $("#rate_calc_mode").val();
-        var deduction_fund = $("#earning_deduction_fund").val();
-        var allowance_status = $("#allowance_status").val();
-        $.ajax({
-          url:"ajex/ajax-inset-allowances.php",
-          type:"Post", 
-          data:{employee:employee_, discrip:discripti,fin:classification,rate:calc_mode,earning:deduction_fund,allowance:allowance_status},
-          success:function(data){
-            if(data == 1){
-            loadTable();
-            $("#formdata").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
-          }
-
-        });
-            });
+       loadTabletime();
     });
   </script>
 </body>

@@ -11,6 +11,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   header("Location: ../logout.php");
   exit; // Ensure that the script stops execution after the header redirection
 } else {
+  
     // Your code for logged-in users goes here
     $currentDate = date('Y-m-d');
 // Query to count the number of employees 
@@ -26,6 +27,7 @@ if ($result->num_rows > 0) {
 } else {
     $employeeCount = 0;
 }
+
 // Query to count the number of employees with status 'ABSENT' on the current date
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountABSENT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'ABSENT' AND a.Date = '$currentDate'";
 $result = $conn->query($sql);
@@ -44,6 +46,7 @@ if ($result->num_rows > 0) {
 } else {
     $employeeCountDDorOT = 0;
 }
+
 // Query to count the number of employees with DDorOT 'OVERTIME' on the current date
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'OVERTIME' AND a.Date = '$currentDate'";
 $result = $conn->query($sql);
@@ -364,11 +367,7 @@ WHERE
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $Appraisals = $row['Appraisals'];
-        }
-
-// Establish a database connection (assuming $conn is your connection variable)
-// ... (your database connection code)
-
+        }        
 // SQL query to count total employees
 $sql = "SELECT COUNT(*) AS totalEmployeesupdate FROM employeedataupdate";
 
@@ -399,8 +398,14 @@ if ($result) {
     $total_rows_new_update = $row['total_rows_new_update'];
 } else {
   $total_rows_new_update = 0;
+}$sql = "SELECT COUNT(*) AS timeperiod FROM salary WHERE `HrReview` = 'ACCEPT' AND `finace` = 'ACCEPT' AND `ceo` = 'PENDING'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $timeperiod = $row['timeperiod'];
+} else {
+    $timeperiod = 0;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -477,22 +482,68 @@ if ($result) {
         <?php include('link/desigene/navbar.php')?>
         <div class="container px-3 py-5">
           <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
+            <div class="accordion accordion-flush bg-info bg-opacity-10 border border-info rounded-end" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Make an announcement
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <form action="" id="formdata" method="post">
+                  <div class="accordion-body">
+                    <input type="text" class="form-control my-5" placeholder="Subjeet" name="Subject" id="Subject">
+                    <textarea name="Q1" id="Q1"></textarea>
+                    <div class="text-start my-3" >
+                    <input type="button" class="btn btn-primary" value="Sebmit" name="" id="save">
+                    </div>
+                    <script>
+                      CKEDITOR.replace('Q1');
+                      $(document).ready(function(){
+                          $("#save").on("click",function(e){
+                              e.preventDefault();
+                              var Subject = $("#Subject").val();
+                              var Q1 = $("#Q1").val();  // Fix: Change q1 to Q1
+                              $.ajax({
+                                  url: "ajex/ajax-inset-announcement.php",
+                                  type: "Post", 
+                                  data: {Subject: Subject, Q1: Q1},  // Fix: Change q1 to Q1
+                                  success: function(data){
+                                      if(data == 1){
+                                          alert("Save Record");
+                                          $('#formdata')[0].reset();
+                                          CKEDITOR.instances['Q1'].setData('');
+                                      }
+                                      else{
+                                          alert("Can't Save Record");
+                                      }
+                                  }
+                              });
+                          });
+                      });
+                    </script>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3>Employee Status</h3>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <a href="EXITCLEARANCEFORM.php">
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                 <h3><?php echo $exit_form?></h3>
                   <h5>Employee Clearance Form</h5>
-                </div>
-                
+                </div>                
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <a href="aprasals.php">
                 <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
@@ -503,7 +554,7 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
@@ -512,7 +563,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <a href="new_employee.php" style>
                 <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
@@ -523,8 +574,7 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <a href="new_employeeupdate.php" >
                 <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
@@ -535,8 +585,7 @@ if ($result) {
               </div>
               </a>
             </div>
-
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <a href="total_rows_new_update.php" style>
                 <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
@@ -546,35 +595,44 @@ if ($result) {
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
-
-            
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            </div>
+            <div class="col-md-3 col-sm-12 text-center">
+            <a href="timepriod.php" style>
+                <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                <h3><?php echo $timeperiod?></h3>
+                  <h4>Time Period</h4>
+                </div>
+              </div>
+              </a>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3 style="color: darkblue;">Travel request</h3>
             </div>
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReq?>
               <script> var TravelReq= <?php echo $TravelReq?>;</script>
               </h3>
-                  <h5>Total Number of Travel Request</h5>
+                  <h5>Travel Request</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
                 <div class="inner">
                 <h3><?php echo $TravelReqAprove?>
               <script> var TravelReqAprove= <?php echo $TravelReqAprove?>;</script>
               </h3>
-                  <h5>Number of Travel Request Accepted</h5>
+                  <h5>Travel Request Accepted</h5>
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <a href="travelreq.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
@@ -587,7 +645,7 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <a href="travelRejecet.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background-color:#7887f8 !important;" >
@@ -600,10 +658,10 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3 style="color: darkblue;">TA Bill</h3>
             </div>
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                         <d;">
@@ -615,7 +673,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6 py-2">
+            <div class="col-md-3 col-sm-6 py-2">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
                         <d;">
@@ -627,7 +685,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6 py-2">
+            <div class="col-md-3 col-sm-6 py-2">
               <!-- small box -->
               <a href="aprovetabill.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
@@ -641,7 +699,7 @@ if ($result) {
               </div>
               </a>
             </div>
-            <div class="col-md-3 col-xs-6 py-2">
+            <div class="col-md-3 col-sm-6 py-2">
               <!-- small box -->
               <a href="tabill.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
@@ -655,7 +713,7 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6 py-2">
+            <div class="col-md-3 col-sm-6 py-2">
               <!-- small box -->
               <a href="tabillRejecet.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background-color: #7d8bf7e0;">
@@ -669,10 +727,10 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3 style="color: darkblue;">PayRoll</h3>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -682,7 +740,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -692,7 +750,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -702,7 +760,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -712,7 +770,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -722,7 +780,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -732,7 +790,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #919df3;">
                         <d;" >
@@ -742,10 +800,10 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3 style="color: darkblue;">TODAY'S ATTENDANCE</h3>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -758,7 +816,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->     
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- small box -->
                 <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -770,7 +828,7 @@ if ($result) {
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- small box -->
                 <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -782,7 +840,7 @@ if ($result) {
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- small box -->
                 <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -794,7 +852,7 @@ if ($result) {
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- small box -->
                 <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -806,7 +864,7 @@ if ($result) {
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
                 <!-- small box -->
                 <div class="small-box py-2 text-white" style="background-color: #b0b8fa;">
                         <d;" >
@@ -818,10 +876,10 @@ if ($result) {
                   </div>
                 </div>
               </div><!-- ./col -->
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
                 <h3 style="color: darkblue;">LEAVE REQUESTS</h3>
             </div>
-            <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-sm-12">
               <!-- small box -->
               <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
                 <div class="inner">
@@ -832,7 +890,7 @@ if ($result) {
                 </div>
               </div>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
              <a href="aprove.php" style="text-decoration: none;" >
              <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
@@ -845,7 +903,7 @@ if ($result) {
               </div>
              </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <a href="Leavereq.php" style="text-decoration: none;">
               <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
@@ -858,7 +916,7 @@ if ($result) {
               </div>
               </a>
             </div><!-- ./col -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-sm-6">
               <!-- small box -->
               <a href="Reject.php" style="text-decoration: none;" >
               <div class="small-box py-2 text-white" style="background:#c7cdff;;" >
@@ -872,8 +930,8 @@ if ($result) {
               </a>
             </div><!-- ./col -->
             <div class="col-lg-12 col-sm-12">
-            <div class="row">
-            <div class="col-sm-12 col-lg-6 col-md-6">
+              <div class="row">
+                <div class="col-sm-12 col-lg-6 col-md-6">
                     <div class="p-4"><iframe class="chartjs-hidden-iframe" style="display: block; overflow: hidden; border: 0px none; margin: 0px; inset: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;" tabindex="-1"></iframe>
                         <canvas id="myChart" style="width: 520px; max-width: 600px; display: block; height: 259px;" width="780" height="388"></canvas>
                         <script>
