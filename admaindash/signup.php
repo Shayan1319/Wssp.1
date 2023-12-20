@@ -19,18 +19,29 @@ if(isset($_POST['submit']))
     $Password = $_POST['Password'];
     $Employeenumber = $_POST['Employeenumber'];
     $Designation = $_POST['Designation'];
-    $query = mysqli_query($conn, "INSERT INTO `login`(`FullName`, `Gender`, `Email`, `Password`, `EmployeeNumber`, `Designation`) VALUES ('$FullName','$Gander','$Email','$Password','$Employeenumber','$Designation')");
-if ($query) {
-    // Insertion was successful
+    $select=mysqli_query($conn,"SELECT * FROM `login` WHERE `EmployeeNumber`='$Employeenumber'");
+    if (mysqli_num_rows($select)){
     ?>
+     <script>
+        alert("Employee already having a login");
+     </script>
+    <?php
+    }
+    else{
+
+        $query = mysqli_query($conn, "INSERT INTO `login`(`FullName`, `Gender`, `Email`, `Password`, `EmployeeNumber`, `Designation`) VALUES ('$FullName','$Gander','$Email','$Password','$Employeenumber','$Designation')");
+        if ($query) {
+            // Insertion was successful
+            ?>
     <script>
         alert("Data inserted successfully");
         location.replace("signup.php");
-    </script>
+        </script>
     <?php
 } else {
     // Insertion failed
     echo '<script>alert("Sorry, data was not inserted: ' . mysqli_error($conn) . '");</script>';
+}
 }
 
 
