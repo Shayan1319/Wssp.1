@@ -568,8 +568,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
              </div>
            </nav>
             <div class="table-responsive" >
-             <table class="table bg-light">
-               <thead>
+             <table>
+               <thead class="table bg-light">
                  <tr>
                    <th scope="col">#</th>
                    <th scope="col">From Designation</th>
@@ -738,7 +738,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <?php $CNIC = $_GET['updat'];?>
         location.replace('Transfer.php?updat=<?php echo $CNIC?>#section6');
             }
-      $(document).ready(function($) {       
+      $(document).ready(function($) {      
     function loadTable() {
         var see = "<?php echo $_GET['updat'];?>";
         $.ajax({
@@ -764,7 +764,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     var Department1 = $("#Department1").val();
     var Acting = $("#Acting").val();
     var Remarks = $("#Remarks").val();
-    
     // Create a FormData object
     var formData = new FormData();
     formData.append('employee_id', employee_id);

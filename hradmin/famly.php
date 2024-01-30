@@ -688,7 +688,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             $("#Spouse_Name_update").val(famly.Spouse_Name);
             $("#CNIC_update").val(famly.CNIC);
             $("#Date_of_B_update").val(famly.Date_of_B);
-           
         }
     });
 });

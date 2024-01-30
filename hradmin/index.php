@@ -296,7 +296,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     </div>
                 </div>
             </div>
-
+</div>
+</div>
 
 <?php include('link/desigene/script.php')?>
 </body>

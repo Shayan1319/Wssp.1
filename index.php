@@ -18,7 +18,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['Designation'] = $row['Designation'];
         $_SESSION['name']=$row['FullName'];
         $_SESSION['Email'] = $row['Email'];
-        
         header("Location: admaindash/index.php");
         exit();
     }

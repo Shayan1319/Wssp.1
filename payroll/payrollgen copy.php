@@ -184,26 +184,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               <div class="form-group text-end mt-4">
                 <button type="submit" id="submit" name="submit" style="background-color: darkblue;" class="btn btn-primary">Save</button>
               </div> 
-            </div>
-            <!-- <div class="col-md-4 my-4">
-                <div class="form-group">
-                    <label>Employee No</label>
-                    <select name="employee_noid" id="employee_noid" class="form-control select2">
-                        <?php
-                        // $selectempdata = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status` = 'ON-DUTY'");
-                        // if (mysqli_num_rows($selectempdata) > 0) {
-                        //     echo '<option value="#employee_noid" class="employee-option" selected>Search</option>';
-                        //     while ($rowempdata = mysqli_fetch_assoc($selectempdata)) {
-                        //         echo '<option value="#emp' . $rowempdata['EmployeeNo'] . '" class="employee-option">' . $rowempdata['EmployeeNo'] . '</option>';
-                        //     }
-                        // }
-                        ?>
-                    </select>
-                </div>
-            </div> -->
-                        
+            </div>                        
               <div id="time_employee_ajax" class="col-12">
-              
               </div>
         </div>
       </form>
