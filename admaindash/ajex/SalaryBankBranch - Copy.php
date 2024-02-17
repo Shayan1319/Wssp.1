@@ -1,6 +1,6 @@
 <?php
 include ('../link/desigene/db.php');
-$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Class_TMA'");
+$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='SalaryBankBranch'");
 if(mysqli_num_rows($select)>0){
     while($row=mysqli_fetch_assoc($select)){
      ?>

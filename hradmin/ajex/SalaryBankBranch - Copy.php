@@ -1,6 +1,6 @@
 <?php
 include ('../link/desigene/db.php');
-$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Department_TMA'");
+$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='SalaryBankBranch'");
 if(mysqli_num_rows($select)>0){
   ?>
      <option value="">Select</option>

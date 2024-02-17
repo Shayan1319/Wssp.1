@@ -24,7 +24,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <?php
       $CNIC = $_GET['updat'];
       $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC'");
-      while($see1=mysqli_fetch_all($select)){
+      while($see1=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
         <div class="row">
@@ -38,18 +38,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <h5><?php echo $see1 ['ContactPerson']?></h5>
                 <h5 class="text-primary"><?php echo $see1 ['email']?></h5>
                 <h5><?php echo $see1 ['ofphNumber']?></h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12 col-lg-6">
-            <div class="float-end bg-white">
-              <div class="card" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Action</li>
-                </ul>
-                <div class="card-footer">
-                  <a href="#" class="btn btn-primary">Edit</a>
-                </div>
               </div>
             </div>
           </div>

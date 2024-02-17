@@ -38,6 +38,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="col">CNIC</th>
                         <th scope="col">Employee NO</th>
                         <th scope="col">Employee Manager</th>
+                        <th scope="col">Status</th>
                         <th scope="col">See</th>
                         <th scope="col">Update</th>
                     </thead>
@@ -53,6 +54,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <td><?php echo $see ['CNIC']?></td>
                         <td><?php echo $see ['EmployeeNo'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
+                        <td><?php echo $see ['Status'] ?></td>
                         <td><a href="profile.php?updat=<?php echo $see['CNIC']?>" ><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="updateemp.php?id=<?php echo $see['Id']?>"><i class="fa-solid fa-file-pen"></i></a></td>
                         </tr>

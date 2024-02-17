@@ -1,6 +1,6 @@
 <?php
 include ('../link/desigene/db.php');
-$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Salary_Mode_TMA'");
+$select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='WeeklyWorkingDays'");
 if(mysqli_num_rows($select)>0){
   ?>
      <option value="">Select</option>

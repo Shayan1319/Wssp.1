@@ -393,15 +393,11 @@ if ($query) {
                   </div>
                 </div>
               </div>
-              <?php }?>
+             
               <div id="section2" style="display: none;">
                 <div class="tab-content" id="myTabContent">
                     <div class="row my-4">
-                     <?php 
-                        $id = $_GET['id'];
-                        $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $id AND `Employee_Class`='WSSC PAY'");
-                        while($fetchdata=mysqli_fetch_array($select)){
-                        ?> 
+                   
                       <div class="col-md-12 ">
                         <div class="card card-success border border-2 border-dark bg-light">
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
@@ -526,13 +522,43 @@ if ($query) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Bank</label>
-                                  <input value="<?php echo $fetchdata['Salary_Bank']?>" type="text" class="form-control" name="Salary_Bank" placeholder="Salary Bank" >
+                                  <select name="Salary_Bank" id="SalaryBank_drop" class="form-control ">
+                                <?php
+                                    include ('../link/desigene/db.php');
+                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='SalaryBank'");
+                                    if(mysqli_num_rows($select)>0){
+                                    ?>
+                                        <option value="" <?php echo ($fetchdata['Salary_Bank'] == '') ? 'selected' : ''; ?>>Select</option>
+                                    <?php
+                                        while($row=mysqli_fetch_assoc($select)){
+                                        ?>
+                                        <option <?php echo ($fetchdata['Salary_Bank'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                        <?php   
+                                        }
+                                    }
+                                    ?>  
+                                </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Bank Branch</label>
-                                  <input value="<?php echo $fetchdata['Salary_Branch']?>" type="text" class="form-control" name="Salary_Branch" placeholder="Salary Branch">
+                                  <select name="Salary_Branch" id="SalaryBankBranch_drop" class="form-control ">
+                                <?php
+                                    include ('../link/desigene/db.php');
+                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='SalaryBankBranch'");
+                                    if(mysqli_num_rows($select)>0){
+                                    ?>
+                                        <option value="" <?php echo ($fetchdata['Salary_Branch'] == '') ? 'selected' : ''; ?>>Select</option>
+                                    <?php
+                                        while($row=mysqli_fetch_assoc($select)){
+                                        ?>
+                                        <option <?php echo ($fetchdata['Salary_Branch'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                        <?php   
+                                        }
+                                    }
+                                    ?>  
+                                </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -544,7 +570,22 @@ if ($query) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Pay Type</label>
-                                  <input value="<?php echo $fetchdata['Pay_Type']?>" type="text" class="form-control" name="Pay_Type" placeholder="Pay Type">
+                                  <select name="Pay_Type" id="PayType_drop" class="form-control ">
+                                <?php
+                                    include ('../link/desigene/db.php');
+                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='PayType'");
+                                    if(mysqli_num_rows($select)>0){
+                                    ?>
+                                        <option value="" <?php echo ($fetchdata['Pay_Type'] == '') ? 'selected' : ''; ?>>Select</option>
+                                    <?php
+                                        while($row=mysqli_fetch_assoc($select)){
+                                        ?>
+                                        <option <?php echo ($fetchdata['Pay_Type'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                        <?php   
+                                        }
+                                    }
+                                    ?>  
+                                </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -554,23 +595,48 @@ if ($query) {
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Bill Walved Off</label>
-                                  <input value="<?php echo $fetchdata['Bill_Walved_Off']?>" type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Walved Off" >
-                                </div>
+                                  <div class="form-group">
+                                      <label>Bill Waived Off</label>
+                                      <select name="Bill_Waived_Off" id="Bill_Waived_Off" class="form-control select2" onchange="toggleVisibility()">
+                                          <option value="NO" <?php echo ($fetchdata['Bill_Waived_Off'] == 'NO') ? 'selected' : ''; ?>>NO</option>
+                                          <option value="YES" <?php echo ($fetchdata['Bill_Waived_Off'] == 'YES') ? 'selected' : ''; ?>>YES</option>
+                                      </select>
+                                  </div>
                               </div>
+
+
+                              <div class="col-md-4 my-2" id="billWiaivedoff">
+                                  <div class="form-group">
+                                      <label>Bill Waived Off</label>
+                                      <input type="text" class="form-control" value="<?php echo $fetchdata['Bill_Walved_Off']?>" name="Bill_Walved_Off" placeholder="Bill Waived Off">
+                                  </div>
+                              </div>
+
+                              <script>
+                                  // Function to toggle visibility based on the selected value
+                                  function toggleVisibility() {
+                                      // Get the selected value
+                                      var selectedValue = document.getElementById('Bill_Waived_Off').value;
+
+                                      // Get the element with id "billWiaivedoff"
+                                      var billWiaivedoffElement = document.getElementById('billWiaivedoff');
+
+                                      // Toggle visibility based on the selected value
+                                      billWiaivedoffElement.style.display = selectedValue === 'YES' ? 'block' : 'none';
+                                  }
+
+                                  // Call toggleVisibility after the DOM has fully loaded
+                                  document.addEventListener('DOMContentLoaded', function() {
+                                      toggleVisibility();
+                                  });
+                              </script>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Weekly Working Days</label>
                                   <input value="<?php echo $fetchdata['Weekly_Working_Days']?>" type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" >
                                 </div>
                               </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Bill Waived Off</label>
-                                  <input value="<?php echo $fetchdata['Bill_Waived_Off']?>" type="text" class="form-control" name="Bill_Waived_Off" placeholder="Bill Waived Off" >
-                                </div>
-                              </div>
+                              
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Pay Classification</label>
@@ -642,7 +708,7 @@ if ($query) {
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Type</label>
+                                  <label>Type Accordingly login</label>
                                   <select name="Type" id="Type_drop" class="form-control ">
                                 <?php
                                     include ('../link/desigene/db.php');
@@ -659,6 +725,15 @@ if ($query) {
                                     }
                                     ?>  
                                 </select>
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Department Type<span>*</span></label>
+                                  <select name="DepartmentType" required id="" class="form-control select2">
+                                    <option <?php echo ($fetchdata['TypeEmp'] == 'WSSC') ? 'selected' : ''; ?> value="WSSC">WSSC</option>
+                                    <option <?php echo ($fetchdata['TypeEmp'] == 'TMA') ? 'selected' : ''; ?> value="TMA">TMA</option>
+                                  </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -685,7 +760,14 @@ if ($query) {
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label>Status</label>
-                                    <select name="Status" id="Status_drop" class="form-control ">
+                                    <?php
+                                    if($fetchdata['Status']=="NEW"){
+                                      $desable='disabled';
+                                    }else{
+                                      $desable='';
+                                    }
+                                    ?>
+                                    <select name="Status" <?php echo $desable;?>  id="Status_drop" class="form-control ">
                                 <?php
                                     include ('../link/desigene/db.php');
                                     $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Status'");
@@ -716,17 +798,12 @@ if ($query) {
                                     <select name="Employee_Manager" id="" class="form-control ">
                                     <?php
                                     include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='MANAGER' ");
+                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` ");
                                     if(mysqli_num_rows($select)>0){
                                         ?><option value="">select</option><?php
                                         while($row=mysqli_fetch_assoc($select)){
                                         ?>
-                                    <option <?php echo ($fetchdata['Employee_Manager'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
-                                        
-                                        
-                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                    
-                                    </option>
+                                    <option <?php echo ($fetchdata['Employee_Manager'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>"><?php echo $row['EmployeeNo']?></option>
                                         
                                         <?php   
                                         }
@@ -739,21 +816,15 @@ if ($query) {
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label> Attendance Supervisor</label>
-                                    <select name="Attendance_Supervisor" id="superviser" class="form-control ">
+                                    <select name="Attendance_Supervisor" id="" class="form-control ">
                                     <?php
                                    include ('../link/desigene/db.php');
-                                   $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='SUPERVISO' ");
+                                   $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
                                    if(mysqli_num_rows($select)>0){
                                        ?><option value="">select</option><?php
-                                       while($row=mysqli_fetch_assoc($select)){
+                                       while($row=mysqli_fetch_array($select)){
                                        ?>
-                                   <option <?php echo ($fetchdata['Attendance_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
-                                       
-                                       
-                                       <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                   
-                                   </option>
-                                       
+                                   <option <?php echo ($fetchdata['Attendance_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>"> <?php echo $row['EmployeeNo']?> </option>
                                        <?php   
                                        }
                                    }
@@ -764,20 +835,15 @@ if ($query) {
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label>DY.Manager </label>
-                                    <select name="DY_Supervisor" id="DY_Supervisor" class="form-control ">
+                                    <select name="DY_Supervisor" id="" class="form-control ">
                                    <?php include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='DY_MANAGER' ");
+                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` ");
                                     if(mysqli_num_rows($select)>0){
                                         ?><option value="">select</option><?php
                                         while($row=mysqli_fetch_assoc($select)){
                                         ?>
                                     <option <?php echo ($fetchdata['DY_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> 
-                                    value="<?php echo $row['EmployeeNo']?>">
-                                        
-                                        
-                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                    
-                                    </option>
+                                    value="<?php echo $row['EmployeeNo']?>"><?php echo $row['EmployeeNo']?></option>
                                         
                                         <?php   
                                         }
@@ -824,443 +890,6 @@ if ($query) {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <?php }
-                      $id = $_GET['id'];
-                      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $id AND `Employee_Class`='TMA PAY'");
-                      while($fetchdata=mysqli_fetch_array($select)){
-                      ?>
-                      <div class="col-md-12 ">
-                        <div class="card card-success border border-2 border-dark bg-light">
-                          <div style="background-color: darkblue;" class="card-header text-white fw-bold">
-                            <div class="row">
-                              <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width:fit-content;">Employement Information</div>
-                              </div>
-                              <div class="col-sm-12 col-lg-7">
-                                <h3 class="bg-success p-2 rounded" style="width:fit-content;">TMA</h3>
-                              </div>
-                            </div>
-                          </div>
-                          <br>
-                          <div class="card-body ">
-                            <div class="row">
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employement Group</label>
-                                  <select name="Employement_Group_TMA" id="Employement_Group_TMA_drop" class="form-control ">
-                                  
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='EmpGroup'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employement_Group'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Employement_Group'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Class</label>
-                                  <select name="Employee_Class_TMA" id="Employee_Class_TMA_drop" class="form-control ">
-                                   
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Class'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employee_Class'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Employee_Class'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Group</label>
-                                    <select name="Employee_Group_TMA" id="Employee_Group_TMA_drop" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Group'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employee_Group'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Employee_Group'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Sub Group</label>
-                                  <select name="Employee_Sub_Group_TMA" id="" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Sub_Group'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employee_Sub_Group'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Employee_Sub_Group'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>    
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Quota</label>
-                                    <select name="Employee_Quota_TMA" id="Employee_Quota_TMA_drop" class="form-control ">
-                                   
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Quota'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Employee_Quota'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Employee_Quota'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Salary Bank</label>
-                                  <input value="<?php echo $fetchdata['Salary_Bank']?>" type="text" class="form-control" name="Salary_Bank_TMA" placeholder="Salary Bank">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Salary Bank Branch</label>
-                                  <input value="<?php echo $fetchdata['Salary_Branch']?>" type="text" class="form-control" name="Salary_Branch_TMA" placeholder="Salary Branch">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Account No</label>
-                                  <input value="<?php echo $fetchdata['Account_No']?>" type="text" class="form-control" name="Account_No_TMA" placeholder="Account No">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Pay Type</label>
-                                  <input value="<?php echo $fetchdata['Pay_Type']?>" type="text" class="form-control" name="Pay_Type_TMA" placeholder="Pay Type">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>EOBI No</label>
-                                  <input value="<?php echo $fetchdata['EOBI_No']?>" type="text" class="form-control" name="EOBI_No_TMA" placeholder="EOBI No">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Bill Walved Off</label>
-                                  <input value="<?php echo $fetchdata['Bill_Walved_Off']?>" type="text" class="form-control" name="Bill_Walved_Off_TMA" placeholder="Bill Walved Off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Weekly Working Days</label>
-                                  <input value="<?php echo $fetchdata['Weekly_Working_Days']?>" type="text" class="form-control" name="Weekly_Working_Days_TMA" placeholder="Weekly Working Days">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Bill Waived Off</label>
-                                  <input value="<?php echo $fetchdata['Bill_Waived_Off']?>" type="text" class="form-control" name="Bill_Waived_Off_TMA" placeholder="Bill Waived Off">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Pay Classification</label>
-                                  <input value="<?php echo $fetchdata['Employee_Pay_Classification']?>" type="text" class="form-control" name="Employee_Pay_Classification_TMA" placeholder="Employee Pay Classification">
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Grade</label>
-                                  <select name="Grade_TMA" id="Grade_TMA_drop" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Grade'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Grade'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Grade'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Department</label>
-                                  <select name="Department_TMA" id="Department_TMA_drop" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Department'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Department'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Department'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div  class="form-group">
-                                  <label>Job Tiltle</label>
-                                  <select name="Job_Tiltle_TMA" id="Job_Tiltle_TMA_drop" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Job_Tiltle'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Job_Tiltle'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Job_Tiltle'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>   
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Type</label>
-                                    <select name="Type_TMA" id="Type_TMA_drop" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='type'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['type'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['type'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Salary Mode</label>
-                                    <select name="Salary_Mode_TMA" id="Salary_Mode_TMA_drop" id="Salary_Mode" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Salary_Mode'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Salary_Mode'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Salary_Mode'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Status</label>
-                                  <select name="Status_TMA" id="Status_TMA_drop" id="Status_tma" class="form-control ">
-                                <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Status'");
-                                    if(mysqli_num_rows($select)>0){
-                                    ?>
-                                        <option value="" <?php echo ($fetchdata['Status'] == '') ? 'selected' : ''; ?>>Select</option>
-                                    <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                        <option <?php echo ($fetchdata['Status'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-                                        <?php   
-                                        }
-                                    }
-                                    ?>  
-                                </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee NO</label>
-                                  <input value="<?php echo $fetchdata['EmployeeNo']?>" id="EmployeeNo"  type="text" name="EmployeeNo_TMA" placeholder="Employee NO" class="form-control" autocomplete="off" >
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Manager ID No</label>
-                                  <div>
-                                  <select name="Employee_Manager_TMA" id="employee_noTMA" class="form-control ">
-                                  <?php
-                                    include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='MANAGER' ");
-                                    if(mysqli_num_rows($select)>0){
-                                        ?>
-                                        
-                                        <option value="">select</option>
-                                        
-                                        <?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-
-
-
-                                    <option <?php echo ($fetchdata['Employee_Manager']==$row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
-                                        
-                                        
-                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                    
-                                    </option>
-                                        
-                                        <?php   
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                                  </div>
-                                </div>
-                              </div>
-                                <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label> Attendance Supervisor</label>
-                                    <select name="Attendance_Supervisor_TMA" id="superviserTMA" class="form-control ">
-                                    <?php
-                                   include ('../link/desigene/db.php');
-                                   $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='SUPERVISO' ");
-                                   if(mysqli_num_rows($select)>0){
-                                       ?><option value="">select</option><?php
-                                       while($row=mysqli_fetch_assoc($select)){
-                                       ?>
-                                   <option <?php echo ($fetchdata['Attendance_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> value="<?php echo $row['EmployeeNo']?>">
-                                       
-                                       
-                                       <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                   
-                                   </option>
-                                       
-                                       <?php   
-                                       }
-                                   }
-                                   ?>   
-                                </select>
-                                  </div>
-                                </div>
-                              
-                              <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label> DY.Manager </label>
-                                    <select name="DY_Supervisor_TMA" id="DY_Supervisor" class="form-control ">
-                                    <?php include ('../link/desigene/db.php');
-                                    $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `type`='DY_MANAGER' ");
-                                    if(mysqli_num_rows($select)>0){
-                                        ?><option value="">select</option><?php
-                                        while($row=mysqli_fetch_assoc($select)){
-                                        ?>
-                                    <option <?php echo ($fetchdata['DY_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> 
-                                    value="<?php echo $row['EmployeeNo']?>">
-                                        
-                                        
-                                        <h4><?php echo $row['fName']?> <?php echo $row['mName']?> <?php echo $row['lName']?></h4> 
-                                    
-                                    </option>
-                                        
-                                        <?php   
-                                        }
-                                    }
-                                    ?>      
-                                </select>
-                                  </div>
-                                </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Joining Date</label>
-                                  <input value="<?php echo $fetchdata['Joining_Date']?>" type="date" name="Joining_Date_TMA" placeholder="Joining Date" class="form-control" autocomplete="off" >
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Contract Expiry Date</label>
-                                  <input value="<?php echo $fetchdata['Contract_Expiry_Date']?>" type="date" name="Contract_Expiry_Date_TMA" id="Contract_Expiry_Date_tma" placeholder="" class="form-control" autocomplete="off" >
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Last Working Day</label>
-                                  <input value="<?php echo $fetchdata['Last_Working_Date']?>" type="date" name="Last_Working_Date_TMA" id="Last_Working_Day" placeholder="" class="form-control" autocomplete="off" >
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Duty Location</label>
-                                  <input value="<?php echo $fetchdata['Duty_Location']?>" type="text" name="Duty_Location_TMA" id="Duty_Location" placeholder="Duty Location" class="form-control" autocomplete="off" >
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                              <div class="form-group">
-                                <label>Duty Point</label>
-                                <input value="<?php echo $fetchdata['Duty_Point']?>" type="text" name="Duty_Point_TMA" placeholder="Duty Point" class="form-control" autocomplete="off" >
-                              </div>
-                            </div>
-                              <div class="col-md-12 text-end mt-2">
-                                <input value="Back" style="background-color: darkblue;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
-                                <input value="Next" style="background-color: darkblue;" name="submit_TMA" type="submit" class="btn text-white  float-right shadow" value="Submit">
-                              </div>
-                          </div>
-                          </div>
-                      </div>
                       </div>
                       <?php } ?>
                     </div>
