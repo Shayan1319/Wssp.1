@@ -76,7 +76,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       loadTable();
       $(document).on("click", "#Accept",function(){
         var accept = $(this).data("acpt");
-    //   alert(accept);
+      // alert(accept);
         $.ajax({
           url : "ajex/NEW_EMP_Accept_ajax.php",
           type:"POST",

@@ -47,14 +47,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     include ('../link/desigene/db.php');
                     $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
                     while($see=mysqli_fetch_array($select)){
+                    if($see['Status']=='NEW'){
+                      $NEW='<i class="fa-solid fa-font-awesome"></i>';
+                    }
                     ?>
+                    
                         <tr>
                         <th scope="row"><?php echo $see ['Id'] ?></th>
                         <td><?php echo $see ['fName'];?> <?php echo $see ['mName'];?> <?php echo $see ['lName']?></td>
                         <td><?php echo $see ['CNIC']?></td>
                         <td><?php echo $see ['EmployeeNo'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
-                        <td><?php echo $see ['Status'] ?></td>
+                        <td><?php echo $see ['Status'] ." ".$NEW ?></td>
                         <td><a href="profile.php?updat=<?php echo $see['CNIC']?>" ><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="updateemp.php?id=<?php echo $see['Id']?>"><i class="fa-solid fa-file-pen"></i></a></td>
                         </tr>

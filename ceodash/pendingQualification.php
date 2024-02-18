@@ -71,42 +71,37 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadTable();
-      $(document).on("click", "#Accept",function(){
-        var accept = $(this).data("acpt");
-    //   alert(accept);
-        $.ajax({
-          url : "ajex/Accept_pendingQualification.php",
-          type:"POST",
-          data : {id : accept},
-          success : function(data){
-            if(data == 1){
-            loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
-          }
+      
+      $(document).on("click", "#Accept", function () {
+    var acceptId = $(this).data("acpt");
+    // alert(acceptId);
+    $.ajax({
+        url: "ajex/Accept_pendingQualification.php",
+        type: "POST",
+        data: { id: acceptId },
+        success: function (data) {
+            alert(data); // Show the data in an alert
+        },
+    });
+});
 
-        });
-      });
-      $(document).on("click", "#Reject",function(){
-        var Reject = $(this).data("rejc");
-    //   alert(Reject);
-        $.ajax({
-          url : "ajex/Reject_pendingQualification.php",
-          type:"POST",
-          data : {id : Reject},
-          success : function(data){
-            if(data == 1){
-            loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
-          }
 
-        });
-      });
+$(document).on("click", "#Reject", function () {
+    var rejectId = $(this).data("rejc");
+
+    $.ajax({
+        url: "ajex/Reject_pendingQualification.php",
+        type: "POST",
+        data: { id: rejectId },
+        success: function (data) {
+            alert(data); // Show the data in an alert
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX error:", status, error);
+            alert("Error in AJAX request");
+        }
+    });
+});
     });
     
     </script>

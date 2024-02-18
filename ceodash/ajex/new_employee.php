@@ -4,7 +4,7 @@ error_reporting(0);
 $currentDate = date('Y-m-d');
 $empid = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
-            $sql = "SELECT * FROM `employeedata` WHERE `Online Status` = 'PENDING'";
+            $sql = "SELECT * FROM `employeedata` WHERE `Status` = 'NEW'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                  $a=1;

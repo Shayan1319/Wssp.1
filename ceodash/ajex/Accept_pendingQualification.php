@@ -1,12 +1,14 @@
 <?php
+
 include('../link/desigene/db.php');
-$id=$_POST['id'];
-$date=date('Y-M-D');
-$update=mysqli_query($conn,"UPDATE `qualification` SET `Status`='ACCPET' WHERE `id`=$id");
-if($update){
-    echo 1;
-}
-else{
-    echo 0;
-}
+
+    $id = $_POST['id'];
+    $update = mysqli_query($conn,"UPDATE `qualification` SET `Status`='[value-12]' WHERE `Id`=$id");
+    if($update){
+        echo "Record accepted:";
+    }else{
+        echo"Could not save the record";
+    }
+
+
 ?>

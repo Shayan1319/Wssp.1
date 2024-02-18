@@ -168,7 +168,7 @@ if ($query) {
         $rate_difference_previous_month = 0;
     }
 } 
-$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Online Status`='PENDING'");
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Status`='NEW'");
 if (mysqli_num_rows($query)) {
     $result = mysqli_fetch_assoc($query);
     $total_employees = $result['total_employees'];
