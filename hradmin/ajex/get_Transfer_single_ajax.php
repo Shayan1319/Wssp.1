@@ -15,6 +15,8 @@ include '../link/desigene/db.php';
             'To_Project' => $row['To_Project'],
             'From_Station' => $row['From_Station'],
             'To_Station' => $row['To_Station'],
+            'To_Grade' => $row['ToGrade'],
+            'To_Department' => $row['ToDepartment'],
             'Worked_From' => $row['Worked_From'],
             'Transfer_Date' => $row['Transfer_Date'],
             

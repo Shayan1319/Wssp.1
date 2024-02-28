@@ -22,7 +22,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div id="main">
       <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
         ?>
         <script>
@@ -408,7 +408,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Qualification</label>
-                                <input type="text" name="Qualification" id="Qualification" placeholder="Qualification" class="form-control" autocomplete="off" >
+                                <select id="Qualification" name="Qualification" class="form-select" >
+                                    <option value="">Select</option>
+                                    <option value="Matric">Matric</option>
+                                    <option value="FSC">FSC</option>
+                                    <option value="FA">FA</option>
+                                    <option value="BS">BS</option>
+                                    <option value="BSC">BSC</option>
+                                    <option value="Master">Master</option>
+                                    <option value="MPhil">MPhil</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
+
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
@@ -420,7 +431,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" >
+                                <input type="date" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
@@ -432,7 +443,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>PEC Registration</label>
-                                <input type="text" name="PEC_Registration" id="PEC_Registration" placeholder="Last Institute" class="form-control" autocomplete="off" >
+                                <input type="text" name="PEC_Registration" id="PEC_Registration" placeholder="PEC Registration" class="form-control" autocomplete="off" >
                               </div>
                             </div>
                             <div class="col-md-4 my-2">

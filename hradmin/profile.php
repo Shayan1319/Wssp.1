@@ -23,7 +23,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div class="container-fluid py-5">
     <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC'");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC'");
       while($see1=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
@@ -131,7 +131,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Date of Birth</label>
-          <h5><?php echo $see1 ['DofB'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['DofB'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
@@ -272,19 +272,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Joining Date</label>
-          <h5><?php echo $see1 ['Joining_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Joining_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Contract Expiry Date</label>
-          <h5><?php echo $see1 ['Contract_Expiry_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Contract_Expiry_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Last Working Date</label>
-          <h5><?php echo $see1 ['Last_Working_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Last_Working_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
@@ -427,7 +427,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see4 ['To_Designation'] ?></td>
           <td><?php echo $see4 ['From_BPS'] ?></td>
           <td><?php echo $see4 ['ToBps'] ?></td>
-          <td><?php echo $see4 ['Promotion_Date'] ?></td>
+          <td><?php echo date('d-m-Y', strtotime($see4 ['Promotion_Date'])) ?></td>
           <td><?php echo $see4 ['Promotion_Number'] ?></td>
           <td><?php echo $see4 ['Department1'] ?></td>
           <td><?php echo $see4 ['Acting'] ?></td>
@@ -459,8 +459,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <th scope="col">To Station</th>
           <th scope="col">Worked From</th>
           <th scope="col">Transfer Date</th>
-          <th scope="col">Update</th>
-          <th scope="col">Delete</th>
         </tr></thead>
           
         <tbody>
@@ -479,7 +477,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see5 ['From_Station'] ?></td>
           <td><?php echo $see5 ['To_Station'] ?></td>
           <td><?php echo $see5 ['Worked_From'] ?></td>
-          <td><?php echo $see5 ['Transfer_Date'] ?></td>
+          <td><?php echo date('d-m-Y', strtotime($see5 ['Transfer_Date'])) ?></td>
           </tr>
           <?php }?>
           </tbody>
@@ -495,6 +493,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </nav>
           <div class="row">
           <div>
+          <table class="table bg-light">
+          <thead>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">CNIC</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Father Name</th>
+          <th scope="col">Relation</th>
+          </tr>
+          </thead>
+          
+          <tbody>
             <?php $CNIC = $_GET['updat'];
           $selectM = mysqli_query($conn,"SELECT * FROM `spouse` WHERE `employee_id`=$CNIC");
           $row=mysqli_num_rows($selectM);
@@ -502,60 +513,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           { $see6=mysqli_fetch_array($selectM);
            
           ?>
-          <table class="table bg-light">
-          <thead>
-          <tr>
-          <th scope="col">#</th>
-          <th scope="col">Spouse_Name</th>
-          <th scope="col">CNIC</th>
-          <th scope="col">Date of Birth</th>
-          </tr>
-          </thead>
           
-          <tbody>
           
           <tr>
           <th scope="row"><?php echo $i?></th>
           <td><?php echo $see6 ['Spouse_Name'] ?></td>
           <td><?php echo $see6 ['CNIC'] ?></td>
-          <td><?php echo $see6 ['Date_of_B'] ?></td>
-          </tr>
-          <table class="table bg-light">
-           <thead>
-           <tr>
-           <th scope="col">#</th>
-           <th scope="col"> Childeren Name</th>
-           <th scope="col">CNIC</th>
-           <th scope="col">Date of birth.</th>
-           <th scope="col">Gender</th>
-           <th scope="col">Mother Name</th>
-          </tr>
-           </thead>
-           
-           <tbody id="table-data">
-           <?php   
-                $MCNIC = $see6 ['CNIC'];
-                $select = mysqli_query($conn,"SELECT * FROM `child` WHERE `MouterCNIC`= '$MCNIC'");
-                while($featch=mysqli_fetch_array($select))
-                {
-                ?>
-                <tr>
-                    <th scope="row"><?php echo $featch ['id'] ?></th>
-                    <td><?php echo $featch ['Name'] ?></td>
-                    <td><?php echo $featch ['CNIC'] ?></td>
-                    <td><?php echo $featch ['Date_of_B'] ?></td>
-                    <td><?php echo $featch ['Gender'] ?></td>
-                    <td><?php echo $see6 ['Spouse_Name'] ?></td>
-                    <?php   
-                    }
-
-                ?>
-           </tbody>
-        </table>
+          <td><?php echo date('d-m-Y', strtotime($see['Date_of_B'])); ?></td>
           
-          </tbody>
-          </table>
-         <?php }?>
+      <td><?php echo $see6 ['Father_name'] ?></td>
+      <td><?php echo $see6 ['type'] ?></td>
+          </tr>
+          <?php }?>
+        </tbody>
+        </table>
         
           </div>
           </div>

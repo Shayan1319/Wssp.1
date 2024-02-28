@@ -18,6 +18,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <head>
    <?php include ('link/links.php')?>
 </head>
+<style>
+label span{
+  color: #ff0505;
+}
+</style>
 <body>
     <?php include ('link/desigene/sidebar.php')?>
     <div id="main">
@@ -25,7 +30,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <div class="container-fluid py-5">
         <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
@@ -244,7 +249,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   <div class="col-md-4 my-2">
                   <div class="form-group">
                   <label>Grade</label>
-                  <h5><</h5>
+                  <h5><?php echo $see ['Grade'] ?></h5>
                   </div>
                   </div>
                   <div class="col-md-4 my-2">
@@ -507,73 +512,110 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <?php }?>
         <div  class="container-fluid py-5">
              <form id="formdata" action="" method="post">
-             <div id="section7">
-                <div class="row my-4">
-                  <!-- left column -->
-                  <div class="col-md-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Employee Spouse</div>
+                <div id="section7">
+                    <div class="row my-4">
+                      <!-- left column -->
+                      <div class="col-md-12">
+                        <div class="card card-success">
+                          <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
+                            <div class="card-title">Dependents</div>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body bg-light">
+                            <div class="row">
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Name<span>*</span></label>
+                                  <input type="text" name="Spouse_Name" id="Spouse_Name" placeholder="Name" class="form-control" autocomplete="off" required="">
+                                </div>
+                              </div>  
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>NIC/B-form No <span style="font-size: x-small; font-weight: initial;" >(witout dash -)</span> </label>
+                              <input id="cNo" type="number" name="CNIC" placeholder="NIC/B-form No" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
+                                </div>
+                                <script>
+                          function validateCNIC(input) {
+                              // Get the entered CNIC number
+                              var cnicNumber = input.value;
+
+                              // Check if the length is less than 14
+                              if (cnicNumber.length < 13) {
+                                  // Set the border color to red
+                                  input.style.borderColor = 'red';
+                              } else {
+                                  // Reset the border color
+                                  input.style.borderColor = ''; // Empty string resets to the default
+                              }
+
+                              // If you want to limit the input to 14 characters
+                              if (cnicNumber.length > 13) {
+                                  // Trim the input to 14 characters
+                                  input.value = cnicNumber.slice(0, 14);
+                              }
+                          }
+                          </script>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Date of birth<span>*</span></label>
+                                  <input type="date" name="Date_of_B" id="Date_of_B" placeholder="Date of birth" class="form-control" autocomplete="off" required="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Father Name<span>*</span></label>
+                                  <input type="text" name="Father_name" id="Father_name" placeholder="Father Name" class="form-control" autocomplete="off" required="">
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Relation<span>*</span></label>
+                                  <select name="" id="type" class="form-select"></select>
+                                </div>
+                              </div>
+
+                              <div class=" text-end">
+                                <input type="button" name=""style="background-color: darkblue;" type="button" id="save" class="btn text-white shadow float-right" value="Add" >
+                                <input type="button" name=""style="background-color: red;" type="button" id="save" class="btn text-white shadow float-right" value="Back" onclick="back()">
+                                <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
+                              </div>
+                            </div>
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                       </div>
-                      <!-- /.card-header -->
-                      <div class="card-body bg-light">
-                        <div class="row">
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Spouse Name</label>
-                              <input type="text" name="Spouse_Name" id="Spouse_Name" placeholder="Spouse Name" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>  
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>CNIC</label>
-                              <input type="text" name="CNIC" id="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Date of birth</label>
-                              <input type="date" name="Date_of_B" id="Date_of_B" placeholder="Date of birth" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class=" text-end">
-                            <input type="button" name=""style="background-color: darkblue;" type="button" id="save" class="btn text-white shadow float-right" value="Add" >
-                            <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
+                      <!-- Col-12 -->
+                      <div class="col-12">
+                        <div class="card card-success">
+                          <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
+                            <div class="card-title">Dependents Details</div>
                           </div>
                         </div>
+                          <div>
+                                <table class="table bg-light">
+                                  <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">NIC/B-form No</th>
+                                        <th scope="col">Date of birth.</th>
+                                        <th scope="col">Father Name</th>
+                                        <th scope="col">Relation</th>
+                                        <th scope="col">Update</th>
+                                        <th scope="col">Delete</th>
+                                      </tr>
+                                  </thead>
+                                    
+                                    <tbody id="table-data">
+                                  
+                                  </tbody>
+                                </table>
+                            </div>
                       </div>
-                      <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                   </div>
-                  <!-- Col-12 -->
-                  <div class="col-12">
-                    <div class="card card-success">
-                      <div style="background-color: darkblue;" class="card-header  text-white fw-bold">
-                        <div class="card-title">Spouse Details</div>
-                      </div>
-                    </div>
-                       <div>
-                            <table class="table bg-light">
-                              <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Spouse_Name</th>
-                                    <th scope="col">CNIC</th>
-                                    <th scope="col">Date of birth.</th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
-                                  </tr>
-                              </thead>
-                                
-                                <tbody id="table-data">
-                               
-                               </tbody>
-                            </table>
-                        </div>
-                  </div>
-                </div>
-              </div>
              </form>
               <!-- /.card -->
 
@@ -590,22 +632,35 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <input type="text" class="form-control" hidden id="id_update" name="">
                         <div class="my-2">
                             <div class="form-group">
-                              <label>Spouse Name</label>
-                              <input type="text" name="Spouse_Name" id="Spouse_Name_update" placeholder="Spouse Name" class="form-control" autocomplete="off" required="">
+                              <label>Dependents Name<span>*</span></label>
+                              <input type="text" name="Spouse_Name" id="Spouse_Name_update" placeholder="Name" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>  
                           <div class="my-2">
                             <div class="form-group">
-                              <label>CNIC</label>
-                              <input type="text" name="CNIC" id="CNIC_update" placeholder="CNIC" class="form-control" autocomplete="off" required="">
+                              <label>NIC/B-form No<span>*</span></label>
+                              <input type="text" name="CNIC" id="CNIC_update" placeholder="NIC/B-form No" class="form-control" autocomplete="off" autocomplete="off" oninput="validateCNIC(this)" required="">
                             </div>
                           </div>
                           <div class="my-2">
                             <div class="form-group">
-                              <label>Date of birth</label>
+                              <label>Date of birth<span>*</span></label>
                               <input type="date" name="Date_of_B" id="Date_of_B_update" placeholder="Date of birth" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
+                          <div class="my-2">
+                            <div class="form-group">
+                              <label>Father name<span>*</span></label>
+                              <input type="text" name="Father_name_update" id="Father_name_Update" placeholder="Father Name" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>
+                          <div class="my-2">
+                            <div class="form-group">
+                              <label>Relation<span>*</span></label>
+                              <select name="type" id="type_update" class="form-select"></select>
+                            </div>
+                          </div>
+                          
                           </form>
                         </div>
                       
@@ -620,9 +675,34 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <script>
      function backToSection2() {
         <?php $CNIC = $_GET['updat'];?>
-        location.replace('addChild.php?updat=<?php echo $CNIC?>#section8');
+        location.replace('profile.php?updat=<?php echo $CNIC?>#section8');
             }
-            $(document).ready(function($) {       
+            function back() {
+        <?php $CNIC = $_GET['updat'];?>
+        location.replace('Transfer.php?updat=<?php echo $CNIC?>#section6');
+            }
+            $(document).ready(function($) {  
+              
+              function type(){ // renamed the function here
+        $.ajax({
+            url : "ajex/dependertype - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#type").html(data);
+            }
+        });
+    }
+      type();
+      function type_update(){ // renamed the function here
+        $.ajax({
+            url : "ajex/dependertype - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#type_update").html(data);
+            }
+        });
+    }
+      type_update();     
     function loadTable() {
         var see = "<?php echo $_GET['updat'];?>";
         $.ajax({
@@ -637,28 +717,31 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     loadTable();
  
     $("#save").on("click", function(e) {
-      e.preventDefault();
-        var employee_id = "<?php echo $_GET['updat']?>";
-        var Spouse_Name = $("#Spouse_Name").val();
-        var CNIC = $("#CNIC").val();
-        var Date_of_B = $("#Date_of_B").val();
-       
+    e.preventDefault();
+    var employee_id = "<?php echo $_GET['updat']?>";
+    var Spouse_Name = $("#Spouse_Name").val();
+    var CNIC = $("#cNo").val(); // Corrected variable name
+    var Date_of_B = $("#Date_of_B").val();
+    var Father_name = $("#Father_name").val();
+    var type = $("#type").val();
+    
+    if (type.trim() !== "" || Father_name.trim() !== "" || Date_of_B.trim() !== "" || CNIC.trim() !== "" || Spouse_Name.trim() !== "") {
         $.ajax({
             url: "ajex/Famelyinsert.php",
             type: "POST",
-            data: { employee_id:employee_id,Spouse_Name:Spouse_Name,CNIC:CNIC,Date_of_B:Date_of_B,},
+            data: { employee_id:employee_id, Spouse_Name:Spouse_Name, CNIC:CNIC, Date_of_B:Date_of_B, Father_name:Father_name, type:type },
             success: function(data) {
-                if (data == 1) {
-                    loadTable();
-                    $("#formdata").trigger("reset");
-                } else {
-                    alert("Can't Save Record");
-                }
+                alert(data)
+                loadTable();
+                $("#formdata").trigger("reset");
             },
             error: function(jqXHR, textStatus, errorThrown) {
-        console.log("AJAX Error:", textStatus, errorThrown);
-        }});
-    });
+                console.log("AJAX Error:", textStatus, errorThrown);
+            }
+        });
+    }
+});
+
     $(document).on("click", "#delete",function(){
         var delet = $(this).data("did");
         $.ajax({
@@ -688,9 +771,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             $("#Spouse_Name_update").val(famly.Spouse_Name);
             $("#CNIC_update").val(famly.CNIC);
             $("#Date_of_B_update").val(famly.Date_of_B);
+            $("#Father_name_Update").val(famly.Father_name);
+            $("#type_update").val(famly.type); // Set selected value for the dropdown
         }
     });
 });
+
 
       $("#updatenow").on("click",function(e){
         e.preventDefault();
@@ -698,11 +784,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var Spouse_Name_update = $("#Spouse_Name_update").val();
         var CNIC_update = $("#CNIC_update").val();
         var Date_of_B_update = $("#Date_of_B_update").val();
+        var Father_name_Update = $("#Father_name_Update").val();
+        var type_update = $("#type_update").val();
         // alert(id_update);
         $.ajax({
           url:"ajex/ajax-update-employee-famly-allowance.php",
           type:"POST", 
-          data:{id:id_update,Spouse_Name_update:Spouse_Name_update,CNIC_update:CNIC_update,Date_of_B_update:Date_of_B_update},
+          data:{id:id_update,Spouse_Name_update:Spouse_Name_update,CNIC_update:CNIC_update,Date_of_B_update:Date_of_B_update, Father_name_Update:Father_name_Update, type_update:type_update},
           success:function(data){
             if(data == 1){
             loadTable();

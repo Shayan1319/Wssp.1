@@ -357,6 +357,27 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>                                
                                 </div>
                               </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Depender type</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Dependertype" id="Dependertype">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="Dependertype_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Dependertype_drop" >
+
+                                      </ul>
+                                  </div>                                
+                                </div>
+                              </div>
                             </div>
                             </form>
                           </div>
@@ -639,6 +660,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
+
             $("#Status_btn").on("click",function(e){
         e.preventDefault();
         var Status = $("#Status").val();
@@ -649,6 +671,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           success:function(data){
             if(data == 1){
             loadStatus();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#Dependertype_btn").on("click",function(e){
+        e.preventDefault();
+        var Dependertype = $("#Dependertype").val();
+        $.ajax({
+          url:"ajex/Dependertype.php",
+          type:"Post", 
+          data:{Dependertype:Dependertype},
+          success:function(data){
+            if(data == 1){
+            loadDependertype();
             $("#form").trigger("reset"); 
             }
             else{
@@ -815,6 +856,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       }
       loadStatus();
 
+      function loadDependertype(){
+        $.ajax({
+          url : "ajex/dependertype - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Dependertype_drop").html(data);
+          }
+        });
+      }
+      loadDependertype();
+
 
       $(document).on("click", ".delete-btn", function() {
     var did = $(this).data('did');
@@ -838,7 +890,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               loadJob_Tiltle();
               loadType();
               loadSalary_Mode();
-              loadStatus();// Refresh the list after deletion
+              loadStatus();
+              Dependertype();// Refresh the list after deletion
             } else {
                 alert("Can't Delete Record");
             }

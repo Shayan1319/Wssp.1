@@ -11,7 +11,9 @@ if (mysqli_num_rows($query)) {
         'id' => $row['id'],
         'Spouse_Name' => $row['Spouse_Name'],
         'CNIC' => $row['CNIC'],
-        'Date_of_B' => $row['Date_of_B']
+        'Date_of_B' => $row['Date_of_B'],
+        'Father_name'=> $row['Father_name'],
+        'type'=> $row['type']
     );
 
     // Encode the data as JSON

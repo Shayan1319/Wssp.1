@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 // links to database
 include ('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'FinanceAdmin') {
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
   
@@ -23,8 +23,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div class="container-fluid py-5">
     <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
-      while($see1=mysqli_fetch_all($select)){
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC'");
+      while($see1=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
         <div class="row">
@@ -40,8 +40,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <h5><?php echo $see1 ['ofphNumber']?></h5>
               </div>
             </div>
-          </div>
-          <div class="col-md-6 col-sm-12 col-lg-6">
           </div>
           <br>
           <hr>
@@ -133,7 +131,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Date of Birth</label>
-          <h5><?php echo $see1 ['DofB'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['DofB'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
@@ -232,7 +230,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Grade</label>
-          <h5><?php echo $see1 ['Grade']?></h5>
+          <h5><?php echo $see1 ['Grade'] ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
@@ -274,19 +272,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Joining Date</label>
-          <h5><?php echo $see1 ['Joining_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Joining_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Contract Expiry Date</label>
-          <h5><?php echo $see1 ['Contract_Expiry_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Contract_Expiry_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
           <div class="form-group">
           <label>Last Working Date</label>
-          <h5><?php echo $see1 ['Last_Working_Date'] ?></h5>
+          <h5><?php echo date('d-m-Y', strtotime($see1 ['Last_Working_Date'])) ?></h5>
           </div>
           </div>
           <div class="col-md-4 my-2">
@@ -309,18 +307,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </div>
           </div>
           </div>
-          <?php }?>
           <div class="col-12 bg-white mt-5 px-2">
-          <nav class="navbar bg-white">
-          <div class="container-fluid">
-          <h4>Qualification Information</h4>
-          </div>
-          </nav>
-          <div>
-          <table class="table bg-light">
+            <nav class="navbar bg-white">
+              <div class="container-fluid">
+                <h4>Qualification Information</h4>
+              </div>
+            </nav>
+            <div>
+              <table class="table bg-light">
           <thead>
-          <tr>
-          <th scope="col">#</th>
+            <tr>
+              <th scope="col">#</th>
           <th scope="col">Qualification</th>
           <th scope="col">Grade/Division</th>
           <th scope="col">Passing Year of Degree</th>
@@ -328,7 +325,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <th scope="col">PEC Registration</th>
           <th scope="col">Institute Address</th>
           <th scope="col">Major Subject</th>
-          </tr>
+        </tr>
           </thead>
           <tbody>
           <?php   $CNIC = $_GET['updat'];
@@ -347,11 +344,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see2 ['Major Subject'] ?></td>
           </tr>
           <?php }?>
-          </tbody>
+        </tbody>
           </table>
           </div>
-          </div>   
-          <div class="col-12 bg-white mt-5 px-2">
+        </div>   
+        <div class="col-12 bg-white mt-5 px-2">
           <nav class="navbar bg-white">
           <div class="container-fluid">
           <h4>Training Information</h4>
@@ -360,25 +357,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div>
           <table class="table bg-light">
           <thead>
-          <tr>
-          <th scope="col">#</th>
-          <th scope="col">Training Serial Number</th>
-          <th scope="col">Training Name</th>
-          <th scope="col">Institute</th>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Training Serial Number</th>
+              <th scope="col">Training Name</th>
+              <th scope="col">Institute</th>
           <th scope="col">City</th>
           <th scope="col">Institute Address</th>
           <th scope="col">Oblige Sponsor</th>
           <th scope="col">From</th>
           <th scope="col">To</th>
           <th scope="col">Duration</th>
-          </tr>
+        </tr>
           </thead>
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+            <?php   $CNIC = $_GET['updat'];
           $select = mysqli_query($conn,"SELECT * FROM `training` WHERE `Employee_id`=$CNIC");
           while($see3=mysqli_fetch_array($select))
           { 
-          ?>
+            ?>
           <tr>
           <th scope="row"><?php echo $see3 ['Id'] ?></th>
           <td><?php echo $see3 ['Training_Serial_Number'] ?></td>
@@ -390,23 +387,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see3 ['From'] ?></td>
           <td><?php echo $see3 ['To'] ?></td>
           <td><?php echo $see3 ['Duration'] ?></td>
-          </tr>
-          <?php }?>
+        </tr>
+        <?php }?>
           </tbody>
-          </table>
-          </div>
+        </table>
+      </div>
           </div>
           <div class="col-12 bg-white mt-5 px-2">
-          <nav class="navbar bg-white">
+            <nav class="navbar bg-white">
           <div class="container-fluid">
           <h4>Promotion Information</h4>
           </div>
-          </nav>
+        </nav>
           <div>
-          <table class="table bg-light">
-          <thead>
+            <table class="table bg-light">
+              <thead>
           <tr>
-          <th scope="col">#</th>
+            <th scope="col">#</th>
           <th scope="col">From Designation</th>
           <th scope="col">To Designation</th>
           <th scope="col">From BPS</th>
@@ -419,7 +416,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </tr>
           </thead>
           <tbody>
-          <?php   $CNIC = $_GET['updat'];
+            <?php   $CNIC = $_GET['updat'];
           $select = mysqli_query($conn,"SELECT * FROM `promotion` WHERE `Employee_id`=$CNIC");
           while($see4=mysqli_fetch_array($select))
           { 
@@ -430,7 +427,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see4 ['To_Designation'] ?></td>
           <td><?php echo $see4 ['From_BPS'] ?></td>
           <td><?php echo $see4 ['ToBps'] ?></td>
-          <td><?php echo $see4 ['Promotion_Date'] ?></td>
+          <td><?php echo date('d-m-Y', strtotime($see4 ['Promotion_Date'])) ?></td>
           <td><?php echo $see4 ['Promotion_Number'] ?></td>
           <td><?php echo $see4 ['Department1'] ?></td>
           <td><?php echo $see4 ['Acting'] ?></td>
@@ -449,7 +446,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </nav>
           <div class="row">
           <div>
-          <table class="table bg-light">
+            <table class="table bg-light">
           <thead>
           <tr>
           <th scope="col">#</th>
@@ -462,11 +459,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <th scope="col">To Station</th>
           <th scope="col">Worked From</th>
           <th scope="col">Transfer Date</th>
-          <th scope="col">Update</th>
-          <th scope="col">Delete</th>
-          </tr></thead>
+        </tr></thead>
           
-          <tbody>
+        <tbody>
           <?php   $CNIC = $_GET['updat'];
           $select = mysqli_query($conn,"SELECT * FROM `transfer` WHERE `employee_id`=$CNIC");
           while($see5=mysqli_fetch_array($select))
@@ -482,13 +477,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <td><?php echo $see5 ['From_Station'] ?></td>
           <td><?php echo $see5 ['To_Station'] ?></td>
           <td><?php echo $see5 ['Worked_From'] ?></td>
-          <td><?php echo $see5 ['Transfer_Date'] ?></td>
+          <td><?php echo date('d-m-Y', strtotime($see5 ['Transfer_Date'])) ?></td>
           </tr>
           <?php }?>
           </tbody>
           </table>
           </div>
-          </div>
+        </div>
           </div> 
           <div class="col-12 bg-white mt-5 px-2">
           <nav class="navbar bg-white">
@@ -498,81 +493,53 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </nav>
           <div class="row">
           <div>
-          <?php $CNIC = $_GET['updat'];
+          <table class="table bg-light">
+          <thead>
+          <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">CNIC</th>
+          <th scope="col">Date of Birth</th>
+          <th scope="col">Father Name</th>
+          <th scope="col">Relation</th>
+          </tr>
+          </thead>
+          
+          <tbody>
+            <?php $CNIC = $_GET['updat'];
           $selectM = mysqli_query($conn,"SELECT * FROM `spouse` WHERE `employee_id`=$CNIC");
           $row=mysqli_num_rows($selectM);
           for($i=1;$i<=$row;$i++)
           { $see6=mysqli_fetch_array($selectM);
            
           ?>
-          <table class="table bg-light">
-          <thead>
-          <tr>
-          <th scope="col">#</th>
-          <th scope="col">Spouse_Name</th>
-          <th scope="col">CNIC</th>
-          <th scope="col">Date of Birth</th>
-          </tr>
-          </thead>
           
-          <tbody>
           
           <tr>
           <th scope="row"><?php echo $i?></th>
           <td><?php echo $see6 ['Spouse_Name'] ?></td>
           <td><?php echo $see6 ['CNIC'] ?></td>
-          <td><?php echo $see6 ['Date_of_B'] ?></td>
-          </tr>
-          <table class="table bg-light">
-           <thead>
-           <tr>
-           <th scope="col">#</th>
-           <th scope="col"> Childeren Name</th>
-           <th scope="col">CNIC</th>
-           <th scope="col">Date of birth.</th>
-           <th scope="col">Gender</th>
-           <th scope="col">Mother Name</th>
-           </tr>
-           </thead>
-           
-           <tbody id="table-data">
-           <?php   
-                $MCNIC = $see6 ['CNIC'];
-                $select = mysqli_query($conn,"SELECT * FROM `child` WHERE `MouterCNIC`= '$MCNIC'");
-                while($featch=mysqli_fetch_array($select))
-                {
-                ?>
-                <tr>
-                    <th scope="row"><?php echo $featch ['id'] ?></th>
-                    <td><?php echo $featch ['Name'] ?></td>
-                    <td><?php echo $featch ['CNIC'] ?></td>
-                    <td><?php echo $featch ['Date_of_B'] ?></td>
-                    <td><?php echo $featch ['Gender'] ?></td>
-                    <td><?php echo $see6 ['Spouse_Name'] ?></td>
-                    <?php   
-                    }
-
-                ?>
-           </tbody>
-        </table>
+          <td><?php echo date('d-m-Y', strtotime($see['Date_of_B'])); ?></td>
           
-          </tbody>
-          </table>
-         <?php }?>
+      <td><?php echo $see6 ['Father_name'] ?></td>
+      <td><?php echo $see6 ['type'] ?></td>
+          </tr>
+          <?php }?>
+        </tbody>
+        </table>
         
           </div>
-          </div>
-          <div class=" text-end">
-          <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
           </div>
           </div> 
         </div>
       </div> 
-    </div>
+      <?php }?>
     </div>
   </div>
+</div>
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 

@@ -15,6 +15,7 @@ $CNIC = $_POST['id'];
       <td><?php echo $see ['Promotion_Number'] ?></td>
       <td><?php echo $see ['Department1'] ?></td>
       <td><?php echo $see ['Acting'] ?></td>
+      <td><a href="../CV/<?php echo $see ['file']?>"><i class="fa-solid fa-eye"></i></a></td>
       <td><?php echo $see ['Remarks'] ?></td>
       <td><button type="button" id="update" style="background-color: #00a65a !important;" data-eid="<?php echo $see['Id'] ?>" class="btn delete-btn text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Update</button></td>
       <td><button type="button" id="delete" style="background-color: #a60000  !important;" data-did="<?php echo $see['Id'] ?>" class="btn delete-btn text-white ">Delete</button></td>

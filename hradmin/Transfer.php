@@ -18,6 +18,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <head>
    <?php include ('link/links.php')?>
 </head>
+<style>
+label span{
+  color:#ff0505;
+}
+</style>
 <body>
     <?php include ('link/desigene/sidebar.php')?>
     <div id="main">
@@ -25,7 +30,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <div class="container-fluid py-5">
         <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
       ?>
           <div class="container-fluid m-auto p-5 bg-light">
@@ -473,32 +478,35 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="row">
                           <div class="col-md-4 my-2">
                             <div class="form-group">
-                              <label>Transfer Order Number </label>
+                              <label>Transfer Order Number<span>*</span></label>
                               <input type="text" name="Transfer_Order_Number" id="Transfer_Order_Number" placeholder="Transfer Order Number" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>  
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Designation</label>
-                              <input type="text" name="Designation" id="Designation" placeholder="Designation" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
-                              <label>BPS</label>
-                              <input type="text" name="BPS" id="BPS" placeholder="From BPS" class="form-control" autocomplete="off" required="">
+                              <label>Order Date</label>
+                              <input type="date" name="Transfer_Date" id="Transfer_Date" class="form-control" autocomplete="off" required="">
+                            </div>
+                          </div>  
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>From Designation</label>
+
+                              <select name="Designation" id="Designation" class="form-select" >
+
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label>From Grade</label>
+                              <select name="BPS" class="form-select" id="BPS"></select>
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>From Department</label>
-                              <input type="text" name="From_Department" id="From_Department" placeholder="From Deparment" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label> To Project</label>
-                              <input type="text" name="To_Project" id="To_Project" placeholder="To Project" class="form-control" autocomplete="off" required="">
+                              <select name="From_Department" id="From_Department" class="form-select"></select>
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
@@ -509,22 +517,35 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
+                              <label> To Designation</label>
+                              <select name="To_Project" id="To_Project" class="form-select"></select>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label> To Grade</label>
+                              <select name="To_Grade" id="To_Grade" class="form-select"></select>
+                            </div>
+                          </div>
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
+                              <label> To Department</label>
+                              <select name="To_Department" id="To_Department" class="form-select"></select>
+                            </div>
+                          </div>                          
+                          <div class="col-md-4 my-2">
+                            <div class="form-group">
                               <label>To Station</label>
                               <input type="text" name="To_Station" id="To_Station" placeholder="To Station" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
-                              <label>Worked From</label>
+                              <label>Arrival Date</label>
                               <input type="date" name="Worked_From" id="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
-                          <div class="col-md-4 my-2">
-                            <div class="form-group">
-                              <label>Transfer Date</label>
-                              <input type="date" name="Transfer_Date" id="Transfer_Date" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
+                         
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>File</label>
@@ -533,6 +554,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div>
                           <div class=" text-end">
                             <input type="button" name=""style="background-color: darkblue;" type="button" id="save" class="btn text-white shadow float-right" value="Add" >
+                            <input style="background-color: red;" type="button" onclick="back()" class="btn text-white shadow float-right" value="Back">
                             <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
                           </div>
                         </div>
@@ -548,20 +570,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="card-title">Employee Promotions</div>
                       </div>
                     </div>
-                       <div>
+                       <div class="table-responsive" >
                             <table class="table bg-light">
                                 <thead>
                                     <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Transfer Order Number</th>
-                                    <th scope="col">Designation</th>
-                                    <th scope="col">BPS</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">From Designation</th>
+                                    <th scope="col">From Grade</th>
                                     <th scope="col">From Department</th>
-                                    <th scope="col">To Project</th>
                                     <th scope="col">From Station</th>
+                                    <th scope="col">To Designation</th>
+                                    <th scope="col">To Grade</th>
+                                    <th scope="col">To Department</th>
                                     <th scope="col">To Station</th>
-                                    <th scope="col">Worked From</th>
-                                    <th scope="col">Transfer Date</th>
+                                    <th scope="col">Arrival Date</th>
+                                    <th scope="col">File</th>
                                     <th scope="col">Update</th>
                                     <th scope="col">Delete</th>
                                 </tr></thead>
@@ -585,8 +610,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">Employee Transfer Update</h1>
                         <button type="button" class="btn-close btn btn-dange" style="background-color: #ff0505 !important; color: #fff !important;" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body">
-                      <form id="formdata" action="#" method="post">
+                        <div class="modal-body">
+                          <form id="formdata" action="#" method="post">
                       <div class="my-2">
                             <div class="form-group">
                               <label>Transfer Order Number </label>
@@ -596,26 +621,26 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div>  
                           <div class="my-2">
                             <div class="form-group">
-                              <label>Designation</label>
-                              <input type="text" name="Designation" id="Designation_update" placeholder="Designation" class="form-control" autocomplete="off" required="">
+                              <label>Order Date</label>
+                              <input type="date" name="Worked_From" id="Worked_From_update" placeholder="Worked From" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">
                             <div class="form-group">
-                              <label>BPS</label>
-                              <input type="text" name="BPS" id="BPS_update" placeholder="From BPS" class="form-control" autocomplete="off" required="">
+                              <label>From Designation</label>
+                              <select name="Designation_update" id="Designation_update" class="form-select"></select>
+                            </div>
+                          </div>
+                          <div class="my-2">
+                            <div class="form-group">
+                              <label>From Grade</label>
+                              <select name="BPS_update" id="BPS_update" class="form-select"></select>
                             </div>
                           </div>
                           <div class="my-2">
                             <div class="form-group">
                               <label>From Department</label>
-                              <input type="text" name="From_Department" id="From_Department_update" placeholder="From Deparment" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="my-2">
-                            <div class="form-group">
-                              <label> To Project</label>
-                              <input type="text" name="To_Project" id="To_Project_update" placeholder="To Project" class="form-control" autocomplete="off" required="">
+                              <select name="From_Department_update" id="From_Department_update" class="form-select"></select>                              
                             </div>
                           </div>
                           <div class="my-2">
@@ -626,19 +651,32 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div>
                           <div class="my-2">
                             <div class="form-group">
+                              <label> To Designation</label>
+                              <select name="To_Project_update" id="To_Project_update" class="form-select"></select>
+                            </div>
+                          </div>
+                          <div class=" my-2">
+                            <div class="form-group">
+                              <label> To Grade</label>
+                              <select name="To_Grade_update" id="To_Grade_update" class="form-select"></select>
+                            </div>
+                          </div>                          
+                          <div class=" my-2">
+                            <div class="form-group">
+                              <label>To Department</label>
+                              <select name="To_Department_update" id="To_Department_update" class="form-select"></select>
+                            </div>
+                          </div>
+                          <div class="my-2">
+                            <div class="form-group">
                               <label>To Station</label>
                               <input type="text" name="To_Station" id="To_Station_update" placeholder="To Station" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
+                          
                           <div class="my-2">
                             <div class="form-group">
-                              <label>Worked From</label>
-                              <input type="date" name="Worked_From" id="Worked_From_update" placeholder="Worked From" class="form-control" autocomplete="off" required="">
-                            </div>
-                          </div>
-                          <div class="my-2">
-                            <div class="form-group">
-                              <label>Transfer Date</label>
+                              <label>Arrival Date</label>
                               <input type="date" name="Transfer_Date" id="Transfer_Date_update" class="form-control" autocomplete="off" required="">
                             </div>
                           </div>
@@ -664,6 +702,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <?php $CNIC = $_GET['updat'];?>
         location.replace('famly.php?updat=<?php echo $CNIC?>#section7');
             }
+      function back() {<?php $CNIC = $_GET['updat'];?>location.replace('Promotions.php?updat=<?php echo $CNIC?>#section7');}
+
             $(document).ready(function($) {       
     function loadTable() {
         var see = "<?php echo $_GET['updat'];?>";
@@ -677,34 +717,170 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
     }
     loadTable();
+
+    function From_Department(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#From_Department").html(data);
+          }
+        });
+      }
+      From_Department();
+      function To_Department(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#To_Department").html(data);
+          }
+        });
+      }
+      To_Department();
+      function From_Department_update(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#From_Department_update").html(data);
+          }
+        });
+      }
+      From_Department_update();
+      function To_Department_update(){
+        $.ajax({
+          url : "ajex/Department - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#To_Department_update").html(data);
+          }
+        });
+      }
+      To_Department_update();
+    function Designation(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#Designation").html(data);
+       }
+     });
+   }Designation();
+
+   function To_Project(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#To_Project").html(data);
+       }
+     });
+   }To_Project();
+   function Designation_update(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#Designation_update").html(data);
+       }
+     });
+   }Designation_update();
+   function To_Project_update(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#To_Project_update").html(data);
+       }
+     });
+   }To_Project_update();
  
+
+
+   function BPS(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#BPS").html(data);
+          }
+        });
+      }
+      BPS();
+      
+      function To_Grade(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#To_Grade").html(data);
+          }
+        });
+      }
+      To_Grade();
+      
+      function BPS_update(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#BPS_update").html(data);
+          }
+        });
+      }
+      BPS_update();
+      
+      function To_Grade_update(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#To_Grade_update").html(data);
+          }
+        });
+      }
+      To_Grade_update();
+
+
+
+
     $("#save").on("click", function(e) {
     e.preventDefault();
 
     var employee_id = "<?php echo $_GET['updat']; ?>";
     var Transfer_Order_Number = $("#Transfer_Order_Number").val();
+    var Transfer_Date = $("#Transfer_Date").val();
     var Designation = $("#Designation").val();
     var BPS = $("#BPS").val();
     var From_Department = $("#From_Department").val();
-    var To_Project = $("#To_Project").val();
     var From_Station = $("#From_Station").val();
+    var To_Project = $("#To_Project").val();
+    var To_Grade = $("#To_Grade").val();
+    var To_Department = $("#To_Department").val();
     var To_Station = $("#To_Station").val();
     var Worked_From = $("#Worked_From").val();
-    var Transfer_Date = $("#Transfer_Date").val();
     var file = $("#file")[0].files[0]; // Get the selected file
 
     var formData = new FormData();
     formData.append('employee_id', employee_id);
     formData.append('Transfer_Order_Number', Transfer_Order_Number);
+    formData.append('Transfer_Date', Transfer_Date);
     formData.append('Designation', Designation);
     formData.append('BPS', BPS);
     formData.append('From_Department', From_Department);
-    formData.append('To_Project', To_Project);
     formData.append('From_Station', From_Station);
+    formData.append('To_Project', To_Project);
+    formData.append('To_Grade', To_Grade);
+    formData.append('To_Department', To_Department);
     formData.append('To_Station', To_Station);
     formData.append('Worked_From', Worked_From);
-    formData.append('Transfer_Date', Transfer_Date);
     formData.append('file', file); // Append the file to the formData object
+    if (Transfer_Order_Number.trim() !== "") {
 
     $.ajax({
         url: "ajex/Transferinsert.php",
@@ -713,21 +889,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         contentType: false,
         processData: false,
         success: function(data) {
-          if(data == 0.1){
-              alert("Can't Save file");
-            }
-            if (data == 1) {
-                loadTable();
-                $("#formdata").trigger("reset");
-            }
-             else {
-                alert("Can't Save Record");
-            }
+         alert(data);
+    loadTable();
+    $("#formdata").trigger("reset");
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error:", textStatus, errorThrown);
         }
-    });
+    });}
 });
 
     $(document).on("click", "#delete",function(){
@@ -745,8 +915,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             }
           }
         });
-      });
-      $(document).on("click", "#update", function() {
+      });$(document).on("click", "#update", function() {
     var update = $(this).data("eid");
 
     $.ajax({
@@ -755,20 +924,31 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         data: { id: update },
         success: function(data) {
             var Transfer = JSON.parse(data);
+
+            // Set values for text inputs
             $("#id_update").val(Transfer.id);
             $("#Transfer_Order_Number_update").val(Transfer.Transfer_Order_Number);
-            $("#Designation_update").val(Transfer.Designation);
-            $("#BPS_update").val(Transfer.BPS);
-            $("#From_Department_update").val(Transfer.From_Department);
-            $("#To_Project_update").val(Transfer.To_Project);
+            $("#Worked_From_update").val(Transfer.Worked_From);
             $("#From_Station_update").val(Transfer.From_Station);
             $("#To_Station_update").val(Transfer.To_Station);
-            $("#Worked_From_update").val(Transfer.Worked_From);
             $("#Transfer_Date_update").val(Transfer.Transfer_Date);
-           
+
+            // Set values for dropdowns
+            $("#Designation_update option[value='" + Transfer.Designation + "']").prop('selected', true);
+            $("#BPS_update option[value='" + Transfer.BPS + "']").prop('selected', true);
+            $("#From_Department_update option[value='" + Transfer.From_Department + "']").prop('selected', true);
+            $("#To_Project_update option[value='" + Transfer.To_Project + "']").prop('selected', true);
+            $("#To_Grade_update option[value='" + Transfer.To_Grade + "']").prop('selected', true);
+            $("#To_Department_update option[value='" + Transfer.To_Department + "']").prop('selected', true);
+
+            // Update the file input (assuming you have a file input with id 'file_update')
+            // Note: You cannot set a value for a file input due to security reasons
+            // If you need to show the file name, you can display it in a separate element
+            $("#file_update").val(""); // Clear the file input
         }
     });
 });
+
 $("#updatenow").on("click", function(e) {
     e.preventDefault();
     var formData = new FormData($("#formdata")[0]);
@@ -780,6 +960,8 @@ $("#updatenow").on("click", function(e) {
     formData.append("To_Project_update", $("#To_Project_update").val());
     formData.append("From_Station_update", $("#From_Station_update").val());
     formData.append("To_Station_update", $("#To_Station_update").val());
+    formData.append("To_Grade_update", $("#To_Grade_update").val());
+    formData.append("To_Department_update", $("#To_Department_update").val());
     formData.append("Worked_From_update", $("#Worked_From_update").val());
     formData.append("Transfer_Date_update", $("#Transfer_Date_update").val());
     formData.append("file_update", $("#file_update")[0].files[0]); // Get the file object

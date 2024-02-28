@@ -15,9 +15,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
 ?>
 <?php 
-
 if(isset($_POST['submit']))
 {
+?>
+<script>
+  alert("Are you sure to save record?");
+</script>
+<?php
 $image = $_FILES ["image"];
 $fName = $_POST ["fName"];
 $mName = $_POST ["mName"];
@@ -74,10 +78,7 @@ $DY_Supervisor=$_POST['DY_Supervisor'];
 $Image_name =$image['name'];
 $Image_path = $image['tmp_name'];
 $Image_error = $image['error'];
-$seleted=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `email`='$email' && `Status`='NEW'");
-if($seleted){
-  echo '<script>alert("CNIC alrady Exist");</script>';
-}else{
+
 if($Image_error==0)
 {
     $Image_save='../image/'.$Image_name;
@@ -93,14 +94,14 @@ if($query)
     echo '<script>alert("Data is inserted");</script>';
      ?>
             <script>
-                location.replace('Qualification.php?updat=<?php echo $CNIC?>#section3');
+                location.replace('Qualification.php?updat=<?php echo $EmployeeNowssp?>#section3');
             </script>
      <?php
 }
 else{
 echo '<script>alert("Sorry Data is not inserted");</script>'; 
 }
-}}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -183,7 +184,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                       <div class="form-group">
                           <label>CNIC <span style="font-size: x-small; font-weight: initial;" >(witout dash -)</span> </label>
-                          <input id="cNo" type="text" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
+                          <input id="cNo" type="number" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
                       </div>
 
                       <script>
@@ -242,19 +243,19 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Mobile Number</label>
-                          <input id="moNum" type="text" name="mNumber" placeholder="Mobile Number" class="form-control" autocomplete="off" >
+                          <input id="moNum" type="number" name="mNumber" placeholder="Mobile Number" class="form-control" autocomplete="off" >
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Office Phone Number</label>
-                          <input id="OfPNum" type="text" name="ofphNumber" placeholder="Office Number" class="form-control" autocomplete="off" >
+                          <input id="OfPNum" type="number" name="ofphNumber" placeholder="Office Number" class="form-control" autocomplete="off" >
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Alternate Number</label>
-                          <input id="ANum" type="text" name="Alternate_Number" placeholder="Alternate Number" class="form-control" autocomplete="off" >
+                          <input id="ANum" type="number" name="Alternate_Number" placeholder="Alternate Number" class="form-control" autocomplete="off" >
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -310,7 +311,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Next of Kin Cell Number</label>
-                          <input id="NextofKinCellNumber" type="text" name="NextofKinCellNumber" placeholder="Next of Kin Cell Number " class="form-control" autocomplete="off" >
+                          <input id="NextofKinCellNumber" type="number" name="NextofKinCellNumber" placeholder="Next of Kin Cell Number " class="form-control" autocomplete="off" >
                         </div>
                       </div>                   
                       <div class="col-md-4 my-2">
@@ -322,7 +323,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Contact Person Cell Number</label>
-                          <input id="CPCN" type="text" name="CPCN" placeholder="Contact Person Cell Number " class="form-control" autocomplete="off" >
+                          <input id="CPCN" type="number" name="CPCN" placeholder="Contact Person Cell Number " class="form-control" autocomplete="off" >
                         </div>
                       </div>
                   </div>     

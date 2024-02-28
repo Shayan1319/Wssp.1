@@ -19,6 +19,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <head>
    <?php include ('link/links.php')?>
 </head>
+<style>
+  label span{
+    color:#ff0505;
+  }
+</style>
 <body>
     <?php include ('link/desigene/sidebar.php')?>
       <div id="main">
@@ -26,7 +31,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <div class="container-fluid py-5">
         <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
       ?>
           <div class="container-fluid m-auto p-5 bg-light">
@@ -375,7 +380,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <th scope="col">From</th>
                           <th scope="col">To</th>
                           <th scope="col">Update</th>
-                          <th scope="col">Delete</th>
+                          <th scope="col">Months Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -404,14 +409,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             </div>
           </div>
           <?php 
-          echo $empclass;
-          if($empclass == 'WSSC CONTRACTUAL' || $empclass == 'WSSC CONTINGENT'){
-            $wssc = 'block';
-            $tma='none';
-          } else if($empclass == 'TMA PERMANENT' || $empclass == 'TMA DAILY WAGES'){
-            $tma = 'block';
-            $wssc='none';
-          }
         }?>
           <form id="formdata" action="#" method="post">
             <div id="section5" >
@@ -430,22 +427,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                          <div class="form-group">
                            <label>From Designation</label>
                            <select id="From_Designation" name="From_Designation" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="CONTINGENT" >CONTINGENT</option>
-                             <option value="COVID-19" >COVID-19</option>
-                             <option value="DAILY WAGE" >DAILY WAGE</option>
-                             <option value="INTERNSHIP" >INTERNSHIP</option>
-                             <option value="M–1" >M–1</option>
-                             <option value="M–3" >M–3</option>
-                             <option value="M–4" >M–4</option>
-                             <option value="M–5" >M–5</option>
-                             <option value="M–6" >M–6</option>
-                             <option value="M–7" >M–7</option>
-                             <option value="S–1" >S–1</option>
-                             <option value="S–2" >S–2</option>
-                             <option value="S–3" >S–3</option>
-                             <option value="S–4" >S–4</option>
-                             <option value="STREAM" >STREAM</option>
                            </select>
                          </div>
                        </div>
@@ -453,60 +434,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                          <div class="form-group">
                            <label>To Designation</label>
                            <select id="To_Designation" name="To_Designation" class="form-control select2">
-                            <option value="">Select</option>
-                            <option value="CONTINGENT" >CONTINGENT</option>
-                            <option value="COVID-19" >COVID-19</option>
-                            <option value="DAILY WAGE" >DAILY WAGE</option>
-                            <option value="INTERNSHIP" >INTERNSHIP</option>
-                            <option value="M–1" >M–1</option>
-                            <option value="M–3" >M–3</option>
-                            <option value="M–4" >M–4</option>
-                            <option value="M–5" >M–5</option>
-                            <option value="M–6" >M–6</option>
-                            <option value="M–7" >M–7</option>
-                            <option value="S–1" >S–1</option>
-                            <option value="S–2" >S–2</option>
-                            <option value="S–3" >S–3</option>
-                            <option value="S–4" >S–4</option>
-                            <option value="STREAM" >STREAM</option>
                           </select>
                          </div>
                        </div>
                        <div class="col-md-4 my-2" style="display:<?php echo $tma?>">
                          <div class="form-group">
-                           <label>From BPS</label>
+                           <label>From Grade</label>
                            <select name="From_BPS" id="From_BPS" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="BPS-2" >BPS-2</option>
-                             <option value="BPS-3" >BPS-3</option>
-                             <option value="BPS-4" >BPS-4</option>
-                             <option value="BPS-5" >BPS-5</option>
-                             <option value="BPS-6" >BPS-6</option>
-                             <option value="BPS-7" >BPS-7</option>
-                             <option value="BPS-9" >BPS-9</option>
-                             <option value="BPS-11" >BPS-11</option>
-                             <option value="BPS-14" >BPS-14</option>
-                             <option value="BPS-16" >BPS-16</option>
-                             <option value="BPS-17" >BPS-17</option>
+                             
                            </select>
                          </div>
                        </div>
                        <div class="col-md-4 my-2" style="display:<?php echo $tma?>">
                          <div class="form-group">
-                           <label>To BPS</label>
-                           <select name="From_BPS" id="From_BPS" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="BPS-2" >BPS-2</option>
-                             <option value="BPS-3" >BPS-3</option>
-                             <option value="BPS-4" >BPS-4</option>
-                             <option value="BPS-5" >BPS-5</option>
-                             <option value="BPS-6" >BPS-6</option>
-                             <option value="BPS-7" >BPS-7</option>
-                             <option value="BPS-9" >BPS-9</option>
-                             <option value="BPS-11" >BPS-11</option>
-                             <option value="BPS-14" >BPS-14</option>
-                             <option value="BPS-16" >BPS-16</option>
-                             <option value="BPS-17" >BPS-17</option>
+                           <label>To Grade</label>
+                           <select name="to_BPS" id="to_BPS" class="form-control select2">
                            </select>
                          </div>
                        </div>
@@ -518,7 +460,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        </div>
                        <div class="col-md-4 my-2">
                          <div class="form-group">
-                           <label>Promotion Number</label>
+                           <label>Promotion Number<span>*</span></label>
                            <input type="text" name="Promotion_Number" id="Promotion_Number" placeholder="Promotion Number" class="form-control" autocomplete="off">
                          </div>
                        </div>
@@ -546,14 +488,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        </div>
                        <div class="col-md-4 my-2">
                          <div class="form-group">
-                           <label>File</label>
+                           <label>File<span>*</span></label>
                            <input type="file" name="file" id="file" placeholder="file" class="form-control" autocomplete="off">
                          </div>
                        </div>
                        <div class=" text-end">
                          <input type="button" name=""style="background-color: darkblue;" type="button" id="save" class="btn text-white shadow float-right" value="Add" >
+                         <input style="background-color: red;" type="button" onclick="back()" class="btn text-white shadow float-right" value="Back">
                          <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
-                       </div>                    </div>
+                       </div>
+                      </div>
                    </div>
                  </div>
                </div>
@@ -564,22 +508,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-12 bg-white mt-5 px-2"> 
            <nav class="navbar bg-white">
              <div class="container-fluid">
-               <h4>Training Information</h4>
+               <h4>Promotion Information</h4>
              </div>
            </nav>
             <div class="table-responsive" >
-             <table>
+             <table class="table">
                <thead class="table bg-light">
                  <tr>
                    <th scope="col">#</th>
                    <th scope="col">From Designation</th>
                    <th scope="col">To Designation</th>
-                   <th scope="col">From BPS</th>
-                   <th scope="col">ToBps</th>
+                   <th scope="col">From Grade</th>
+                   <th scope="col">To Grade</th>
                    <th scope="col">Promotion Date</th>
                    <th scope="col">Promotion Number</th>
                    <th scope="col">Department</th>
                    <th scope="col">Acting</th>
+                   <th scope="col">File</th>
                    <th scope="col">Remarks</th>
                    <th scope="col">Update</th>
                    <th scope="col">Delete</th>
@@ -603,76 +548,31 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        <div class="my-2" style="display:<?php echo $wssc?>;"> 
                          <div class="form-group">
                            <label>From Designation</label>
-                           <select id="From_Designation_update" name="From_Designation_update" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="M–1" >M–1</option>
-                             <option value="M–3" >M–3</option>
-                             <option value="M–4" >M–4</option>
-                             <option value="M–5" >M–5</option>
-                             <option value="M–6" >M–6</option>
-                             <option value="M–7" >M–7</option>
-                             <option value="S–1" >S–1</option>
-                             <option value="S–2" >S–2</option>
-                             <option value="S–3" >S–3</option>
-                             <option value="S–4" >S–4</option>
-                             <option value="STREAM" >STREAM</option>
+                           <select id="From_DesignationUpdate" name="From_Designation_update" class="form-control select2">
+                            
                            </select>
                          </div>
                        </div>
                        <div class="my-2" style="display:<?php echo $wssc?>;">
                          <div class="form-group">
                            <label>To Designation</label>
-                           <select id="To_Designation_update" name="To_Designation_update" class="form-control select2">
-                            <option value="">Select</option>
-                            <option value="M–1" >M–1</option>
-                            <option value="M–3" >M–3</option>
-                            <option value="M–4" >M–4</option>
-                            <option value="M–5" >M–5</option>
-                            <option value="M–6" >M–6</option>
-                            <option value="M–7" >M–7</option>
-                            <option value="S–1" >S–1</option>
-                            <option value="S–2" >S–2</option>
-                            <option value="S–3" >S–3</option>
-                            <option value="S–4" >S–4</option>
-                            <option value="STREAM" >STREAM</option>
+                           <select id="To_DesignationUpdate" name="To_Designation_update" class="form-control select2">
                           </select>
                          </div>
                        </div>
                        <div class="my-2" style="display:<?php echo $tma?>">
                          <div class="form-group">
-                           <label>From BPS</label>
-                           <select name="From_BPS_update" id="From_BPS_update" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="BPS-2" >BPS-2</option>
-                             <option value="BPS-3" >BPS-3</option>
-                             <option value="BPS-4" >BPS-4</option>
-                             <option value="BPS-5" >BPS-5</option>
-                             <option value="BPS-6" >BPS-6</option>
-                             <option value="BPS-7" >BPS-7</option>
-                             <option value="BPS-9" >BPS-9</option>
-                             <option value="BPS-11" >BPS-11</option>
-                             <option value="BPS-14" >BPS-14</option>
-                             <option value="BPS-16" >BPS-16</option>
-                             <option value="BPS-17" >BPS-17</option>
+                           <label>From Grade</label>
+                           <select name="From_BPSupdate" id="From_BPSupdate" class="form-control select2">
+                            
                            </select>
                          </div>
                        </div>
                        <div class="my-2" style="display:<?php echo $tma?>">
                          <div class="form-group">
-                           <label>To BPS</label>
-                           <select name="ToBps_update" id="ToBps_update" class="form-control select2">
-                             <option value="">Select</option>
-                             <option value="BPS-2" >BPS-2</option>
-                             <option value="BPS-3" >BPS-3</option>
-                             <option value="BPS-4" >BPS-4</option>
-                             <option value="BPS-5" >BPS-5</option>
-                             <option value="BPS-6" >BPS-6</option>
-                             <option value="BPS-7" >BPS-7</option>
-                             <option value="BPS-9" >BPS-9</option>
-                             <option value="BPS-11" >BPS-11</option>
-                             <option value="BPS-14" >BPS-14</option>
-                             <option value="BPS-16" >BPS-16</option>
-                             <option value="BPS-17" >BPS-17</option>
+                           <label>To Grade</label>
+                           <select name="To_Bpsupdate" id="to_BPSupdate" class="form-control select2">
+                            
                            </select>
                          </div>
                        </div>
@@ -684,7 +584,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       </div>
                       <div class=" my-2">
                         <div class="form-group">
-                          <label>Promotion Number</label>
+                          <label>Promotion Number<span>*</span></label>
                           <input type="text" name="Promotion_Number" id="Promotion_Number_update" placeholder="Promotion Number" class="form-control" autocomplete="off">
                         </div>
                       </div>
@@ -712,7 +612,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       </div>
                       <div class="my-2">
                          <div class="form-group">
-                           <label>File</label>
+                           <label>File<span>*</span></label>
                            <input type="file" name="file" id="file" placeholder="file" class="form-control" autocomplete="off">
                          </div>
                        </div>
@@ -734,9 +634,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     $(function() {
       $(".select2").select2();
     });
-      function backToSection2() {
+      function backToSection2() {<?php $CNIC = $_GET['updat'];?>location.replace('Transfer.php?updat=<?php echo $CNIC?>#section6');}
+            
+            function back() {
         <?php $CNIC = $_GET['updat'];?>
-        location.replace('Transfer.php?updat=<?php echo $CNIC?>#section6');
+        location.replace('Training.php?updat=<?php echo $CNIC?>#section3');
             }
       $(document).ready(function($) {      
     function loadTable() {
@@ -751,6 +653,93 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
     }
     loadTable();
+    function From_Designation(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#From_Designation").html(data);
+       }
+     });
+   }
+
+   From_Designation();
+   function To_Designation(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#To_Designation").html(data);
+       }
+     });
+   }
+   To_Designation();
+   function From_BPS(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#From_BPS").html(data);
+          }
+        });
+      }
+      From_BPS();
+      function to_BPS(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#to_BPS").html(data);
+          }
+        });
+      }
+      to_BPS();
+      
+    function From_DesignationUpdate(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#From_DesignationUpdate").html(data);
+       }
+     });
+   }
+   
+   From_DesignationUpdate();
+   function To_DesignationUpdate(){
+     $.ajax({
+       url : "ajex/Job_Tiltle - Copy.php",
+       type:"POST",
+       success : function(data){
+         console.log(data); // Log the response to the console
+         $("#To_DesignationUpdate").html(data);
+       }
+     });
+   }
+   To_DesignationUpdate();
+   function From_BPSupdate(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#From_BPSupdate").html(data);
+          }
+        });
+      }
+      From_BPSupdate();
+      function to_BPSupdate(){
+        $.ajax({
+          url : "ajex/Grade - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#to_BPSupdate").html(data);
+          }
+        });
+      }
+      to_BPSupdate();
  
     $("#save").on("click", function(e) {
     e.preventDefault();
@@ -758,7 +747,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     var From_Designation = $("#From_Designation").val();
     var To_Designation = $("#To_Designation").val();
     var From_BPS = $("#From_BPS").val();
-    var ToBps = $("#ToBps").val();
+    var ToBps = $("#to_BPS").val();
+    
     var Promotion_Date = $("#Promotion_Date").val();
     var Promotion_Number = $("#Promotion_Number").val();
     var Department1 = $("#Department1").val();
@@ -779,6 +769,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     
     // Append the file to the FormData object
     formData.append('file', $('#file')[0].files[0]);
+    if (Promotion_Number.trim() !== "") {
 
     $.ajax({
         url: "ajex/insert_Promotion.php",
@@ -787,23 +778,14 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         processData: false, // Don't process the data (needed for FormData)
         contentType: false, // Don't set contentType
         success: function(data) {
-             if(data == 0.1){
-              alert("Can't Save Image");
-            }
-            if (data == 1) {
-                loadTable();
-                $("#formdata").trigger("reset");
-            }
-             else {
-                alert("Can't Save Record");
-            }
-           
-            
-        },
+           alert(data);
+           $("#formdata").trigger("reset");
+          loadTable();
+          },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log("AJAX Error:", textStatus, errorThrown);
         }
-    });
+    });}else {alert('Add promotion number')}
 });
 
     $(document).on("click", "#delete",function(){
@@ -823,6 +805,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }
         });
       });
+ 
       $(document).on("click", "#update", function() {
     var update = $(this).data("eid");
 
@@ -833,10 +816,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         success: function(data) {
             var Promotion = JSON.parse(data);
             $("#id_update").val(Promotion.id);
-            $("#From_Designation_update").val(Promotion.From_Designation);
-            $("#To_Designation_update").val(Promotion.To_Designation);
-            $("#From_BPS_update").val(Promotion.From_BPS);
-            $("#ToBps_update").val(Promotion.ToBps);
+            $("#From_DesignationUpdate").val(Promotion.From_Designation);
+            $("#To_DesignationUpdate").val(Promotion.To_Designation);
+            $("#From_BPSupdate").val(Promotion.From_BPS);
+
+            // Set selected value for the 'to_BPSupdate' select box
+            $("#to_BPSupdate").val(Promotion.ToBps);
+
             $("#Promotion_Date_update").val(Promotion.Promotion_Date);
             $("#Promotion_Number_update").val(Promotion.Promotion_Number);
             $("#Department1_update").val(Promotion.Department1);
@@ -849,16 +835,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         }
     });
 });
+
+
 $("#updatenow").on("click", function(e) {
     e.preventDefault();
 
     // Get form data
     var formData = new FormData($("#formdata")[0]);
     // Additional form fields
-    formData.append("From_Designation_update", $("#From_Designation_update").val());
-    formData.append("To_Designation_update", $("#To_Designation_update").val());
-    formData.append("From_BPS_update", $("#From_BPS_update").val());
-    formData.append("ToBps_update", $("#ToBps_update").val());
+    formData.append("From_Designation_update", $("#From_DesignationUpdate").val());
+    formData.append("To_Designation_update", $("#To_DesignationUpdate").val());
+    formData.append("From_BPS_update", $("#From_BPSupdate").val());
+    formData.append("ToBps_update", $("#to_BPSupdate").val());
     formData.append("Promotion_Date_update", $("#Promotion_Date_update").val());
     formData.append("Promotion_Number_update", $("#Promotion_Number_update").val());
     formData.append("Department1_update", $("#Department1_update").val());

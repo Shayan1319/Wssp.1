@@ -9,6 +9,8 @@ $From_Department_update = strtoupper($_POST['From_Department_update']);
 $To_Project_update = strtoupper($_POST['To_Project_update']);
 $From_Station_update = strtoupper($_POST['From_Station_update']);
 $To_Station_update = strtoupper($_POST['To_Station_update']);
+$To_Grade_update = strtoupper($_POST['To_Grade_update']);
+$To_Department_update = strtoupper($_POST['To_Department_update']);
 $Worked_From_update = strtoupper($_POST['Worked_From_update']);
 $Transfer_Date_update = strtoupper($_POST['Transfer_Date_update']);
 
@@ -21,7 +23,7 @@ if (move_uploaded_file($_FILES["file_update"]["tmp_name"], $targetFile)) {
 } else {
     echo 0.1;
 }
-$insert = mysqli_query($conn, "UPDATE `transfer` SET`Transfer_Order_Number`='$Transfer_Order_Number_update',`Designation`='$Designation_update',`BPS`='$BPS_update',`From_Department`='$From_Department_update',`To_Project`='$To_Project_update',`From_Station`='$From_Station_update',`To_Station`='$To_Station_update',`Worked_From`='$Worked_From_update',`Transfer_Date`='$Transfer_Date_update',`file`='$fileName' WHERE  `id`='$id'");
+$insert = mysqli_query($conn, "UPDATE `transfer` SET`Transfer_Order_Number`='$Transfer_Order_Number_update',`Designation`='$Designation_update',`BPS`='$BPS_update',`From_Department`='$From_Department_update',`To_Project`='$To_Project_update',`From_Station`='$From_Station_update',`To_Station`='$To_Station_update',`Worked_From`='$Worked_From_update',`Transfer_Date`='$Transfer_Date_update',`file`='$fileName',`ToGrade`='$To_Grade_update',`ToDepartment`='$To_Department_update' WHERE  `id`='$id'");
 
 if ($insert) {
     echo 1;

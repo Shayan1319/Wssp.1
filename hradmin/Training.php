@@ -17,6 +17,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <head>
    <?php include ('link/links.php')?>
 </head>
+<style>
+label span{color: #ff0505;}
+
+</style>
 <body>
   <div class="container-fluid" style="padding: 0px !important;" >
   <?php include ('link/desigene/sidebar.php')?>
@@ -26,7 +30,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    
       <?php
       $CNIC = $_GET['updat'];
-      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `CNIC` ='$CNIC' ");
+      $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
       ?>
       <div class="container-fluid m-auto p-5 bg-light">
@@ -385,7 +389,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       <div class="row">
                           <div class="col-md-4 my-2">
                             <div class="form-group">
-                              <label>Training Serial Number</label>
+                              <label>Training Serial Number<span>*</span></label>
                               <input type="text" name="Training_Serial_Number" id="Training_Serial_Number" placeholder="Training Serial Number" class="form-control" autocomplete="off" >
                             </div>
                           </div>
@@ -433,13 +437,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </div> 
                           <div class="col-md-4 my-2">
                             <div class="form-group">
-                              <label>Duration </label>
-                              <input type="text" name="Duration" id="Duration" placeholder="Duration" class="form-control" autocomplete="off" >
+                              <label>Months Duration</label>
+                              <input type="number" name="Duration" id="Duration" placeholder="Duration" class="form-control" autocomplete="off" >
                             </div>
                           </div>
                           <div class=" text-end">
                             <input type="button" name=""style="background-color: darkblue;" type="button" id="save" class="btn text-white shadow float-right" value="Add" >
+                            <input style="background-color: red;" type="button" onclick="back()" class="btn text-white shadow float-right" value="Back">
                             <input style="background-color: darkblue;" type="button" onclick="backToSection2()" class="btn text-white shadow float-right" value="Next">
+                            
                           </div>
                         </div>
                       
@@ -497,7 +503,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       <form id="formdata" action="#" method="post">
                              <div class="my-2">
                                <div class="form-group">
-                                 <label>Training Serial Number</label>
+                                 <label>Training Serial Number<span>*</span></label>
                                  <input type="text" name="Training_Serial_Number" id="Training_Serial_Number_update" placeholder="Training Serial Number" class="form-control" autocomplete="off" >
                                 <input type="text" class="form-control" hidden id="id_update" name="">
                                </div>
@@ -569,6 +575,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <?php $CNIC = $_GET['updat'];?>
         location.replace('Promotions.php?updat=<?php echo $CNIC?>#section5');
             }
+            function back() {
+        <?php $CNIC = $_GET['updat'];?>
+        location.replace('Qualification.php?updat=<?php echo $CNIC?>#section3');
+            }
       $(document).ready(function($) {       
     function loadTable() {
         var see = "<?php echo $_GET['updat'];?>";
@@ -595,7 +605,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var From = $("#From").val();
         var To = $("#To").val();
         var Duration = $("#Duration").val();
-       
+        if (Training_Serial_Number.trim() !== "") {
         $.ajax({
             url: "ajex/insert_training.php",
             type: "POST",
@@ -610,7 +620,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             },
             error: function(jqXHR, textStatus, errorThrown) {
         console.log("AJAX Error:", textStatus, errorThrown);
-        }});
+        }});}
+        else{
+          alert("Entere the Training Serial Number");
+        }
     });
     $(document).on("click", "#delete",function(){
         var delet = $(this).data("did");
@@ -632,6 +645,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       $(document).on("click", "#update",function(){
         var update = $(this).data("eid");
       // alert(update);
+      
         $.ajax({
           url : "ajex/get_train_single_ajax.php",
           type:"POST",
@@ -664,6 +678,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var Duration =$("#Duration_update").val();
         var id_update = $("#id_update").val();
         // alert(id_update);
+        if (Training_Serial_Number.trim() !== "") {
+
         $.ajax({
           url:"ajex/ajax-update-employee-train-allowance.php",
           type:"POST", 
@@ -675,7 +691,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             else{
               alert ("Can't Save Record");
             }
-          } });
+          } });}
         });
 });
 
