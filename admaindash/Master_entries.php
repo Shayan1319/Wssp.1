@@ -44,6 +44,27 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="row">
                             <div class="col-md-4 my-2">
                                 <div class="form-group">
+                                  <label>Religion</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="Religion">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="Religion_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Religion_drop" >
+
+                                      </ul>
+                                  </div>                                
+                                </div>
+                              </div>
+                            <div class="col-md-4 my-2">
+                                <div class="form-group">
                                   <label>Employement Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
@@ -233,6 +254,27 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
+                                  <label>Employee Pay Classification</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Pay_Classification" id="Employee_Pay_Classification">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="Employee_Pay_Classification_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="Employee_Pay_Classification_drop" >
+
+                                      </ul>
+                                  </div>                                
+                                </div>
+                              </div>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
                                   <label>Grade</label>
                                   <div class="row my-2">
                                     <div class="col-9">
@@ -392,7 +434,26 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
 <script>
    $(document).ready(function(){
-    $("#EmpGroup_btn").on("click",function(e){
+    $("#Religion_btn").on("click",function(e){
+        e.preventDefault();
+        var Religion = $("#Religion").val();
+        $.ajax({
+          url:"ajex/Religion.php",
+          type:"Post", 
+          data:{Religion:Religion},
+          success:function(data){
+            if(data == 1){
+            loadReligion();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
+            $("#EmpGroup_btn").on("click",function(e){
         e.preventDefault();
         var EmpGroup = $("#EmpGroup").val();
         $.ajax({
@@ -407,6 +468,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             else{
               alert ("Can't Save Record");
             }
+          }
+
+        });
+            });
+            $("#Employee_Pay_Classification_btn").on("click",function(e){
+        e.preventDefault();
+        var Employee_Pay_Classification = $("#Employee_Pay_Classification").val();
+
+        $.ajax({
+          url:"ajex/Employee_Pay_Classification.php",
+          type:"Post", 
+          data:{Employee_Pay_Classification:Employee_Pay_Classification},
+          success:function(data){
+            alert(data);
+            
+            loadEmployee_Pay_Classification();
+            $("#form").trigger("reset"); 
           }
 
         });
@@ -702,7 +780,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     
 
 
-            function loadEmpGroup(){ // renamed the function here
+            function loadReligion(){ // renamed the function here
+        $.ajax({
+            url : "ajex/Religion - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#Religion_drop").html(data);
+            }
+        });
+    }
+      loadReligion();
+      function loadEmpGroup(){ // renamed the function here
         $.ajax({
             url : "ajex/EmpGroup - Copy.php",
             type:"POST",
@@ -712,6 +800,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
     }
       loadEmpGroup();
+      
+      function loadEmployee_Pay_Classification() {
+    $.ajax({
+        url: "ajex/Employee_Pay_Classification - Copy.php",
+        type: "POST",
+        success: function (data) {
+            console.log("Data from Employee_Pay_Classification - Copy.php:", data);
+            $("#Employee_Pay_Classification_drop").html(data);
+        }
+    });
+}
+
+      loadEmployee_Pay_Classification();
       function loadEmployee_Class(){
         $.ajax({
           url : "ajex/Employee_Class - Copy.php",
@@ -876,7 +977,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         data: { did: did },
         success: function(data) {
             if (data == 1) {
+              loadReligion();
               loadEmpGroup();
+              loadEmployee_Pay_Classification();
               loadEmployee_Class();
               loadEmployee_Group();
               loadEmployee_Sub_Group();

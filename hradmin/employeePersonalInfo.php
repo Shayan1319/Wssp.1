@@ -115,6 +115,9 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 </head>
 <style>
     .select2-selection__rendered {
@@ -190,32 +193,48 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                         </div>
                       </div> 
                       <div class="col-md-4 my-2">
-                      <div class="form-group">
-                          <label>CNIC <span style="font-size: x-small; font-weight: initial;" >(witout dash -)</span> </label>
-                          <input id="cNo" type="number" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
-                      </div>
+                     
+    <div class="form-group">
+        <label>CNIC <span style="font-size: x-small; font-weight: initial;">(without dash -)</span> 
+        <span id="cnicStatus" style="font-size: smaller;"></span>
+      </label>
+        <input id="cNo" type="number" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
+    </div>
 
-                      <script>
-                      function validateCNIC(input) {
-                          // Get the entered CNIC number
-                          var cnicNumber = input.value;
 
-                          // Check if the length is less than 14
-                          if (cnicNumber.length < 13) {
-                              // Set the border color to red
-                              input.style.borderColor = 'red';
-                          } else {
-                              // Reset the border color
-                              input.style.borderColor = ''; // Empty string resets to the default
-                          }
 
-                          // If you want to limit the input to 14 characters
-                          if (cnicNumber.length > 13) {
-                              // Trim the input to 14 characters
-                              input.value = cnicNumber.slice(0, 14);
-                          }
-                      }
-                      </script>
+    <script>
+function validateCNIC(input) {
+    var cnicNumber = input.value;
+
+    if (cnicNumber.length < 13) {
+        input.style.borderColor = 'red';
+        document.getElementById('cnicStatus').innerText = ''; // Reset status message
+    } else {
+        input.style.borderColor = '';
+        checkCNICExistence(cnicNumber);
+    }
+
+    if (cnicNumber.length > 13) {
+        input.value = cnicNumber.slice(0, 14);
+    }
+}
+
+function checkCNICExistence(cnicNumber) {
+    // Make an AJAX request
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Handle the response
+            var response = xhr.responseText;
+            document.getElementById('cnicStatus').innerText = response;
+        }
+    };
+    xhr.open("GET", "ajex/check_cnic.php?cnic=" + cnicNumber, true);
+    xhr.send();
+}
+</script>
+
 
                       </div>
                       <div class="col-md-4 my-2">
@@ -269,19 +288,19 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Date of Birth<span>*</span></label>
-                          <input id="DofB" required type="Date" name="DofB" class="form-control" autocomplete="off" >
+                          <input id="DofB" required type="Date" name="DofB" class="form-control datepicker" autocomplete="off" >
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Religion</label>
-                          <input id="Religion" type="text" name="religion" placeholder="Religion" class="form-control" autocomplete="off" >
+                          <select name="religion" id="Religion_drop" class="form-control select2"></select>
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Gender<span>*</span></label>
-                          <select name="gender" required id="" class="form-control select2">
+                          <select name="gender" required id="gender" class="form-control select2">
                               <option value="">Choose</option>
                               <option value="Mail">Male</option>
                               <option value="Female">Female</option>
@@ -474,7 +493,8 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Pay Classification<span>*</span></label>
-                                  <input type="text" required class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" >
+                                  <select name="Employee_Pay_Classification" required id="Employee_Pay_Classification_drop" class="form-control select2">
+                                  </select>
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -528,12 +548,40 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                       </select>
                                     </div>
                                   </div>
-                                <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee NO<span>*</span></label>
-                                  <input type="text" id="EmployeeNowssp" name="EmployeeNo" placeholder="Employee NO" class="form-control" autocomplete="off" required >
-                                </div>
-                              </div>
+                                  <div class="col-md-4 my-2">
+    <div class="form-group">
+        <label>Employee NO<span>*</span>
+        <span id="employeeNoStatus" style="font-size: smaller;"></span>
+      </label>
+        <input type="text" id="EmployeeNowssp" name="EmployeeNo" placeholder="Employee NO" class="form-control" autocomplete="off" oninput="validateEmployeeNo(this)" required>
+    </div>
+</div>
+<script>
+function validateEmployeeNo(input) {
+    var employeeNo = input.value;
+
+    if (employeeNo.trim() === "") {
+        input.style.borderColor = 'red';
+        document.getElementById('employeeNoStatus').innerText = ''; // Reset status message
+    } else {
+        input.style.borderColor = '';
+        checkEmployeeNoExistence(employeeNo);
+    }
+}
+
+function checkEmployeeNoExistence(employeeNo) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = xhr.responseText;
+            document.getElementById('employeeNoStatus').innerText = response;
+        }
+    };
+    xhr.open("GET", "ajex/check_employee_no.php?employeeNo=" + employeeNo, true);
+    xhr.send();
+}
+</script>
+
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label class="form-label" >Manager ID No<span>*</span></label>
@@ -566,13 +614,13 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Contract Expiry Date<span>*</span></label>
-                                  <input type="date" required name="Contract_Expiry_Date" placeholder="" class="form-control" autocomplete="off" >
+                                  <input type="date" required name="Contract_Expiry_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Last Working Date<span>*</span></label>
-                                  <input type="date" required name="Last_Working_Date" placeholder="" class="form-control" autocomplete="off" >
+                                  <label>Last Working Date</label>
+                                  <input type="date"  name="Last_Working_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -588,7 +636,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                 </div>
                               </div>
                               <div class="col-md-12 text-end mt-2">
-                                <input style="background-color: darkblue;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
+                                <input style="background-color: red;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
                                 <input style="background-color: darkblue;" name="submit" type="submit" class="btn text-white  float-right shadow" value="Submit">
                                 
                               </div>
@@ -605,6 +653,15 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
       </form> 
     </div>
     <script>
+    flatpickr('.datepicker', {
+        dateFormat: 'd-m-Y', // customize the date format as needed (dd-mm-yyyy)
+        enableTime: false, // set to true if you want to include time
+        minDate: 'today', // set minimum date
+    });
+</script>
+
+    <script>
+      
       $(function() {
           $(".select2").select2();
              });
@@ -658,6 +715,26 @@ $(document) .ready(function(){
         });
     }
       loadEmpGroup();
+      function loadEmployee_Pay_Classification(){ // renamed the function here
+        $.ajax({
+            url : "ajex/Employee_Pay_Classification - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#Employee_Pay_Classification_drop").html(data);
+            }
+        });
+    }
+      loadEmployee_Pay_Classification();
+      function loadReligion(){ // renamed the function here
+        $.ajax({
+            url : "ajex/Religion - Copy.php",
+            type:"POST",
+            success : function(data){
+                $("#Religion_drop").html(data);
+            }
+        });
+    }
+      loadReligion();
 
       function loadEmployee_Class(){
         $.ajax({
@@ -814,13 +891,20 @@ $(document) .ready(function(){
 function validateSection1() {
   // Get the entered CNIC number
 
- var cNo = document.getElementById("cNo").value;
- if (cNo) {
- document.getElementById("section1").style.display = "none";
- document.getElementById("section2").style.display="block";
+  var fName = document.getElementById("fName").value;
+var fatherName = document.getElementById("FatherName").value;
+var cNo = document.getElementById("cNo").value;
+var email = document.getElementById("email").value;
+var DofB = document.getElementById("DofB").value;
+var gender = document.getElementById("gender").value;
+
+if (fName && fatherName && cNo && email && DofB && gender) {
+    document.getElementById("section1").style.display = "none";
+    document.getElementById("section2").style.display = "block";
 } else {
- alert("Please fill in the required fields");
- }
+    alert("Please fill in all the required fields");
+}
+
 }
 function backToSection1() {
 document.getElementById("section2").style.display = "none";
