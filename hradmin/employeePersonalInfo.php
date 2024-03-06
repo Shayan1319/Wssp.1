@@ -608,7 +608,7 @@ function checkEmployeeNoExistence(employeeNo) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Joining Date<span>*</span></label>
-                                  <input type="date" name="Joining_Date" require id="Joining_Date" placeholder="Joining Date" class="form-control" autocomplete="off" >
+                                  <input type="date" name="Joining_Date" require id="Joining_Date" placeholder="Joining Date" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
