@@ -78,7 +78,11 @@ $DY_Supervisor=$_POST['DY_Supervisor'];
 $Image_name =$image['name'];
 $Image_path = $image['tmp_name'];
 $Image_error = $image['error'];
+$selected = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `CNIC`='$CNIC' AND `Status`='NEW' OR `EmployeeNo`='$EmployeeNowssp'");
 
+if (mysqli_num_rows($selected) > 0) {
+  echo '<script>alert("Sorry CNIC already exists");</script>';
+} else {
 if($Image_error==0)
 {
     $Image_save='../image/'.$Image_name;
@@ -100,6 +104,7 @@ if($query)
 }
 else{
 echo '<script>alert("Sorry Data is not inserted");</script>'; 
+}
 }
 }
 ?>
@@ -637,8 +642,6 @@ $(document) .ready(function(){
    
 });
 
-</script>
-<script>
 $(document) .ready(function(){
    
 
@@ -652,7 +655,7 @@ $(document) .ready(function(){
         });
     }
       loadEmpGroup();
-      
+
       function loadEmployee_Class(){
         $.ajax({
           url : "ajex/Employee_Class - Copy.php",

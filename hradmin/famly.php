@@ -635,7 +635,7 @@ label span{
                               <label>Dependents Name<span>*</span></label>
                               <input type="text" name="Spouse_Name" id="Spouse_Name_update" placeholder="Name" class="form-control" autocomplete="off" required="">
                             </div>
-                          </div>  
+                          </div>
                           <div class="my-2">
                             <div class="form-group">
                               <label>NIC/B-form No<span>*</span></label>

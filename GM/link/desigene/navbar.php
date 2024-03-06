@@ -41,7 +41,7 @@
               $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
               while($row = mysqli_fetch_array($insert)){
               ?>
-              <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['CNIC']?>">See Profile</a></li>
+              <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['EmployeeNo']?>">See Profile</a></li>
               <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
               <?php }?>
             </ul>

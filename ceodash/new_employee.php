@@ -47,6 +47,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="col">Status</th>
                         <th scope="col">Joining Date</th>
                         <th scope="col">Contract Expiry Date</th>
+                        <th scope="col">See Employee Record</th>
                         <th scope="col">Accept</th>
                         <th scope="col">Reject</th>
                     </tr>

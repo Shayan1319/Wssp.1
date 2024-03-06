@@ -2,7 +2,7 @@
 include('../link/desigene/db.php');
            
 $sql = "SELECT tr.*, e.* FROM `promotion` AS tr 
-INNER JOIN `employeedata` AS e ON tr.employee_id = e.CNIC 
+INNER JOIN `employeedata` AS e ON tr.employee_id = e.EmployeeNo 
 WHERE tr.Status = 'PENDING'";
 
 $result = $conn->query($sql);

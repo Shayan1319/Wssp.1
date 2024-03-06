@@ -25,6 +25,7 @@ include('../link/desigene/db.php');
                                 <td><?php echo $row['Status'] ?></td>
                                 <td><?php echo $row['Joining_Date'] ?></td>
                                 <td><?php echo $row['Contract_Expiry_Date'] ?></td>
+                                <td><a href="profile.php?updat=<?php echo $row ['EmployeeNo']?>"><i class="fa-solid fa-eye"></i></a></td>
                                 <td><input  type="submit" data-acpt="<?php echo $row['Id'] ?>" class="btn btn-success text-white float-right shadow" value="Accept" id="Accept" name="Accept"></td>
                                 <td><input type="submit" data-rejc="<?php echo $row['Id'] ?>" class="btn bg-danger text-white float-right shadow" value="Reject" id="Reject" name="Reject"></td>
                             </tr>
