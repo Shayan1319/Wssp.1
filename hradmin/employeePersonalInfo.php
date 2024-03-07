@@ -37,6 +37,7 @@ $mNumber = $_POST ["mNumber"];
 $ofphNumber = $_POST ["ofphNumber"];
 $Alternate_Number = $_POST ["Alternate_Number"];
 $DofB = $_POST ["DofB"];
+$DofB = DateTime::createFromFormat('d-m-Y', $DofB)->format('Y-m-d');
 $religion = $_POST ["religion"];
 $gender = $_POST ["gender"];
 $BlGroup = $_POST ["BlGroup"];
@@ -59,8 +60,11 @@ $DepartmentType = $_POST ["DepartmentType"];
 $EmployeeNowssp = $_POST ["EmployeeNo"];
 $Employee_Manager = $_POST ["Employee_Manager"];
 $Joining_Date = $_POST ["Joining_Date"];
+$Joining_Date = DateTime::createFromFormat('d-m-Y', $Joining_Date)->format('Y-m-d');
 $Contract_Expiry_Date = $_POST ["Contract_Expiry_Date"];
+$Contract_Expiry_Date = DateTime::createFromFormat('d-m-Y', $Contract_Expiry_Date)->format('Y-m-d');
 $Last_Working_Date = $_POST ["Last_Working_Date"];
+$Last_Working_Date = DateTime::createFromFormat('d-m-Y', $Last_Working_Date)->format('Y-m-d');
 $Attendance_Supervisor = $_POST ["Attendance_Supervisor"];
 $Duty_Location = $_POST ["Duty_Location"];
 $Duty_Point = $_POST ["Duty_Point"];
@@ -115,10 +119,14 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-</head>
+   
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+     <!--jQuery and jQuery UI-->
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  </head>
 <style>
     .select2-selection__rendered {
       line-height: 31px !important;
@@ -288,7 +296,7 @@ function checkCNICExistence(cnicNumber) {
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Date of Birth<span>*</span></label>
-                          <input id="DofB" required type="Date" name="DofB" class="form-control datepicker" autocomplete="off" >
+                          <input id="DofB" required type="text" name="DofB" class="form-control datepicker" autocomplete="off" placeholder="dd-mm-yyyy">
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -608,19 +616,19 @@ function checkEmployeeNoExistence(employeeNo) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Joining Date<span>*</span></label>
-                                  <input type="date" name="Joining_Date" require id="Joining_Date" placeholder="Joining Date" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" name="Joining_Date" require id="Joining_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Contract Expiry Date<span>*</span></label>
-                                  <input type="date" required name="Contract_Expiry_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" required name="Contract_Expiry_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Last Working Date</label>
-                                  <input type="date"  name="Last_Working_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" name="Last_Working_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -653,13 +661,13 @@ function checkEmployeeNoExistence(employeeNo) {
       </form> 
     </div>
     <script>
-    flatpickr('.datepicker', {
-        dateFormat: 'd-m-Y', // customize the date format as needed (dd-mm-yyyy)
-        enableTime: false, // set to true if you want to include time
-        minDate: 'today', // set minimum date
-    });
-</script>
-
+        $(document).ready(function() {
+            // Initialize the datepicker with your desired format
+            $(".datepicker").datepicker({
+                dateFormat: 'dd mm yy'
+            });
+        });
+    </script>
     <script>
       
       $(function() {
@@ -911,6 +919,7 @@ document.getElementById("section2").style.display = "none";
 document.getElementById("section1").style.display = "block";
 }
 </script>
+
   <?php include('link/desigene/script.php')?>
 </body>
 </html>

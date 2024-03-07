@@ -13,8 +13,6 @@ $To_Grade_update = strtoupper($_POST['To_Grade_update']);
 $To_Department_update = strtoupper($_POST['To_Department_update']);
 $Worked_From_update = strtoupper($_POST['Worked_From_update']);
 $Transfer_Date_update = strtoupper($_POST['Transfer_Date_update']);
-
-// File upload handling
 $targetDirectory = "../../CV/";
 $fileName = basename($_FILES["file_update"]["name"]);
 $targetFile = $targetDirectory . $fileName;

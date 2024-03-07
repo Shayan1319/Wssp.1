@@ -13,7 +13,7 @@ $Department1 = strtoupper($_POST['Department1']);
 $Acting = strtoupper($_POST['Acting']);
 $Remarks = strtoupper($_POST['Remarks']);
 
-// File upload handling
+
 $targetDirectory = "../../CV/";
 $targetFile = $targetDirectory . basename($_FILES["file"]["name"]);
 $fileName = basename($_FILES["file"]["name"]);

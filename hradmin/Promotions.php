@@ -455,7 +455,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        <div class="col-md-4 my-2">
                          <div class="form-group">
                            <label>Promotion Date</label>
-                           <input type="Date" name="Promotion_Date" id="Promotion_Date" class="form-control" autocomplete="off">
+                           <input type="Date" name="Promotion_Date" id="Promotion_Date" class="form-control datepicker" autocomplete="off">
                          </div>
                        </div>
                        <div class="col-md-4 my-2">
@@ -467,7 +467,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        <div class="col-md-4 my-2">
                          <div class="form-group">
                            <label>Department</label>
-                           <input type="text" name="Department1" id="Department1" placeholder="Department" class="form-control" autocomplete="off">
+                           <input type="text" name="Department1" id="Department1" placeholder="Department" class="form-control " autocomplete="off">
                          </div>
                        </div>
                        <div class="col-md-4 my-2">
@@ -579,7 +579,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       <div class=" my-2">
                         <div class="form-group">
                           <label>Promotion Date</label>
-                          <input type="Date" name="Promotion_Date" id="Promotion_Date_update" class="form-control" autocomplete="off">
+                          <input type="Date" name="Promotion_Date" id="Promotion_Date_update" class="form-control datepicker" placeholder="Promotion Date" autocomplete="off">
                         </div>
                       </div>
                       <div class=" my-2">
@@ -628,6 +628,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </div>
         </div>
       </div>
+      
+
         <?php include('../link/desigene/script.php') ?>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>

@@ -485,7 +485,7 @@ label span{
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Order Date</label>
-                              <input type="date" name="Transfer_Date" id="Transfer_Date" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Transfer_Date" id="Transfer_Date" class="form-control datepicker" placeholder="Order Date" autocomplete="off" required="">
                             </div>
                           </div>  
                           <div class="col-md-4 my-2">
@@ -542,7 +542,7 @@ label span{
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Arrival Date</label>
-                              <input type="date" name="Worked_From" id="Worked_From" placeholder="Worked From" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Worked_From" id="Worked_From" placeholder="Arrival From"  class="form-control datepicker" autocomplete="off" required="">
                             </div>
                           </div>
                          
@@ -622,7 +622,7 @@ label span{
                           <div class="my-2">
                             <div class="form-group">
                               <label>Order Date</label>
-                              <input type="date" name="Worked_From" id="Worked_From_update" placeholder="Worked From" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Worked_From" id="Worked_From_update" placeholder="Ordaer Date" class="form-control datepicker" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">
@@ -677,7 +677,7 @@ label span{
                           <div class="my-2">
                             <div class="form-group">
                               <label>Arrival Date</label>
-                              <input type="date" name="Transfer_Date" id="Transfer_Date_update" class="form-control" autocomplete="off" required="">
+                              <input type="date" name="Transfer_Date" id="Transfer_Date_update" class="form-control datepicker" placeholder="Arrival Date" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">
@@ -697,6 +697,7 @@ label span{
                   </div>
                 </div>
     </div>
+   
     <script>
       function backToSection2() {
         <?php $CNIC = $_GET['updat'];?>
@@ -940,10 +941,6 @@ label span{
             $("#To_Project_update option[value='" + Transfer.To_Project + "']").prop('selected', true);
             $("#To_Grade_update option[value='" + Transfer.To_Grade + "']").prop('selected', true);
             $("#To_Department_update option[value='" + Transfer.To_Department + "']").prop('selected', true);
-
-            // Update the file input (assuming you have a file input with id 'file_update')
-            // Note: You cannot set a value for a file input due to security reasons
-            // If you need to show the file name, you can display it in a separate element
             $("#file_update").val(""); // Clear the file input
         }
     });
