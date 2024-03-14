@@ -239,7 +239,7 @@ if ($query) {
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Date of Birth</label>
-                          <input value="<?php echo $fetchdata['DofB']?>" id="DofB" type="Date" name="DofB" class="form-control" autocomplete="off" >
+                          <input value="<?php echo $fetchdata['DofB']?>" id="DofB" type="text" name="DofB" class="form-control datepicker" autocomplete="off" >
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -772,19 +772,19 @@ if ($query) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Joining Date</label>
-                                  <input value="<?php echo $fetchdata['Joining_Date']?>" type="date" name="Joining_Date" id="Joining_Date" placeholder="Joining Date" class="form-control" autocomplete="off" >
+                                  <input value="<?php echo $fetchdata['Joining_Date']?>" type="text" name="Joining_Date" id="Joining_Date" placeholder="Joining Date" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Contract Expiry Date</label>
-                                  <input value="<?php echo $fetchdata['Contract_Expiry_Date']?>" type="date" name="Contract_Expiry_Date" placeholder="" class="form-control" autocomplete="off" >
+                                  <input value="<?php echo $fetchdata['Contract_Expiry_Date']?>" type="text" name="Contract_Expiry_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Last Working Date</label>
-                                  <input value="<?php echo $fetchdata['Last_Working_Date']?>" type="date" name="Last_Working_Date" placeholder="" class="form-control" autocomplete="off" >
+                                  <input value="<?php echo $fetchdata['Last_Working_Date']?>" type="text" name="Last_Working_Date" placeholder="" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -818,6 +818,12 @@ if ($query) {
       </form> 
     </div>
     <script>
+      $(document).ready(function() {
+            // Initialize the datepicker with your desired format
+            $(".datepicker").datepicker({
+                dateFormat: 'dd mm yy'
+            });
+        });
       $(function() {
           $(".select2").select2();
              });

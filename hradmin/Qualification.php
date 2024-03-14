@@ -330,63 +330,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 </div>
                    </div>
               </div>
-      
-              <!-- <div class="col-12 bg-white mt-5 px-2"> 
-              <nav class="navbar bg-white">
-              <div class="container-fluid">
-                  <h4>Qualification Info</h4>
-              </div>
-              </nav>
-                  <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div>-->
-              <!-- <div class="col-12 bg-white mt-5 px-2">
-              <nav class="navbar bg-white">
-              <div class="container-fluid">
-                  <h4>Family Info</h4>
-              </div>
-              </nav>
-                  <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div>
-              <div class="col-12 bg-white mt-5 px-2">
-              <nav class="navbar bg-white">
-              <div class="container-fluid">
-                  <h4>Training Info</h4>
-              </div>
-              </nav>
-                  <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div>
-              <div class="col-12 bg-white mt-5 px-2">
-              <nav class="navbar bg-white">
-              <div class="container-fluid">
-                  <h4>Promotions Info</h4>
-              </div>
-              </nav>
-                  <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div>
-              <div class="col-12 bg-white mt-5 px-2">
-              <nav class="navbar bg-white">
-              <div class="container-fluid">
-                  <h4>Transfer Info</h4>
-              </div>
-              </nav>
-                  <div class="row">
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                    <div class="col-md-6 col-lg-6 col-sm-12"></div>
-                  </div>
-              </div> -->
-
             </div>
 
           </div>
@@ -395,6 +338,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
              <div class="container-fluid py-5">
                 <div id="section3" >
                   <div class="row my-4">
+                    <!-- insert data  -->
                      <form id="formdata">
                       <div class="col-md-12">
                       <div class="card card-success bg-light">
@@ -431,7 +375,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="date" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" >
+                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
+                                
                               </div>
                             </div>
                             <div class="col-md-4 my-2">
@@ -477,7 +422,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     </div>
                     <!-- Col-12 -->
                     </form>
-                 
+                    <!-- show data inserted  -->
                     <div class="card card2 text-center bg-light">
                         <div style="background-color: darkblue;" class="card-header ">
                           <div class="card-title text-white">Employee Qualification</div>
@@ -507,6 +452,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   </div>
                 </div>
               </div>
+              <!-- upadate form  -->
               <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -519,7 +465,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="my-2">
                               <div class="form-group">
                                 <label>Qualification</label>
-                                <input type="text" name="Qualification" id="Qualification_update" placeholder="Qualification" class="form-control" autocomplete="off" >
+                                <select id="Qualification_update" name="Qualification" class="form-select" >
+                                    <option value="">Select</option>
+                                    <option value="Matric">Matric</option>
+                                    <option value="FSC">FSC</option>
+                                    <option value="FA">FA</option>
+                                    <option value="BS">BS</option>
+                                    <option value="BSC">BSC</option>
+                                    <option value="Master">Master</option>
+                                    <option value="MPhil">MPhil</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
                                 <input type="text" class="form-control" hidden id="id_update" name="">
                               </div>
                             </div>
@@ -532,7 +488,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree_update" placeholder="Passing Year of Degree " class="form-control" autocomplete="off" >
+                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree_update" placeholder="dd-mm-yyyy" class="form-control datepickerupdate" autocomplete="off" >
+                                <!-- datepicker not working hear -->
                               </div>
                             </div>
                             <div class="my-2">
@@ -576,9 +533,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   </div>
                 </div>
               </div>
-        <?php include('../link/desigene/script.php') ?>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+     $(document).ready(function() {
+            // Initialize the datepicker with your desired format
+            $(".datepicker, #Passing_Year_of_Degree_update").datepicker({
+                dateFormat: 'dd mm yy'
+            });
+        });
       function backToSection2() {
           <?php $CNIC = $_GET['updat'];?>
           location.replace('Training.php?updat=<?php echo $CNIC?>#section4');
@@ -609,16 +570,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var Major_Subject = $("#Major_Subject").val();
         var Remarks = $("#Remarks").val();
         $.ajax({
-            url: "insert_qualification.php",
+            url: "ajex/insert_qualification.php",
             type: "POST",
             data: { employee_id:employee_id,Qualification:Qualification,GradeDivision:GradeDivision,Passing_Year_of_Degree:Passing_Year_of_Degree,Last_Institute:Last_Institute,PEC_Registration:PEC_Registration,Institute_Address:Institute_Address,Major_Subject:Major_Subject,Remarks:Remarks},
             success: function(data) {
-                if (data == 1) {
+              alert(data);
                     loadTable();
                     $("#formdata").trigger("reset");
-                } else {
-                    alert("Can't Save Record");
-                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
         console.log("AJAX Error:", textStatus, errorThrown);
@@ -691,10 +649,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 });
 
   </script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
   <?php include('link/desigene/script.php')?>
   </body>
 </html>

@@ -120,12 +120,6 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
 <head>
    <?php include ('link/links.php')?>
    
-   <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-     <!--jQuery and jQuery UI-->
-     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
 <style>
     .select2-selection__rendered {
@@ -211,37 +205,37 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
 
 
 
-    <script>
-function validateCNIC(input) {
-    var cnicNumber = input.value;
+  <script>
+        function validateCNIC(input) {
+            var cnicNumber = input.value;
 
-    if (cnicNumber.length < 13) {
-        input.style.borderColor = 'red';
-        document.getElementById('cnicStatus').innerText = ''; // Reset status message
-    } else {
-        input.style.borderColor = '';
-        checkCNICExistence(cnicNumber);
-    }
+            if (cnicNumber.length < 13) {
+                input.style.borderColor = 'red';
+                document.getElementById('cnicStatus').innerText = ''; // Reset status message
+            } else {
+                input.style.borderColor = '';
+                checkCNICExistence(cnicNumber);
+            }
 
-    if (cnicNumber.length > 13) {
-        input.value = cnicNumber.slice(0, 14);
-    }
-}
-
-function checkCNICExistence(cnicNumber) {
-    // Make an AJAX request
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // Handle the response
-            var response = xhr.responseText;
-            document.getElementById('cnicStatus').innerText = response;
+            if (cnicNumber.length > 13) {
+                input.value = cnicNumber.slice(0, 14);
+            }
         }
-    };
-    xhr.open("GET", "ajex/check_cnic.php?cnic=" + cnicNumber, true);
-    xhr.send();
-}
-</script>
+
+        function checkCNICExistence(cnicNumber) {
+            // Make an AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Handle the response
+                    var response = xhr.responseText;
+                    document.getElementById('cnicStatus').innerText = response;
+                }
+            };
+            xhr.open("GET", "ajex/check_cnic.php?cnic=" + cnicNumber, true);
+            xhr.send();
+        }
+  </script>
 
 
                       </div>

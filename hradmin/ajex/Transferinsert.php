@@ -12,7 +12,6 @@ $Worked_From = strtoupper($_POST['Worked_From']);
 $Transfer_Date = strtoupper($_POST['Transfer_Date']);
 $ToGrade = strtoupper($_POST['To_Grade']);
 $To_Department = strtoupper($_POST['To_Department']);
-// File upload handling
 $targetDirectory = "../../CV/";
 $targetFile = $targetDirectory . basename($_FILES["file"]["name"]);
 $fileName = basename($_FILES["file"]["name"]);

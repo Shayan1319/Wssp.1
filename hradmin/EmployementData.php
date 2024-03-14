@@ -59,7 +59,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <td><?php echo $see ['EmployeeNo'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
                         <td><?php echo $see ['Status'] ." ".$NEW ?></td>
-                        <td><a href="profile.php?updat=<?php echo $see['CNIC']?>" ><i class="fa-solid fa-eye"></i></a></td>
+                        <td><a href="profile.php?updat=<?php echo $see['EmployeeNo']?>" ><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="updateemp.php?id=<?php echo $see['Id']?>"><i class="fa-solid fa-file-pen"></i></a></td>
                         </tr>
                         <?php

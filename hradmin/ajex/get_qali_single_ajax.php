@@ -11,7 +11,7 @@ include '../link/desigene/db.php';
             'Qualification_update' => $row['Qualification'],
             'GradeDivision_update' => $row['Grade/Division'],
             'Passing_Year_of_Degree_update' => $row['Passing Year of Degree'],
-            'Last Institute' => $row['Qualification'],
+            'Last_Institute_update' => $row['Last Institute'],
             'PEC_Registration_update' => $row['PEC Registration'],
             'Institute_Address_update' => $row['Institute Address'],
             'Major_Subject_update' => $row['Major Subject'],

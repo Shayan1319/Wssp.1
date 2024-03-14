@@ -426,13 +426,13 @@ label span{color: #ff0505;}
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>From</label>
-                              <input type="Date" name="From" id="From" class="form-control" autocomplete="off" >
+                              <input type="text" name="From" id="From" class="form-control datepicker" placeholder="dd-mm-yyyy"  autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>To</label>
-                              <input type="Date" name="To" id="To" class="form-control" autocomplete="off" >
+                              <input type="text" name="To" id="To" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" >
                             </div>
                           </div> 
                           <div class="col-md-4 my-2">
@@ -541,13 +541,13 @@ label span{color: #ff0505;}
                              <div class="my-2">
                                <div class="form-group">
                                  <label>From</label>
-                                 <input type="Date" name="From" id="From_update" class="form-control" autocomplete="off" >
+                                 <input type="text" name="From" id="From_update" class="form-control datepicker" autocomplete="off" >
                                </div>
                              </div>
                              <div class="my-2">
                                <div class="form-group">
                                  <label>To</label>
-                                 <input type="Date" name="To" id="To_update" class="form-control" autocomplete="off" >
+                                 <input type="text" name="To" id="To_update" class="form-control datepicker" autocomplete="off" >
                                </div>
                              </div> 
                              <div class="my-2">
@@ -568,9 +568,13 @@ label span{color: #ff0505;}
                 </div>
               </div>
   </div>
-        <?php include('../link/desigene/script.php') ?>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+     $(document).ready(function() {
+            // Initialize the datepicker with your desired format
+            $(".datepicker").datepicker({
+                dateFormat: 'dd mm yy'
+            });
+        });
       function backToSection2() {
         <?php $CNIC = $_GET['updat'];?>
         location.replace('Promotions.php?updat=<?php echo $CNIC?>#section5');
@@ -611,12 +615,9 @@ label span{color: #ff0505;}
             type: "POST",
             data: { employee_id:employee_id,Training_Serial_Number:Training_Serial_Number,Training_Name:Training_Name,Institute:Institute,City:City,Institute_Address:Institute_Address,Oblige_Sponsor:Oblige_Sponsor,From:From,To:To,Duration:Duration},
             success: function(data) {
-                if (data == 1) {
+              alert(data);
                     loadTable();
                     $("#formdata").trigger("reset");
-                } else {
-                    alert("Can't Save Record");
-                }
             },
             error: function(jqXHR, textStatus, errorThrown) {
         console.log("AJAX Error:", textStatus, errorThrown);
@@ -696,11 +697,6 @@ label span{color: #ff0505;}
 });
 
   </script>
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-<?php include('link/desigene/script.php')?>
 </body>
 </html>
 <?php }?>
