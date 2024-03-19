@@ -1,7 +1,7 @@
 <?php
 include('../link/desigene/db.php');
 $id=$_POST['id'];
-$date=date('Y-M-D');
+$date=date('D : d-M-Y');
 $update=mysqli_query($conn,"UPDATE `travelrequest` SET `Statusofmanger`='REJECTED', `DateOfAccepManager`='$date' WHERE  `id`=$id");
 if($update){
     echo 1;

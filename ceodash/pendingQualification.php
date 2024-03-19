@@ -81,6 +81,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         data: { id: acceptId },
         success: function (data) {
             alert(data); // Show the data in an alert
+            loadTable();
         },
     });
 });

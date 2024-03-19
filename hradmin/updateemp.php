@@ -245,7 +245,22 @@ if ($query) {
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Religion</label>
-                          <input value="<?php echo $fetchdata['religion']?>" id="Religion" type="text" name="religion" placeholder="Religion" class="form-control" autocomplete="off" >
+                          <select name="religion" id="" class="form-control select2">
+                          <?php
+                            $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Religion'");
+                            if(mysqli_num_rows($select)>0){
+                              ?>
+                                <option value="">Select</option>
+                              <?php
+                                while($row=mysqli_fetch_assoc($select)){
+                                ?>
+                                <option value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                <option <?php echo ($fetchdata['religion'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                <?php   
+                                }
+                            }
+                            ?>
+                          </select>
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -557,7 +572,23 @@ if ($query) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employee Pay Classification</label>
-                                  <input value="<?php echo $fetchdata['Employee_Pay_Classification']?>" type="text" class="form-control" name="Employee_Pay_Classification" placeholder="Employee Pay Classification" >
+                                  <select name="Employee_Pay_Classification" required id="" class="form-control select2">
+                                  <?php
+                                    $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Pay_Classification'");
+                                    if(mysqli_num_rows($select)>0){
+                                      ?>
+                                        <option value="">Select</option>
+                                      <?php
+                                        while($row=mysqli_fetch_assoc($select)){
+                                        ?>
+                                        <option <?php echo ($fetchdata['Employee_Pay_Classification'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+
+                                        <?php   
+                                        }
+                                    }
+                                    ?>
+                                </select>
+
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -876,8 +907,7 @@ $(document) .ready(function(){
    
 });
 
-</script>
-<script>
+
 $(document) .ready(function(){
   function loadTable(){
     $.ajax({

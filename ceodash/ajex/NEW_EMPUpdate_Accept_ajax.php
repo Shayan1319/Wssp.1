@@ -63,29 +63,19 @@ if (isset($_POST['id'])) {
     $typeUpdate=$row['typeUpdate'];
    $DY_SupervisorUpdate=$row['DY_SupervisorUpdate'];
     // SQL query for insertion
-    $insertquery = "UPDATE `employeedata` SET  `image`='$ImageUpdate',`fName`='$fNameUpdate',`mName`='$mNameUpdate',`lName`='$lNameUpdate',`father_Name`='$father_NameUpdate',`CNIC`='$CNICUpdate',`email`='$emailUpdate',`pAddress`='$pAddressUpdate',`cAddress`='$cAddressUpdate',`city`='$cityUpdate',`postAddress`='$postAddressUpdate',`mNumber`='$mNumberUpdate',`ofphNumber`='$ofphNumberUpdate',`Alternate_Number`='$Alternate_NumberUpdate',`DofB`='$DofBUpdate',`religion`='$religionUpdate',`gender`='$genderUpdate',`BlGroup`='$BlGroupUpdate',`Domicile`='$DomicileUpdate',`MaritalStatus`='$MaritalStatusUpdate',`NextofKin`='$NextofKinUpdate',`NextofKinCellNumber`='$NextofKinCellNumberUpdate',`ContactPerson`='$ContactPersonUpdate',`CPCN`='$CPCNUpdate',`Employement_Group`='$Employement_GroupUpdate',`Employee_Class`='$Employee_ClassUpdate',`Employee_Group`='$Employee_GroupUpdate',`Employee_Sub_Group`='$Employee_Sub_GroupUpdate',`Employee_Quota`='$Employee_QuotaUpdate',`Salary_Bank`='$Salary_BankUpdate',`Salary_Branch`='$Salary_BranchUpdate',`Account_No`='$Account_NoUpdate',`Pay_Type`='$Pay_TypeUpdate',`EOBI_No`='$EOBI_NoUpdate',`Bill_Walved_Off`='$Bill_Walved_OffUpdate',`Weekly_Working_Days`='$Weekly_Working_DaysUpdate',`Bill_Waived_Off`='$Bill_Waived_OffUpdate',`Employee_Pay_Classification`='$Employee_Pay_ClassificationUpdate',`Grade`='$Grade_tmaUpdate',`Department`='$DepartmentUpdate',`Job_Tiltle`='$Job_TiltleUpdate',`Salary_Mode`='$Salary_ModeUpdate',`Status`='$StatusUpdate',`EmployeeNo`='$EmployeeNoUpdate',`Employee_Manager`='$Employee_ManagerUpdate',`Joining_Date`='$Joining_DateUpdate',`Contract_Expiry_Date`='$Contract_Expiry_DateUpdate',`Last_Working_Date`='$Last_Working_DateUpdate',`Attendance_Supervisor`='$Attendance_SupervisorUpdate',`Duty_Location`='$Duty_LocationUpdate',`Duty_Point`='$Duty_PointUpdate',`Online Status`='ACCEPT',`type`='$TypeUpdate',`DY_Supervisor`='$DY_SupervisorUpdate',`leaveAlreadyAvailed`='34' WHERE `Id`='$IdUpdate'";
+    $insertquery = "UPDATE `employeedata` SET  `image`='$imageUpdate',`fName`='$fNameUpdate',`mName`='$mNameUpdate',`lName`='$lNameUpdate',`father_Name`='$father_NameUpdate',`CNIC`='$CNICUpdate',`email`='$emailUpdate',`pAddress`='$pAddressUpdate',`cAddress`='$cAddressUpdate',`city`='$cityUpdate',`postAddress`='$postAddressUpdate',`mNumber`='$mNumberUpdate',`ofphNumber`='$ofphNumberUpdate',`Alternate_Number`='$Alternate_NumberUpdate',`DofB`='$DofBUpdate',`religion`='$religionUpdate',`gender`='$genderUpdate',`BlGroup`='$BlGroupUpdate',`Domicile`='$DomicileUpdate',`MaritalStatus`='$MaritalStatusUpdate',`NextofKin`='$NextofKinUpdate',`NextofKinCellNumber`='$NextofKinCellNumberUpdate',`ContactPerson`='$ContactPersonUpdate',`CPCN`='$CPCNUpdate',`Employement_Group`='$Employement_GroupUpdate',`Employee_Class`='$Employee_ClassUpdate',`Employee_Group`='$Employee_GroupUpdate',`Employee_Sub_Group`='$Employee_Sub_GroupUpdate',`Employee_Quota`='$Employee_QuotaUpdate',`Salary_Bank`='$Salary_BankUpdate',`Salary_Branch`='$Salary_BranchUpdate',`Account_No`='$Account_NoUpdate',`Pay_Type`='$Pay_TypeUpdate',`EOBI_No`='$EOBI_NoUpdate',`Bill_Walved_Off`='$Bill_Walved_OffUpdate',`Weekly_Working_Days`='$Weekly_Working_DaysUpdate',`Bill_Waived_Off`='$Bill_Waived_OffUpdate',`Employee_Pay_Classification`='$Employee_Pay_ClassificationUpdate',`Grade`='$GradeUpdate',`Department`='$DepartmentUpdate',`Job_Tiltle`='$Job_TiltleUpdate',`Salary_Mode`='$Salary_ModeUpdate',`Status`='$StatusUpdate',`EmployeeNo`='$EmployeeNoUpdate',`Employee_Manager`='$Employee_ManagerUpdate',`Joining_Date`='$Joining_DateUpdate',`Contract_Expiry_Date`='$Contract_Expiry_DateUpdate',`Last_Working_Date`='$Last_Working_DateUpdate',`Attendance_Supervisor`='$Attendance_SupervisorUpdate',`Duty_Location`='$Duty_LocationUpdate',`Duty_Point`='$Duty_PointUpdate',`Status`='ON-DUTY',`type`='$typeUpdate',`DY_Supervisor`='$DY_SupervisorUpdate',`leaveAlreadyAvailed`='34' WHERE `Id`='$IdUpdate'";
     
     // Execute the query
     $query = mysqli_query($conn, $insertquery);
     
     // Check if the query was successful
     if ($query) {
-        $deletequery = mysqli_query($conn, "DELETE FROM `employeedataupdate` WHERE `Id`=$id");
-
-        if ($deletequery) {
-            echo 1;
-        } else {
-            echo 0;
-        }
+      echo "Updated the employee data";
     } else {
-        echo 0;
+        echo "Updated the employee data";
     }
 } else {
-    echo 0;
+    echo "No record exest";
 }
 }
-?>
-
-?>
-
 ?>

@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 // links to database
 include ('link/desigene/db.php');
-if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
   
@@ -17,12 +17,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    <?php include ('link/links.php')?>
 </head>
 <body>
-    <?php include ('link/desigene/sidebar.php')?>
   <div id="main">
     <?php include('link/desigene/navbar.php')?>
     <div class="container-fluid py-5">
     <?php
-      $CNIC = $_GET['updat'];
+      $CNIC = $_SESSION['EmployeeNumber'];
       $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC'");
       while($see1=mysqli_fetch_array($select)){
       ?>

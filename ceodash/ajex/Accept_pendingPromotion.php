@@ -1,12 +1,11 @@
 <?php
 include('../link/desigene/db.php');
 $id=$_POST['id'];
-$date=date('Y-M-D');
-$update=mysqli_query($conn,"UPDATE `transfer` SET `Status`='ACCPET' WHERE `Id`=$id");
+$update=mysqli_query($conn,"UPDATE `promotion` SET `Status`='ACCPET' WHERE `Id`=$id");
 if($update){
-    echo 1;
+    echo "Promotion Accepeted";
 }
 else{
-    echo 0;
+    echo "Promotion Not Accepeted";
 }
 ?>

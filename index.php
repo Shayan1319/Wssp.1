@@ -119,20 +119,23 @@ if (isset($_POST['submit'])) {
         header("Location: Employee/index.php");
         exit();
     }
-    else {
-        // Handle the case where the login is not successful
-        echo '<script>alert("Sorry, the email or password is incorrect.");</script>';
+    elseif ($loginas == "") {
+        echo '<script>alert("Please select the login type.");</script>';
     }
+    else {
+        echo '<script>alert("Sorry, the email or password is incorrect.");</script>';
+        // Redirect back to the login page or display an error message
+        header("Location: index.php");
+        exit();
+    }
+    
 }
 ?>
 <!doctype html>
 <html lang="en">
-
 <head>
 <?php include ('link/links.php')?>
 </head>
-
-
 <body>
     <section class="ftco-section">
         <div class="container">
@@ -174,23 +177,19 @@ if (isset($_POST['submit'])) {
 
 <section class="">
     <!-- Footer -->
-   
     <!-- Copyright -->
     <div class="text-center text-white p-3" style="background-color: rgb(0 0 0 / 70%);">
         © 2020 Copyright:
         <a class="text-white" href="index.php">Kurtlar Developer</a> || Created by @Kurtlar Developer
     </div>
     <!-- Copyright -->
-  
 <!-- Footer -->
 </section>
-
 </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-
 </body>
 
 </html>

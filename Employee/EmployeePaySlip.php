@@ -2,12 +2,12 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
-if (strlen($_SESSION['loginid']==0)) {
-?>   <script>
-location.replace('../logout.php')
-</script><?php
-  } else{
+include('../link/desigene/db.php');
+if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
+  error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
+  header("Location: ../logout.php");
+  exit;
+} else{
 ?><!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,24 +29,62 @@ location.replace('../logout.php')
                 <!-- form start -->
                 <form method="post" action="../printpayroll.php" enctype="multipart/form-data">
                   <div class="row">
-                    <div class="col-12">
+                  <div class="col-12">
                     <div class="form-group">
-                        <label>Employee Number </label>
-                        <input type="number" name="empnumber" value="<?php echo $_SESSION['EmployeeNumber']?>" placeholder="Employee Number" class="form-control" autocomplete="off" readonly required="">
-                      </div>
+                      <label>Employee No</label>
+                      <input type="number" value="<?php echo $_SESSION['EmployeeNumber']?>" class="form-control" disabled readonly name="empnumber" id="employee_no">
                     </div>
-                    <div class="col-6">
+                  </div>
+                  <div class="col-md-6 my-4">
                       <div class="form-group">
                         <label>From Month </label>
-                        <input type="date" name="frommonth" placeholder="From Month" class="form-control" autocomplete="off" required="">
+                        <select name="frommonth" required id="timeperiod" class="form-control select2">
+                        <?php
+                        $select = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `HRStatus`='ACCEPT' ORDER BY `ID` DESC");
+
+                        if (mysqli_num_rows($select) > 0) {
+                            ?>
+                            <option value="">Select</option>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($select)) {
+                                // Format the date using date() function with the month in English
+                                $formattedDate = date('d-M-Y', strtotime($row['FromDate']));
+                                
+                                echo '<option value="' . $row['FromDate'] . '">' . $formattedDate . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">No time periods found</option>';
+                        }
+                        ?>
+
+                        </select>
                       </div>
-                    </div>
-                    <div class="col-6">
+                  </div>
+                  <div class="col-md-6 my-4">
                       <div class="form-group">
-                        <label>To Month</label>
-                        <input type="date" name="tomunth" placeholder="To Month" class="form-control" autocomplete="off" required="">
+                        <label>To Month </label>
+                        <select name="tomunth" required id="totimeperiod" class="form-control select2">
+                        <?php
+                        $select = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `HRStatus`='ACCEPT' ORDER BY `ID` DESC");
+
+                        if (mysqli_num_rows($select) > 0) {
+                            ?>
+                            <option value="">Select</option>
+                            <?php
+                            while ($row = mysqli_fetch_assoc($select)) {
+                                // Format the date using date() function with the month in English
+                                $formattedDate = date('d-M-Y', strtotime($row['FromDate']));
+                                
+                                echo '<option value="' . $row['FromDate'] . '">' . $formattedDate . '</option>';
+                            }
+                        } else {
+                            echo '<option value="">No time periods found</option>';
+                        }
+                        ?>
+
+                        </select>
                       </div>
-                    </div>
+                  </div>
                     <div class="col-md-12 text-end mt-2">
                       <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="submit">
                     </div>
@@ -62,5 +100,27 @@ location.replace('../logout.php')
       </div>
     </div>
       <?php include('link/desigene/script.php')?>
+  </div>
+  <div class="clearfix">&nbsp;</div>
+  <div class="clearfix">&nbsp;</div>
+<script>
+    var addSerial = 0;
+    $(function() {
+      $(".select2").select2();
+    });
+$(document) .ready(function(){
+  function loadTable(){
+    $.ajax({
+      url : "ajex/empidpay.php",
+      type : "POST",
+    success : function(data){
+    $("#employee_no") .html(data) ;
+    }});
+    }
+    loadTable(); 
+});
+</script>
+  
+</script>
   </body>
 </html><?php }?>

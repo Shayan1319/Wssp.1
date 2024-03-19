@@ -35,10 +35,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <tr>
                         <th scope="col">#</th>
                         <th>EmployeeNo</th>
-                        <th>fName</th>
-                        <th>Spouse_Name</th>
+                        <th>Employee Name</th>
+                        <th>Dependent Name</th>
+                        <th>Father Name</th>
                         <th>CNIC</th>
                         <th>Date_of_B</th>
+                        <th>Relation</th>
                         <th scope="col">Accept</th>
                         <th scope="col">Reject</th>
                     </tr>

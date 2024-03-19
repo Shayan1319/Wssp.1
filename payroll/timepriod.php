@@ -37,15 +37,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <div class="row mt-2">
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Form Date</label>
-                      <input type="date" name="" id="fromdate" class="form-control">
+                      <input type="text" name="" id="fromdate" placeholder="dd-mm-yyy" class="form-control datepicker">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">To Date</label>
-                      <input type="date" name="" id="todate" class="form-control">
+                      <input type="text" name="" id="todate" placeholder="dd-mm-yyy" class="form-control datepicker">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Working Days</label>
-                      <input type="number" name=""  min="1" id="workingdate" class="form-control">
+                      <input type="number" name="" min="1" id="workingdate" class="form-control">
                     </div>
                     <div class="text-end">
                     <div class="form-group">
@@ -125,9 +125,14 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   </div>
   
   </div>
-  <?php include('../link/desigene/script.php') ?>
-  <!-- jequery  -->
+
   <script>
+    $(document).ready(function() {
+            // Initialize the datepicker with your desired format
+            $(".datepicker").datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        });
     $(document).ready(function(){
       function loadTable(){
         $.ajax({

@@ -31,22 +31,22 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <div class="row my-3">
             <div class="col-12 table-responsive">
                 <table class="table">
-                    <thead class="text-white" style="background-color: darkblue;">
+                    <thead class="text-white" style="background-color: darkblue; color:white !important;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th>EmployeeNo</th>
-                        <th>lName</th>
-                        <th>Training_Serial_Number</th>
-                        <th>Training_Name</th>
-                        <th>Institute</th>
-                        <th>City</th>
-                        <th>Institute_Address</th>
-                        <th> Oblige_Sponsor</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Duration</th>
-                        <th scope="col">Accept</th>
-                        <th scope="col">Reject</th>
+                        <th class="text-white" scope="col">#</th>
+                        <th class="text-white">EmployeeNo</th>
+                        <th class="text-white">Name</th>
+                        <th class="text-white">Training Serial Number</th>
+                        <th class="text-white">Training Name</th>
+                        <th class="text-white">Institute</th>
+                        <th class="text-white">City</th>
+                        <th class="text-white">Institute Address</th>
+                        <th class="text-white"> Oblige Sponsor</th>
+                        <th class="text-white">From</th>
+                        <th class="text-white">To</th>
+                        <th class="text-white">Duration</th>
+                        <th class="text-white" scope="col">Accept</th>
+                        <th class="text-white" scope="col">Reject</th>
                     </tr>
                 </thead>
                 <tbody id="table-data" >
@@ -74,18 +74,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       loadTable();
       $(document).on("click", "#Accept",function(){
         var accept = $(this).data("acpt");
-    //   alert(accept);
         $.ajax({
           url : "ajex/Accept_pendingTraining.php",
           type:"POST",
           data : {id : accept},
           success : function(data){
-            if(data == 1){
+            alert(data);
             loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
           }
 
         });
@@ -98,12 +93,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           type:"POST",
           data : {id : Reject},
           success : function(data){
-            if(data == 1){
+            alert(data)
             loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
           }
 
         });

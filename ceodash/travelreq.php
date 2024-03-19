@@ -57,7 +57,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     </div>
   </div>
 <?php include('link/desigene/script.php')?>
-<?php include('../link/desigene/script.php') ?>
+<?php include('../link/desigene/script.php') ?> 
   <!-- jequery  -->
   <script>
     $(document).ready(function(){

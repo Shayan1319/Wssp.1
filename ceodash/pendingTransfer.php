@@ -73,38 +73,30 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadTable();
-      $(document).on("click", "#Accept",function(){
+
+      $(document).on("click","#Accept",function(){
         var accept = $(this).data("acpt");
-    //   alert(accept);
+        alert(accept);
         $.ajax({
           url : "ajex/Accept_pendingTransfer.php",
           type:"POST",
           data : {id : accept},
           success : function(data){
-            if(data == 1){
-            loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+            alert(data);
+            loadTable(); 
           }
-
         });
       });
+
       $(document).on("click", "#Reject",function(){
         var Reject = $(this).data("rejc");
-    //   alert(Reject);
         $.ajax({
           url : "ajex/Reject_pendingTransfer.php",
           type:"POST",
           data : {id : Reject},
           success : function(data){
-            if(data == 1){
-            loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+            alert(data)
+            loadTable();            
           }
 
         });

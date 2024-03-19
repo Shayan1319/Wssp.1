@@ -81,12 +81,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           type:"POST",
           data : {id : accept},
           success : function(data){
-            if(data == 1){
+            alert(data)
             loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+            
           }
 
         });
@@ -99,14 +96,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           type:"POST",
           data : {id : Reject},
           success : function(data){
-            if(data == 1){
+            alert(data)
             loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
           }
-
         });
       });
     });

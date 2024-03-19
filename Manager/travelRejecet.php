@@ -72,7 +72,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       loadTable();
       $(document).on("click", "#Accept",function(){
         var accept = $(this).data("acpt");
-    //   alert(accept);
+
         $.ajax({
           url : "ajex/Accept_travel_ajax.php",
           type:"POST",
@@ -90,7 +90,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       });
       $(document).on("click", "#Reject",function(){
         var Reject = $(this).data("rejc");
-    //   alert(Reject);
+
         $.ajax({
           url : "ajex/Reject_travel_ajax.php",
           type:"POST",

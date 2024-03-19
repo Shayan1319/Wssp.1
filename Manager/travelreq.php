@@ -2,6 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
+
 include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Manager') {
   // Log the unauthorized access attempt for auditing purposes
@@ -21,7 +22,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     h4, h3 {
       text-align: center;
     }
-
    </style>
 </head>
 <body>
@@ -73,7 +73,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       loadTable();
       $(document).on("click", "#Accept",function(){
         var accept = $(this).data("acpt");
-    //   alert(accept);
         $.ajax({
           url : "ajex/Accept_travel_ajax.php",
           type:"POST",
@@ -91,7 +90,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       });
       $(document).on("click", "#Reject",function(){
         var Reject = $(this).data("rejc");
-    //   alert(Reject);
         $.ajax({
           url : "ajex/Reject_travel_ajax.php",
           type:"POST",

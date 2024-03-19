@@ -197,25 +197,34 @@ if ($result->num_rows > 0) {
 }
 
 // Tabill
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS 
-        Tabill FROM employeedata AS e 
-        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
-        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(*) AS tabillCount
+FROM `tabill` AS t
+INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
+INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
+WHERE tr.`Statusofmanger` = 'ACCPET'
+AND tr.`StatusofGM` = 'ACCPET'
+AND e.`Employee_Manager` = $empid;
+";
 
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $Tabill = $row['Tabill'];
+    $Tabill = $row['tabillCount'];
 } else {
     $Tabill = 0;
 }
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillAprove
-        FROM employeedata AS e
-        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
-        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+
+$sql = "SELECT COUNT(*) AS tabillAprove
+FROM `tabill` AS t
+INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
+INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
+WHERE tr.`Statusofmanger` = 'ACCPET'
+AND tr.`StatusofGM` = 'ACCPET'
+AND t.`Statusofmanger` = 'ACCPET'
+AND t.`StatusofGm` = 'ACCPET'
+AND e.`Employee_Manager` = $empid;
+";
 
 $result = $conn->query($sql);
 
@@ -225,11 +234,14 @@ if ($result->num_rows > 0) {
 } else {
     $tabillAprove = 0;
 }
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillaccept
-        FROM employeedata AS e
-        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
-        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(*) AS tabillaccept
+FROM `tabill` AS t
+INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
+INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
+WHERE tr.`Statusofmanger` = 'ACCPET'
+AND tr.`StatusofGM` = 'ACCPET'
+AND t.`Statusofmanger` = 'ACCPET'
+AND e.`Employee_Manager` = $empid";
 
 $result = $conn->query($sql);
 
@@ -239,11 +251,14 @@ if ($result->num_rows > 0) {
 } else {
     $tabillaccept = 0;
 }
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillPENDING
-        FROM employeedata AS e
-        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
-        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'PENDING' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(*) AS tabillPENDING
+FROM `tabill` AS t
+INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
+INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
+WHERE tr.`Statusofmanger` = 'ACCPET'
+AND tr.`StatusofGM` = 'ACCPET'
+AND t.`Statusofmanger` = 'PENDING'
+AND e.`Employee_Manager` = $empid";
 
 $result = $conn->query($sql);
 
@@ -253,11 +268,15 @@ if ($result->num_rows > 0) {
 } else {
     $tabillPENDING = 0;
 }
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillREJECTED
-        FROM employeedata AS e
-        INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
-        INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'REJECTED' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(*) AS tabillREJECTED
+FROM `tabill` AS t
+INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
+INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
+WHERE tr.`Statusofmanger` = 'ACCPET'
+AND tr.`StatusofGM` = 'ACCPET'
+AND t.`Statusofmanger` = 'REJECTED'
+AND e.`Employee_Manager` = $empid
+        ";
 
 $result = $conn->query($sql);
 
