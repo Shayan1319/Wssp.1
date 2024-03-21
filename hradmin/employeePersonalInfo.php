@@ -4,24 +4,13 @@ error_reporting(0);
 // links to database
 include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
-  // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
-  
-  // Redirect to the logout page
   header("Location: ../logout.php");
-  exit; // Ensure that the script stops execution after the header redirection
+  exit;
 } else
   {
-
-?>
-<?php 
 if(isset($_POST['submit']))
 {
-?>
-<script>
-  alert("Are you sure to save record?");
-</script>
-<?php
 $image = $_FILES ["image"];
 $fName = $_POST ["fName"];
 $mName = $_POST ["mName"];
@@ -37,7 +26,6 @@ $mNumber = $_POST ["mNumber"];
 $ofphNumber = $_POST ["ofphNumber"];
 $Alternate_Number = $_POST ["Alternate_Number"];
 $DofB = $_POST ["DofB"];
-$DofB = DateTime::createFromFormat('d-m-Y', $DofB)->format('Y-m-d');
 $religion = $_POST ["religion"];
 $gender = $_POST ["gender"];
 $BlGroup = $_POST ["BlGroup"];
@@ -60,11 +48,8 @@ $DepartmentType = $_POST ["DepartmentType"];
 $EmployeeNowssp = $_POST ["EmployeeNo"];
 $Employee_Manager = $_POST ["Employee_Manager"];
 $Joining_Date = $_POST ["Joining_Date"];
-$Joining_Date = DateTime::createFromFormat('d-m-Y', $Joining_Date)->format('Y-m-d');
 $Contract_Expiry_Date = $_POST ["Contract_Expiry_Date"];
-$Contract_Expiry_Date = DateTime::createFromFormat('d-m-Y', $Contract_Expiry_Date)->format('Y-m-d');
 $Last_Working_Date = $_POST ["Last_Working_Date"];
-$Last_Working_Date = DateTime::createFromFormat('d-m-Y', $Last_Working_Date)->format('Y-m-d');
 $Attendance_Supervisor = $_POST ["Attendance_Supervisor"];
 $Duty_Location = $_POST ["Duty_Location"];
 $Duty_Point = $_POST ["Duty_Point"];
@@ -82,18 +67,9 @@ $DY_Supervisor=$_POST['DY_Supervisor'];
 $Image_name =$image['name'];
 $Image_path = $image['tmp_name'];
 $Image_error = $image['error'];
-$selectedCNIC = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `CNIC`='$CNIC' AND `Status`='NEW'");
-$selectedEmployeeNo = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$EmployeeNowssp' AND `Status`='NEW'");
-
-if (mysqli_num_rows($selectedCNIC) > 0) {
-    echo '<script>alert("Sorry CNIC already exists");</script>';
-} elseif (mysqli_num_rows($selectedEmployeeNo) > 0) {
-    echo '<script>alert("Sorry Employee Number already exists");</script>';
-} else {
 if($Image_error==0)
 {
     $Image_save='../image/'.$Image_name;
-    // echo $Image_save;
     move_uploaded_file($Image_path, $Image_save);  
 }else{
     echo '<script>alert("Picture is not uploaded Kindli update");</script>';
@@ -113,7 +89,7 @@ else{
 echo '<script>alert("Sorry Data is not inserted");</script>'; 
 }
 }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
