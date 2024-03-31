@@ -136,13 +136,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                 <div class="col-4 my-2">
     <div class="form-group">
         <label>Leave From</label>
-        <input type="text" name="LeaveFrom" id="LeaveFrom" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+        <input type="text" name="LeaveFrom" id="LeaveFrom" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
     </div>
 </div>
 <div class="col-4 my-2">
     <div class="form-group">
         <label>Leave To</label>
-        <input type="text" name="LeaveTo" id="LeaveTo" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+        <input type="text" name="LeaveTo" id="LeaveTo" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
     </div>
 </div>
 <div class="col-4 my-2">
@@ -250,7 +250,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
 $(document).ready(function() {
             // Initialize the datepicker with your desired format
             $(".datepicker").datepicker({
-                dateFormat: 'D : dd-M-yy'
+                dateFormat: 'dd mm yy'
             });
         });
 </script>

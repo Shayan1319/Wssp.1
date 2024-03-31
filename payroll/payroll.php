@@ -386,13 +386,10 @@ $(document).ready(function() {
 $(document).ready(function() {
       $("#description").change(function() {
         var descriptionId = $(this).val();
-        alert(descriptionId);
         $.ajax({
           url: "ajex/get_allowances_ajax.php",
           type: "POST",
           data: { "id": descriptionId},
-          // cache: false,
-          // async: false,
           success: function(data) {
             var allowanceData = JSON.parse(data);
             $("#allowance_calc_mode").val(allowanceData.rate_calc_mode);

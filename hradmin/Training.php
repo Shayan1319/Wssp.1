@@ -426,13 +426,13 @@ label span{color: #ff0505;}
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>From</label>
-                              <input type="text" name="From" id="From" class="form-control datepicker" placeholder="dd-mm-yyyy"  autocomplete="off" >
+                              <input type="text" name="From" id="From" class="form-control datepicker" placeholder="dd mm yyyy"  autocomplete="off" >
                             </div>
                           </div>
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>To</label>
-                              <input type="text" name="To" id="To" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" >
+                              <input type="text" name="To" id="To" class="form-control datepicker" placeholder="dd mm yyyy" autocomplete="off" >
                             </div>
                           </div> 
                           <div class="col-md-4 my-2">

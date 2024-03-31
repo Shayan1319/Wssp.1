@@ -11,9 +11,9 @@ $allowance_status=strtoupper($_POST['allowance']);
 $price=$_POST['price'];
 $insert= mysqli_query($conn,"UPDATE `allowances` SET `allowance`='$discription',`fin_classification`='$fin_classification',`rate_calc_mode`='$rate_calc_mode',`earning_deduction_fund`='$earning_deduction_fund',`allowance_status`='$allowance_status',`price`='$price' WHERE `id`='$id'");
 if($insert){
- echo 1;
+ echo "Data Updated";
 }else{
-    echo 0;
+    echo "Data Not Updated";
 }
 
 

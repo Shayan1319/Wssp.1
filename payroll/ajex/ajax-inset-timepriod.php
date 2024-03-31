@@ -11,24 +11,38 @@ $date = date('Y-m-d');
 // Insert query for the timeperiod table
 $insertTimePeriod = mysqli_query($conn, "INSERT INTO `timeperiod`(`DateOfSub`, `FromDate`, `ToDate`, `WrokingDays`) VALUES ('$date', '$fromdate', '$todate', '$workingdate')");
 
-// Insert query for Sundays into the holidays table
-$currentDate = date('Y-m-d', strtotime($fromdate));
-$endDate = date('Y-m-d', strtotime($todate));
+if (!$insertTimePeriod) {
+    echo "Error inserting time period: " . mysqli_error($conn);
+    exit; // Exit the script if there's an error
+}
+
+// Variables for holiday insertion
+$currentDate = date('Y-m-d', strtotime($fromdate)); // Use the format 'Y-m-d' for 'Date' column
+$endDate = date('Y-m-d', strtotime($todate)); // Use the format 'Y-m-d' for 'Date' column
+$success = true;
+echo $currentDate.$endDate.$success;
 
 while (strtotime($currentDate) <= strtotime($endDate)) {
     // Check if the current date is a Sunday
     if (date('l', strtotime($currentDate)) === 'Sunday') {
         // Insert query for Sunday
         $insertHoliday = mysqli_query($conn, "INSERT INTO `holidays`(`DateOfSub`, `Date`, `Day`, `Type`) VALUES ('$date', '$currentDate', 'Sunday', 'Weekly Holiday')");
+        
+        // Check for errors in holiday insertion
+        if (!$insertHoliday) {
+            $success = false;
+            echo "Error inserting holiday: " . mysqli_error($conn);
+            break; // Exit the loop if an error occurs
+        }
     }
 
     // Move to the next day
     $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
 }
 
-if ($insertTimePeriod) {
-    echo 1;
+if ($success) {
+    echo 1; // Success
 } else {
-    echo 0;
+    echo 0; // Failure
 }
 ?>

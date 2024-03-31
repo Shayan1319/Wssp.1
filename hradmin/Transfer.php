@@ -485,7 +485,7 @@ label span{
                           <div class="col-md-4 my-2">
                             <div class="form-group">
                               <label>Order Date</label>
-                              <input type="text" name="Transfer_Date" id="Transfer_Date" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" required="">
+                              <input type="text" name="Transfer_Date" id="Transfer_Date" class="form-control datepicker" placeholder="dd mm yyyy" autocomplete="off" required="">
                             </div>
                           </div>  
                           <div class="col-md-4 my-2">
@@ -622,7 +622,7 @@ label span{
                           <div class="my-2">
                             <div class="form-group">
                               <label>Order Date</label>
-                              <input type="text" name="Worked_From" id="Worked_From_update" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                              <input type="text" name="Worked_From" id="Worked_From_update" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">
@@ -677,7 +677,7 @@ label span{
                           <div class="my-2">
                             <div class="form-group">
                               <label>Arrival Date</label>
-                              <input type="text" name="Transfer_Date" id="Transfer_Date_update" class="form-control datepicker" placeholder="dd-mm-yyyy" autocomplete="off" required="">
+                              <input type="text" name="Transfer_Date" id="Transfer_Date_update" class="form-control datepicker" placeholder="dd mm yyyy" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">

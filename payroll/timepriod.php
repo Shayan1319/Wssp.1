@@ -37,11 +37,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <div class="row mt-2">
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Form Date</label>
-                      <input type="text" name="" id="fromdate" placeholder="dd-mm-yyy" class="form-control datepicker">
+                      <input type="date" name="" id="fromdate" placeholder="dd mm yyyy" class="form-control ">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">To Date</label>
-                      <input type="text" name="" id="todate" placeholder="dd-mm-yyy" class="form-control datepicker">
+                      <input type="date" name="" id="todate" placeholder="dd mm yyyy" class="form-control ">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Working Days</label>
@@ -127,12 +127,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   </div>
 
   <script>
-    $(document).ready(function() {
-            // Initialize the datepicker with your desired format
-            $(".datepicker").datepicker({
-                dateFormat: 'dd-mm-yy'
-            });
-        });
+    
     $(document).ready(function(){
       function loadTable(){
         $.ajax({
@@ -154,13 +149,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           type:"Post", 
           data:{fromdate:fromdate, todate:todate,workingdate:workingdate},
           success:function(data){
-            if(data == 1){
+            alert(data);
             loadTable();
             $("#formdata").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+           
           }
         });
       });

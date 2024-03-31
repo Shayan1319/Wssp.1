@@ -45,7 +45,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                         <div class="col-4">
                             <div class="form-group">
                             <label>Bill Date<span>*</span></label>
-                            <input type="text" id="BillDate" name="BillDate" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                            <input type="text" id="BillDate" name="BillDate" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                             </div>
                         </div>
                         <div class="col-4">
@@ -173,7 +173,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
     <script>
    $(document).ready(function() {
     $(".datepicker").datepicker({
-        dateFormat: 'D d-M-yy'
+        dateFormat: 'dd mm yy'
     });
 
     function loadTable() {

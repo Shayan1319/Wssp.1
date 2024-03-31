@@ -455,7 +455,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                        <div class="col-md-4 my-2">
                          <div class="form-group">
                            <label>Promotion Date</label>
-                           <input type="text" placeholder="dd-mm-yyyy" name="Promotion_Date" id="Promotion_Date" class="form-control datepicker" autocomplete="off">
+                           <input type="text" placeholder="dd mm yyyy" name="Promotion_Date" id="Promotion_Date" class="form-control datepicker" autocomplete="off">
                          </div>
                        </div>
                        <div class="col-md-4 my-2">

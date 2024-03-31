@@ -13,7 +13,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
       $EmployeeNo=$_SESSION['EmployeeNumber'];
       $Name=$_POST['Name'];
       $RequestNo=$_POST['RequestNo'];
-      $RequestDate=date('y-m-d');
+      $RequestDate=date('d m y');
       $FromCity=$_POST['FromCity'];
       $ToCity=$_POST['ToCity'];
       $DepartuerDate=$_POST['DepartuerDate'];
@@ -135,13 +135,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                   <div class="col-4">
                     <div class="form-group">
                       <label>Departure ON</label>
-                      <input type="text" name="DepartuerDate" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                      <input type="text" name="DepartuerDate" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label>Return Date</label>
-                      <input type="text" name="ReturnDate" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                      <input type="text" name="ReturnDate" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                     </div>
                   </div>
                   <div class="col-4">
@@ -248,7 +248,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   $(document).ready(function() {
     // Initialize the datepicker with the correct date format
     $(".datepicker").datepicker({
-        dateFormat: 'dd-mm-yy', // Adjust format if needed
+        dateFormat: 'dd mm yy', // Adjust format if needed
         changeMonth: true,
         changeYear: true
     });

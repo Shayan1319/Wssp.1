@@ -340,18 +340,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var rate_calc_mode_update = $("#rate_calc_mode_update").val();
         var earning_deduction_fund_update = $("#earning_deduction_fund_update").val();
         var allowance_status_update = $("#allowance_status_update").val();
+        var price = 1;
         // alert(id_update);
         $.ajax({
           url:"ajex/ajax-update-allowance.php",
           type:"Post", 
-          data:{id:id_update,discrip:discription_update,fin:fin_classification_update,rate:rate_calc_mode_update,earning:earning_deduction_fund_update,allowance:allowance_status_update},
+          data:{id:id_update,discrip:discription_update,fin:fin_classification_update,rate:rate_calc_mode_update,earning:earning_deduction_fund_update,allowance:allowance_status_update, price:price},
           success:function(data){
-            if(data == 1){
+            alert(data)
             loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+            
           } });
             });
       //  loadTable();

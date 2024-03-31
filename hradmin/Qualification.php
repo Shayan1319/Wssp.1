@@ -1,4 +1,5 @@
 <?php
+      
 session_start();
 error_reporting(0);
 
@@ -159,7 +160,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Gender</label>
-                            <h5><?php echo $see ['gender'] ?></h5>
+                            <h5><?php echo $see ['gender'].date('d-m-y'); ?></h5>
                           </div>
                         </div>
                         <div class="col-md-4 my-2">
@@ -375,7 +376,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="col-md-4 my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
+                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" >
                                 
                               </div>
                             </div>
@@ -488,7 +489,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="my-2">
                               <div class="form-group">
                                 <label>Passing Year of Degree</label>
-                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree_update" placeholder="dd-mm-yyyy" class="form-control datepickerupdate" autocomplete="off" >
+                                <input type="text" name="Passing_Year_of_Degree" id="Passing_Year_of_Degree_update" placeholder="dd mm yyyy" class="form-control datepickerupdate" autocomplete="off" >
                                 <!-- datepicker not working hear -->
                               </div>
                             </div>

@@ -559,7 +559,7 @@ label span{
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Date of birth<span>*</span></label>
-                                  <input type="text" name="Date_of_B" id="Date_of_B" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                                  <input type="text" name="Date_of_B" id="Date_of_B" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -645,7 +645,7 @@ label span{
                           <div class="my-2">
                             <div class="form-group">
                               <label>Date of birth<span>*</span></label>
-                              <input type="text" name="Date_of_B" id="Date_of_B_update" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" required="">
+                              <input type="text" name="Date_of_B" id="Date_of_B_update" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
                             </div>
                           </div>
                           <div class="my-2">

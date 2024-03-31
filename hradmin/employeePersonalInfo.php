@@ -266,7 +266,7 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                       <div class="col-md-4 my-2">
                         <div class="form-group">
                           <label>Date of Birth<span>*</span></label>
-                          <input id="DofB" required type="text" name="DofB" class="form-control datepicker" autocomplete="off" placeholder="dd-mm-yyyy">
+                          <input id="DofB" required type="text" name="DofB" class="form-control datepicker" autocomplete="off" placeholder="dd mm yyyy">
                         </div>
                       </div>
                       <div class="col-md-4 my-2">
@@ -586,19 +586,19 @@ function checkEmployeeNoExistence(employeeNo) {
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Joining Date<span>*</span></label>
-                                  <input type="text" name="Joining_Date" require id="Joining_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" name="Joining_Date" require id="Joining_Date" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Contract Expiry Date<span>*</span></label>
-                                  <input type="text" required name="Contract_Expiry_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" required name="Contract_Expiry_Date" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Last Working Date</label>
-                                  <input type="text" name="Last_Working_Date" placeholder="dd-mm-yyyy" class="form-control datepicker" autocomplete="off" >
+                                  <input type="text" name="Last_Working_Date" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" >
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
