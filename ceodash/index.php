@@ -365,7 +365,6 @@ $result = mysqli_query($conn, $sql);
 if ($result) {
     // Fetch the result as an associative array
     $row = mysqli_fetch_assoc($result);
-
     // Get the total number of employees
     $totalEmployeesupdate = $row['totalEmployeesupdate'];
 

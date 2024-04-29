@@ -178,9 +178,6 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
       </label>
         <input id="cNo" type="number" name="CNIC" placeholder="CNIC" class="form-control" autocomplete="off" oninput="validateCNIC(this)">
     </div>
-
-
-
   <script>
         function validateCNIC(input) {
             var cnicNumber = input.value;
@@ -199,11 +196,9 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
         }
 
         function checkCNICExistence(cnicNumber) {
-            // Make an AJAX request
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Handle the response
                     var response = xhr.responseText;
                     document.getElementById('cnicStatus').innerText = response;
                 }
@@ -212,8 +207,6 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
             xhr.send();
         }
   </script>
-
-
                       </div>
                       <div class="col-md-4 my-2">
                         <div class="form-group">
@@ -302,8 +295,8 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                           <label>Marital Status </label>
                           <select name="MaritalStatus" id="MaritalStatus" class="form-control select2">
                               <option value="">Choose</option>
-                              <option value=" Married"> Married</option>
-                              <option value=" Unmarried"> Unmarried</option>
+                              <option value="Married"> Married</option>
+                              <option value="Unmarried"> Unmarried</option>
                           </select>
                         </div>
                       </div>
@@ -390,7 +383,6 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                   </select>
                                 </div>
                               </div>
-                              
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Salary Bank</label>
@@ -424,7 +416,6 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                   <input type="text" class="form-control" name="EOBI_No" placeholder="EOBI No" >
                                 </div>
                               </div>
-                              
                               <div class="col-md-4 my-2">
                                   <div class="form-group">
                                       <label>Bill Waived Off</label>
@@ -434,14 +425,12 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                       </select>
                                   </div>
                               </div>
-
                               <div class="col-md-4 my-2" id="billWiaivedoff">
                                   <div class="form-group">
                                       <label>Bill Waived Off</label>
                                       <input type="text" class="form-control" name="Bill_Walved_Off" placeholder="Bill Waived Off">
                                   </div>
                               </div>
-
                               <script>
                                   // Function to toggle visibility based on the selected value
                                   function toggleVisibility() {
@@ -496,13 +485,13 @@ echo '<script>alert("Sorry Data is not inserted");</script>';
                                    </select>
                                 </div>
                               </div>
-                              <div class="col-md-4 my-2">
+                              <!-- <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Type Accordingly login<span>*</span></label>
-                                  <select name="Type" required id="Type_drop" class="form-control select2">
+                                  <select name="Type"  id="Type_drop" class="form-control select2">
                                   </select>
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Department Type<span>*</span></label>
@@ -616,7 +605,6 @@ function checkEmployeeNoExistence(employeeNo) {
                               <div class="col-md-12 text-end mt-2">
                                 <input style="background-color: red;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
                                 <input style="background-color: darkblue;" name="submit" type="submit" class="btn text-white  float-right shadow" value="Submit">
-                                
                               </div>
                             </div>
                           </div>
@@ -625,14 +613,12 @@ function checkEmployeeNoExistence(employeeNo) {
                     </div>
               </div>
             </div>
-            
           </div>
         </div>
       </form> 
     </div>
     <script>
         $(document).ready(function() {
-            // Initialize the datepicker with your desired format
             $(".datepicker").datepicker({
                 dateFormat: 'dd mm yy'
             });

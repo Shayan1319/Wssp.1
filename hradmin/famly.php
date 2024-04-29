@@ -689,7 +689,7 @@ label span{
         location.replace('Transfer.php?updat=<?php echo $CNIC?>#section6');
             }
             $(document).ready(function($) {  
-              
+           
               function type(){ // renamed the function here
         $.ajax({
             url : "ajex/dependertype - Copy.php",

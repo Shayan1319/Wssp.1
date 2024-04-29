@@ -42,6 +42,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <div class="card-body ">
                             <form action="" id="form" >
                             <div class="row">
+                            <h3>Employee Personal from data</h3>
                             <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Religion</label>
@@ -63,6 +64,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>                                
                                 </div>
                               </div>
+                              <h3>employeement from data</h3>
                             <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group</label>
@@ -338,27 +340,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Type</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="Type" id="Type">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Type_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Type_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
                                   <label>Salary Mode</label>
                                   <div class="row my-2">
                                     <div class="col-9">
@@ -399,9 +380,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>                                
                                 </div>
                               </div>
+                              <br>
+                              <h3>Depender from data</h3>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Depender type</label>
+                                  <label>Depender name</label>
                                   <div class="row my-2">
                                     <div class="col-9">
                                         <input class="form-control" type="text" placeholder="Add Option" name="Dependertype" id="Dependertype">
@@ -682,6 +665,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
             });
             $("#Job_Tiltle_btn").on("click",function(e){
+
         e.preventDefault();
         var Job_Tiltle = $("#Job_Tiltle").val();
         $.ajax({
@@ -689,36 +673,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           type:"Post", 
           data:{Job_Tiltle:Job_Tiltle},
           success:function(data){
-            if(data == 1){
+            alert(data);
             loadJob_Tiltle();
             $("#form").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+           
           }
 
         });
             });
-            $("#Type_btn").on("click",function(e){
-        e.preventDefault();
-        var Type = $("#Type").val();
-        $.ajax({
-          url:"ajex/Type.php",
-          type:"Post", 
-          data:{Type:Type},
-          success:function(data){
-            if(data == 1){
-            loadType();
-            $("#form").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
-          }
-
-        });
-            });
+           
             $("#Salary_Mode_btn").on("click",function(e){
         e.preventDefault();
         var Salary_Mode = $("#Salary_Mode").val();
@@ -926,16 +889,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadJob_Tiltle();
-      function loadType(){
-        $.ajax({
-          url : "ajex/Type - Copy.php",
-          type:"POST",
-          success : function(data){
-            $("#Type_drop").html(data);
-          }
-        });
-      }
-      loadType();
+     
       function loadSalary_Mode(){
         $.ajax({
           url : "ajex/Salary_Mode - Copy.php",
@@ -991,7 +945,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               loadGrade();
               loadDepartment();
               loadJob_Tiltle();
-              loadType();
               loadSalary_Mode();
               loadStatus();
               Dependertype();// Refresh the list after deletion
