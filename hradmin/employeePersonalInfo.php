@@ -2,6 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
+$date=date('Y-m-d');
 include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
@@ -9,86 +10,120 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   exit;
 } else
   {
-if(isset($_POST['submit']))
-{
-$image = $_FILES ["image"];
-$fName = $_POST ["fName"];
-$mName = $_POST ["mName"];
-$lName = $_POST ["lName"];
-$father_Name = $_POST ["father_Name"];
-$CNIC = $_POST ["CNIC"];
-$email = $_POST ["email"];
-$pAddress = $_POST ["pAddress"];
-$cAddress = $_POST ["cAddress"];
-$city = $_POST ["city"];
-$postAddress = $_POST ["postAddress"];
-$mNumber = $_POST ["mNumber"];
-$ofphNumber = $_POST ["ofphNumber"];
-$Alternate_Number = $_POST ["Alternate_Number"];
-$DofB = $_POST ["DofB"];
-$religion = $_POST ["religion"];
-$gender = $_POST ["gender"];
-$BlGroup = $_POST ["BlGroup"];
-$Domicile = $_POST ["Domicile"];
-$MaritalStatus = $_POST ["MaritalStatus"];
-$NextofKin = $_POST ["NextofKin"];
-$NextofKinCellNumber = $_POST ["NextofKinCellNumber"];
-$ContactPerson = $_POST ["ContactPerson"];
-$CPCN = $_POST ["CPCN"];
-$Employement_Group = $_POST ["Employement_Group"];
-$Employee_Class = $_POST["Employee_Class"];
-$Employee_Group = $_POST ["Employee_Group"];
-$Employee_Sub_Group = $_POST ["Employee_Sub_Group"];
-$Employee_Quota = $_POST ["Employee_Quota"];
-$Grade_tma = $_POST ["Grade"]; 
-$Department = $_POST ["Department"];
-$Job_Tiltle = $_POST ["Job_Tiltle"];
-$Salary_Mode = $_POST ["Salary_Mode"];
-$DepartmentType = $_POST ["DepartmentType"];
-$EmployeeNowssp = $_POST ["EmployeeNo"];
-$Employee_Manager = $_POST ["Employee_Manager"];
-$Joining_Date = $_POST ["Joining_Date"];
-$Contract_Expiry_Date = $_POST ["Contract_Expiry_Date"];
-$Last_Working_Date = $_POST ["Last_Working_Date"];
-$Attendance_Supervisor = $_POST ["Attendance_Supervisor"];
-$Duty_Location = $_POST ["Duty_Location"];
-$Duty_Point = $_POST ["Duty_Point"];
-$Salary_Bank = $_POST['Salary_Bank'];
-$Salary_Branch = $_POST['Salary_Branch'];
-$Account_No = $_POST['Account_No'];
-$Pay_Type = $_POST['Pay_Type'];
-$EOBI_No = $_POST['EOBI_No'];
-$Bill_Walved_Off = $_POST['Bill_Walved_Off'];
-$Weekly_Working_Days = $_POST['Weekly_Working_Days'];
-$Bill_Waived_Off = $_POST['Bill_Waived_Off'];
-$Employee_Pay_Classification = $_POST['Employee_Pay_Classification'];
-$Type=$_POST['Type'];
-$DY_Supervisor=$_POST['DY_Supervisor'];
-$Image_name =$image['name'];
-$Image_path = $image['tmp_name'];
-$Image_error = $image['error'];
-if($Image_error==0)
-{
-    $Image_save='../image/'.$Image_name;
-    move_uploaded_file($Image_path, $Image_save);  
-}else{
-    echo '<script>alert("Picture is not uploaded Kindli update");</script>';
-}
-$insertquery = "INSERT INTO `employeedata`(`image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`,`type`, `DY_Supervisor`, `TypeEmp`) VALUES ('$Image_name','$fName','$mName','$lName','$father_Name','$CNIC','$email','$pAddress','$cAddress','$city','$postAddress','$mNumber','$ofphNumber','$Alternate_Number','$DofB','$religion','$gender','$BlGroup','$Domicile','$MaritalStatus','$NextofKin','$NextofKinCellNumber','$ContactPerson','$CPCN','$Employement_Group','$Employee_Class','$Employee_Group','$Employee_Sub_Group','$Employee_Quota','$Salary_Bank','$Salary_Branch','$Account_No','$Pay_Type','$EOBI_No','$Bill_Walved_Off','$Weekly_Working_Days','$Bill_Waived_Off','$Employee_Pay_Classification','$Grade_tma','$Department','$Job_Tiltle','$Salary_Mode','NEW','$EmployeeNowssp','$Employee_Manager','$Joining_Date','$Contract_Expiry_Date','$Last_Working_Date','$Attendance_Supervisor','$Duty_Location','$Duty_Point','$Type', '$DY_Supervisor','$DepartmentType')";
-$query= mysqli_query($conn,$insertquery);
-if($query)
-{
-    echo '<script>alert("Data is inserted");</script>';
-     ?>
-            <script>
-                location.replace('Qualification.php?updat=<?php echo $EmployeeNowssp?>#section3');
-            </script>
-     <?php
-}
-else{
-echo '<script>alert("Sorry Data is not inserted");</script>'; 
-}
-}
+    if(isset($_POST['submit']))
+    {
+        include('../link/desigene/db.php');
+    
+        $date = date('Y-m-d');
+        $image = $_FILES["image"];
+        $fName = $_POST["fName"];
+        $mName = $_POST["mName"];
+        $lName = $_POST["lName"];
+        $father_Name = $_POST["father_Name"];
+        $CNIC = $_POST["CNIC"];
+        $email = $_POST["email"];
+        $pAddress = $_POST["pAddress"];
+        $cAddress = $_POST["cAddress"];
+        $city = $_POST["city"];
+        $postAddress = $_POST["postAddress"];
+        $mNumber = $_POST["mNumber"];
+        $ofphNumber = $_POST["ofphNumber"];
+        $Alternate_Number = $_POST["Alternate_Number"];
+        $DofB = $_POST["DofB"];
+        $religion = $_POST["religion"];
+        $gender = $_POST["gender"];
+        $BlGroup = $_POST["BlGroup"];
+        $Domicile = $_POST["Domicile"];
+        $MaritalStatus = $_POST["MaritalStatus"];
+        $NextofKin = $_POST["NextofKin"];
+        $NextofKinCellNumber = $_POST["NextofKinCellNumber"];
+        $ContactPerson = $_POST["ContactPerson"];
+        $CPCN = $_POST["CPCN"];
+        $Employement_Group = $_POST["Employement_Group"];
+        $Employee_Class = $_POST["Employee_Class"];
+        $Employee_Group = $_POST["Employee_Group"];
+        $Employee_Sub_Group = $_POST["Employee_Sub_Group"];
+        $Employee_Quota = $_POST["Employee_Quota"];
+        $Grade_tma = $_POST["Grade"];
+        $Department = $_POST["Department"];
+        $Job_Tiltle = $_POST["Job_Tiltle"];
+        $Salary_Mode = $_POST["Salary_Mode"];
+        $DepartmentType = $_POST["DepartmentType"];
+        $EmployeeNowssp = $_POST["EmployeeNo"];
+        $Employee_Manager = $_POST["Employee_Manager"];
+        $Joining_Date = $_POST["Joining_Date"];
+        $Contract_Expiry_Date = $_POST["Contract_Expiry_Date"];
+        $Last_Working_Date = $_POST["Last_Working_Date"];
+        $Attendance_Supervisor = $_POST["Attendance_Supervisor"];
+        $Duty_Location = $_POST["Duty_Location"];
+        $Duty_Point = $_POST["Duty_Point"];
+        $Salary_Bank = $_POST['Salary_Bank'];
+        $Salary_Branch = $_POST['Salary_Branch'];
+        $Account_No = $_POST['Account_No'];
+        $Pay_Type = $_POST['Pay_Type'];
+        $EOBI_No = $_POST['EOBI_No'];
+        $Bill_Walved_Off = $_POST['Bill_Walved_Off'];
+        $Weekly_Working_Days = $_POST['Weekly_Working_Days'];
+        $Bill_Waived_Off = $_POST['Bill_Waived_Off'];
+        $Employee_Pay_Classification = $_POST['Employee_Pay_Classification'];
+        $Type = $_POST['Type'];
+        $DY_Supervisor = $_POST['DY_Supervisor'];
+        $Image_name = $image['name'];
+        $Image_path = $image['tmp_name'];
+        $Image_error = $image['error'];
+    
+        if($Image_error == 0)
+        {
+            $Image_save = '../image/'.$Image_name;
+            move_uploaded_file($Image_path, $Image_save);  
+        }
+        else
+        {
+            echo '<script>alert("Picture is not uploaded. Kindly update.");</script>';
+        }
+    
+        $insertquery = "INSERT INTO `employeedata`(
+            `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `type`, `DY_Supervisor`, `TypeEmp`
+        ) VALUES (
+            '$Image_name','$fName','$mName','$lName','$father_Name','$CNIC','$email','$pAddress','$cAddress','$city','$postAddress','$mNumber','$ofphNumber','$Alternate_Number','$DofB','$religion','$gender','$BlGroup','$Domicile','$MaritalStatus','$NextofKin','$NextofKinCellNumber','$ContactPerson','$CPCN','$Employement_Group','$Employee_Class','$Employee_Group','$Employee_Sub_Group','$Employee_Quota','$Salary_Bank','$Salary_Branch','$Account_No','$Pay_Type','$EOBI_No','$Bill_Walved_Off','$Weekly_Working_Days','$Bill_Waived_Off','$Employee_Pay_Classification','$Grade_tma','$Department','$Job_Tiltle','$Salary_Mode','NEW','$EmployeeNowssp','$Employee_Manager','$Joining_Date','$Contract_Expiry_Date','$Last_Working_Date','$Attendance_Supervisor','$Duty_Location','$Duty_Point','$Type','$DY_Supervisor','$DepartmentType'
+        )";
+    
+        $query = mysqli_query($conn, $insertquery);
+    
+        if($query)
+        {
+            $queryipeaete = "SELECT `Id` FROM `employeedata` ORDER BY `Id` DESC LIMIT 1";
+            $result = mysqli_query($conn, $queryipeaete);
+            $rowselectedupdate = mysqli_fetch_assoc($result);
+            $IdUpdate = $rowselectedupdate['Id'];
+    
+            $insertupdatequery = "INSERT INTO `employeedataupdate`(
+                `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `UpdateDate`, `typeUpdate`, `DY_SupervisorUpdate`, `leaveAlreadyAvailedUpdate`
+            ) VALUES (
+                '$IdUpdate', '$Image_name', '$fName', '$mName', '$lName', '$father_Name', '$CNIC', '$email', '$pAddress', '$cAddress', '$city', '$postAddress', '$mNumber', '$ofphNumber', '$Alternate_Number', '$DofB', '$religion', '$gender', '$BlGroup', '$Domicile', '$MaritalStatus', '$NextofKin', '$NextofKinCellNumber', '$ContactPerson', '$CPCN', '$Employement_Group', '$Employee_Class', '$Employee_Group', '$Employee_Sub_Group', '$Employee_Quota', '$Salary_Bank', '$Salary_Branch', '$Account_No', '$Pay_Type', '$EOBI_No', '$Bill_Walved_Off', '$Weekly_Working_Days', '$Bill_Waived_Off', '$Employee_Pay_Classification', '$Grade_tma', '$Department', '$Job_Tiltle', '$Salary_Mode', 'NEW', '$EmployeeNowssp', '$Employee_Manager', '$Joining_Date', '$Contract_Expiry_Date', '$Last_Working_Date', '$Attendance_Supervisor', '$Duty_Location', '$Duty_Point', '$date', '$Type', '$DY_Supervisor', '34'
+            )";
+    
+            $queryupdate = mysqli_query($conn, $insertupdatequery);
+    
+            if($queryupdate)
+            {
+                echo '<script>alert("Data is inserted");</script>'; ?>
+                <script>
+                    location.replace('Qualification.php?updat=<?php echo $EmployeeNowssp?>#section3');
+                </script>
+            <?php
+            }
+            else
+            {
+                echo '<script>alert("Data inserted, but update failed.");</script>';
+            }
+        }
+        else
+        {
+            echo '<script>alert("Sorry, data is not inserted.");</script>'; 
+        }
+    }
+    
 
 ?>
 <!DOCTYPE html>

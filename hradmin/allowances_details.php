@@ -21,67 +21,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   .container-fluid{
     padding: 0px !important;
   }
-  #fullDiv ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  #fullDiv li {
-    float: left;
-    display: block;
-    width: 14.2857%;
-    text-align: center;
-    list-style-type: none;
-  }
-
-  #fullDiv li:nth-child(n+1):nth-child(-n+7) {
-    font-weight: 900;
-    color: #e67e22;
-  }
-
-  #fullDiv li:nth-child(n+39),
-  #fullDiv li:nth-child(n+8):nth-child(-n+16) {
-    font-weight: 900;
-    color: rgba(0, 0, 0, .3);
-  }
-
-  #fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
-  #fullDiv li:nth-child(17) {
-    border-radius: 5px;
-    background-color: #1abc9c;
-    color: #ecf0f1;
-  }
-
-  .form-group label {
-    font-weight: bold;
-  }
-
-  /* width */
-  ::-webkit-scrollbar {
-    width: 20px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: red;
-    border-radius: 10px;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-  }
-
   button {
     background-color: darkblue !important;
     color: white !important;
-  
   }
 </style>
 
@@ -151,7 +93,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <div class="form-group">
                       <label>Allowance Status</label>
                       <select name="allowance_status" id="allowance_status" class="form-control">
-                        <option value="">Select Status</option>
                         <option value="Active">Active</option>
                         <option value="Inactive">Inactive</option>
                       </select>
@@ -241,7 +182,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <div class="form-group">
                       <label>Allowance Status</label>
                       <select name="allowance_status" id="allowance_status_update" class="form-control">
-                        <option value="">Select Status</option>
                         <option value="ACTIVE">Active</option>
                         <option value="INACTIVE">Inactive</option>
                       </select>
@@ -341,7 +281,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         var earning_deduction_fund_update = $("#earning_deduction_fund_update").val();
         var allowance_status_update = $("#allowance_status_update").val();
         var price = 1;
-        // alert(id_update);
         $.ajax({
           url:"ajex/ajax-update-allowance.php",
           type:"Post", 
@@ -349,11 +288,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           success:function(data){
             alert(data)
             loadTable();
-            
           } });
             });
-      //  loadTable();
-      //  /code for update 
+
+
       $("#save").on("click",function(e){
         e.preventDefault();
         var employee_ = $("#employee_no").val();
@@ -378,28 +316,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
-            $("#updatenow").on("click",function(e){
-        e.preventDefault();
-        var discription_update = $("#discription_update").val();
-        var id_update = $("#id_update").val();
-        var fin_classification_update = $("#fin_classification_update").val();
-        var rate_calc_mode_update = $("#rate_calc_mode_update").val();
-        var earning_deduction_fund_update = $("#earning_deduction_fund_update").val();
-        var allowance_status_update = $("#allowance_status_update").val();
-        // alert(id_update);
-        $.ajax({
-          url:"ajex/ajax-update-allowance.php",
-          type:"Post", 
-          data:{id:id_update,discrip:discription_update,fin:fin_classification_update,rate:rate_calc_mode_update,earning:earning_deduction_fund_update,allowance:allowance_status_update},
-          success:function(data){
-            if(data == 1){
-            loadTable();
-            }
-            else{
-              alert ("Can't Save Record");
-            }
-          } });
-            });
+         
     });
   </script>
 </body>

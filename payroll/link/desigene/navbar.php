@@ -27,8 +27,14 @@
       <ul class="navbar-nav w-100">
         
      
-        <li class="nav-item w-100">
-        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="payroll.php">Payroll</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link text-center rounded-pill active text-light m-auto links dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Payroll
+          </a>
+          <ul class=" dropdown-menu">
+            <li><a class="dropdown-item" href="payroll.php">Payroll</a></li>
+            <li><a class="dropdown-item" href="new_employeeupdate copy.php">All Payroll</a></li>
+          </ul>
         </li>
         <li class="nav-item w-100">
           <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="employeeCountotal.php">Attendance</a>

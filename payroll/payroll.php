@@ -6,7 +6,6 @@ include('../link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Payroll manager') {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
-  
   // Redirect to the logout page
   header("Location: ../logout.php");
   exit; // Ensure that the script stops execution after the header redirection
@@ -55,68 +54,6 @@ if (isset($_POST['submit'])) {
 
 
   <style>
-    #fullDiv ul {
-      margin: 0;
-      padding: 0;
-    }
-
-    #fullDiv li {
-      float: left;
-      display: block;
-      width: 14.2857%;
-      text-align: center;
-      list-style-type: none;
-    }
-
-    #fullDiv li:nth-child(n+1):nth-child(-n+7) {
-      font-weight: 900;
-      color: #e67e22;
-    }
-
-    #fullDiv li:nth-child(n+39),
-    #fullDiv li:nth-child(n+8):nth-child(-n+16) {
-      font-weight: 900;
-      color: rgba(0, 0, 0, .3);
-    }
-
-    #fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
-    #fullDiv li:nth-child(17) {
-      border-radius: 5px;
-      background-color: #1abc9c;
-      color: #ecf0f1;
-    }
-
-    .form-group label {
-      font-weight: bold;
-    }
-
-    /* width */
-    ::-webkit-scrollbar {
-      width: 20px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 5px grey;
-      border-radius: 10px;
-    }
-
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: red;
-      border-radius: 10px;
-    }
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: #b30000;
-    }
-
-    .form-group,
-    .form-check {
-      margin-top: 10px;
-    }
-
     #payroll_print {
       font-size: 24px;
     }
@@ -159,6 +96,7 @@ if (isset($_POST['submit'])) {
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Employee No</label>
+                      <span id="cnicStatus" style="font-size: smaller;"></span>
                       <select name="employee_no" id="employee_no" class="form-control select2">
                       </select>
                     </div>
@@ -349,8 +287,7 @@ $(document) .ready(function(){
     }});
     }
     loadTable(); 
-});
-$(document) .ready(function(){
+
   function loadAllowances(){
   $.ajax({
       url : "ajex/allowances_ajax.php",
@@ -361,8 +298,6 @@ $(document) .ready(function(){
     });
       }
       loadAllowances(); 
-});
-$(document).ready(function() {
     $("#employee_no").change(function() {
         var empid = $(this).val();
         $.ajax({
@@ -404,13 +339,11 @@ $(document).ready(function() {
               rateInput.prop('disabled', false);
             }
           },
-          // error: function(xhr, status, error) {
-          //   console.error("Error in AJAX request:", error);
-          // }
         });
       });
     });
     var addedDescriptionIds = [];
+
     $("#add").click(function() {
       var description = $("#description :selected").text();
       var allowanceCalcMode = $('#allowance_calc_mode').val();
@@ -419,7 +352,9 @@ $(document).ready(function() {
       var Fin_Classification = $("#Fin_Classification").val();
       var rate = parseFloat($("#rate_input").val());
       var rupees = parseFloat($("#rupees").val());
+
       // Check if the description ID has already been added
+      
   if (addedDescriptionIds.includes(descriptionId)) {
     alert("This description has already been added.");
     return; // Do not add it again
@@ -444,17 +379,10 @@ $(document).ready(function() {
       var oldData = $("#add_list").html();
       newData = oldData + newData;
       $("#add_list").html(newData);
-      $('#description').val('');
-      $('#allowance_calc_mode').val('');
-      $('#earning_deduction_fund').val('');
-      $('#Fin_Classification').val('');
-      $('#rate_input').val('');
-      $('#rupees').val('');
-      $(".select2").select2();
-      if (earningDeductionFund == "EARNING" && allowanceCalcMode == "PRESENT RATE") {
+      if (earningDeductionFund === "EARNING" && allowanceCalcMode === "PRESENT RATE") {
         var grossPay = parseFloat($('#grossPayInput').val()) || 0;
         $('#grossPayInput').val((grossPay + rate).toFixed(2));
-      } else if (earningDeductionFund == "DEDUCTION" && allowanceCalcMode == "PRESENT RATE") {
+      } else if (earningDeductionFund === "DEDUCTION" && allowanceCalcMode === "PRESENT RATE") {
         var deduction = parseFloat($('#deductionInput').val()) || 0;
         $('#deductionInput').val((deduction + rate).toFixed(2));
       }else if (earningDeductionFund === "FUND" && Fin_Classification === "EOBI-ER") {
@@ -467,28 +395,36 @@ $(document).ready(function() {
           var newGrossPay = grossPay - rate;
           $("#grossPayInput").val(newGrossPay.toFixed(2));
         }
-       else if (earningDeductionFund == "FUND" && allowanceCalcMode == "PRESENT RATE") {
+       else if (earningDeductionFund === "FUND" && allowanceCalcMode === "PRESENT RATE") {
         var fund = parseFloat($('#fundInput').val()) || 0;
         $('#fundInput').val((fund + rate).toFixed(2));
       }
-      else if(allowanceCalcMode=="PREVAILING RATE" && earningDeductionFund=="EARNING"){
+      else if(allowanceCalcMode === "PREVAILING RATE" && earningDeductionFund === "EARNING"){
         var grossPay = parseFloat($("#grossPayInput").val()) || 0;
         var mulrate = rupees * rate;
         var newGrossPay = grossPay + mulrate;
         $("#grossPayInput").val(newGrossPay.toFixed(2));
-      }else if(allowanceCalcMode=="OFF PAY" && earningDeductionFund=="DEDUCTION"){
+      }else if(allowanceCalcMode === "OFF PAY" && earningDeductionFund ==="DEDUCTION"){
         var grossPay = parseFloat($("#grossPayInput").val()) || 0;
         var mulrate = rupees * rate;
         var newGrossPay = grossPay - mulrate;
         $("#grossPayInput").val(newGrossPay.toFixed(2));
       }
-      else if (allowanceCalcMode == "RUNTIME VALUE" || allowanceCalcMode == "OVERTIME" || allowanceCalcMode == "DOUBLE DUTY"|| allowanceCalcMode == "OFF PAY") {
+      else if (allowanceCalcMode === "RUNTIME VALUE" || allowanceCalcMode === "OVERTIME" || allowanceCalcMode == "DOUBLE DUTY"|| allowanceCalcMode == "OFF PAY") {
         $('#rate_input').prop('disabled', true).val(null);
       } else {
         $('#rate_input').prop('disabled', false);
       }
       calculateNetPay();
+      $('#description').val('');
+      $('#allowance_calc_mode').val('');
+      $('#earning_deduction_fund').val('');
+      $('#Fin_Classification').val('');
+      $('#rate_input').val('');
+      $('#rupees').val('');
+      $(".select2").select2();
     });
+    // function for delete row
     function deleteRow(btn) {
       var row = $(btn).closest('tr');
       var tableId = row.closest('table').attr('id');

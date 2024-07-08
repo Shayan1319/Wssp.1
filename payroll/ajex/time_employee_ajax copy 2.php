@@ -6,21 +6,19 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
     $todate = $rowtime['ToDate'];
     $workingdays = $rowtime['WrokingDays'];
     $timeid = $rowtime['ID'];
-  $selery=mysqli_query($conn,"SELECT * FROM `salary` WHERE `timeperiod`='$timeid' AND (`HrReview`='Reject' OR `finace`='Reject' OR `ceo`='Reject');");
+  $selery=mysqli_query($conn,"SELECT * FROM `salary` WHERE `timeperiod`='$timeid' AND (`HrReview`='Reject' OR `finace`='Reject' OR `ceo`='Reject' OR `InternalAuditor`='Reject');");
+
+  $e = 1;
+
     while($rowsallery=mysqli_fetch_array($selery)){
       $empid=$rowsallery['employee_id'];
+
     $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `EmployeeNo`='$empid'");
+    
     if (mysqli_num_rows($selectemp)) {
-      $e = 1;
-      
         while ($rowemp = mysqli_fetch_array($selectemp)) {
             $employee_id = $rowemp['EmployeeNo'];
             $employee_no = $rowemp['Id'];
-            $selectatend = mysqli_prepare($conn, "SELECT COUNT(id) AS attendance_count FROM `atandece` WHERE `Date` >= ? AND `Date` <= ? AND `Employeeid` = ?");
-            mysqli_stmt_bind_param($selectatend, "sss", $fromdate, $todate, $employee_id);
-            mysqli_stmt_execute($selectatend);
-            $resultAttend = mysqli_stmt_get_result($selectatend);
-            $attendance_count = mysqli_fetch_assoc($resultAttend)['attendance_count'];
                 ?>
           <div id="emp<?php echo $rowemp['EmployeeNo']?>" style="display: block;" class="col-md-12">
             <div class="card card-success border border-2 border-dark bg-light">
@@ -38,6 +36,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                       <label>Name</label>
                       <input value="<?php echo $rowemp['fName']?> <?php echo $rowemp['mName']?> <?php echo $rowemp['lName']?>" type="text" name="empname[]" id="empname" readonly placeholder="Name" class="form-control" autocomplete="off" required="">
                       <input type="number" value="<?php echo $e?>" name="empid[]" hidden id="">
+                      <input type="number" value="<?php echo $rowsallery['id']?>" name="salaryid[]" hidden id="">
                     </div>
                   </div>
                   <!-- Father Name -->
@@ -157,8 +156,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                           <tbody id="allownces">
                               <?php
                               $description_id = $rowemp['Id'];
-                              $query = mysqli_query($conn, "
-                              SELECT p.*, a.*, emp.*,edf.*,
+                              $query = mysqli_query($conn,"SELECT p.*, a.*, emp.*,edf.*,
                                   (SELECT COUNT(*) FROM atandece at WHERE at.Employeeid = emp.EmployeeNo AND at.DDorOT = 'DOUBLE DUTY' AND at.Date>= '$fromdate' AND at.Date <= '$todate') AS DoubleDutyCount, 
                                   (SELECT COUNT(*) FROM atandece ot WHERE ot.Employeeid = emp.EmployeeNo AND ot.DDorOT = 'OVERTIME' AND ot.Date>= '$fromdate' AND ot.Date <= '$todate') AS OvertimeCount, 
                                   (SELECT COUNT(*) FROM atandece abs WHERE abs.Employeeid = emp.EmployeeNo AND abs.status = 'ABSENT' AND abs.Date>= '$fromdate' AND abs.Date <= '$todate') AS AbsentCount
@@ -166,8 +164,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                               INNER JOIN allowances AS a ON p.AllowancesId = a.id
                               INNER JOIN employeedata AS emp ON emp.Id = p.EmpNo
                               INNER JOIN earning_deduction_fund AS edf ON emp.Id = edf.employee_id
-                              WHERE a.allowance_status = 'ACTIVE' AND p.EmpNo = $description_id;
-                              ");
+                              WHERE a.allowance_status = 'ACTIVE' AND p.EmpNo = $description_id;");
 
                               if (mysqli_num_rows($query)) {
                                   $a = 1; // Initialize $a before the loop starts
@@ -180,23 +177,23 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                                           $rateDis = 'none';
                                           $netPayInput = $fetchdata['net_pay'];
                                             $price = $netPayInput / 26; 
-                                          $rateInputvalue = $fetchdata['AbsentCount'];
+                                          $rateInputvalue = $fetchdata['Rate'];
                                       }
                                       else if ( $fetchdata['rate_calc_mode'] == 'OFF PAY' && $fetchdata['Weekly_Working_Days']==5) {
                                         $rateInput = 'block';
                                         $rateDis = 'none';
                                         $netPayInput = $fetchdata['net_pay'];
                                           $price = $netPayInput / 22; 
-                                        $rateInputvalue = $fetchdata['AbsentCount'];
+                                        $rateInputvalue = $fetchdata['Rate'];
                                     } else if ( $fetchdata['rate_calc_mode'] == 'DOUBLE DUTY') {
                                           $rateInput = 'block';
                                           $rateDis = 'none';
-                                          $rateInputvalue = $fetchdata['DoubleDutyCount'];
+                                          $rateInputvalue = $fetchdata['Rate'];
                                           $price = $fetchdata['price'];
                                       } else if ( $fetchdata['rate_calc_mode'] == 'OVERTIME') {
                                           $rateInput = 'block';
                                           $rateDis = 'none';
-                                          $rateInputvalue = $fetchdata['OvertimeCount'];
+                                          $rateInputvalue = $fetchdata['Rate'];
                                           $price = $fetchdata['price'];
                                       } else {
                                           $rateInput = 'none';
@@ -237,55 +234,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                                               <input style="display: none;" type="text" value="<?php echo round($price) ?>" name="price[]" id="price<?php echo $e?>">
                                           </td>
                                       </tr>
-                                      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                                      <script>
-                                          $(document).ready(function() {
-                                              function calculateGrossPay<?php echo $e;?>() {
-                                                  var grossPay = 0;
-                                                  var deductionInput = 0;
-                                                  var fundInput = 0;
-                                                  $('#employee_pay<?php echo $e;?> tbody tr').each(function() {
-                                                      var Fin_Classification = $(this).find('#fin_classification<?php echo $e; ?>').val();
-                                                      var earningDeductionFund = $(this).find('#earning_deduction_fund<?php echo $e; ?>').val();
-                                                      var rateCalcMode = $(this).find('#rate_calc_mode<?php echo $e;?>').val();
-                                                      var rate = parseFloat($(this).find('#rate<?php echo $e; ?>').val());
-                                                      var price = parseFloat($(this).find('#price<?php echo $e; ?>').val());
-                                                      var amount = rate * price;
-                                                      if (rateCalcMode === 'PRESENT RATE' && earningDeductionFund === 'EARNING') {
-                                                          grossPay += amount;
-                                                          console.log('Condition 1: Present Rate & Earning');
-                                                      } else if (earningDeductionFund == "DEDUCTION" && rateCalcMode == "PRESENT RATE") {
-                                                        deductionInput += amount;
-                                                      }
-                                                      else if (earningDeductionFund === "FUND" && Fin_Classification === "EOBI-ER") {
-                                                        fundInput += amount;
-                                                        grossPay -= amount;
-                                                      }
-                                                      else if (earningDeductionFund === "FUND" && rateCalcMode == "PRESENT RATE") {
-                                                        fundInput += amount;
-                                                      }else if(rateCalcMode=="OFF PAY" && earningDeductionFund=="DEDUCTION"){
-                                                        grossPay -= amount;
-                                                        deductionInput += amount;
-                                                      }
-                                                      else if(rateCalcMode=="OVERTIME" && earningDeductionFund=="EARNING"){
-                                                        grossPay += amount;
-                                                      }
-                                                      else if(rateCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING"){
-                                                        grossPay += amount;
-                                                      }
-                                                  });
-                                                  $('#grossPayInput<?php echo $e; ?>').val(grossPay.toFixed(2));
-                                                  $('#deductionInput<?php echo $e; ?>').val(deductionInput.toFixed(2));
-                                                  $('#fundInput<?php echo $e; ?>').val(fundInput.toFixed(2));
-                                                  var netPay = grossPay - deductionInput + fundInput;
-                                                  $('#netPayInput<?php echo $e; ?>').val(netPay.toFixed(2));
-                                              }
-                                              calculateGrossPay<?php echo $e; ?>();
-                                              $('#employee_pay<?php echo $e; ?>').on('input', 'input', function() {
-                                                  calculateGrossPay<?php echo $e; ?>();
-                                              });
-                                          });
-                                      </script>
+                                    
                                       <?php
                                       $a++;
                                   }
@@ -298,7 +247,65 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
               </div>
             </div>
           </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+                $(document).ready(function() {
+                    function calculateGrossPay<?php echo $e;?>() {
+                        var grossPay = 0;
+                        var deductionInput = 0;
+                        var fundInput = 0;
+                        $('#employee_pay<?php echo $e;?> tbody tr').each(function() {
+                            var Fin_Classification = $(this).find('#fin_classification<?php echo $e; ?>').val();
+                            var earningDeductionFund = $(this).find('#earning_deduction_fund<?php echo $e; ?>').val();
+                            var rateCalcMode = $(this).find('#rate_calc_mode<?php echo $e;?>').val();
+                            var rate = parseFloat($(this).find('#rate<?php echo $e; ?>').val());
+                            var price = parseFloat($(this).find('#price<?php echo $e; ?>').val());
+                            var amount = rate * price;
+                            if (rateCalcMode == 'PRESENT RATE' && earningDeductionFund == 'EARNING') {
+                                grossPay += amount;
+                            } 
+                            else if (earningDeductionFund == "DEDUCTION" && rateCalcMode == "PRESENT RATE") {
+                              deductionInput += amount;
+                            }
+                            else if (earningDeductionFund === "FUND" && Fin_Classification === "EOBI-ER") {
+                              fundInput += amount;
+                              grossPay -= amount;
+                            }
+                            else if (earningDeductionFund === "FUND" && rateCalcMode == "PRESENT RATE") {
+                              fundInput += amount;
+                            }else if(rateCalcMode=="OFF PAY" && earningDeductionFund=="DEDUCTION"){
+                              grossPay -= amount;
+                              deductionInput += amount;
+                            }
+                            else if(rateCalcMode=="OVERTIME" && earningDeductionFund=="EARNING"){
+                              grossPay += amount;
+                            }
+                            else if(rateCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING"){
+                              grossPay += amount;
+                            }
+                            else if(rateCalcMode=="RUNTIME VALUE"){
+                              grossPay += amount;
+                            }
+                            else{
+                              grossPay += amount;
+                            }
+                        });
+                        $('#grossPayInput<?php echo $e;?>').val(grossPay.toFixed(2));
+                        $('#deductionInput<?php echo $e;?>').val(deductionInput.toFixed(2));
+                        $('#fundInput<?php echo $e;?>').val(fundInput.toFixed(2));
+                        var netPay = grossPay - deductionInput + fundInput;
+                        $('#netPayInput<?php echo $e;?>').val(netPay.toFixed(2));
+                    }
+                    calculateGrossPay<?php echo $e; ?>();
+                    $('#employee_pay<?php echo $e; ?>').on('input', 'input', function() {
+                        calculateGrossPay<?php echo $e; ?>();
+                    });
+                });
+            </script>
           <?php
-       $e++; }
-    }}}
+  }
+  $e++; 
+    }
+  }
+  }
 ?>

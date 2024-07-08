@@ -20,7 +20,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div id="main">
       <?php include('link/desigene/navbar.php')?>
             <div class="container-fluid m-auto py-5">
-              <form action="ajex/exselPayroll.php" method="post">
+              <form action="../exselPayroll.php" target="_blank" method="post">
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -79,9 +79,73 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         </select>
                       </div>
                   </div>
+                  <div class="col-md-6 my-2">
+                    <div class="form-group">
+                      <label>Employee Sub Group</label>
+                      <select name="Employee_Sub_Group" id="Employee_Sub_Group_drop" class="form-control " >
+                    <?php
+                        include ('../link/desigene/db.php');
+                        $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Employee_Sub_Group'");
+                        if(mysqli_num_rows($select)>0){
+                        ?>
+                            <option value="" <?php echo ($fetchdata['Employee_Sub_Group'] == '') ? 'selected' : ''; ?>>Select</option>
+                        <?php
+                            while($row=mysqli_fetch_assoc($select)){
+                            ?>
+                            <option <?php echo ($fetchdata['Employee_Sub_Group'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                            <?php   
+                            }
+                        }
+                        ?>  
+                    </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6 my-2">
+                    <div class="form-group">
+                      <label>Salary Bank Branch</label>
+                      <select name="Salary_Branch" id="Salary_Branch" class="form-control ">
+                    <?php
+                        include ('../link/desigene/db.php');
+                        $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='SalaryBankBranch'");
+                        if(mysqli_num_rows($select)>0){
+                        ?>
+                            <option value="" <?php echo ($fetchdata['Salary_Branch'] == '') ? 'selected' : ''; ?>>Select</option>
+                        <?php
+                            while($row=mysqli_fetch_assoc($select)){
+                            ?>
+                            <option <?php echo ($fetchdata['Salary_Branch'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                            <?php   
+                            }
+                        }
+                        ?>  
+                    </select>
+                    </div>
+                  </div>
+                                <div class="col-md-6 my-2">
+                                  <div class="form-group">
+                                    <label>Department</label>
+                                    <select name="Department" id="Department" class="form-control ">
+                                  <?php
+                                      include ('../link/desigene/db.php');
+                                      $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Department'");
+                                      if(mysqli_num_rows($select)>0){
+                                      ?>
+                                          <option value="" <?php echo ($fetchdata['Department'] == '') ? 'selected' : ''; ?>>Select</option>
+                                      <?php
+                                          while($row=mysqli_fetch_assoc($select)){
+                                          ?>
+                                          <option <?php echo ($fetchdata['Department'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+                                          <?php   
+                                          }
+                                      }
+                                      ?>  
+                                  </select>
+                                  </div>
+                                </div></th>
                   <div class="col-md-12 text-end mt-2">
                     <input style="background-color: darkblue;" type="button" id="See" class="btn text-white float-right shadow" value="Search">
                   </div>
+                  
                   <div class="col-12">
                     <div class="card card-success">
                       <div class="card card-success border border-2 border-dark bg-light">
@@ -122,10 +186,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           </tbody>
                         </table>
                           </div>
-                          <div class="col-md-1">
+                          <div class="col-md-12">
                             <div class="form-group">
                               <div class="clearfix">&nbsp;</div>
                               <button type="submit" id="submit" name="submit" style="background-color: darkblue;" class="btn btn-primary">Save</button>
+                              <button type="submit" id="submitall" name="submitall" style="background-color: darkblue;" class="btn btn-primary"> Payroll Details</button>
+                              <button type="submit" id="Sub-Group" name="Sub-Group" style="background-color: darkblue;" class="btn btn-primary">Pay Sub-Group</button>
+                              <button type="submit" id="Bank" name="Bank" style="background-color: darkblue;" class="btn btn-primary">Bank Credit Advice</button>
+                              <button type="submit" id="Cheque" name="Cheque" style="background-color: darkblue;" class="btn btn-primary">Cheque Payment</button>
+                              <button type="submit" id="Department" name="Department" style="background-color: darkblue;" class="btn btn-primary">Department Payment</button>
+                              <button type="submit" id="EOBI" name="EOBI" style="background-color: darkblue;" class="btn btn-primary">EOBI Loan Payment</button>
                             </div>
                           </div>
                         </div>
@@ -159,10 +229,15 @@ $(document) .ready(function(){
         var employee_no = $("#employee_no").val();
         var frommonth = $("#frommonth").val();
         var tomunth = $("#tomunth").val();
+        var Employee_Sub_Group_drop = $("#Employee_Sub_Group_drop").val();
+        var Salary_Branch = $("#Salary_Branch").val();
+        var Department = $("#Department").val();
         $.ajax({
           url:"ajex/ajax-get-payroll.php",
           type:"Post", 
-          data:{employee_no:employee_no,frommonth:frommonth,tomunth:tomunth},
+          data:{employee_no:employee_no,frommonth:frommonth,tomunth:tomunth, Employee_Sub_Group_drop:Employee_Sub_Group_drop,
+            Salary_Branch:Salary_Branch,Department:Department
+          },
           success:function(data){
             $("#employee_pay").html(data);
           }

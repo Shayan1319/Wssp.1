@@ -53,6 +53,7 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                     <div class="form-group">
                       <label>Father Name</label>
                       <input value="<?php echo $rowemp['father_Name']?>" type="text" name="father_name[]" id="father_name" placeholder="Father Name" class="form-control" readonly autocomplete="off" required="">
+                      <input value="<?php echo $rowemp['Salary_Branch']?>" type="text" name="Salary_Branch[]" id="Salary_Branch" placeholder="Father Name" class="form-control" readonly autocomplete="off" required="">
                     </div>
                   </div>
                   <!-- Type -->
@@ -83,16 +84,17 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                   </div>
                   <div class="col-4">
                     <div class="form-group">
-                      <label>Employee_Group</label>
-                      <input value="<?php echo $rowemp['Employee_Group']?>" type="text" name="Employee_Group[]" id="Employee_Group" placeholder="Employee_Group" class="form-control" readonly autocomplete="off" required="">
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="form-group">
                       <label>Employee_Class</label>
                       <input value="<?php echo $rowemp['Employee_Class']?>" type="text" name="Employee_Class[]" id="Employee_Class" placeholder="Employee_Class" class="form-control" readonly autocomplete="off" required="">
                     </div>
                   </div>
+                  <div class="col-4">
+                    <div class="form-group">
+                      <label>Employee_Group</label>
+                      <input value="<?php echo $rowemp['Employee_Group']?>" type="text" name="Employee_Group[]" id="Employee_Group" placeholder="Employee_Group" class="form-control" readonly autocomplete="off" required="">
+                    </div>
+                  </div>
+                  
                   <div class="col-4">
                     <div class="form-group">
                       <label>Employee_Sub_Group</label>
@@ -167,13 +169,20 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                               $description_id = $rowemp['Id'];
                               $query = mysqli_query($conn, "
                               SELECT r.*, a.*, emp.*,edf.*,
-                                  (SELECT COUNT(*) FROM atandece at WHERE at.Employeeid = emp.EmployeeNo AND at.DDorOT = 'DOUBLE DUTY' AND at.Date>= '$fromdate' AND at.Date <= '$todate') AS DoubleDutyCount, 
-                                  (SELECT COUNT(*) FROM atandece ot WHERE ot.Employeeid = emp.EmployeeNo AND ot.DDorOT = 'OVERTIME' AND ot.Date>= '$fromdate' AND ot.Date <= '$todate') AS OvertimeCount, 
+                                  (SELECT COUNT(*) FROM atandece at WHERE at.Employeeid = emp.EmployeeNo AND at.DDorOT = 'DOUBLE DUTY' AND at.Date>= '$fromdate' AND at.Date <= '$todate') AS DoubleDutyCount,
+
+                                  (SELECT COUNT(*) FROM atandece ot WHERE ot.Employeeid = emp.EmployeeNo AND ot.DDorOT = 'OVERTIME' AND ot.Date>= '$fromdate' AND ot.Date <= '$todate') AS OvertimeCount,
+
                                   (SELECT COUNT(*) FROM atandece abs WHERE abs.Employeeid = emp.EmployeeNo AND abs.status = 'ABSENT' AND abs.Date>= '$fromdate' AND abs.Date <= '$todate') AS AbsentCount
+
                               FROM rate AS r
+
                               INNER JOIN allowances AS a ON r.allowances_id = a.id
+                              
                               INNER JOIN employeedata AS emp ON emp.Id = r.employee_id
+                              
                               INNER JOIN earning_deduction_fund AS edf ON emp.Id = edf.employee_id
+                              
                               WHERE a.allowance_status = 'ACTIVE' AND r.employee_id = $description_id;
                               ");
 
@@ -183,6 +192,7 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                                       if ($fetchdata['rate'] == 0.00 && $fetchdata['rate_calc_mode'] == 'RUNTIME VALUE') {
                                           $rateInput = 'block';
                                           $rateDis = 'none';
+                                          $price = 1; 
                                       } else if ($fetchdata['rate'] == 0.00 && $fetchdata['rate_calc_mode'] == 'OFF PAY' && $fetchdata['Weekly_Working_Days']==6) {
                                           $rateInput = 'block';
                                           $rateDis = 'none';
@@ -290,6 +300,12 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                               grossPay += amount;
                             }
                             else if(rateCalcMode=="DOUBLE DUTY" && earningDeductionFund=="EARNING"){
+                              grossPay += amount;
+                            }
+                            else if(rateCalcMode=="RUNTIME VALUE"){
+                              grossPay += amount;
+                            }
+                            else{
                               grossPay += amount;
                             }
                         });

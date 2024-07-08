@@ -74,7 +74,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         $("#table-data").html(data);
       }
     });
-  }
+  } 
 
   loadTable();
 

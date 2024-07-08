@@ -7,7 +7,7 @@ if (isset($_POST['id'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        $row = mysqli_fetch_array($result);
+    $row = mysqli_fetch_array($result);
     $IdUpdate=$row['IdUpdate'];
     $imageUpdate=$row['imageUpdate'];
     $fNameUpdate = $row ['fNameUpdate'];
@@ -70,7 +70,11 @@ if (isset($_POST['id'])) {
     
     // Check if the query was successful
     if ($query) {
-      echo "Updated the employee data";
+        $updateid= mysqli_query($conn,"UPDATE `employeedataupdate` SET `status`='Update Accept' WHERE `Id`=$id");
+        if($updateid){
+        echo "Updated the employee data";
+        }
+
     } else {
         echo "Updated the employee data";
     }

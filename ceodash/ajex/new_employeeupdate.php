@@ -1,6 +1,6 @@
 <?php
                     include('../link/desigene/db.php');
-                    $sql = "SELECT * FROM `employeedataupdate`";
+                    $sql = "SELECT * FROM `employeedataupdate` WHERE `status`='IN PROCESS'";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         $a=1;

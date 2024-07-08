@@ -8,7 +8,7 @@ $rate_calc_mode=strtoupper($_POST['rate']);
 $earning_deduction_fund=strtoupper($_POST['earning']);
 $allowance_status=strtoupper($_POST['allowance']);
 // Insert query
-$insert= mysqli_query($conn,"INSERT INTO `allowances`(  `allowance`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `allowance_status`) VALUES ('$discription','$fin_classification','$rate_calc_mode','$earning_deduction_fund','$allowance_status')");
+$insert= mysqli_query($conn,"INSERT INTO `allowances`(  `allowance`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `allowance_status`, `price`) VALUES ('$discription','$fin_classification','$rate_calc_mode','$earning_deduction_fund','$allowance_status', 1)");
 if($insert){
  echo 1;
 }else{

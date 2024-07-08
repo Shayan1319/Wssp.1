@@ -44,11 +44,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     </thead>
                     <tbody>
                     <?php 
-                    include ('../link/desigene/db.php');
+                    include ('link/desigene/db.php');
                     $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
+                    if(mysqli_num_rows($select)>0){
                     while($see=mysqli_fetch_array($select)){
                     if($see['Status']=='NEW'){
                       $NEW='<i class="fa-solid fa-font-awesome"></i>';
+                    }
+                    $IdUpdate=$see ['Id'];
+                    $ifupdate=mysqli_query($conn,"SELECT * FROM `employeedataupdate` WHERE `IdUpdate`=$IdUpdate && `status`='IN PROCESS'");
+                    if(mysqli_num_rows($ifupdate)>0){
+                      $dataupdate='<i class="fa-solid fa-spinner fa-spin"></i>';
+                    }else{
+                      $dataupdate=$see ['Status'] ." ".$NEW;
+                      
                     }
                     ?>
                     
@@ -58,12 +67,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <td><?php echo $see ['CNIC']?></td>
                         <td><?php echo $see ['EmployeeNo'] ?><?php echo $see ['EmployeeNowssp'] ?></td>
                         <td><?php echo $see ['Employee_Manager'] ?><?php echo $see ['Employee_Manager_tma'] ?></td>
-                        <td><?php echo $see ['Status'] ." ".$NEW ?></td>
+                        <td><?php echo $dataupdate?></td>
                         <td><a href="profile.php?updat=<?php echo $see['EmployeeNo']?>" ><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="updateemp.php?id=<?php echo $see['Id']?>"><i class="fa-solid fa-file-pen"></i></a></td>
                         </tr>
                         <?php
                         $aid=$aid+1;
+                    }}
+                    else{
+                      echo 'error';
                     }
                     ?>   
                               

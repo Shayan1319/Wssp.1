@@ -23,6 +23,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         $Employee_Class = $_POST['Employee_Class'];
         $Employee_Sub_Group = $_POST['Employee_Sub_Group'];
         $Pay_Type = $_POST['Pay_Type'];
+        $Salary_Branch= $_POST['Salary_Branch'];
         $Account_No = $_POST['Account_No'];
         $fundInput = $_POST['fundInput'];
         $grossPayInput = $_POST['grossPayInput'];
@@ -44,8 +45,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             echo '<script>alert( "Data Already Exist");</script>';
           }else{
             // Insert into salary table
-            $salarySql = "INSERT INTO `salary`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `BankAccountNo`,`timeperiod`) 
-                    VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}','{$Employee_Group[$e]} {$Employee_Class[$e]}','{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}','{$Account_No[$e]}','$timeperiod')";
+            $salarySql = "INSERT INTO `salary`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `Bank`, `BankAccountNo`,`timeperiod`) 
+                    VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}','{$Employee_Group[$e]} {$Employee_Class[$e]}','{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}',{$Salary_Branch[$e]},'{$Account_No[$e]}','$timeperiod')";
           }
             if ($conn->query($salarySql) === TRUE) {
             } else {
@@ -181,5 +182,4 @@ $("#time_period").change(function() {
 </script>
 </body>
 </html>
-
 <?php } ?>

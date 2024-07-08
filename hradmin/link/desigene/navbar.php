@@ -20,14 +20,31 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
             <ul class="dropdown-menu">
-              <?php 
-              $id = $_SESSION['EmployeeNumber'];
-              $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
-              while($row = mysqli_fetch_array($insert)){
-              ?>
-              <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['CNIC']?>">See Profile</a></li>
-              <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
-              <?php }?>
+            <?php
+// Check if the session variable is set
+    $id = $_SESSION['EmployeeNumber'];
+
+    // Include the database connection
+    include '../link/desigene/db.php';
+
+    // Execute the query
+    $insert = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
+
+    // Check if the query was successful
+    if (!$insert) {
+        echo "Error: " . mysqli_error($conn);
+    }
+
+    // Fetch and display the data
+    while ($row = mysqli_fetch_array($insert)) {
+        ?>
+        <li><a class="dropdown-item" href="profile.php?updat=<?php echo $row['EmployeeNo']; ?>">See Profile</a></li>
+        <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+        <?php
+    }
+
+?>
+
             </ul>
           </div>
     </div>

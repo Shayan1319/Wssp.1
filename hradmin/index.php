@@ -10,6 +10,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     header("Location: ../logout.php");
     exit; // Ensure that the script stops execution after the header redirection
   } else{
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <h5 class="card-title">Number</h5>
                             <p class="card-text">
                                 <?php
-                                include ('link/desigene/db.php');
+                                include ('../link/desigene/db.php');
                                 // Query to get the sum of rate column for the current month
                                 $query = mysqli_query($conn, "SELECT COUNT(*) AS CountNullRows
                                 FROM employee_exit

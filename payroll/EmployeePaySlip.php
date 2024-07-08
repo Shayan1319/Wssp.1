@@ -30,7 +30,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               <!-- /.card-header -->
               <div class="card-body bg-light">
                 <!-- form start -->
-                <form method="post" action="../printpayroll.php" enctype="multipart/form-data">
+                <form method="post" action="../printpayroll.php" target="_blank" enctype="multipart/form-data">
                   <div class="row">
                   <div class="col-12">
                     <div class="form-group">
@@ -91,6 +91,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   </div>
                     <div class="col-md-12 text-end mt-2">
                       <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Submit" name="submit">
+                      <input style="background-color: darkblue;" type="submit" class="btn text-white float-right shadow" value="Payroll Summary" name="submitsum">
                     </div>
                     </div>
                 </form>
