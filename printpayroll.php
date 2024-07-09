@@ -490,11 +490,10 @@ else if(isset($_POST['submitsum'])){
                     </td>
                     <td>
                         <?php
-                        $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `salary`AS sal 
-                                            INNER JOIN timeperiod AS tim ON tim.ID = sal.timeperiod
-                                            WHERE tim.FromDate >= '$frommonth'
-                                            && tim.FromDate <= '$tomunth' 
-                                            && sal.Bank ='$salary'");
+                        $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `salary`AS sal INNER JOIN timeperiod AS tim ON tim.ID = sal.timeperiod
+                        WHERE tim.FromDate >= '$frommonth'
+                        && tim.FromDate <= '$tomunth' 
+                        && sal.Bank ='$salary'");
                         $countdata = mysqli_fetch_assoc($countquery);
                         echo $countdata['employee']; ?>
                     </td>

@@ -403,6 +403,29 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>                                
                                 </div>
                               </div>
+                              <br>
+                              <h3>Leave</h3>
+                              <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Leave type</label>
+                                  <div class="row my-2">
+                                    <div class="col-9">
+                                        <input class="form-control" type="text" placeholder="Add Option" name="leave" id="leave">
+                                    </div>
+                                    <div class="col-3">
+                                        <button id="leave_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
+                                      Select
+                                      </button>
+                                      <ul class="dropdown-menu" id="leave_drop" >
+
+                                      </ul>
+                                  </div>                                
+                                </div>
+                              </div>
                             </div>
                             </form>
                           </div>
@@ -740,6 +763,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
+            $("#leave_btn").on("click",function(e){
+        e.preventDefault();
+        var leave = $("#leave").val();
+        $.ajax({
+          url:"ajex/leave.php",
+          type:"Post", 
+          data:{leave:leave},
+          success:function(data){
+            if(data == 1){
+            loadleave();
+            $("#form").trigger("reset"); 
+            }
+            else{
+              alert ("Can't Save Record");
+            }
+          }
+
+        });
+            });
     
 
 
@@ -920,7 +962,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }
         });
       }
-      loadDependertype();
+      loadleave();
+      function loadleave(){
+        $.ajax({
+          url : "ajex/leave - Copy.php",
+          type:"POST",
+          success : function(data){
+            $("#leave_drop").html(data);
+          }
+        });
+      }
+      loadleave();
 
 
       $(document).on("click", ".delete-btn", function() {
@@ -948,6 +1000,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               loadSalary_Mode();
               loadStatus();
               Dependertype();// Refresh the list after deletion
+              leave();// Refresh the list after deletion
             } else {
                 alert("Can't Delete Record");
             }

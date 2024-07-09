@@ -29,43 +29,93 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               <div class="card-title text-white fw-bolder">Employee Number of Leave</div>
             </div>
             <div class="container">
-            <table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">CNIC</th>
-            <th scope="col">Employee NO</th>
-            <th scope="col">Employee Group</th>
-            <th scope="col">Number of Leaves</th>
-            <th scope="col">Number of Travel</th>
-            <th scope="col">See Profile</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php 
-        $select = mysqli_query($conn, "SELECT e.EmployeeNo, e.fName, e.mName, e.lName, e.CNIC, e.EmployeeNo, e.Employee_Group, COUNT(DISTINCT l.Id) AS NumberOfLeaves, SUM(CASE WHEN l.Statusofmanger = 'ACCEPT' AND l.StatusofGm = 'ACCEPT' THEN 1 ELSE 0 END) AS LeavesAccepted, COUNT(DISTINCT t.RequestNo) AS NumberOfTravelRequests FROM employeedata e LEFT JOIN leavereq l ON e.EmployeeNo = l.EmployeeNo AND YEAR(l.DateofApply) = YEAR(CURRENT_DATE()) LEFT JOIN travelrequest t ON e.EmployeeNo = t.EmployeeNo AND YEAR(t.DepartureOn) = YEAR(CURRENT_DATE()) GROUP BY e.EmployeeNo, e.fName; ");
-        
-        $counter = 1;
-        
-        while ($row = mysqli_fetch_array($select)) {
-        ?>
-        <tr>
-            <th scope="row"><?php echo $counter; ?></th>
-            <td><?php echo $row['fName'];?> <?php echo $row['mName'];?> <?php echo $row['lName'];?></td>
-            <td><?php echo $row['CNIC']; ?></td>
-            <td><?php echo $row['EmployeeNo']; ?></td>
-            <td><?php echo $row['Employee_Group']; ?></td>
-            <td><?php echo $row['LeavesAccepted']; ?></td>
-            <td><?php echo $row['NumberOfTravelRequests']; ?></td>
-            <td><a href="profile.php?id=<?php echo $row['EmployeeNo']; ?>"><i class="fa-solid fa-eye"></i></a></td>
-        </tr>
-        <?php
-        $counter++;
-        }
-        ?>
-    </tbody>
-</table>
+              <form action="../leave FY.php"  target="_blank" method="post">
+                <div class="row">
+                  <div class="col-md-12 my-2">
+                    <div class="form-group">
+                      <label> Employee</label>
+                      <select name="employee" id="" class="form-control ">
+                        <?php
+                  include ('../link/desigene/db.php');
+                  $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
+                  if(mysqli_num_rows($select)>0){
+                      ?><option value="">select</option><?php
+                      while($row=mysqli_fetch_array($select)){
+                      ?>
+                  <option value="<?php echo $row['EmployeeNo']?>"> <?php echo $row['EmployeeNo']?> </option>
+                      <?php   
+                      }
+                  }
+                  ?> 
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">From Date</label>
+              <input class="form-control" required type="date" name="fromdate" id="">
+            </div>
+            <div class="col-md-6">
+              <label for="">To Date</label>
+              <input class="form-control" required type="date" name="todate" id="">
+            </div>
+            <div class="col-12  text-end">
+              <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="leaveFY" id="leaveFy">leave FY</button>
+            </div>
+          </div>
+        </form>
+        <form action="../leave FY.php"  target="_blank" method="post">
+                <div class="row">
+                  <div class="col-md-6 my-2">
+                    <div class="form-group">
+                      <label> Employee</label>
+                      <select name="employee" id="" class="form-control ">
+                        <?php
+                  include ('../link/desigene/db.php');
+                  $select = mysqli_query($conn,"SELECT * FROM `employeedata`");
+                  if(mysqli_num_rows($select)>0){
+                      ?><option value="">select</option><?php
+                      while($row=mysqli_fetch_array($select)){
+                      ?>
+                  <option value="<?php echo $row['EmployeeNo']?>"> <?php echo $row['EmployeeNo']?> </option>
+                      <?php   
+                      }
+                  }
+                  ?> 
+              </select>
+              </div>
+            </div>
+            <div class="col-md-6 my-2">
+              <div class="form-group">
+                <label>Month</label>
+                <select name="Month" required id="Month" class="form-control select2">
+                <?php
+                $select = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `HRStatus`='ACCEPT' ORDER BY `ID` DESC");
+
+                if (mysqli_num_rows($select) > 0) {
+                    ?>
+                    <option value="">Select</option>
+                    <?php
+                    while ($row = mysqli_fetch_assoc($select)) {
+                        // Format the date using date() function with the month in English
+                        $formattedDate = date('d-M-Y', strtotime($row['FromDate']));
+                        
+                        echo '<option value="' . $row['ID'] . '">' . $formattedDate . '</option>';
+                    }
+                } else {
+                    echo '<option value="">No time periods found</option>';
+                }
+                ?>
+
+                </select>
+              </div>
+          </div>
+            <div class="col-12  text-end">
+              <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="leaveM" id="leaveM">leave FY</button>
+              <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="leaveD" id="leaveD">leave Details</button>
+              <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="overtime" id="overtime"> Overtime/Duble Duty</button>
+            </div>
+          </div>
+        </form>
 
             </div>
         </div>

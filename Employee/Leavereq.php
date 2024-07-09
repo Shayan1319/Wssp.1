@@ -15,7 +15,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
         $Employee_number = $_SESSION['EmployeeNumber'];
         $Number = $_POST['Number'];
         $type = $_POST['type'];
-        $Levefrom = $_POST['Levefrom'];
+        $Levefrom = $_POST['LeaveFrom'];
         $LeaveTo = $_POST['LeaveTo'];
         $NumberofDay = $_POST['NumberofDay'];
         $LeaveAlreadyAvailed = $_POST['LeaveAlreadyAvailed'];
@@ -122,27 +122,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                   <div class="form-group">
                     <label>Leave Type</label>
                     <select class="form-control select2" name="type" id="">
-                      <option value="null" selected>Select Leave Type</option>
-                      <option value="Annual">Annual</option>
-                      <option value="Sick">Sick</option>
-                      <option value="Maternity">Maternity</option>
-                      <option value="Paternity">Paternity</option>
-                      <option value="Casual">Casual</option>
-                      <option value="Compassionate">Compassionate</option>
-                      <option value="Without Pay">Without Pay</option>
+                    <option value="null" selected>Select Leave Type</option>
+                    <?php $selectleave=mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='leave'");
+                      while($row=mysqli_fetch_array($selectleave)){
+                      echo "<option value='".$row['drop']."'>".$row['drop']."</option>";
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>
                 <div class="col-4 my-2">
     <div class="form-group">
         <label>Leave From</label>
-        <input type="text" name="LeaveFrom" id="LeaveFrom" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
+        <input type="date" name="LeaveFrom" id="LeaveFrom" placeholder="dd mm yyyy" class="form-control" autocomplete="off" required="">
     </div>
 </div>
 <div class="col-4 my-2">
     <div class="form-group">
         <label>Leave To</label>
-        <input type="text" name="LeaveTo" id="LeaveTo" placeholder="dd mm yyyy" class="form-control datepicker" autocomplete="off" required="">
+        <input type="date" name="LeaveTo" id="LeaveTo" placeholder="dd mm yyyy" class="form-control" autocomplete="off" required="">
     </div>
 </div>
 <div class="col-4 my-2">
