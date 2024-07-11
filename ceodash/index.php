@@ -252,8 +252,9 @@ if ($result->num_rows > 0) {
 // Your database connection code here
 
 $sql = "SELECT COUNT(*) AS EmployeeCountexp
-        FROM employeedata
-        WHERE Contract_Expiry_Date <= DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH)";
+        FROM employeedata 
+WHERE STR_TO_DATE(Contract_Expiry_Date, '%d %m %Y') 
+      BETWEEN CURRENT_DATE() AND DATE_ADD(CURRENT_DATE(), INTERVAL 3 MONTH)";
 
 $result = $conn->query($sql);
 
@@ -263,6 +264,19 @@ if ($result->num_rows > 0) {
     
 } else {
   $employeeCountexp =0;
+}
+$sql = "SELECT COUNT(*) AS EmployeeCount_on_duty
+        FROM employeedata 
+WHERE `Status`='ON-DUTY'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $employeeCount_on_duty = $row['EmployeeCount_on_duty'];
+    
+} else {
+  $employeeCount_on_duty =0;
 }
 // Tabill
 $sql = "SELECT COUNT(*) AS Tabill
@@ -489,11 +503,27 @@ if ($result->num_rows > 0) {
               <!-- small box -->
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
-                  <h3><?php echo $employeeCountexp?></h3>
+                  
+                  <form action="../ContractExp.php" method="POST" class="text-center" target="_blank" >
+                  <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="Headcounts" id="Headcounts"> <h3><?php echo $employeeCount_on_duty?></h3></button>
+                  </form>                  
+                  <h5>On-Duty Employee</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                  
+                  <form action="../ContractExp.php" method="POST" class="text-center" target="_blank" >
+                  <button type="submit" style="background-color: darkblue;" class="btn btn-primary" name="ContractExp" id="ContractExp"> <h3><?php echo $employeeCountexp?></h3></button>
+                  </form>                  
                   <h5>Employee Contact Expiry</h5>
                 </div>
               </div>
-            </div><!-- ./col -->
+            </div>
+            <!-- ./col -->
             <div class="col-md-3 col-sm-12">
               <a href="new_employee.php" style>
                 <!-- small box -->

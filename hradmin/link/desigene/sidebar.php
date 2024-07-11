@@ -41,16 +41,6 @@
               <a class="dropbtn nav-link" href="employeePersonalInfo.php">
                   Add Employee
                 </a>
-                
-                  <!-- <a id="section_a" onclick="backToSection1()" href="#">Employement Info</a>
-                  <a id="section_b" onclick="validateSection1()" href="#">Joining Info</a> -->
-                  <!-- <a id="" href="Qualuficationadd.php">Qualification</a>
-                  <a id="" href="TreiningInfoadd.php">Treining Info</a>
-                  <a id="" href="Promotionsadd.php">Promotions</a>
-                  <a id="" href="Transferadd.php"> Transfer</a>
-                <a href="Addfamily.php" class="nav-link">
-                  Family Information
-                </a> -->
                 <a href="allowances_details.php" class="nav-link">
                   Allowances
                 </a>
@@ -71,10 +61,4 @@
                  Leaves requests
                 </a>
 
-                <!-- <a href="EmployeePromotions.php" class="nav-link">
-                  Promotions
-                </a>
-                <a href="EmployeeTransfer.php" class="nav-link">
-                  Transfer
-                </a> --> 
               </div>

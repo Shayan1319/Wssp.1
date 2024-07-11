@@ -61,6 +61,9 @@
         </li>   
         <li class="nav-item w-100">
         <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="All payroll.php">All Payroll</a>
+        </li>
+        <li class="nav-item w-100">
+        <a class="nav-link text-center rounded-pill active text-light  m-auto links" href="Gratuity.php">Gratuity</a>
         </li> 
         <div class="dropstart">
             <button type="button" class="btn text-white" data-bs-toggle="dropdown" aria-expanded="false">

@@ -3,6 +3,7 @@ include('../link/desigene/db.php');
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
+    $EmployeeNumber = $_POST['EmployeeNumber'];
     $sql = "SELECT * FROM `employeedataupdate` WHERE `Id`=$id";
     $result = $conn->query($sql);
 
@@ -70,7 +71,7 @@ if (isset($_POST['id'])) {
     
     // Check if the query was successful
     if ($query) {
-        $updateid= mysqli_query($conn,"UPDATE `employeedataupdate` SET `status`='Update Accept' WHERE `Id`=$id");
+        $updateid= mysqli_query($conn,"UPDATE `employeedataupdate` SET `status`='Update Accept', `AuthBy` = '$EmployeeNumber' WHERE `Id`=$id");
         if($updateid){
         echo "Updated the employee data";
         }

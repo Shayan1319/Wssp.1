@@ -72,7 +72,6 @@ if(isset($_POST['leaveFY'])){
                                                ?>
                                                 <th>TOTAL LEAVE</th>
                                                 <th>Leaves Calc.</th>
-                                                
                                                 <th>Absents Yearly</th>
                                                 <th>Leaves Enti-ment</th>
                                                 <th>Leaves Bal.</th>
@@ -108,14 +107,18 @@ if(isset($_POST['leaveFY'])){
                                                         <?php
                                                     }?>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate';");$countdata = mysqli_fetch_assoc($contleave); echo $countdata['empleave'];?></td>
-                                                    <td><?php $contleave=mysqli_query($conn,"SELECT SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate';");$countdata = mysqli_fetch_assoc($contleave); echo $countdata['empleave'];?></td>
+
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate';");
+                                                    $countdata = mysqli_fetch_assoc($contleave);
+                                                     echo $countdata['empleave'];?></td>
+
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT COUNT(*) AS empabsent FROM `atandece` WHERE `Employeeid`='$empNo' 
                                                     && `ManagerStatus`='ACCEPT'
                                                     && `GMStatus`='ACCEPT' 
                                                     && `PayrollStatus`='ACCEPT' 
                                                     && `status`='ABSENT'
                                                     && `Date`>='$fromdate' && `Date`<='$todate';");$countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
-                                                    <td>30</td>
+                                                    <td>15</td>
                                                     <td><?php
                                                         $contleave = mysqli_query($conn, "SELECT 30-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
 
@@ -131,7 +134,7 @@ if(isset($_POST['leaveFY'])){
                                                         if ($countdata && !is_null($countdata['empleave'])) {
                                                             echo $countdata['empleave'];
                                                         } else {
-                                                            echo 30;
+                                                            echo 15;
                                                         }
                                                         ?>
                                                         </td>
@@ -182,7 +185,7 @@ if(isset($_POST['leaveFY'])){
         </html>
 <?php
     }
-    if(isset($_POST['leaveD'])){
+else if(isset($_POST['leaveD'])){
         $employee=$_POST['employee'];
         $timid=$_POST['Month'];
             
@@ -301,9 +304,9 @@ if(isset($_POST['leaveFY'])){
                                                         && `PayrollStatus`='ACCEPT' 
                                                         && `status`='ABSENT'
                                                         && `Date`>='$fromdate' && `Date`<='$todate';");$countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
-                                                        <td>30</td>
+                                                        <td>15</td>
                                                         <td><?php
-                                                            $contleave = mysqli_query($conn, "SELECT 30-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
+                                                            $contleave = mysqli_query($conn, "SELECT 15-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
     
                                                             // Check if the query executed correctly
                                                             if (!$contleave) {
@@ -317,7 +320,7 @@ if(isset($_POST['leaveFY'])){
                                                             if ($countdata && !is_null($countdata['empleave'])) {
                                                                 echo $countdata['empleave'];
                                                             } else {
-                                                                echo 30;
+                                                                echo 15;
                                                             }
                                                             ?>
                                                             </td>
@@ -455,7 +458,6 @@ if(isset($_POST['leaveFY'])){
                                                     <th>Employee</th>
                                                     <th>Leaves this Month</th>
                                                     <th>Leaves Calc.</th>
-                                                    
                                                     <th>Absents this Month</th>
                                                     <th>Leaves Entitlement</th>
                                                     <th>Leaves Bal.</th>
@@ -489,10 +491,10 @@ if(isset($_POST['leaveFY'])){
                                                         && `PayrollStatus`='ACCEPT' 
                                                         && `status`='ABSENT'
                                                         && `Date`>='$fromdate' && `Date`<='$todate';");$countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
-                                                        <td>30</td>
+                                                        <td>15</td>
                                                         <td><?php
                                                         $todate_year = date('Y', strtotime($todate));
-                                                            $contleave = mysqli_query($conn, "SELECT 30-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' 
+                                                            $contleave = mysqli_query($conn, "SELECT 15-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' 
                                                             &&  YEAR(`LeaveTo`)='$todate_year' ");
     
                                                             // Check if the query executed correctly
@@ -507,7 +509,7 @@ if(isset($_POST['leaveFY'])){
                                                             if ($countdata && !is_null($countdata['empleave'])) {
                                                                 echo $countdata['empleave'];
                                                             } else {
-                                                                echo 30;
+                                                                echo 15;
                                                             }
                                                             ?>
                                                             </td>

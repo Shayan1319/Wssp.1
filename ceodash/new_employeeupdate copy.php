@@ -39,13 +39,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <?php include('link/desigene/navbar.php')?>
         <div class="container-fluid m-auto p-5">
           <div class="row my-3">
-            <div class="col-md-4 my-2">
+            <div class="col-md-6 my-2">
               <div class="form-group">
                 <label>EmployeeNo</label>
                 <select name="" id="DY_Supervisor" class="form-control select2">
                   <?php include ('../link/desigene/db.php');
                     $select = mysqli_query($conn,"SELECT * FROM `employeedata` ");
-                    if(mysqli_num_rows($select)>0){
+                     if(mysqli_num_rows($select)>0){
                   ?>
                   <option value="">select</option><?php
                     while($row=mysqli_fetch_assoc($select)){
@@ -57,6 +57,27 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </select>
               </div>
             </div>
+                <form action="../Amendments.php" target="_blank" method="post">
+                <div class="col-12">
+                  <div class="row">
+                  <div class="col-md-6 my-2">
+                    <div class="form-group">
+                      <label>From date</label>
+                      <input type="date" class="form-control" name="from" value="">
+                    </div>
+                  </div>
+                  <div class="col-md-6 my-2">
+                  <div class="form-group">
+                    <label>To date</label>
+                      <input type="date" class="form-control" name="to" value="">
+                    </div>
+                  </div>
+                  <div class="col-md-12 my-2">
+                  <button type="submit" id="Amendments" name="Amendments" style="background-color: darkblue;" class="btn btn-primary">Employee Amendments</button>
+                  </div>
+                  </div>
+                </div>
+                </form>
             <div class="col-12 table-responsive">
                 <table class="table">
                   <thead class="text-white" style="background-color: darkblue;">

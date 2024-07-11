@@ -2,7 +2,9 @@
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
-    $updateid= mysqli_query($conn,"UPDATE `employeedataupdate` SET `status`='Update Rejected' WHERE `Id`=$id");
+    $EmployeeNumber = $_POST['EmployeeNumber'];
+
+    $updateid= mysqli_query($conn,"UPDATE `employeedataupdate` SET `status`='Update Rejected', `AuthBy`='$EmployeeNumber' WHERE `Id`=$id");
     if($updateid){
         echo "Rejected employee data";
     } else {
