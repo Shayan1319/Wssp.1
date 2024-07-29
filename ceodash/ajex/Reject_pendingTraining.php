@@ -7,6 +7,6 @@ if($update){
     echo "Training reject successfully";
 }
 else{
-    echo "Training not rejaect";
+    echo "Training not reject";
 }
 ?>

@@ -15,12 +15,12 @@ if(isset($_POST['Encashment'])){
         <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <title>Leave Encashment</title>
+        <title>Leave Encasement</title>
         <meta content="" name="description">
         <meta content="" name="keywords">
          <!-- Google Fonts -->
          <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
-         <!-- fontawesome -->
+         <!-- font-awesome -->
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -43,9 +43,6 @@ if(isset($_POST['Encashment'])){
         </head>
         <body>
         <button type="button" id="print" style="position: fixed;" class="btn btn-success no-print">Generate PDF</button>
-
-            
-            
         <div id="content">
             <div class="row text-center mt-5">
                <div class="col-4 text-center mt-5">
@@ -54,7 +51,7 @@ if(isset($_POST['Encashment'])){
                 <div class="col-8 text-center mt-5">
                     <h3>Water & Sanitation Services Company</h3>
                     <h6>Mingora Swat</h6>
-                    <h6> Leave Encashment</h6>
+                    <h6> Leave Encasement</h6>
                     <h6> <?php echo date('d-M-Y', strtotime($fromdate))." To ".date('d-M-Y', strtotime($todate))?></h6>
                 </div>
                 <p>Date : <?php echo date("d-M-Y")?></p>
@@ -145,10 +142,8 @@ if(isset($_POST['Encashment'])){
                                                         if (!$contleave) {
                                                             die('Query Error: ' . mysqli_error($conn));
                                                         }
-
                                                         // Fetch the data
                                                         $countdata = mysqli_fetch_assoc($contleave);
-
                                                         // Check if data is fetched and if 'empleave' is NULL
                                                         if ($countdata && !is_null($countdata['empleave'])) {
                                                             echo $countdata['empleave'];
@@ -163,8 +158,6 @@ if(isset($_POST['Encashment'])){
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['pay'];?></td>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['pay'];?></td>
-
-
                                                      <td>
                                                      <?php
                                                         $LeavePayable = mysqli_query($conn, "SELECT (15-SUM(TotalDays)) / 2.0 AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
@@ -185,14 +178,10 @@ if(isset($_POST['Encashment'])){
                                                             $days= 15 / 2.0;
                                                         }
                                                         ?>
-                                                        
                                                         <?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
-
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $days*$countdata['pay'];?></td>
-
                                                     <td><?php echo $row['Salary_Bank']." | ".$row['Salary_Branch']?></td>
                                                     <td><?php echo $row['Account_No']?></td>
-
                                                 </tr>
                                                 <?php
                                                 $a++;
@@ -213,8 +202,7 @@ if(isset($_POST['Encashment'])){
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
-                <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
-                
+                <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 <hr>
 </div>
             
@@ -280,9 +268,6 @@ else if(isset($_POST['Gratuity'])){
         </head>
         <body>
         <button type="button" id="print" style="position: fixed;" class="btn btn-success no-print">Generate PDF</button>
-
-            
-            
         <div id="content">
             <div class="row text-center mt-5">
                <div class="col-4 text-center mt-5">
@@ -291,8 +276,8 @@ else if(isset($_POST['Gratuity'])){
                 <div class="col-8 text-center mt-5">
                     <h3>Water & Sanitation Services Company</h3>
                     <h6>Mingora Swat</h6>
-                    <h6>  Gratuity Statement as on:<?php echo date("d-M-Y")?></h6>
-                    <h6> <?php echo date('d-M-Y', strtotime($fromdate))." To ".date('M-Y', strtotime($todate))?></h6>
+                    <h6>Gratuity Statement as on:<?php echo date("d-M-Y")?></h6>
+                    <h6><?php echo date('d-M-Y', strtotime($fromdate))." To ".date('M-Y', strtotime($todate))?></h6>
                 </div>
                     <table class="table ">
                         <thead>
@@ -371,44 +356,23 @@ else if(isset($_POST['Gratuity'])){
                                                     // Create DateTime objects
                                                     $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
                                                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                                                
-
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
-
                                                      echo '<td>'.$interval->y .'</td>'.'<td>'.$interval->m .'</td>'.'<td>'.$interval->d .'</td>';
-
-                                                  
                                                 }
                                                 // Fetch all employees' Joining_Date
-                                               
-                                                    
-                                                    
                                                     $currentYear = date('Y');
                                                     $period = '01-07-' . $currentYear; // July 1st of the current year
-
                                                     $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
-
-
                                                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                                                
-
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
-
                                                      echo '<td>'.$interval->y .'</td>'.'<td>'.$interval->m .'</td>'.'<td>'.$interval->d .'</td>';
-
-                                                  
-                                                
-                                                    
                                                     // Fetch all employees' Joining_Date
                                                 $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
-
                                                 while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                     $gross_pay = $employeedata['gross_pay'];
-                                                    
                                                     $daypermonth=$row['Weekly_Working_Days']*4;
-
                                                     echo '<td>' . round($gross_pay * 12) . '</td>' . 
                                                     '<td>' . round($gross_pay) . '</td>' . 
                                                     '<td>' . round($gross_pay / $daypermonth) . '</td>';
@@ -417,12 +381,9 @@ else if(isset($_POST['Gratuity'])){
 
                                                 while ($employee = mysqli_fetch_assoc($selectEmployees)) {
                                                     $joiningDate = $employee['Joining_Date'];
-                                                    
                                                     // Create DateTime objects
                                                     $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
                                                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                                                
-
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
                                                     $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
@@ -525,7 +486,7 @@ else if(isset($_POST['Gratuity'])){
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
-                <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+                <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 
                 <hr>
 </div>

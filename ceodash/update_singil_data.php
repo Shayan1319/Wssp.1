@@ -327,7 +327,7 @@ if ($query) {
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width:fit-content;">Employement Information
+                                <div class="card-title text-white" style="width:fit-content;">Employment Information
                                 </div>
                               </div>
                               <div class="col-sm-12 col-lg-7">
@@ -340,7 +340,7 @@ if ($query) {
                             <div class="row">
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Employement Group</label>
+                                  <label>Employment Group</label>
                                   <select name="Employement_Group" id="" class="form-control ">
                                   <?php
                                     include ('../link/desigene/db.php');
@@ -627,7 +627,7 @@ if ($query) {
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Job Tiltle</label>
+                                  <label>Job Title</label>
                                   <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control ">
                                 <?php
                                     include ('../link/desigene/db.php');

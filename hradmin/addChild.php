@@ -102,7 +102,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           </div>
           <div class="col-md-4 my-2">
           <div class="form-group">
-          <label>Permenent Address</label>
+          <label>Permanent Address</label>
           <h5><?php echo $see ['pAddress'] ?></h5>
           </div>
           </div>
@@ -207,13 +207,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           <div class="col-12 bg-white mt-5 px-2">
           <nav class="navbar bg-white">
           <div class="container-fluid">
-          <h4>Employement Information</h4>
+          <h4>Employment Information</h4>
           </div>
           </nav>
           <div class="row">
           <div class="col-md-4 my-2">
           <div class="form-group">
-          <label>Employement Group</label>
+          <label>Employment Group</label>
           <h5><?php echo $see ['Employement_Group'] ?></h5>
           </div>
           </div>
@@ -549,7 +549,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       <div class="modal-dialog modal-fullscreen-sm-down">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Childeren</h1>
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Children</h1>
             <button type="button" class="btn-close btn btn-dange" style="background-color: #ff0505 !important; color: #fff !important;" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

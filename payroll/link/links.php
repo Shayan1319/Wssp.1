@@ -32,17 +32,13 @@
 <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 <link rel="stylesheet" href="../dist/select2/select2.min.css">
 <link rel="stylesheet" href="../dist/sweat-alerts/sweetalert.css">
-
 <!-- Chart.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
 <!-- Custom CSS -->
 <link href="../css/style.css" rel="stylesheet">
-
 <!-- Roboto Mono Font -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
-
 <!-- jQuery and jQuery UI -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

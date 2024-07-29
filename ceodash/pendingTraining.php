@@ -41,7 +41,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th class="text-white">Institute</th>
                         <th class="text-white">City</th>
                         <th class="text-white">Institute Address</th>
-                        <th class="text-white"> Oblige Sponsor</th>
+                        <th class="text-white">Oblige Sponsor</th>
                         <th class="text-white">From</th>
                         <th class="text-white">To</th>
                         <th class="text-white">Duration</th>

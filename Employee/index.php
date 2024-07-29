@@ -264,7 +264,7 @@ var employeeCountDDorOT= <?php echo $employeeCountDDorOT?>;
                     <h5 style="color: rgb(60, 59, 59);"><b>Basic Information</b></h5>
                     <div class="row">
                         <div class="col-6">
-                            <h6 style="color:rgb(4, 111, 218);">Addree</h6>
+                            <h6 style="color:rgb(4, 111, 218);">Address</h6>
                             <h6 style="color:rgb(4, 111, 218);"><?php echo $row['pAddress']?></h6>
                         </div>
                         <div class="col-6">

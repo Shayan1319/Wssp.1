@@ -39,7 +39,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th>Dependent Name</th>
                         <th>Father Name</th>
                         <th>CNIC</th>
-                        <th>Date_of_B</th>
+                        <th>Date of Birth</th>
                         <th>Relation</th>
                         <th scope="col">Accept</th>
                         <th scope="col">Reject</th>

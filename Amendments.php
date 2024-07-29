@@ -134,7 +134,7 @@ if ($result->num_rows > 0) {
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
-                <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+                <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 
                 <hr>
 </div>

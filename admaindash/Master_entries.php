@@ -30,7 +30,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width: fit-content;">Employement Information
+                                <div class="card-title text-white" style="width: fit-content;">Employment Information
                                 </div>
                               </div>
                               <div class="col-sm-12 col-lg-7">
@@ -64,10 +64,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>                                
                                 </div>
                               </div>
-                              <h3>employeement from data</h3>
+                              <h3>Employment Data</h3>
                             <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Employement Group</label>
+                                  <label>Employment Group</label>
                                   <div class="row my-2">
                                     <div class="col-9">
                                         <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="EmpGroup">
@@ -319,7 +319,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Job Tiltle</label>
+                                  <label>Job Title</label>
                                   <div class="row my-2">
                                     <div class="col-9">
                                         <input class="form-control" type="text" placeholder="Add Option" name="Job_Tiltle" id="Job_Tiltle">
@@ -381,10 +381,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 </div>
                               </div>
                               <br>
-                              <h3>Depender from data</h3>
+                              <h3>Depended from data</h3>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Depender name</label>
+                                  <label>Depended name</label>
                                   <div class="row my-2">
                                     <div class="col-9">
                                         <input class="form-control" type="text" placeholder="Add Option" name="Dependertype" id="Dependertype">

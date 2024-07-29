@@ -28,10 +28,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <label for="">Item</label>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Item </option>
-                        <option value="HRMS Updated">HRMS Updatede</option>
+                        <option value="HRMS Updated">HRMS Updated</option>
                         <option value="EOBI Guidance ">EOBI Guidance </option>
                         <option value="Last Salary Payment">Last Salary Payment</option>
-                        <option value="Leave Encashment">Leave Encashment</option>
+                        <option value="Leave Encasement">Leave Encasement</option>
                         <option value="Gratuity">Gratuity</option>
                       </select>
                 </div>

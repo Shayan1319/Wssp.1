@@ -2,7 +2,7 @@
 include('../link/desigene/db.php');
 $id=$_POST['id'];
 $date=date('Y-M-D');
-$update=mysqli_query($conn,"UPDATE `employeedata` SET `Online Status`='ACCPET' WHERE `Id`=$id");
+$update=mysqli_query($conn,"UPDATE `employeedata` SET `Online Status`='ACCEPT' WHERE `Id`=$id");
 if($update){
     if ($result->num_rows > 0) {
         $row = mysqli_fetch_array($result);

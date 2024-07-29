@@ -34,18 +34,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <thead class="text-white" style="background-color: darkblue;">
                     <tr>
                         <th scope="col">#</th>
-                        <th>EmployeeNo</th>
+                        <th>Employee No</th>
                         <th>Name</th>
-                        <th>Transfer_Order_Number</th>
+                        <th>Transfer Order Number</th>
                         <th>Designation</th>
                         <th>BPS</th>
-                        <th>email</th>
-                        <th>From_Department</th>
-                        <th>To_Project</th>
-                        <th>To_Station</th>
-                        <th>Worked_From</th>
-                        <th>Transfer_Date</th>
-                        <th>file</th>
+                        <th>Email</th>
+                        <th>From Department</th>
+                        <th>To Project</th>
+                        <th>To Station</th>
+                        <th>Worked From</th>
+                        <th>Transfer Date</th>
+                        <th>File</th>
                         <th scope="col">Accept</th>
                         <th scope="col">Reject</th>
                     </tr>

@@ -34,16 +34,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <thead class="text-white" style="background-color: darkblue;">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">EmployeeNo No</th>
+                        <th scope="col">Employee No</th>
                         <th scope="col">fName Name</th>
-                        <th scope="col">Job Tiltle</th>
-                        <th scope="col">CNIC Class</th>
-                        <th scope="col">father Name Date</th>
+                        <th scope="col">Job Title</th>
+                        <th scope="col">CNIC</th>
+                        <th scope="col">Father Name</th>
                         <th scope="col">email City</th>
-                        <th scope="col">Employement Group City</th>
+                        <th scope="col">Employment Group City</th>
                         <th scope="col">Grade Date</th>
                         <th scope="col">Department Date</th>
-                        <th scope="col">Job Tiltle</th>
+                        <th scope="col">Job Title</th>
                         <th scope="col">Status</th>
                         <th scope="col">Joining Date</th>
                         <th scope="col">Contract Expiry Date</th>

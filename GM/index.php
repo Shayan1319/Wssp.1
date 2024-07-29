@@ -386,62 +386,7 @@ WHERE
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <style>
-      #fullDiv ul {
-          margin: 0;
-          padding: 0;
-      }
-      
-      #fullDiv li {
-          float: left;
-          display: block;
-          width: 14.2857%;
-          text-align: center;
-          list-style-type: none;
-      }
-      
-      #fullDiv li:nth-child(n+1):nth-child(-n+7) {
-          font-weight: 900;
-          color: #e67e22;
-      }
-      
-      #fullDiv li:nth-child(n+39),
-      #fullDiv li:nth-child(n+8):nth-child(-n+16) {
-          font-weight: 900;
-          color: rgba(0, 0, 0, .3);
-      }
-      
-      #fullDiv li:hover:nth-child(n+8):nth-child(-n+38),
-      #fullDiv li:nth-child(17) {
-          border-radius: 5px;
-          background-color: #1abc9c;
-          color: #ecf0f1;
-      }
-      
-      .form-group label {
-          font-weight: bold;
-      }
-      /* width */
-      
-      ::-webkit-scrollbar {
-          width: 20px;
-      }
-      /* Track */
-      
-      ::-webkit-scrollbar-track {
-          box-shadow: inset 0 0 5px grey;
-          border-radius: 10px;
-      }
-      /* Handle */
-      
-      ::-webkit-scrollbar-thumb {
-          background: red;
-          border-radius: 10px;
-      }
-      /* Handle on hover */
-      
-      ::-webkit-scrollbar-thumb:hover {
-          background: #b30000;
-      }
+     
       h4, h3 {
         text-align: center;
       }
@@ -450,12 +395,20 @@ WHERE
       }
   </style>
   <body>
+    <?php include('link/desigene/navbar.php')?>
+    <?php include('link/desigene/sidebar copy.php')?>
     <div id="main">
-        <?php include('link/desigene/navbar.php')?>
         <div class="container-fluid py-5">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                <h1 style="color: darkblue;">Welcome <?php echo $_SESSION['name']?></h1>
+              <div class="colmd-12 text-center">
+              <?php $empid= $_SESSION['EmployeeNumber'];
+                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$empid'");
+                $name=mysqli_fetch_assoc($select);
+                ?>
+                  <h1 style="color: darkblue;">WELCOME Mr <?php echo $name['fName'].' '.$name['mName'].' '.$name['lName']?></h1>
+                  <h3> Manager</h3>
+              </div>
             </div>
             <div class="col-lg-4 col-xs-12">
               <!-- small box -->

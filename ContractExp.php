@@ -60,8 +60,8 @@ if(isset($_POST['ContractExp'])){
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Emp. No</th>
-                                                <th>Emp. Name</th>
+                                                <th>Employee No</th>
+                                                <th>Name</th>
                                                 <th>Father Name</th>                                                
                                                 <th>Department</th>
                                                 <th>Job</th>
@@ -127,7 +127,7 @@ if(isset($_POST['ContractExp'])){
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
-                <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+                <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 
                 <hr>
 </div>
@@ -319,7 +319,7 @@ if(isset($_POST['ContractExp'])){
         <hr>
         <div class="text-center">
             <b>Human Resource Department WSSC Swat.</b>
-            <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+            <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
         </div>
         <hr>
     </div>

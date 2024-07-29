@@ -113,7 +113,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               <th>Time Period</th>
               <th>Allowance</th>
               <th>Price</th>
-              <th>Allownce Id</th>
+              <th>Allowance Id</th>
             </tr>
           </thead>
           <tbody id="table-time">

@@ -30,8 +30,9 @@
     <div class="profile col-12">
       <?php 
       $empid= $_SESSION['EmployeeNumber'];
-      $select=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$empid'");
-      while($row=mysqli_fetch_array($select)){
+      include('../link/desigene/db.php');
+      $selectsession=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$empid'");
+      while($row=mysqli_fetch_array($selectsession)){
       ?>
       <img src="../image/<?php echo $row['image']?>" alt="">
       <h3> <?php echo $row['fName']?> <?php echo $row['lName']?></h3>
@@ -44,6 +45,6 @@
    Employee salary
    </a>
    <a href="EmployeePaySlip.php" class="nav-link">
-   Employee Pay slip
+   Reports
    </a>
 </div>

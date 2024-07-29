@@ -71,17 +71,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       <tr class="text-white">
                           <th  style="color: white !important;" scope="col">#</th>
                           <th  style="color: white !important;" scope="col">EmployeeNo</th>
-                          <th  style="color: white !important;" scope="col">fName</th>
+                          <th  style="color: white !important;" scope="col">Name</th>
                           <th  style="color: white !important;" scope="col">CNIC</th>
-                          <th  style="color: white !important;" scope="col">mNumber</th>
-                          <th  style="color: white !important;" scope="col">Job_Tiltle</th>
-                          <th  style="color: white !important;" scope="col">father_Name</th>
-                          <th  style="color: white !important;" scope="col">Employement_Group</th>
-                          <th  style="color: white !important;" scope="col">Employee_Class</th>
-                          <th  style="color: white !important;" scope="col">Employee_Group</th>
-                          <th  style="color: white !important;" scope="col">Employee_Sub_Group</th>
-                          <th  style="color: white !important;" scope="col">Salary_Bank</th>
-                          <th  style="color: white !important;" scope="col">Account_No</th>
+                          <th  style="color: white !important;" scope="col">Mobile Number</th>
+                          <th  style="color: white !important;" scope="col">Job Title</th>
+                          <th  style="color: white !important;" scope="col">Father Name</th>
+                          <th  style="color: white !important;" scope="col">Employment Group</th>
+                          <th  style="color: white !important;" scope="col">Employee Class</th>
+                          <th  style="color: white !important;" scope="col">Employee Group</th>
+                          <th  style="color: white !important;" scope="col">Employee Sub Group</th>
+                          <th  style="color: white !important;" scope="col">Salary Bank</th>
+                          <th  style="color: white !important;" scope="col">Account No</th>
                           <th  style="color: white !important;" scope="col">Grade</th>
                           <th  style="color: white !important;" scope="col">Department</th>
                           <th  style="color: white !important;" scope="col">Status</th>
@@ -91,10 +91,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     echo '<th  style="color: white !important;" >'.$rowallownce['allowance'].'</th>';
                                   }
                           ?>
-                          <th  style="color: white !important;" scope="col">fund</th>
-                          <th  style="color: white !important;" scope="col">gross_pay</th>
-                          <th  style="color: white !important;" scope="col">deduction</th>
-                          <th  style="color: white !important;" scope="col">net_pay</th>
+                          <th  style="color: white !important;" scope="col">Fund</th>
+                          <th  style="color: white !important;" scope="col">Gross Pay</th>
+                          <th  style="color: white !important;" scope="col">Deduction</th>
+                          <th  style="color: white !important;" scope="col">Net Pay</th>
                       </tr>
                   </thead>
                   <tbody id="table-data">

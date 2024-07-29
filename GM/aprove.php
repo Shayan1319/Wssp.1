@@ -43,7 +43,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="col">Leave From</th>
                         <th scope="col">Leave To</th>
                         <th scope="col">Total Days</th>
-                        <th scope="col">Leave Avalible</th>
+                        <th scope="col">Leave Available</th>
                         <th scope="col">Reject</th>
                     </tr>
                 </thead>

@@ -7,7 +7,7 @@
             $sql = "SELECT * FROM employeedata AS e  
             INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
             INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-            WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'REJECTED' AND t.DateofApply >= '$currentDate'";
+            WHERE tr.Statusofmanger = 'ACCEPT' AND tr.StatusofGM = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'REJECTED' AND t.DateofApply >= '$currentDate'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
             $a=1;

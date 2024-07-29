@@ -74,7 +74,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAcceptLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.StatusofGm = 'ACCPET' AND l.Statusofmanger = 'ACCPET' AND l.LeaveFrom = '$currentDate'";
+        WHERE l.StatusofGm = 'ACCEPT' AND l.Statusofmanger = 'ACCEPT' AND l.LeaveFrom = '$currentDate'";
 
 $result = $conn->query($sql);
 
@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAPROVELeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.StatusofGm = 'ACCPET' AND l.LeaveFrom >= '$currentDate'";
+        WHERE l.StatusofGm = 'ACCEPT' AND l.LeaveFrom >= '$currentDate'";
 
 $result = $conn->query($sql);
 
@@ -194,7 +194,7 @@ if ($query) {
         $total_employees_payroll = 0;
     }
 } 
-// taravel request
+// travel request
 
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReq
         FROM employeedata AS e
@@ -211,7 +211,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqAprove
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' ";
+        WHERE t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'ACCEPT' ";
 
 $result = $conn->query($sql);
 
@@ -225,7 +225,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqPENDING
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'PENDING'";
+        WHERE t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'PENDING'";
 
 $result = $conn->query($sql);
 
@@ -238,7 +238,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqREJECTED
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'REJECTED' ";
+        WHERE t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'REJECTED' ";
 
 $result = $conn->query($sql);
 
@@ -283,8 +283,8 @@ $sql = "SELECT COUNT(*) AS Tabill
         FROM `tabill` AS t
         INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`
         INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo`
-        WHERE tr.`Statusofmanger` = 'ACCPET'
-        AND tr.`StatusofGM` = 'ACCPET'";
+        WHERE tr.`Statusofmanger` = 'ACCEPT'
+        AND tr.`StatusofGM` = 'ACCEPT'";
 
 $result = $conn->query($sql);
 
@@ -294,7 +294,7 @@ if ($result->num_rows > 0) {
 } else {
     $Tabill = 0;
 }
-$sql = "SELECT COUNT(*) AS tabillAprove FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCPET' AND tr.`StatusofGM` = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET'";
+$sql = "SELECT COUNT(*) AS tabillAprove FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCEPT' AND tr.`StatusofGM` = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'ACCEPT'";
 
 $result = $conn->query($sql);
 
@@ -304,7 +304,7 @@ if ($result->num_rows > 0) {
 } else {
     $tabillAprove = 0;
 }
-$sql = "SELECT COUNT(*) AS tabillaccept FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCPET' AND tr.`StatusofGM` = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET'
+$sql = "SELECT COUNT(*) AS tabillaccept FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCEPT' AND tr.`StatusofGM` = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'ACCEPT'
         ";
 
 $result = $conn->query($sql);
@@ -316,7 +316,7 @@ if ($result->num_rows > 0) {
     $tabillaccept = 0;
 }
 
-$sql = "SELECT COUNT(*) AS tabillPENDING FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCPET' AND tr.`StatusofGM` = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'PENDING'";
+$sql = "SELECT COUNT(*) AS tabillPENDING FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCEPT' AND tr.`StatusofGM` = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'PENDING'";
 
 $result = $conn->query($sql);
 
@@ -327,7 +327,7 @@ if ($result->num_rows > 0) {
     $tabillPENDING = 0;
 }
 
-$sql = "SELECT COUNT(*) AS tabillREJECTED FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCPET' AND tr.`StatusofGM` = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'REJECTED'";
+$sql = "SELECT COUNT(*) AS tabillREJECTED FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id` INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.`Statusofmanger` = 'ACCEPT' AND tr.`StatusofGM` = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'REJECTED'";
 
 $result = $conn->query($sql);
 
@@ -423,8 +423,10 @@ if ($result->num_rows > 0) {
       }
   </style>
   <body>
+  <?php include('link/desigene/navbar.php')?>
+  <?php include('link/desigene/sidebar copy.php')?>
+
     <div id="main">
-        <?php include('link/desigene/navbar.php')?>
         <div class="container px-3 py-5">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12 text-center">
@@ -870,7 +872,7 @@ if ($result->num_rows > 0) {
                 <h3><?php echo $totalAPROVELeaves?>
               <script> var vetsciencestotalAPROVELeaves= <?php echo $totalAPROVELeaves?>;</script>
               </h3>
-                  <h5>APROVE</h5>
+                  <h5>APPROVE</h5>
                 </div>
               </div>
              </a>

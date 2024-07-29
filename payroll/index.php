@@ -51,13 +51,22 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
 <body>
   <div class="container-fluid p-0">
-  <div id="main">
-    <?php include('link/desigene/navbar.php'); ?>
+      <?php include('link/desigene/navbar.php'); ?>
+      <?php include('link/desigene/sidebar.php'); ?>
+      <div id="main">
     <div class="container">
             <div class="row">
+                <div class="col-md-12 text-center">
+                <?php $empid= $_SESSION['EmployeeNumber'];
+                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$empid'");
+                $name=mysqli_fetch_assoc($select);
+                ?>
+                  <h1 style="color: darkblue;">WELCOME Mr <?php echo $name['fName'].' '.$name['mName'].' '.$name['lName']?></h1>
+                  <h3>Payroll Manager</h3>
+                </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4 p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#0C1C5F;">
-                        <div class="card-header">Total Amount Payroll of this mounth</div>
+                        <div class="card-header">Total Amount Payroll of this Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -83,7 +92,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         echo "No salary data found for the last time period.";
                                     }
                                 } else {
-                                    echo "No data found for the last time period in the timeperiod table.";
+                                    echo "No data found for the last time period in the Time Period table.";
                                 }
 
                                 ?>
@@ -93,7 +102,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-light mb-3" style="max-width: 18rem;background-color:#2A64C4">
-                        <div class="card-header">Total Amount WSSC of This Mounth</div>
+                        <div class="card-header">Total Amount WSSC of This Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -130,7 +139,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#61AFE4">
-                        <div class="card-header">Total Amount Tma of This Mounth</div>
+                        <div class="card-header">Total Amount Tma of This Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -157,7 +166,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                           echo "No salary data found for the last time period.";
                                       }
                                   } else {
-                                      echo "No data found for the last time period in the timeperiod table.";
+                                      echo "No data found for the last time period in the time period table.";
                                   }  
                                 ?>
                             </p>

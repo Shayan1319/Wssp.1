@@ -10,7 +10,7 @@
             <img class="float-end" src="../image/1662096718940.jpg" width="180px" alt="">
         </div>
         <div class="col-md-6 col-sm-12 col-lg-8 mx-auto">
-        <h4 class="text-white text-center m-5" style="text-shadow: 0px 6px 15px #111;">HRMIS WSSC SWAT </h4>
+        <h4 class="text-white text-center m-5" style="text-shadow: 0px 6px 15px #111;">HR MIS WSSC SWAT </h4>
         </div>
         <div class="col-md-3 col-lg-2 col-sm-12 mx-auto">
             <img src="../image/image-removebg-preview.png" width="128px" alt="">
@@ -19,7 +19,7 @@
 </nav>
 <nav class="navbar navbar-expand-lg bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand text-light" href="index.php">Dashbord</a>
+    <a class="navbar-brand text-light" href="index.php">Dashboard</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

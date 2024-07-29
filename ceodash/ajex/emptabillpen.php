@@ -4,7 +4,7 @@ error_reporting(0);
 $currentDate = date('Y-m-d');
 $empid = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
-            $sql = "SELECT t.*,tr.*,e.* FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'PENDING'";
+            $sql = "SELECT t.*,tr.*,e.* FROM `tabill` AS t INNER JOIN `travelrequest` AS tr ON t.`RequestNoTravel` = tr.`id`INNER JOIN `employeedata` AS e ON t.`EmployeeNo` = e.`EmployeeNo` WHERE tr.Statusofmanger = 'ACCEPT' AND tr.StatusofGM = 'ACCEPT' AND t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'PENDING'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $a=1;

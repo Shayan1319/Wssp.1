@@ -80,7 +80,7 @@ if (isset($_POST['id'])) {
         echo "Updated the employee data";
     }
 } else {
-    echo "No record exest";
+    echo "No record exist";
 }
 }
 ?>

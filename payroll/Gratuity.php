@@ -45,7 +45,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   </div> 
                   <div class="col-md-12 text-end mt-2">
                     <input style="background-color: darkblue;" type="submit" name="Gratuity" id="Gratuity" class="btn text-white float-right shadow" value="Gratuity">
-                    <input style="background-color: darkblue;" type="submit" name="Encashment" id="Encashment" class="btn text-white float-right shadow" value=" Leave Encashment">
+                    <input style="background-color: darkblue;" type="submit" name="Encashment" id="Encashment" class="btn text-white float-right shadow" value=" Leave Encasement">
                   </div>
                 </div>
               </form>

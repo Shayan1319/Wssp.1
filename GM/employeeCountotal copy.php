@@ -166,7 +166,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                                               <table class="table table-striped  table-bordered border-dark table-responsive" >
                                                                   <thead class="table-light" >
                                                                       <tr>
-                                                                          <th>Deductiont</th>
+                                                                          <th>Deduction</th>
                                                                           <th>Monthly</th>
                                                                           <th>Arrears</th>
                                                                           <th>Amount</th>

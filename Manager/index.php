@@ -344,7 +344,12 @@ WHERE
     <div class="container-fluid m-auto p-5">
         <div class="row">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                  <h1 style="color: darkblue;">WELCOME USER NAME</h1>
+                <?php $empid= $_SESSION['EmployeeNumber'];
+                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$empid'");
+                $name=mysqli_fetch_assoc($select);
+                ?>
+                  <h1 style="color: darkblue;">WELCOME Mr <?php echo $name['fName'].' '.$name['mName'].' '.$name['lName']?></h1>
+                  <h3>Manager</h3>
               </div>
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                   <h2>TODAY'S ATTENDANCE</h2>

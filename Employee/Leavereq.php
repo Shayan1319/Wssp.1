@@ -53,6 +53,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
 <div class="container-fluid m-auto py-5">
   <div class="row">
       <?php 
+
+     // Get today's date
+      $todate = date('Y-m-d');
+
+      // Create a DateTime object for July 1st of the current year
+      $julyFirst = new DateTime(date('Y') . '-07-01');
+
+      // Check if today's date is before July 1st
+      if (new DateTime($todate) < $julyFirst) {
+          // If it is, set $fromdate to July 1st of the previous year
+          $fromdate = (date('Y') - 1) . '-07-01';
+      } else {
+          // Otherwise, set $fromdate to July 1st of the current year
+          $fromdate = date('Y') . '-07-01';
+      }
+      
+
          $Empod = $_SESSION['EmployeeNumber'];
          $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $Empod");
      
@@ -85,7 +102,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                 <div class="col-4 my-2">
                   <div class="form-group">
                     <label>Father Name</label>
-                    <input type="text" disabled value="<?php echo $row['father_Name']?>" placeholder="Fasther Name" class="form-control" autocomplete="off" required="">
+                    <input type="text" disabled value="<?php echo $row['father_Name']?>" placeholder="Father Name" class="form-control" autocomplete="off" required="">
                   </div>
                 </div>
                 <div class="col-4 my-2">
@@ -156,23 +173,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                     <label>Leave Already Availed</label>
                     <?php
                       include ('link/desigene/db.php');
-                        // Get the employee ID from the session
                         $empid = $_SESSION['EmployeeNumber'];
-                        $empleave=$row['leaveAlreadyAvailed'];
-                        $currentYear = date('Y');
+                        $empleave=15;
                         // SQL query to calculate available leave days
-                        $sql = "SELECT COUNT(*) AS totalLeaveEntries
-                        FROM atandece
-                        WHERE Employeeid = '$empid'
-                          AND YEAR(`Date`) = '$currentYear'
-                          AND `status` = 'LEAVE'";
+                        $sql = "SELECT SUM(`TotalDays`) AS empleave FROM `leavereq` WHERE `EmployeeNo`=$empid AND `Statusofmanger`='ACCEPT' AND `StatusofGm`='ACCEPT' AND `LeaveTo` >= '$fromdate' AND `LeaveTo` <= '$todate';";
 
                         $result = $conn->query($sql);
 
                         if ($result) {
                                 $rowleave = $result->fetch_assoc();
-                                $leave=$rowleave['totalLeaveEntries'];
+                                $leave=$rowleave['empleave'];
                                 $totalDaysAfterSubtraction = $empleave-$leave;
+                        }
+                        else{
+                          $totalDaysAfterSubtraction = $empleave;
                         }
                         ?>
 
@@ -215,7 +229,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                              if( $row['Statusofmanger']=='REJECTED'||$row['StatusofGm']=='REJECTED'){
                               $status="REJECTED";
                               $color= "btn-danger";
-                             }else if( $row['Statusofmanger']=='ACCPET' && $row['StatusofGm']=='ACCPET'){
+                             }else if( $row['Statusofmanger']=='ACCEPT' && $row['StatusofGm']=='ACCEPT'){
                               $status="Accepted";
                               $color= "btn-success";
                              }else{

@@ -89,8 +89,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                                                 <th scope="col" class="text-white">Fund</th>
                                                                 <th scope="col" class="text-white">Gross Pay</th>
                                                                 <th scope="col" class="text-white">Deduction</th>
-                                                                <th scope="col" class="text-white">Netpay</th>
-                                                                <th scope="col" class="text-white">Jate</th>
+                                                                <th scope="col" class="text-white">Net Pay</th>
+                                                                <th scope="col" class="text-white">Date</th>
                                                                 <th scope="col" class="text-white">Joining Date</th>
                                                                 <th scope="col" class="text-white">Job Title</th>
                                                                 <th scope="col" class="text-white">Grade</th>

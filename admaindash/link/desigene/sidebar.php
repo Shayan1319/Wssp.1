@@ -36,10 +36,10 @@
   </div>                
               <a href="index.php" class="nav-link mt-3">Dashboard (MIS)</a>
               <a href="Master_entries.php" class="nav-link">
-              Master_enteries
+              Master entries
                 </a>
               <a class="dropbtn nav-link" href="signup.php">
-                  Login
+                 Create Employee Login
                 </a>
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form

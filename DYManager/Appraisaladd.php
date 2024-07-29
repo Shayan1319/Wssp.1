@@ -94,7 +94,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         </div>
                         <div class="card card2 bg-light my-5">
                         <div class="table-responsive">
-                            <table class="table teble-bordered align-middle">
+                            <table class="table table-bordered align-middle">
                             <thead class="text-white" style="background-color: darkblue;" >
                                 <tr class="align-bottom">
                                     <th></th>

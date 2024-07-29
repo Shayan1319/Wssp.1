@@ -2,7 +2,7 @@
 include('../link/desigene/db.php');
 $id=$_POST['id'];
 $date=date('Y-M-D');
-$update=mysqli_query($conn,"UPDATE `travelrequest` SET `StatusofGm`='ACCPET', `DateOfAccepGm`='$date' WHERE  `id`=$id");
+$update=mysqli_query($conn,"UPDATE `travelrequest` SET `StatusofGm`='ACCEPT', `DateOfAccepGm`='$date' WHERE  `id`=$id");
 if($update){
     echo 1;
 }

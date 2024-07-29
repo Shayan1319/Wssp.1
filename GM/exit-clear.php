@@ -90,7 +90,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="col">Employee ID #: </th>
                         <th scope="col">Designation</th>
                         <th scope="col">Department</th>
-                        <th scope="col">Verifi</th>
+                        <th scope="col">Verify</th>
                     </tr>
                 </thead>
                 <tbody style="background-color: #61AFE4; color: #fff;">

@@ -212,13 +212,13 @@ label span{color: #ff0505;}
             <div class="col-12 bg-white mt-5 px-2">
                 <nav class="navbar bg-white">
                   <div class="container-fluid">
-                      <h4>Employement Information</h4>
+                      <h4>Employment Information</h4>
                   </div>
                 </nav>
                 <div class="row">
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>Employement Group</label>
+                                    <label>Employment Group</label>
                                     <h5><?php echo $see ['Employement_Group'] ?></h5>
                                   </div>
                                 </div>
@@ -261,7 +261,7 @@ label span{color: #ff0505;}
                                 </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>Job Tiltle</label>
+                                    <label>Job Title</label>
                                     <h5><?php echo $see ['Job_Tiltle'] ?></h5>
                                   </div>
                                 </div>

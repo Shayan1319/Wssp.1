@@ -6,8 +6,19 @@ include 'link/desigene/db.php';
 
 if(isset($_POST['leaveFY'])){
     $employee=$_POST['employee'];
-    $fromdate=$_POST['fromdate'];
-    $todate=$_POST['todate'];
+    $todate = date('Y-m-d');
+
+    // Create a DateTime object for July 1st of the current year
+    $julyFirst = new DateTime(date('Y') . '-07-01');
+
+    // Check if today's date is before July 1st
+    if (new DateTime($todate) < $julyFirst) {
+        // If it is, set $fromdate to July 1st of the previous year
+        $fromdate = (date('Y') - 1) . '-07-01';
+    } else {
+        // Otherwise, set $fromdate to July 1st of the current year
+        $fromdate = date('Y') . '-07-01';
+    }
         
 ?>
         <!DOCTYPE html>

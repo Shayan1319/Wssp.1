@@ -54,7 +54,7 @@ if(isset($_POST['submitall'])){
                     <h6>Mingora Swat</h6>
                     <h6>Payroll Breakup</h6>
                 </div>
-                <p>Patslip - <?php echo date("d-M-Y")?></p>
+                <p>Payslip - <?php echo date("d-M-Y")?></p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -120,7 +120,7 @@ if ($result->num_rows > 0) {
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
                 </div>
-                <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+                <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 
                 <hr>
 </div>

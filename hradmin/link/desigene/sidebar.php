@@ -28,9 +28,16 @@
 <div id="mySidenav" class="sidenav">
   <div class="row w-100">
   <div class="profile col-12">
-    <img src="image/download.jfif" alt="">
-    <h3>Name</h3>
-    <h4>Designation</h4>
+  <?php 
+      $empid= $_SESSION['EmployeeNumber'];
+      include('../link/desigene/db.php');
+      $selectsession=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$empid'");
+      while($row=mysqli_fetch_array($selectsession)){
+      ?>
+      <img src="../image/<?php echo $row['image']?>" alt="">
+      <h3> <?php echo $row['fName']?> <?php echo $row['lName']?></h3>
+      <h4> <?php echo $row['Job_Tiltle']?></h4>
+      <?php }?>
   </div>
 
   </div>                
@@ -58,7 +65,7 @@
                 </a>
                 
                 <a href="Leaves.php" class="nav-link">
-                 Leaves requests
+                  Reports
                 </a>
 
               </div>

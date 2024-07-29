@@ -75,6 +75,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                 echo "<th>{$fetch['Grade']}</th>";
                 echo "<th>{$fetch['EmploymentType']}</th>";
                 echo "<th>{$fetch['Department']}</th>";
+                echo "<th>{$fetch['Class']}</th>";
                 echo "<th>{$fetch['ClassGroup']}</th>";
                 echo "<th>{$fetch['SubGroup']}</th>";
                 echo "<th>{$fetch['PaymentMode']}</th>";

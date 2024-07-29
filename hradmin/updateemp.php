@@ -1,20 +1,16 @@
 <?php
 session_start();
 error_reporting(0);
-// links to database
 include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'HR manager') {
-  // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
-  
-  // Redirect to the logout page
   header("Location: ../logout.php");
-  exit; // Ensure that the script stops execution after the header redirection
+  exit; 
 } else
 {
   $date = date('Y-m-d');
   if (isset($_POST['submit'])) {
-    $ChangeBy=$_SESSION['EmployeeNumber'];
+      $ChangeBy = $_SESSION['EmployeeNumber'];
       $IdUpdate = $_POST['Id'];
       $image = $_FILES["image"];
       $fName = $_POST["fName"];
@@ -70,7 +66,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       $Employee_Pay_Classification = $_POST['Employee_Pay_Classification'];
       $Type = $_POST['Type'];
       $DY_Supervisor = $_POST['DY_Supervisor'];
-  
       $Image_name = $image['name'];
       $Image_path = $image['tmp_name'];
       $Image_error = $image['error'];
@@ -80,15 +75,33 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       } else {
           echo '<script>alert("Picture is not uploaded. Kindly update.");</script>';
       }
-  
-      // SQL query for insertion
-      $insertquery = "INSERT INTO `employeedataupdate`(
-          `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `UpdateDate`, `typeUpdate`, `DY_SupervisorUpdate`, `status`,`Change By`,`date`
+      $query = "INSERT INTO `employeedataupdate`(
+          `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, 
+          `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, 
+          `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, 
+          `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, 
+          `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, 
+          `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, 
+          `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, 
+          `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, 
+          `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, 
+          `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, 
+          `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `Emptype`, `typeUpdate`, 
+          `DY_SupervisorUpdate`, `status`, `Change By`, `date`
       ) VALUES (
-          '$IdUpdate', '$Image_name', '$fName', '$mName', '$lName', '$father_Name', '$CNIC', '$email', '$pAddress', '$cAddress', '$city', '$postAddress', '$mNumber', '$ofphNumber', '$Alternate_Number', '$DofB', '$religion', '$gender', '$BlGroup', '$Domicile', '$MaritalStatus', '$NextofKin', '$NextofKinCellNumber', '$ContactPerson', '$CPCN', '$Employement_Group', '$Employee_Class', '$Employee_Group', '$Employee_Sub_Group', '$Employee_Quota', '$Salary_Bank', '$Salary_Branch', '$Account_No', '$Pay_Type', '$EOBI_No', '$Bill_Walved_Off', '$Weekly_Working_Days', '$Bill_Waived_Off', '$Employee_Pay_Classification', '$Grade_tma', '$Department', '$Job_Tiltle', '$Salary_Mode', '$Employee_Status', '$EmployeeNowssp', '$Employee_Manager', '$Joining_Date', '$Contract_Expiry_Date', '$Last_Working_Date', '$Attendance_Supervisor', '$Duty_Location', '$Duty_Point', '$date', '$emptype', '$DY_Supervisor', 'IN PROCESS',$ChangeBy,$date
+         '$IdUpdate', '$Image_name', '$fName', '$mName', '$lName', '$father_Name', '$CNIC', '$email', '$pAddress', 
+         '$cAddress', '$city', '$postAddress', '$mNumber', '$ofphNumber', '$Alternate_Number', '$DofB', '$religion',
+         '$gender', '$BlGroup', '$Domicile', '$MaritalStatus', '$NextofKin', '$NextofKinCellNumber', '$ContactPerson', 
+         '$CPCN', '$Employement_Group', '$Employee_Class', '$Employee_Group', '$Employee_Sub_Group', '$Employee_Quota', 
+         '$Salary_Bank', '$Salary_Branch', '$Account_No', '$Pay_Type', '$EOBI_No', '$Bill_Walved_Off', '$Weekly_Working_Days', 
+         '$Bill_Waived_Off', '$Employee_Pay_Classification', '$Grade_tma', '$Department', '$Job_Tiltle', '$Salary_Mode',
+         '$Employee_Status', '$EmployeeNowssp', '$Employee_Manager', '$Joining_Date', '$Contract_Expiry_Date', 
+         '$Last_Working_Date', '$Attendance_Supervisor', '$Duty_Location', '$Duty_Point', '$emptype', 
+         '$Type', '$DY_Supervisor', 'IN PROCESS', '$ChangeBy', '$date'
       )";
-      $query = mysqli_query($conn, $insertquery);
-      if ($query) {
+      // echo $query;
+      $result = mysqli_query($conn, $query);
+      if ($result) {
           echo '<script>alert("Data is Updated");</script>';
           header("Location: Qualification.php?updat=" . urlencode($EmployeeNowssp) . "#section3");
           exit();
@@ -97,9 +110,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       }
   }
   ?>
-  
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,7 +118,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <style>
     .select2-selection__rendered {
       line-height: 31px !important;
-
     }
     label span{
       color: red;
@@ -119,11 +128,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       border-radius: 0px;
       width: 300px !important;
     }
-
     .select2-selection__arrow {
       height: 34px !important;
-      
-
     }
   </style>
 <body>
@@ -174,13 +180,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Last Name</label>
-                            <input value="<?php echo $fetchdata['lName']?>" id="lName" type="text" name="lName" placeholder="Last Name" class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['lName']?>" id="lName" type="text" name="lName" placeholder="Last Name" class="form-control" autocomplete="off">
                           </div>
                         </div> 
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Father Name</label>
-                            <input value="<?php echo $fetchdata['father_Name']?>" id="FatherName" type="text" name="father_Name" placeholder="Father Name" class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['father_Name']?>" id="FatherName" type="text" name="father_Name" placeholder="Father Name" class="form-control" autocomplete="off">
                           </div>
                         </div> 
                         <div class="col-md-4 my-2">
@@ -211,7 +217,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     document.getElementById('cnicStatus').innerText = response;
                                 }
                             };
-                            
                         }
                             </script>
                         </div>
@@ -224,7 +229,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Permanent Address</label>
-                            <input value="<?php echo $fetchdata['pAddress']?>" id="PAddress" type="text" name="pAddress" placeholder="Permenent Address" class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['pAddress']?>" id="PAddress" type="text" name="pAddress" placeholder="Permanent Address" class="form-control" autocomplete="off" >
                           </div>
                         </div>
                         <div class="col-md-4 my-2">
@@ -283,8 +288,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   ?>
                                   <option <?php echo ($fetchdata['religion'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
                                   <?php   
-                                  }
-                              }
+                                  }}
                               ?>
                             </select>
                           </div>
@@ -295,7 +299,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <select name="gender" id="" class="form-control ">
                                 <option <?php echo ($fetchdata['gender'] =='') ? 'selected' : ''; ?> value="">Choose</option>
                                 <option <?php echo ($fetchdata['gender'] =='Male') ? 'selected' : ''; ?> value="Male">Male</option>
-                                <option <?php echo ($fetchdata['gender'] =='Female') ? 'selected' : ''; ?> value="Female">Female</option>
+                                <option <?php echo ($fetchdata['gender'] =='Female') ? 'selected':'';?> value="Female">Female</option>
                             </select>
                           </div>
                         </div>
@@ -308,7 +312,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Domicile</label>
-                            <input value="<?php echo $fetchdata['Domicile']?>" id="Domicile" type="text" name="Domicile" placeholder="Domicile" class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['Domicile']?>" id="Domicile" type="text" name="Domicile" placeholder="Domicile" class="form-control" autocomplete="off">
                           </div>
                         </div>
                         <div class="col-md-4 my-2">
@@ -316,8 +320,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <label>Marital Status </label>
                             <select name="MaritalStatus" id="MaritalStatus" class="form-control ">
                                 <option <?php echo ($fetchdata['MaritalStatus'] == '') ? 'selected' : ''; ?> value="">Choose</option>
-                                <option <?php echo ($fetchdata['MaritalStatus'] == 'Married') ? 'selected' : ''; ?> value="Married"> Married</option>
-                                <option <?php echo ($fetchdata['MaritalStatus'] == 'Unmarried') ? 'selected' : ''; ?> value="Unmarried"> Unmarried</option>
+                                <option <?php echo ($fetchdata['MaritalStatus'] == 'Married') ? 'selected' : '';?> value="Married"> Married</option>
+                                <option <?php echo ($fetchdata['MaritalStatus'] == 'Unmarried') ? 'selected' : '';?> value="Unmarried"> Unmarried</option>
                             </select>
                           </div>
                         </div>
@@ -330,7 +334,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Next of Kin Cell Number</label>
-                            <input value="<?php echo $fetchdata['NextofKinCellNumber']?>" id="NextofKinCellNumber" type="text" name="NextofKinCellNumber" placeholder="Next of Kin Cell Number " class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['NextofKinCellNumber']?>" id="NextofKinCellNumber" type="text" name="NextofKinCellNumber" placeholder="Next of Kin Cell Number " class="form-control" autocomplete="off">
                           </div>
                         </div>                   
                         <div class="col-md-4 my-2">
@@ -342,7 +346,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <div class="col-md-4 my-2">
                           <div class="form-group">
                             <label>Contact Person Cell Number</label>
-                            <input value="<?php echo $fetchdata['CPCN']?>" id="CPCN" type="text" name="CPCN" placeholder="Contact Person Cell Number " class="form-control" autocomplete="off" >
+                            <input value="<?php echo $fetchdata['CPCN']?>" id="CPCN" type="text" name="CPCN" placeholder="Contact Person Cell Number " class="form-control" autocomplete="off">
                           </div>
                         </div>
                     </div>     
@@ -354,13 +358,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <div id="section2" style="display: none;">
                   <div class="tab-content" id="myTabContent">
                       <div class="row my-4">
-                    
                         <div class="col-md-12 ">
                           <div class="card card-success border border-2 border-dark bg-light">
                             <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                               <div class="row">
                                 <div class="col-sm-12 col-lg-5">
-                                  <div class="card-title text-white" style="width:fit-content;">Employement Information
+                                  <div class="card-title text-white" style="width:fit-content;">Employment Information
                                   </div>
                                 </div>
                                 <div class="col-sm-12 col-lg-7">
@@ -369,11 +372,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                               </div>  
                             </div>
                             <br>
-                            <div class="card-body ">
+                            <div class="card-body">
                               <div class="row">
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>Employement Group</label>
+                                    <label>Employment Group</label>
                                     <select name="Employement_Group" id="" class="form-control ">
                                     <?php
                                       include ('../link/desigene/db.php');
@@ -560,29 +563,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         </select>
                                     </div>
                                 </div>
-
-
                                 <div class="col-md-4 my-2" id="billWiaivedoff">
                                     <div class="form-group">
                                         <label>Bill Waived Off</label>
                                         <input type="text" class="form-control" value="<?php echo $fetchdata['Bill_Walved_Off']?>" name="Bill_Walved_Off" placeholder="Bill Waived Off">
                                     </div>
                                 </div>
-
                                 <script>
-                                    // Function to toggle visibility based on the selected value
                                     function toggleVisibility() {
-                                        // Get the selected value
                                         var selectedValue = document.getElementById('Bill_Waived_Off').value;
-
-                                        // Get the element with id "billWiaivedoff"
                                         var billWiaivedoffElement = document.getElementById('billWiaivedoff');
-
-                                        // Toggle visibility based on the selected value
                                         billWiaivedoffElement.style.display = selectedValue === 'YES' ? 'block' : 'none';
                                     }
-
-                                    // Call toggleVisibility after the DOM has fully loaded
                                     document.addEventListener('DOMContentLoaded', function() {
                                         toggleVisibility();
                                     });
@@ -593,7 +585,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     <input value="<?php echo $fetchdata['Weekly_Working_Days']?>" type="text" class="form-control" name="Weekly_Working_Days" placeholder="Weekly Working Days" >
                                   </div>
                                 </div>
-                                
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label>Employee Pay Classification</label>
@@ -607,13 +598,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                           while($row=mysqli_fetch_assoc($select)){
                                           ?>
                                           <option <?php echo ($fetchdata['Employee_Pay_Classification'] == $row['drop'] ) ? 'selected' : ''; ?> value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
-
                                           <?php   
                                           }
                                       }
                                       ?>
                                   </select>
-
                                   </div>
                                 </div>
                                 <div class="col-md-4 my-2">
@@ -660,7 +649,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
-                                    <label>Job Tiltle</label>
+                                    <label>Job Title</label>
                                     <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control ">
                                   <?php
                                       include ('../link/desigene/db.php');
@@ -795,7 +784,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                           ?>
                                       <option <?php echo ($fetchdata['DY_Supervisor'] ==  $row['EmployeeNo'] ) ? 'selected' : ''; ?> 
                                       value="<?php echo $row['EmployeeNo']?>"><?php echo $row['EmployeeNo']?></option>
-                                          
                                           <?php   
                                           }
                                       }
@@ -836,7 +824,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <div class="col-md-12 text-end mt-2">
                                   <input value="Back" style="background-color: darkblue;" onclick="backToSection1()" type="button" class="btn text-white  float-right shadow" value="Back">
                                   <input value="Next" style="background-color: darkblue;" name="submit" type="submit" class="btn text-white  float-right shadow" value="Submit">
-                                  
                                 </div>
                               </div>
                             </div>
@@ -853,7 +840,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     </div>
     <script>
       $(document).ready(function() {
-            // Initialize the datepicker with your desired format
             $(".datepicker").datepicker({
                 dateFormat: 'dd mm yy'
             });
@@ -871,7 +857,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               }});
               }
               loadTable(); 
-            
           });
 $(document) .ready(function(){
   function loadTable(){
@@ -908,8 +893,6 @@ $(document) .ready(function(){
     loadTable(); 
    
 });
-
-
 $(document) .ready(function(){
   function loadTable(){
     $.ajax({
@@ -919,241 +902,8 @@ $(document) .ready(function(){
     $("#superviserTMA") .html(data) ;
     }});
     }
-    loadTable(); 
-   
-
-//     function loadEmpGroup(){ // renamed the function here
-//         $.ajax({
-//             url : "ajex/EmpGroup - Copy.php",
-//             type:"POST",
-//             success : function(data){
-//                 $("#Employement_Group_drop").html(data);
-//             }
-//         });
-//     }
-//       loadEmpGroup();
-      
-//       function loadEmployee_Class(){
-//         $.ajax({
-//           url : "ajex/Employee_Class - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Class_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Class();
-
-//       function loadEmployee_Group(){
-//         $.ajax({
-//           url : "ajex/Employee_Group - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Group_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Group();
-
-      
-//       function loadEmployee_Sub_Group(){
-//         $.ajax({
-//           url : "ajex/Employee_Sub_Group - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Sub_Group_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Sub_Group();
-
-//       function loadEmployee_Quota(){
-//         $.ajax({
-//           url : "ajex/Employee_Quota - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Quota_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Quota();
-
-//       function loadGrade(){
-//         $.ajax({
-//           url : "ajex/Grade - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Grade_drop").html(data);
-//           }
-//         });
-//       }
-//       loadGrade();
-//       function loadDepartment(){
-//         $.ajax({
-//           url : "ajex/Department - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Department_drop").html(data);
-//           }
-//         });
-//       }
-//       loadDepartment();
-//       function loadJob_Tiltle(){
-//      $.ajax({
-//        url : "ajex/Job_Tiltle - Copy.php",
-//        type:"POST",
-//        success : function(data){
-//          console.log(data); // Log the response to the console
-//          $("#Job_Tiltle_drop").html(data);
-//        }
-//      });
-//    }
-//    loadJob_Tiltle();
-
-//       function loadType(){
-//         $.ajax({
-//           url : "ajex/Type - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Type_drop").html(data);
-//           }
-//         });
-//       }
-//       loadType();
-//       function loadSalary_Mode(){
-//         $.ajax({
-//           url : "ajex/Salary_Mode - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Salary_Mode_drop").html(data);
-//           }
-//         });
-//       }
-//       loadSalary_Mode();
-//       function loadStatus(){
-//         $.ajax({
-//           url : "ajex/Status - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Status_drop").html(data);
-//           }
-//         });
-//       }
-//       loadStatus();
-//       function loadEmployement_Group_TMA(){
-//         $.ajax({
-//           url : "ajex/Employement_Group_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employement_Group_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployement_Group_TMA();
-//       function loadEmployee_Class_TMA(){
-//         $.ajax({
-//           url : "ajex/Employee_Class_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Class_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Class_TMA();
-//       function loadEmployee_Group_TMA(){
-//         $.ajax({
-//           url : "ajex/Employee_Group_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Group_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Group_TMA();
-//       function loadEmployee_Sub_Group_TMA(){
-//         $.ajax({
-//           url : "ajex/Employee_Sub_Group_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Sub_Group_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Sub_Group_TMA();
-//       function loadEmployee_Quota_TMA(){
-//         $.ajax({
-//           url : "ajex/Employee_Quota_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Employee_Quota_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadEmployee_Quota_TMA();
-//        function loadGrade_TMA(){
-//         $.ajax({
-//           url : "ajex/Grade_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Grade_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadGrade_TMA();
-//       function loadDepartment_TMA(){
-//         $.ajax({
-//           url : "ajex/Department_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Department_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadDepartment_TMA();
-//       function loadJob_Tiltle_TMA(){
-//         $.ajax({
-//           url : "ajex/Job_Tiltle_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Job_Tiltle_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadJob_Tiltle_TMA();
-//       function loadType_TMA(){
-//         $.ajax({
-//           url : "ajex/Type_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Type_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadType_TMA();
-//       function loadSalary_Mode_TMA(){
-//         $.ajax({
-//           url : "ajex/Salary_Mode_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Salary_Mode_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadSalary_Mode_TMA();
-//       function loadStatus_TMA(){
-//         $.ajax({
-//           url : "ajex/Status_TMA - Copy.php",
-//           type:"POST",
-//           success : function(data){
-//             $("#Status_TMA_drop").html(data);
-//           }
-//         });
-//       }
-//       loadStatus_TMA();
-
-    
+    loadTable();     
 });
-
 function validateSection1() {
  var cNo = document.getElementById("cNo").value;
  if (cNo) {

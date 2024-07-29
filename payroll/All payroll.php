@@ -17,6 +17,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <?php include ('link/links.php')?>
   </head>
   <body>
+    
     <div id="main">
       <?php include('link/desigene/navbar.php')?>
             <div class="container-fluid m-auto py-5">
@@ -124,7 +125,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <div class="col-md-6 my-2">
                                   <div class="form-group">
                                     <label>Department</label>
-                                    <select name="Department" id="Department" class="form-control ">
+                                    <select name="Department_drop" id="Department" class="form-control ">
                                   <?php
                                       include ('../link/desigene/db.php');
                                       $select = mysqli_query($conn,"SELECT * FROM `master` WHERE `name`='Department'");
@@ -159,10 +160,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <thead>
                               <tr>
                                   <th>S.No</th>
-                                  <th>Emp. No	</th>
-                                  <th>Emp. Name</th>
-                                  <th>Emp. Father Name</th>
-                                  <th>Emp. CNIC</th>
+                                  <th>Employee No	</th>
+                                  <th>Name</th>
+                                  <th>Father Name</th>
+                                  <th>CNIC</th>
                                   <th>Joining Date</th>
                                   <th>Job Title</th>
                                   <th>Grade</th>
@@ -189,7 +190,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <div class="col-md-12">
                             <div class="form-group">
                               <div class="clearfix">&nbsp;</div>
-                              <button type="submit" id="submit" name="submit" style="background-color: darkblue;" class="btn btn-primary">Save</button>
+                              <button type="submit" id="submit" name="submit" style="background-color: darkblue;" class="btn btn-primary">Download Report in Excel</button>
                               <button type="submit" id="submitall" name="submitall" style="background-color: darkblue;" class="btn btn-primary"> Payroll Details</button>
                               <button type="submit" id="Sub-Group" name="Sub-Group" style="background-color: darkblue;" class="btn btn-primary">Pay Sub-Group</button>
                               <button type="submit" id="Bank" name="Bank" style="background-color: darkblue;" class="btn btn-primary">Bank Credit Advice</button>

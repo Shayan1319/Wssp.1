@@ -40,7 +40,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <thead>
                           <tr>
                             <th>S.No</th>
-                            <th>Date of Submiting</th>
+                            <th>Date of Submitting</th>
                             <th>Form Date</th>
                             <th>To Date</th>
                             <th>Working Days</th>

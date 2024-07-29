@@ -474,68 +474,7 @@ $sql = "SELECT COUNT(*) AS Appraisals
                 </div>
               </div>
               </a>
-            </div><!-- ./col -->
-            <!-- <div class="col-lg-4 col-xs-6">
-              
-              <div class="small-box bg-blue">
-                <div class="inner">
-                <h3><?php echo $tabillAprove?>
-              <script> var tabillAprove= <?php echo $tabillAprove?>;</script>
-              </h3>
-                  <h4>Number of TA Bill Accepted</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-              </div>
             </div>
-            <div class="col-lg-4 col-xs-6">
-              <a href="aprovetabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
-                <div class="inner">
-                <h3><?php echo $tabillaccept?>
-              <script> var tabillaccept= <?php echo $tabillaccept?>;</script>
-              </h3>
-                  <h4>TA Bill Approved</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-              </div>
-              </a>
-            </div>
-              <div class="col-lg-4 col-xs-6">
-              
-              <a href="tabill.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
-                <div class="inner">
-                <h3><?php echo $tabillPENDING?>
-              <script> var tabillPENDING= <?php echo $tabillPENDING?>;</script>
-              </h3>
-                  <h4>TA bill Pending</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-lg-4 col-xs-6">
-              
-              <a href="tabillRejecet.php" style="text-decoration: none;">
-              <div class="small-box bg-blue">
-                <div class="inner">
-                <h3><?php echo $tabillREJECTED?>
-              <script> var tabillREJECTED= <?php echo $tabillREJECTED?>;</script>
-              </h3>
-                  <h4>TA bill REJECTED</h4>
-                </div>
-                <div class="icon">
-                  <i class="fa fa-clock-o"></i>
-                </div>
-              </div>
-              </a>
-            </div> -->
               <div class="col-12">
                 <div class="row">
                 <div class="col-sm-12 col-lg-6 col-md-6">

@@ -45,7 +45,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   AND HR_Approved_Date IS NULL
                                   AND Gratuity_Remarks IS NULL;
                                 ");
-                                $row = mysqli_fetch_array($query); // Use $query instead of $result
+                                $row = mysqli_fetch_array($query); 
                                 echo $row['CountNullRows'];
                                 ?>
                             </p>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4 p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#0C1C5F;">
-                        <div class="card-header">Total Amount Payroll of this mounth</div>
+                        <div class="card-header">Total Amount Payroll of this month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -64,24 +64,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 // Retrieve the last time period
                                 $queryLastTimePeriod = mysqli_query($conn, "SELECT `ID` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 1");
                                 $rowLastTimePeriod = mysqli_fetch_array($queryLastTimePeriod);
-
                                 // Check if there are results
                                 if ($rowLastTimePeriod['ID'] !== null) {
                                     // Use the ID of the last time period in the salary query
                                     $lastTimePeriodId = $rowLastTimePeriod['ID'];
-
                                     // Query to get the sum of net_pay for the last time period
                                     $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId");
                                     $rowSalary = mysqli_fetch_array($querySalary);
-
                                     // Check if there are results
                                     if ($rowSalary['total_rate'] !== null) {
                                         echo $rowSalary['total_rate'];
                                     } else {
-                                        echo "No salary data found for the last time period.";
+                                        echo "0";
                                     }
                                 } else {
-                                    echo "No data found for the last time period in the timeperiod table.";
+                                    echo "0";
                                 }
 
                                 ?>
@@ -91,7 +88,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-light mb-3" style="max-width: 18rem;background-color:#2A64C4">
-                        <div class="card-header">Total Amount WSSC of This Mounth</div>
+                        <div class="card-header">Total Amount WSSC of This Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -107,19 +104,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                       $lastTimePeriodId = $rowLastTimePeriod['ID'];
   
                                       // Query to get the sum of net_pay for the last time period
-                                      $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId && `ClassGroup`= ' WSSC PAY '");
+                                      $querySalary = mysqli_query($conn, "SELECT SUM(sal.net_pay) AS total_rate FROM `salary` AS sal
+                                      LEFT JOIN `employeedata` AS emp ON sal.employee_id=emp.EmployeeNo
+                                      WHERE sal.timeperiod = $lastTimePeriodId && emp.TypeEmp= 'WSSC'");
                                       $rowSalary = mysqli_fetch_array($querySalary);
-  
                                       // Check if there are results
                                       if ($rowSalary['total_rate'] !== null) {
                                           $wsscpay= $rowSalary['total_rate'];
                                           echo $wsscpay;
                                       } else {
                                         $wsscpay=0;
-                                          echo "No salary data found for the last time period.";
+                                          echo "0";
                                       }
                                   } else {
-                                      echo "No data found for the last time period in the timeperiod table.";
+                                      echo "0";
                                   }  
                                 ?>
                             </p>
@@ -128,7 +126,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </div>
                 <div class="col-sm-12 col-lg-3 col-md-3 m-4  p-3">
                     <div class="card text-white mb-3" style="max-width: 18rem;background-color:#61AFE4">
-                        <div class="card-header">Total Amount Tma of This Mounth</div>
+                        <div class="card-header">Total Amount Tma of This Month</div>
                         <div class="card-body">
                             <h5 class="card-title">RS</h5>
                             <p class="card-text">
@@ -144,7 +142,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                       $lastTimePeriodId = $rowLastTimePeriod['ID'];
   
                                       // Query to get the sum of net_pay for the last time period
-                                      $querySalary = mysqli_query($conn, "SELECT SUM(net_pay) AS total_rate FROM salary WHERE timeperiod = $lastTimePeriodId && `ClassGroup`= ' TMA PAY '");
+                                      $querySalary = mysqli_query($conn, "SELECT SUM(sal.net_pay) AS total_rate FROM `salary` AS sal
+                                      LEFT JOIN `employeedata` AS emp ON sal.employee_id=emp.EmployeeNo
+                                      WHERE sal.timeperiod = $lastTimePeriodId && emp.TypeEmp= 'TMA'");
                                       $rowSalary = mysqli_fetch_array($querySalary);
                                       // Check if there are results
                                       if ($rowSalary['total_rate'] !== null) {
@@ -152,10 +152,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                           echo $tmapay;
                                       } else {
                                         $tmapay =0;
-                                          echo "No salary data found for the last time period.";
+                                          echo "0";
                                       }
                                   } else {
-                                      echo "No data found for the last time period in the timeperiod table.";
+                                      echo "0";
                                   }  
                                 ?>
                             </p>
@@ -207,7 +207,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     echo $difference;
                                
                             } else {
-                                echo "Not enough data found in the timeperiod table to calculate the difference between the last two time periods.";
+                                echo "0";
                             }
                             ?>
 

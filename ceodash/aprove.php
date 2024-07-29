@@ -32,19 +32,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             <div class="col-12">
                 <table class="table">
                     <thead class="text-white" style="background-color: darkblue;">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Employee No</th>
-                        <th scope="col">Employee Name</th>
-                        <th scope="col">Designation</th>
-                        <th scope="col">Employee Class</th>
-                        <th scope="col">Phone number</th>
-                        <th scope="col">Leave Type</th>
-                        <th scope="col">Leave From</th>
-                        <th scope="col">Leave To</th>
-                        <th scope="col">Total Days</th>
-                        <th scope="col">Leave Avalible</th>
-                        <th scope="col">Reject</th>
+                    <tr style="color:white !important" >
+                        <th style="color:white !important"  scope="col">#</th>
+                        <th style="color:white !important"  scope="col">Employee No</th>
+                        <th style="color:white !important"  scope="col">Employee Name</th>
+                        <th style="color:white !important"  scope="col">Designation</th>
+                        <th style="color:white !important"  scope="col">Employee Class</th>
+                        <th style="color:white !important"  scope="col">Phone number</th>
+                        <th style="color:white !important"  scope="col">Leave Type</th>
+                        <th style="color:white !important"  scope="col">Leave From</th>
+                        <th style="color:white !important"  scope="col">Leave To</th>
+                        <th style="color:white !important"  scope="col">Total Days</th>
+                        <th style="color:white !important"  scope="col">Leave Available</th>
+                        <th style="color:white !important"  scope="col">Reject</th>
                     </tr>
                 </thead>
                 <tbody id="table-data" >
@@ -57,7 +57,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   </div>
 <?php include('link/desigene/script.php')?>
 <?php include('../link/desigene/script.php') ?>
-  <!-- jequery  -->
+  <!-- jquery  -->
   <script>
     $(document).ready(function(){
       function loadTable(){

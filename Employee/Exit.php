@@ -58,7 +58,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                                         <input type="text" class="form-control" value="<?php echo $_SESSION['EmployeeNumber'] ?>" readonly placeholder="Employee Id" name="empid" id="empid">
                                     </div>
                                     <div class="col-md-4 my-2">
-                                        <label for="empid">Leaveing date</label>
+                                        <label for="empid">Leaving date</label>
                                         <input type="date" class="form-control" value="<?php echo date('Y-m-d') ?>" placeholder="Employee Id" name="date" id="empid">
                                     </div>
                                     

@@ -70,7 +70,7 @@ while($fetchdata=mysqli_fetch_array($select)){
           <div class="col-md-4 my-2">
             <div class="form-group">
               <label>Permanent Address</label>
-              <input value="<?php echo $fetchdata['pAddressUpdate']?>" id="PAddress" type="text" name="pAddress" placeholder="Permenent Address" class="form-control" autocomplete="off" >
+              <input value="<?php echo $fetchdata['pAddressUpdate']?>" id="PAddress" type="text" name="pAddress" placeholder="Permanent Address" class="form-control" autocomplete="off" >
             </div>
           </div>
           <div class="col-md-4 my-2">
@@ -204,7 +204,7 @@ while($fetchdata=mysqli_fetch_array($select)){
                           <div style="background-color: darkblue;" class="card-header text-white fw-bold">
                             <div class="row">
                               <div class="col-sm-12 col-lg-5">
-                                <div class="card-title text-white" style="width:fit-content;">Employement Information
+                                <div class="card-title text-white" style="width:fit-content;">Employment Information
                                 </div>
                               </div>
                               <div class="col-sm-12 col-lg-7">
@@ -217,7 +217,7 @@ while($fetchdata=mysqli_fetch_array($select)){
                             <div class="row">
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Employement Group</label>
+                                  <label>Employment Group</label>
                                   <select name="Employement_Group" id="" class="form-control ">
                                   <?php
                                     include ('../link/desigene/db.php');
@@ -504,7 +504,7 @@ while($fetchdata=mysqli_fetch_array($select)){
                               </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Job Tiltle</label>
+                                  <label>Job Title</label>
                                   <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control ">
                                 <?php
                                     include ('../link/desigene/db.php');

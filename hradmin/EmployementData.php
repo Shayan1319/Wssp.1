@@ -39,7 +39,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <th scope="col">Employee NO</th>
                         <th scope="col">Employee Manager</th>
                         <th scope="col">Status</th>
-                        <th scope="col">See</th>
+                        <th scope="col">View Details</th>
                         <th scope="col">Update</th>
                     </thead>
                     <tbody>
