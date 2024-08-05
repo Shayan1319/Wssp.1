@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 $currentDate = date('Y-m-d');
-$empid = $_SESSION['EmployeeNumber'];
+$emil = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
             $sql = "SELECT * FROM employeedata AS e  
             INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo

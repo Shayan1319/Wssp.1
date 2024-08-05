@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 $currentDate = date('Y-m-d');
-$empid = $_SESSION['EmployeeNumber'];
+$emil = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
             $sql = "SELECT * FROM employeedata AS e  INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'ACCEPT' AND t.StatusofGM = 'ACCEPT' AND  t.DepartureOn >= '$currentDate'";
             $result = $conn->query($sql);

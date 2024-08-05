@@ -11,7 +11,7 @@ $date = date('Y-m-d'); // Use 'Y-m-d' format for MySQL DATE type
 
 include('..././link/desigene/db.php'); // Make sure to include your database connection file
 
-$sql = "SELECT * FROM employeedata AS e  INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'REJECTED' AND  t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT * FROM employeedata AS e  INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'REJECTED' AND  t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 $result = mysqli_query($conn, $sql) or die("SQL query failed");
 
 if (mysqli_num_rows($result) > 0) {

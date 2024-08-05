@@ -136,7 +136,7 @@
 
 <form action="../ContractExp.php" method="POST"  target="_blank">
 <a href="">
-  <button type="submit" class="btn nav-link" name="ContractExp" id="ContractExp">Employee Contact Expiry</button>
+  <button type="submit" class="btn nav-link" name="ContractExp" id="ContractExp">Employee Contract Expiry</button>
 </a>
 </form>
                   

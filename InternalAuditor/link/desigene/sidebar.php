@@ -29,9 +29,9 @@
   <div class="row w-100">
     <div class="profile col-12">
       <?php 
-      $empid= $_SESSION['EmployeeNumber'];
+      $emil= $_SESSION['EmployeeNumber'];
       include('../link/desigene/db.php');
-      $selectsession=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$empid'");
+      $selectsession=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$emil'");
       while($row=mysqli_fetch_array($selectsession)){
       ?>
       <img src="../image/<?php echo $row['image']?>" alt="">

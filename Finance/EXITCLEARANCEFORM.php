@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
 
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'FinanceAdmin') {
     // Log the unauthorized access attempt for auditing purposes
@@ -48,8 +48,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <?php
                                 include ('link/desigene/db.php');
                                 // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn,"SELECT * FROM employee_exit AS e
-                                INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
+                                $query = mysqli_query($conn,"SELECT 
+        l.CNIC,
+        l.EmployeeNo,
+        l.Employee_Group,
+        l.Joining_Date,
+        e.Leaving_Date,
+        e.Id, 
+        e.Reason_of_Leaving, 
+        l.fName, 
+        l.mName, 
+        l.lName
+    FROM employee_exit AS e
+    INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo 
                                WHERE e.Loan IS NULL AND e.Loan_Remarks IS NULL AND e.OverPay IS NULL AND e.OverPay_Remarks IS NULL AND e.Finance_Other IS NULL AND e.Finance_Remarks IS NULL AND e.Finance_Approved_Date IS NULL; ");
                                 $num = 1;
                                 while($row = mysqli_fetch_array($query)){

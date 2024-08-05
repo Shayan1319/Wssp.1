@@ -264,9 +264,7 @@ if (isset($_POST['submit'])) {
       </form>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
+
   <?php include('link/desigene/script.php'); ?>
   <?php include('link/desigene/footer.php'); ?>
   </div>

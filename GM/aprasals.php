@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'GM') {
     // Log the unauthorized access attempt for auditing purposes
     error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
@@ -43,12 +43,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <tbody>
                                 <?php
                                 include ('link/desigene/db.php');
-                                $empid = $_SESSION['EmployeeNumber'];
+                                $emil = $_SESSION['EmployeeNumber'];
                                 // Query to get the sum of rate column for the current month
                                 $query = mysqli_query($conn,"SELECT * FROM employee_performance AS t
                                 INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
                                 WHERE
-                                        t.CEOQ1 IS NULL
+                                t.CEOQ1 IS NULL
                                         AND t.CEOQ2 IS NULL
                                         AND t.NameOfCountersigningOfficer IS NULL
                                         AND t.DesignationOfCountersigningOfficer IS NULL

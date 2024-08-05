@@ -14,7 +14,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   }else{
     if (isset($_POST['submit'])) {
         // Retrieve user input and sanitize it (use mysqli_real_escape_string or prepared statements)
-        $empid = $_GET['id'];
+        $emil = $_GET['id'];
         $Q1=$_POST['Q1'];
         $Q2=$_POST['Q2'];
         $Q3=$_POST['Q3'];
@@ -39,7 +39,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         $Designation=$_POST['Designation'];
         $data=date("Y-M-D");
         // Perform the database insertion
-        $insertQuery = "UPDATE `employee_performance` SET `Intelligence`='$Q1',`ConfidenceAndWillPower`='$Q2',`AcceptanceOfResponsibility`='$Q3',`ReliabilityUnderPressure`='$Q4',`FinancialResponsibility`='$Q5',`RelationsWithSuperiors`='$Q6',`RelationsWithColleagues`='$Q7',`RelationsWithSubordinates`='$Q8',`BehaviorWithPublic`='$Q9',`AblityToDecideRoutineMatters`='$Q10',`KnowledgeOfRelavantLawsETC`='$Q11',`Q2`='$Q12',`Integrity`='$Integrity',`Q3`='$Q13',`SpecialAptitude`='$Special_aptitude',`RecommendedForFutureTraining`='$Recommendedforfuturetraining',`OverallGradingByReportingOfficer`='$Q14',`OverallGradingByCountersigningOfficer`='$Q15',`FitnessForPromotionByReportingOfficer`='$Q16',`FitnessForPromotionByCountersigningOfficer`='$Q17',`NameOfReportingOfficer`='$name',`DesignationOfReportingOfficer`='$Designation', `DateOfReportingOfficer`='$data' WHERE `Id`=$empid";
+        $insertQuery = "UPDATE `employee_performance` SET `Intelligence`='$Q1',`ConfidenceAndWillPower`='$Q2',`AcceptanceOfResponsibility`='$Q3',`ReliabilityUnderPressure`='$Q4',`FinancialResponsibility`='$Q5',`RelationsWithSuperiors`='$Q6',`RelationsWithColleagues`='$Q7',`RelationsWithSubordinates`='$Q8',`BehaviorWithPublic`='$Q9',`AblityToDecideRoutineMatters`='$Q10',`KnowledgeOfRelavantLawsETC`='$Q11',`Q2`='$Q12',`Integrity`='$Integrity',`Q3`='$Q13',`SpecialAptitude`='$Special_aptitude',`RecommendedForFutureTraining`='$Recommendedforfuturetraining',`OverallGradingByReportingOfficer`='$Q14',`OverallGradingByCountersigningOfficer`='$Q15',`FitnessForPromotionByReportingOfficer`='$Q16',`FitnessForPromotionByCountersigningOfficer`='$Q17',`NameOfReportingOfficer`='$name',`DesignationOfReportingOfficer`='$Designation', `DateOfReportingOfficer`='$data' WHERE `Id`=$emil";
         $insertResult = mysqli_query($conn, $insertQuery);
 
         if ($insertResult) {
@@ -73,9 +73,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             <div class="row">
                 <form action="" method="post">
                     <?php
-                                $empid = $_GET['id'];
+                                $emil = $_GET['id'];
                                 // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn,"SELECT * FROM employee_performance WHERE Id = $empid");
+                                $query = mysqli_query($conn,"SELECT * FROM employee_performance WHERE Id = $emil");
                                 $num = 1;
                                 while($row = mysqli_fetch_array($query)){?>
                     <div class="col-lg-12">

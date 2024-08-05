@@ -13,7 +13,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   } else{
     if (isset($_POST['submit'])) {
         // Retrieve user input and sanitize it (use mysqli_real_escape_string or prepared statements)
-        $empid = $_GET['id'];
+        $emil = $_GET['id'];
         $Q1=$_POST['Q1'];
         $Q2=$_POST['Q2'];
         $Q3=$_POST['Q3'];
@@ -26,7 +26,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         $Q10=$_POST['Q10'];
         $Q11=$_POST['Q11'];
         // Perform the database insertion
-        $insertQuery = "UPDATE `employee_performance` SET `Intelligence`='$Q1',`ConfidenceAndWillPower`='$Q2',`AcceptanceOfResponsibility`='$Q3',`ReliabilityUnderPressure`='$Q4',`FinancialResponsibility`='$Q5',`RelationsWithSuperiors`='$Q6',`RelationsWithColleagues`='$Q7',`RelationsWithSubordinates`='$Q8',`BehaviorWithPublic`='$Q9',`AblityToDecideRoutineMatters`='$Q10',`KnowledgeOfRelavantLawsETC`='$Q11' WHERE `Id`=$empid";
+        $insertQuery = "UPDATE `employee_performance` SET `Intelligence`='$Q1',`ConfidenceAndWillPower`='$Q2',`AcceptanceOfResponsibility`='$Q3',`ReliabilityUnderPressure`='$Q4',`FinancialResponsibility`='$Q5',`RelationsWithSuperiors`='$Q6',`RelationsWithColleagues`='$Q7',`RelationsWithSubordinates`='$Q8',`BehaviorWithPublic`='$Q9',`AblityToDecideRoutineMatters`='$Q10',`KnowledgeOfRelavantLawsETC`='$Q11' WHERE `Id`=$emil";
         $insertResult = mysqli_query($conn, $insertQuery);
 
         if ($insertResult) {
@@ -59,11 +59,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         <div class="container-fluid py-5">
             <div class="row">
                 <form action="" method="post">
-                    <?php $empid = $_SESSION['EmployeeNumber'];
+                    <?php $emil = $_SESSION['EmployeeNumber'];
                                 // Query to get the sum of rate column for the current month
                                 $query = mysqli_query($conn,"SELECT * FROM employee_performance AS t
                                 INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
-                                WHERE e.DY_Supervisor = $empid");
+                                WHERE e.DY_Supervisor = $emil");
                                 $num = 1;
                                 while($row = mysqli_fetch_array($query)){?>
                     <div class="col-lg-12">

@@ -225,7 +225,7 @@ if(isset($_POST['submit'])){
                 <hr>
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
-                    <p style="font-size: 8px;" >Softwere by Kurtlar Developer www.kurtlardeveloper.com</p>
+                    <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
                 </div>
                 <hr>
             </div>

@@ -2,9 +2,9 @@
 session_start();
 error_reporting(0);
 $currentDate = date('Y-m-d');
-$empid = $_SESSION['EmployeeNumber'];
+$emil = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
-            $sql = "SELECT * FROM employeedata AS e INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'PENDING' AND e.Employee_Manager = $empid";
+            $sql = "SELECT * FROM employeedata AS e INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo WHERE t.Statusofmanger = 'PENDING' AND e.Employee_Manager = $emil";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $a=1;

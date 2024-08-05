@@ -17,8 +17,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <head>
   <?php include('link/links.php') ?>
 </head>
-
-
 <body>
   <div class="container-fluid p-0">
     <?php include('link/desigene/sidebar.php') ?>
@@ -59,40 +57,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       </div>
       <!-- /.card -->
     </div>
-   <!-- Col-12 -->
-  
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close btn btn-dange" style="background-color: #ff0505 !important; color: #fff !important;" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-                <div class="modal-body">
-                  <form id="formdata" enctype="multipart/form-data">
-                    <div class="form-group"> 
-                      <label for="" class="form-label">Form Date</label>
-                      <input type="date" name="" id="fromdateUpdate" class="form-control">
-                     <input type="text" class="form-control" hidden id="idUpdate" name="">
-                    </div>
-                    <div class="form-group"> 
-                      <label for="" class="form-label">To Date</label>
-                      <input type="date" name="" id="todateUpdate" class="form-control">
-                    </div>
-                    <div class="form-group"> 
-                      <label for="" class="form-label">Working Days</label>
-                      <input type="number" name=""  min="1" id="workingdateUpdate" class="form-control">
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="updatenow">Update</button>
-                </div>
-                
-    </div>
-  </div>
-</div>
+
   <div class="clearfix">&nbsp;</div>
   <div class="clearfix">&nbsp;</div>
   </div>

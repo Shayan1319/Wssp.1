@@ -11,9 +11,9 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
   $e = 1;
 
     while($rowsallery=mysqli_fetch_array($selery)){
-      $empid=$rowsallery['employee_id'];
+      $emil=$rowsallery['employee_id'];
 
-    $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `EmployeeNo`='$empid'");
+    $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `EmployeeNo`='$emil'");
     
     if (mysqli_num_rows($selectemp)) {
         while ($rowemp = mysqli_fetch_array($selectemp)) {

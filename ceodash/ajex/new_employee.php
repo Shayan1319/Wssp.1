@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 $currentDate = date('Y-m-d');
-$empid = $_SESSION['EmployeeNumber'];
+$emil = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
             $sql = "SELECT * FROM `employeedata` WHERE `Status` = 'NEW'";
             $result = $conn->query($sql);

@@ -1,8 +1,8 @@
 <?php
 include '../link/desigene/db.php';
 
-    $empid = $_GET['id'];
-    $query = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $empid");
+    $emil = $_GET['id'];
+    $query = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $emil");
 
     // $stmt = $conn->prepare($query);
     // $stmt->bindParam(':description_id', $description_id, PDO::PARAM_INT);

@@ -8,13 +8,13 @@ include('../../link/desigene/db.php');
 // Your existing code for fetching data goes here...
 $currentDate = date('Y-m-d');
 
-$empid = $data['Employee_Manager_ID'];
+$emil = $data['Employee_Manager_ID'];
 // Query to count the number of employees 
-$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Employee_Manager`=$empid");
+$query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Employee_Manager`=$emil");
 $row = mysqli_fetch_array($query);
 $employeeCountotal = $row['total_employees'];
 // Query to count the number of employees with status 'PRESENT' on the current date
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCount FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'PRESENT' AND a.Date = '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCount FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'PRESENT' AND a.Date = '$currentDate' AND e.Employee_Manager = $emil";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
     $employeeCount = 0;
 }
 // Query to count the number of employees with status 'ABSENT' on the current date
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountABSENT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'ABSENT' AND a.Date = '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountABSENT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'ABSENT' AND a.Date = '$currentDate' AND e.Employee_Manager = $emil";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
 
 
 // Query to count the number of employees with DDorOT 'DOUBLE DUTY' on the current date
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountDDorOT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'DOUBLE DUTY' AND a.Date = '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountDDorOT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'DOUBLE DUTY' AND a.Date = '$currentDate' AND e.Employee_Manager = $emil";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 
 
 // Query to count the number of employees with DDorOT 'OVERTIME' on the current date
-$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'OVERTIME' AND a.Date = '$currentDate' AND e.Employee_Manager = $empid";
+$sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountOVERTIME FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.DDorOT = 'OVERTIME' AND a.Date = '$currentDate' AND e.Employee_Manager = $emil";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
@@ -60,7 +60,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalPendingLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.Statusofmanger = 'PENDING' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE l.Statusofmanger = 'PENDING' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAcceptLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.Statusofmanger = 'ACCPET' AND l.StatusofGm = 'ACCPET' AND l.LeaveFrom = '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE l.Statusofmanger = 'ACCPET' AND l.StatusofGm = 'ACCPET' AND l.LeaveFrom = '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -88,7 +88,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalAPROVELeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.Statusofmanger = 'ACCPET' AND l.StatusofGm = 'PENDING' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE l.Statusofmanger = 'ACCPET' AND l.StatusofGm = 'PENDING' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -102,7 +102,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalREJECTEDLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE l.Statusofmanger = 'REJECTED' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE l.Statusofmanger = 'REJECTED' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -117,7 +117,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalLeaves
         FROM employeedata AS e
         INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo
-        WHERE  l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE  l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -132,7 +132,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS 
         TravelReq FROM employeedata AS e 
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -145,7 +145,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqAprove
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -158,7 +158,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqaccept
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'ACCPET' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE t.Statusofmanger = 'ACCPET' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -171,7 +171,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqPENDING
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'PENDING' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE t.Statusofmanger = 'PENDING' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -184,7 +184,7 @@ if ($result->num_rows > 0) {
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS TravelReqREJECTED
         FROM employeedata AS e
         INNER JOIN travelrequest AS t ON e.EmployeeNo = t.EmployeeNo
-        WHERE t.Statusofmanger = 'REJECTED' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE t.Statusofmanger = 'REJECTED' AND t.DepartureOn >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -200,7 +200,7 @@ $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS
         Tabill FROM employeedata AS e 
         INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
         INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -214,7 +214,7 @@ $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillAprove
         FROM employeedata AS e
         INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
         INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.StatusofGM = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -228,7 +228,7 @@ $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillaccept
         FROM employeedata AS e
         INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
         INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'ACCPET' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -242,7 +242,7 @@ $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillPENDING
         FROM employeedata AS e
         INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
         INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'PENDING' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'PENDING' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 
@@ -256,7 +256,7 @@ $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS tabillREJECTED
         FROM employeedata AS e
         INNER JOIN tabill AS t ON e.EmployeeNo = t.EmployeeNo
         INNER JOIN travelrequest AS tr ON t.RequestNoTravel=tr.RequestNo
-        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'REJECTED' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $empid";
+        WHERE tr.Statusofmanger = 'ACCPET' AND tr.StatusofGM = 'ACCPET' AND t.Statusofmanger = 'REJECTED' AND t.DateofApply >= '$currentDate' AND e.Employee_Manager = $emil";
 
 $result = $conn->query($sql);
 

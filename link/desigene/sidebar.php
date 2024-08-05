@@ -45,10 +45,6 @@
   .dropdown .dropbtn {
     outline: none;
   }
-
-  .navbar a:hover,
-  .dropdown:hover .dropbtn {}
-
   .dropdown-content {
     display: none;
     z-index: 1;
@@ -59,8 +55,6 @@
     display: block;
     text-align: left;
   }
-
-  .dropdown-content a:hover {}
 
   .dropdown:hover .dropdown-content {
     display: block;

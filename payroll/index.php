@@ -57,8 +57,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                <?php $empid= $_SESSION['EmployeeNumber'];
-                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$empid'");
+                <?php $emil= $_SESSION['EmployeeNumber'];
+                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$emil'");
                 $name=mysqli_fetch_assoc($select);
                 ?>
                   <h1 style="color: darkblue;">WELCOME Mr <?php echo $name['fName'].' '.$name['mName'].' '.$name['lName']?></h1>

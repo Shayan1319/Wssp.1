@@ -37,11 +37,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 <div class="row mt-2">
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Form Date</label>
-                      <input type="date" name="" id="fromdate" placeholder="dd mm yyyy" class="form-control ">
+                      <input type="" name="" id="fromdate" placeholder="dd mm yyyy" class="form-control datepicker">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">To Date</label>
-                      <input type="date" name="" id="todate" placeholder="dd mm yyyy" class="form-control ">
+                      <input type="" name="" id="todate" placeholder="dd mm yyyy" class="form-control datepicker">
                     </div>
                     <div class="col-sm-12 col-md-4">
                       <label for="" class="form-label">Working Days</label>
@@ -99,12 +99,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                         <form id="formdata" enctype="multipart/form-data">
                           <div class="form-group"> 
                             <label for="" class="form-label">Form Date</label>
-                            <input type="date" name="" id="fromdateUpdate" class="form-control">
+                            <input type="text" name="" id="fromdateUpdate" class="form-control datepicker">
                           <input type="text" class="form-control" hidden id="idUpdate" name="">
                           </div>
                           <div class="form-group"> 
                             <label for="" class="form-label">To Date</label>
-                            <input type="date" name="" id="todateUpdate" class="form-control">
+                            <input type="text" name="" id="todateUpdate" class="form-control datepicker">
                           </div>
                           <div class="form-group"> 
                             <label for="" class="form-label">Working Days</label>
@@ -127,7 +127,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   </div>
 
   <script>
-    
+     $(document).ready(function() {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd mm yy'
+            });
+        });
     $(document).ready(function(){
       function loadTable(){
         $.ajax({

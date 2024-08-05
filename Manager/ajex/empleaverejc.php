@@ -2,9 +2,9 @@
 session_start();
 error_reporting(0);
 $currentDate = date('Y-m-d');
-$empid = $_SESSION['EmployeeNumber'];
+$emil = $_SESSION['EmployeeNumber'];
 include('../link/desigene/db.php');
-            $sql = "SELECT * FROM employeedata AS e INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo WHERE l.Statusofmanger = 'REJECTED' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $empid";
+            $sql = "SELECT * FROM employeedata AS e INNER JOIN leavereq AS l ON e.EmployeeNo = l.EmployeeNo WHERE l.Statusofmanger = 'REJECTED' AND l.LeaveFrom >= '$currentDate' AND e.Employee_Manager = $emil";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row=mysqli_fetch_array($result)){

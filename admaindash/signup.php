@@ -126,16 +126,17 @@ if(isset($_POST['submit']))
                                                     <label class="form-label select-label">Designation</label>
                                                     <select class="select form-control" name="Designation" required>
                                                         <option  disabled>Designation.</option>
+                                                        <option value="CEO">CEO</option>
+                                                        <option value="GM">GM</option>
                                                         <option value="HR manager">Humans Resource Manager.</option>
                                                         <option value="Payroll manager">Payroll Manager.</option>
                                                         <option value="Manager">Manager</option>
                                                         <option value="DYManager">DYManager</option>
-                                                        <option value="CEO">CEO</option>
-                                                        <option value="GM">GM</option>
-                                                        <option value="AppAdmin">App Admin</option>
+                                                        <option value="Supervisor">Supervisor</option>
                                                         <option value="FinanceAdmin">Finance Admin</option>
-                                                        <option value="Employee">Employee</option>
                                                         <option value="Internal Auditor">Internal Auditor</option>
+                                                        <option value="Employee">Employee</option>
+                                                        <option value="AppAdmin">App Admin</option>
                                                     </select>
                                                 </div>
                                             </div>

@@ -402,8 +402,8 @@ WHERE
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
               <div class="colmd-12 text-center">
-              <?php $empid= $_SESSION['EmployeeNumber'];
-                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$empid'");
+              <?php $emil= $_SESSION['EmployeeNumber'];
+                $select=mysqli_query($conn,"SELECT `fName`, `mName`, `lName` FROM `employeedata` WHERE `EmployeeNo` = '$emil'");
                 $name=mysqli_fetch_assoc($select);
                 ?>
                   <h1 style="color: darkblue;">WELCOME Mr <?php echo $name['fName'].' '.$name['mName'].' '.$name['lName']?></h1>
@@ -607,7 +607,7 @@ WHERE
               <div class="small-box text-white" style="background-color:#919df3;" >
                 <div class="inner">
                   <h3><?php echo $total_employees_payroll?></h3>
-                  <h4>Total Employees Witho Payroll</h4>
+                  <h4>Total Employees With Payroll</h4>
                 </div>
                 <div class="icon" style="color: #ffffff85;" ><i class="fa-solid fa-money-check-dollar"></i>
                 </div>

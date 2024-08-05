@@ -111,6 +111,16 @@ if (isset($_POST['submit'])) {
         header("Location: GM/index.php");
         exit();
     }
+    elseif ($row["Designation"] == "Supervisor" && $loginas == "Admin") {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name']=$row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+        
+        header("Location: Supervisor/index.php");
+        exit();
+    }
     elseif ($loginas == "Employee") {
         $_SESSION['loginid'] = $row['Id'];
         $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];

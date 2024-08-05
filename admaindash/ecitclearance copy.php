@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('../hrdash/link/desigene/db.php');
+include('link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Admin') {
     // Log the unauthorized access attempt for auditing purposes
     error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
@@ -95,7 +95,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                             </tr>
                                             <tr>
                                                 <th scope="row">2</th>
-                                                <td>Equipment </td>
+                                                <td>Equipment</td>
                                                 <td>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="Equipment" value="Yes" id="EOBI_Guidance1">

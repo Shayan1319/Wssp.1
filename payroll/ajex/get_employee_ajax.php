@@ -1,8 +1,8 @@
 <?php
 include '../link/desigene/db.php';
 
-$empid = $_POST['id'];  // Change from $_GET to $_POST
-$query = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Id` = $empid");
+$emil = $_POST['id'];  // Change from $_GET to $_POST
+$query = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Id` = $emil");
 
 if (mysqli_num_rows($query) > 0) {
     $row = mysqli_fetch_assoc($query);

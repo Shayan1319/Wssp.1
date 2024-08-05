@@ -118,9 +118,6 @@
   <a href="All payroll copy 6.php">
   EOBI Payment
   </a>
-  <a href="Gratuity.php">
-  Gratuity & Leave Encasement
-  </a>
   <a href="EmployeePaySlip.php">
   Employee Pay Slip
   </a>
@@ -135,7 +132,7 @@
 
 <form action="../ContractExp.php" method="POST"  target="_blank">
 <a href="">
-  <button type="submit" class="btn nav-link" name="ContractExp" id="ContractExp">Employee Contact Expiry</button>
+  <button type="submit" class="btn nav-link" name="ContractExp" id="ContractExp">Employee Contract Expiry</button>
 </a>
 </form>
                   

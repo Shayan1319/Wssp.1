@@ -21,6 +21,8 @@
             </button>
             <ul class="dropdown-menu">
               <?php 
+include('../link/desigene/db.php');
+
               $id = $_SESSION['EmployeeNumber'];
               $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
               while($row = mysqli_fetch_array($insert)){

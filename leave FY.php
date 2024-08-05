@@ -100,7 +100,7 @@ if(isset($_POST['leaveFY'])){
                                         if ($result->num_rows > 0) {
                                             $a = 1;
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $empid = $row['Id'];
+                                                $emil = $row['Id'];
                                                 $empNo = $row['EmployeeNo'];
                                                 ?>
                                                 <tr>
@@ -290,7 +290,7 @@ else if(isset($_POST['leaveD'])){
                                             if ($result->num_rows > 0) {
                                                 $a = 1;
                                                 while ($row = mysqli_fetch_array($result)) {
-                                                    $empid = $row['Id'];
+                                                    $emil = $row['Id'];
                                                     $empNo = $row['EmployeeNo'];
                                                     ?>
                                                     <tr>
@@ -486,7 +486,7 @@ else if(isset($_POST['leaveD'])){
                                             if ($result->num_rows > 0) {
                                                 $a = 1;
                                                 while ($row = mysqli_fetch_array($result)) {
-                                                    $empid = $row['Id'];
+                                                    $emil = $row['Id'];
                                                     $empNo = $row['EmployeeNo'];
                                                     ?>
                                                     <tr>
@@ -666,7 +666,7 @@ else if(isset($_POST['leaveD'])){
                                         if ($result->num_rows > 0) {
                                             $a = 1;
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $empid = $row['Id'];
+                                                $emil = $row['Id'];
                                                 $empNo = $row['EmployeeNo'];
                                                 ?>
                                                 <tr>
@@ -674,31 +674,31 @@ else if(isset($_POST['leaveD'])){
 
 
                                                     <td><?php
-                                                    $contleave=mysqli_query($conn,"SELECT SUM(`Rate`) AS empabsent FROM `payrole` WHERE `EmpNo`='$empid'  
+                                                    $contleave=mysqli_query($conn,"SELECT SUM(`Rate`) AS empabsent FROM `payrole` WHERE `EmpNo`='$emil'  
                                                     && `rate_calc_mode`='OVERTIME'
                                                     && `timeperiod`='$Id';
                                                     ");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
                                                      <td><?php
-                                                    $contleave=mysqli_query($conn,"SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$empid'  
+                                                    $contleave=mysqli_query($conn,"SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$emil'  
                                                     && `rate_calc_mode`='OVERTIME'
                                                     && `timeperiod`='$Id';
                                                     ");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
                                                     <td><?php
-                                                    $contleave=mysqli_query($conn,"SELECT SUM(`Rate`) AS empabsent FROM `payrole` WHERE `EmpNo`='$empid'  
+                                                    $contleave=mysqli_query($conn,"SELECT SUM(`Rate`) AS empabsent FROM `payrole` WHERE `EmpNo`='$emil'  
                                                     && `rate_calc_mode`='DOUBLE DUTY'
                                                     && `timeperiod`='$Id';
                                                     ");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
                                                     <td><?php
-                                                    $contleave=mysqli_query($conn,"SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$empid'  
+                                                    $contleave=mysqli_query($conn,"SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$emil'  
                                                     && `rate_calc_mode`='DOUBLE DUTY'
                                                     && `timeperiod`='$Id';
                                                     ");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['empabsent'];?></td>
                                                     <td><?php
-                                                        $contleave = mysqli_query($conn, "SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$empid'  
+                                                        $contleave = mysqli_query($conn, "SELECT SUM(`total`) AS empabsent FROM `payrole` WHERE `EmpNo`='$emil'  
                                                                                         AND `rate_calc_mode` IN ('DOUBLE DUTY', 'OVERTIME')
                                                                                         AND `timeperiod`='$Id'");
                                                         if ($contleave) {

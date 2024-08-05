@@ -86,7 +86,7 @@ if(isset($_POST['submit'])){
             
             $num = 1;
             while($empdata=mysqli_fetch_array($selectemp)){
-                $empid=$empdata['Id'];
+                $emil=$empdata['Id'];
                 $EmployeeNo=$empdata['EmployeeNo'];
             $stmt = mysqli_query($conn, "SELECT * FROM salary AS sal
             LEFT JOIN employeedata AS emp ON emp.EmployeeNo=sal.employee_id
@@ -114,7 +114,7 @@ if(isset($_POST['submit'])){
                     $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                     while ($rowallowance = mysqli_fetch_array($selected)) {
                         $allowanceId=$rowallowance['id'];
-                        $seletpayroll=mysqli_query($conn,"SELECT * FROM `payrole` WHERE `EmpNo`='$empid' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
+                        $seletpayroll=mysqli_query($conn,"SELECT * FROM `payrole` WHERE `EmpNo`='$emil' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
                         if(mysqli_num_rows($seletpayroll)==0){
                             $html.= '<td></td>';
                         }else{
@@ -232,14 +232,14 @@ if(isset($_POST['submit'])){
                                                         <tr>
                                                             <td><?php echo $row['employee_id']; ?><h5><?php echo $row['EmpName']; ?></h5><?php echo $row['JobTitle']; ?></td>
                                                             <?php
-                                                            $empid = $row['employee_id'];
+                                                            $emil = $row['employee_id'];
                                                             $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                                                             while ($rowallowance = mysqli_fetch_array($selected)) {
                                                                 $allowanceId = $rowallowance['id'];
                                                                 
                                                                 $seletpayroll = mysqli_query($conn, "SELECT * FROM `payrole` AS pay 
                                                                 LEFT JOIN `employeedata` AS emp ON emp.Id=pay.EmpNo 
-                                                                WHERE emp.EmployeeNo =$empid AND pay.AllowancesId=$allowanceId ");
+                                                                WHERE emp.EmployeeNo =$emil AND pay.AllowancesId=$allowanceId ");
                                                                 if (mysqli_num_rows($seletpayroll) == 0) {
                                                                     echo '<th>Nill</th>';
                                                                 } else {
@@ -711,7 +711,7 @@ if(isset($_POST['submit'])){
                             
                             $num = 1;
                             while($empdata=mysqli_fetch_array($selectemp)){
-                                $empid=$empdata['Id'];
+                                $emil=$empdata['Id'];
                                 $EmployeeNo=$empdata['EmployeeNo'];
                             $stmt = mysqli_query($conn, "SELECT * FROM salary AS sal
                             LEFT JOIN employeedata AS emp ON emp.EmployeeNo=sal.employee_id
@@ -739,7 +739,7 @@ if(isset($_POST['submit'])){
                                     $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                                     while ($rowallowance = mysqli_fetch_array($selected)) {
                                         $allowanceId=$rowallowance['id'];
-                                        $seletpayroll=mysqli_query($conn,"SELECT * FROM `payrole` WHERE `EmpNo`='$empid' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
+                                        $seletpayroll=mysqli_query($conn,"SELECT * FROM `payrole` WHERE `EmpNo`='$emil' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
                                         if(mysqli_num_rows($seletpayroll)==0){
                                             $html.= '<td></td>';
                                         }else{
@@ -860,14 +860,14 @@ if(isset($_POST['submit'])){
                                                                         <tr>
                                                                             <td><?php echo $row['employee_id']; ?><h5><?php echo $row['EmpName']; ?></h5><?php echo $row['JobTitle']; ?></td>
                                                                             <?php
-                                                                            $empid = $row['employee_id'];
+                                                                            $emil = $row['employee_id'];
                                                                             $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                                                                             while ($rowallowance = mysqli_fetch_array($selected)) {
                                                                                 $allowanceId = $rowallowance['id'];
                                                                                 
                                                                                 $seletpayroll = mysqli_query($conn, "SELECT * FROM `payrole` AS pay 
                                                                                 LEFT JOIN `employeedata` AS emp ON emp.Id=pay.EmpNo 
-                                                                                WHERE emp.EmployeeNo =$empid AND pay.AllowancesId=$allowanceId ");
+                                                                                WHERE emp.EmployeeNo =$emil AND pay.AllowancesId=$allowanceId ");
                                                                                 if (mysqli_num_rows($seletpayroll) == 0) {
                                                                                     echo '<th>Nill</th>';
                                                                                 } else {
@@ -1405,7 +1405,7 @@ else if(isset($_POST['Department'])){
                                                                 </table>
                                                             </td>
                                                             <?php
-                                                        $empid = $rowsallery['Id'];
+                                                        $emil = $rowsallery['Id'];
                                                         $empNo=$rowsallery['EmployeeNo'];
                                                         $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                                                         while ($rowallowance = mysqli_fetch_array($selected)) {
@@ -1413,7 +1413,7 @@ else if(isset($_POST['Department'])){
                                                             
                                                             $seletpayroll = mysqli_query($conn, "SELECT * FROM `payrole` AS pay 
                                                             LEFT JOIN `employeedata` AS emp ON emp.Id=pay.EmpNo 
-                                                            WHERE pay.EmpNo =$empid AND pay.AllowancesId=$allowanceId ");
+                                                            WHERE pay.EmpNo =$emil AND pay.AllowancesId=$allowanceId ");
                                                             if (mysqli_num_rows($seletpayroll) == 0) {
                                                                 echo '<th>Nill</th>';
                                                             } else {

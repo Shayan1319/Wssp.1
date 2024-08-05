@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db="database_wssc";
+$db="wssc";
 // if i change the database name so 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$db);
@@ -11,7 +11,7 @@ $conn = mysqli_connect($servername, $username, $password,$db);
 if ($conn->connect_error) {
  ?>
  <script>
-      alert("Sorry not conect to database");
+      alert("Sorry not connect to database");
  </script>
  
  <?php

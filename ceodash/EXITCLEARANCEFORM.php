@@ -46,9 +46,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <?php
                                 include ('link/desigene/db.php');
                                 // Query to get the sum of rate column for the current month
-                                $query = mysqli_query($conn,"SELECT * FROM employee_exit AS e
-                                 INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
-                                WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Handover_Info_Remarks IS NULL AND e.Capital_Equipment IS NULL AND e.Capital_Remarks IS NULL AND e.HOD_Other IS NULL AND e.HOD_Remarks IS NULL AND e.HOD_Approved_Date IS NULL; ");
+                                $query = mysqli_query($conn,"SELECT 
+        l.CNIC,
+        l.EmployeeNo,
+        l.Employee_Group,
+        l.Joining_Date,
+        e.Leaving_Date,
+        e.Id, 
+        e.Reason_of_Leaving, 
+        l.fName, 
+        l.mName, 
+        l.lName
+    FROM employee_exit AS e
+    INNER JOIN employeedata AS l ON e.Employee_id = l.EmployeeNo
+    WHERE  e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover_Info IS NULL AND e.Handover_Info_Remarks IS NULL AND e.Capital_Equipment IS NULL AND e.Capital_Remarks IS NULL AND e.HOD_Other IS NULL AND e.HOD_Remarks IS NULL AND e.HOD_Approved_Date IS NULL; ");
                                 $num = 1;
                                 while($row = mysqli_fetch_array($query)){
                                  // Use $query instead of $result

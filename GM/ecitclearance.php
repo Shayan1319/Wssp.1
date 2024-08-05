@@ -117,7 +117,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                             </tr>
                                             <tr>
                                                 <th scope="row">3</th>
-                                                <td>CapitalEquipment</td>
+                                                <td>Capital Equipment</td>
                                                 <td>
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="Last_Salary_Payment" value="Yes" id="Last_Salary_Payment1">

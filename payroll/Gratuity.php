@@ -20,7 +20,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     <div id="main">
       <?php include('link/desigene/navbar.php')?>
             <div class="container-fluid m-auto py-5">
-              <form action="../Encashment.php" target="_blank" method="post">
+              <form action="Encashment.php"  method="post">
                 <div class="row">
                   <div class="col-12">
                     <div class="form-group">

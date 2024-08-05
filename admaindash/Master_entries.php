@@ -381,7 +381,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 </div>
                               </div>
                               <br>
-                              <h3>Depended from data</h3>
+                              <h3>Depended</h3>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Depended name</label>

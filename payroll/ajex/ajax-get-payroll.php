@@ -56,7 +56,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
     
 
     while ($empdata = mysqli_fetch_array($selectemp)) {
-        $empid = $empdata['Id'];
+        $emil = $empdata['Id'];
         $EmployeeNo = $empdata['EmployeeNo'];
         $stmt = mysqli_query($conn, "SELECT * FROM salary AS sal
         LEFT JOIN employeedata AS emp ON emp.EmployeeNo=sal.employee_id
@@ -84,7 +84,7 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
                 $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
                 while ($rowallowance = mysqli_fetch_array($selected)) {
                     $allowanceId = $rowallowance['id'];
-                    $seletpayroll = mysqli_query($conn, "SELECT * FROM `payrole` WHERE `EmpNo`='$empid' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
+                    $seletpayroll = mysqli_query($conn, "SELECT * FROM `payrole` WHERE `EmpNo`='$emil' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
                     if (mysqli_num_rows($seletpayroll) == 0) {
                         echo '<th></th>';
                     } else {

@@ -13,7 +13,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $a = 1;
     while ($row = mysqli_fetch_array($result)) {
-        $empid = $row['Id'];
+        $emil = $row['Id'];
         ?>
         <tr>
             <th scope="row"><?php echo $a; ?></th>
@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
             while ($rowallowance = mysqli_fetch_array($selected)) {
                 $allowanceId = $rowallowance['id'];
                 
-                $seletpayroll = mysqli_query($conn, "SELECT * FROM `rate` WHERE `employee_id`='$empid' AND `allowances_id`='$allowanceId'");
+                $seletpayroll = mysqli_query($conn, "SELECT * FROM `rate` WHERE `employee_id`='$emil' AND `allowances_id`='$allowanceId'");
                 if (mysqli_num_rows($seletpayroll) == 0) {
                     echo '<th></th>';
                 } else {

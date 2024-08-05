@@ -90,7 +90,7 @@ if(isset($_POST['Encashment'])){
                                         if ($result->num_rows > 0) {
                                             $a = 1;
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $empid = $row['Id'];
+                                                $emil = $row['Id'];
                                                 $empNo = $row['EmployeeNo'];
                                                 $working_day = 4*($row['Weekly_Working_Days']);
                                                 ?>
@@ -152,11 +152,11 @@ if(isset($_POST['Encashment'])){
                                                         }
                                                         ?>
                                                         </td>
-                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay) FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay) FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['gross_pay'];?></td>
-                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)*12 AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)*12 AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['pay'];?></td>
-                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $countdata['pay'];?></td>
                                                      <td>
                                                      <?php
@@ -178,7 +178,7 @@ if(isset($_POST['Encashment'])){
                                                             $days= 15 / 2.0;
                                                         }
                                                         ?>
-                                                        <?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$empid';");
+                                                        <?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); echo $days*$countdata['pay'];?></td>
                                                     <td><?php echo $row['Salary_Bank']." | ".$row['Salary_Branch']?></td>
                                                     <td><?php echo $row['Account_No']?></td>
@@ -335,7 +335,7 @@ else if(isset($_POST['Gratuity'])){
                                         if ($result->num_rows > 0) {
                                             $a = 1;
                                             while ($row = mysqli_fetch_array($result)) {
-                                                $empid = $row['Id'];
+                                                $emil = $row['Id'];
                                                 $empNo = $row['EmployeeNo'];
                                                 $working_day = 4*($row['Weekly_Working_Days']);
                                                 ?>
@@ -348,11 +348,10 @@ else if(isset($_POST['Gratuity'])){
                                                     <td><?php echo $row['Contract_Expiry_Date']; ?></td>
                                                     <?php 
                                                 // Fetch all employees' Joining_Date
-                                                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$empid' ");
+                                                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
 
                                                 while ($employee = mysqli_fetch_assoc($selectEmployees)) {
                                                     $joiningDate = $employee['Joining_Date'];
-                                                    
                                                     // Create DateTime objects
                                                     $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
                                                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
@@ -369,7 +368,7 @@ else if(isset($_POST['Gratuity'])){
                                                     $interval = $joiningDateTime->diff($toDateTime);
                                                      echo '<td>'.$interval->y .'</td>'.'<td>'.$interval->m .'</td>'.'<td>'.$interval->d .'</td>';
                                                     // Fetch all employees' Joining_Date
-                                                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
+                                                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
                                                 while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                     $gross_pay = $employeedata['gross_pay'];
                                                     $daypermonth=$row['Weekly_Working_Days']*4;
@@ -377,7 +376,7 @@ else if(isset($_POST['Gratuity'])){
                                                     '<td>' . round($gross_pay) . '</td>' . 
                                                     '<td>' . round($gross_pay / $daypermonth) . '</td>';
                                                 }
-                                                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$empid' ");
+                                                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
 
                                                 while ($employee = mysqli_fetch_assoc($selectEmployees)) {
                                                     $joiningDate = $employee['Joining_Date'];
@@ -386,7 +385,7 @@ else if(isset($_POST['Gratuity'])){
                                                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
-                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
+                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
 
                                                     while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                         $gross_pay = $employeedata['gross_pay'];
@@ -410,7 +409,7 @@ else if(isset($_POST['Gratuity'])){
 
                                                 // Calculate the difference
                                                 $interval = $joiningDateTime->diff($toDateTime);
-                                                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
+                                                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
 
                                                     while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                         $gross_pay = $employeedata['gross_pay'];
@@ -432,7 +431,7 @@ else if(isset($_POST['Gratuity'])){
     
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
-                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
+                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
     
                                                         while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                             $gross_pay = $employeedata['gross_pay'];
@@ -443,7 +442,7 @@ else if(isset($_POST['Gratuity'])){
 
 
 
-                                                    $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$empid' ");
+                                                    $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
 
                                                 while ($employee = mysqli_fetch_assoc($selectEmployees)) {
                                                     $joiningDate = $employee['Joining_Date'];
@@ -455,7 +454,7 @@ else if(isset($_POST['Gratuity'])){
 
                                                     // Calculate the difference
                                                     $interval = $joiningDateTime->diff($toDateTime);
-                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$empid' ");
+                                                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
 
                                                     while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
                                                         $gross_pay = $employeedata['gross_pay'];

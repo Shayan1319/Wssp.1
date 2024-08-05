@@ -43,11 +43,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <tbody>
                                 <?php
                                 include ('link/desigene/db.php');
-                                $empid = $_SESSION['EmployeeNumber'];
+                                $emil = $_SESSION['EmployeeNumber'];
                                 // Query to get the sum of rate column for the current month
                                 $query = mysqli_query($conn,"SELECT * FROM employee_performance AS t
                                 INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
-                                WHERE t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.ConfidenceAndWillPower IS NULL AND t.AcceptanceOfResponsibility IS NULL AND t.ReliabilityUnderPressure IS NULL AND t.FinancialResponsibility IS NULL AND t.RelationsWithSuperiors IS NULL AND t.RelationsWithColleagues IS NULL AND t.RelationsWithSubordinates IS NULL AND t.BehaviorWithPublic IS NULL AND t.AblityToDecideRoutineMatters IS NULL AND t.KnowledgeOfRelavantLawsETC IS NULL AND e.DY_Supervisor = $empid");
+                                WHERE t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.Intelligence IS NULL AND t.ConfidenceAndWillPower IS NULL AND t.AcceptanceOfResponsibility IS NULL AND t.ReliabilityUnderPressure IS NULL AND t.FinancialResponsibility IS NULL AND t.RelationsWithSuperiors IS NULL AND t.RelationsWithColleagues IS NULL AND t.RelationsWithSubordinates IS NULL AND t.BehaviorWithPublic IS NULL AND t.AblityToDecideRoutineMatters IS NULL AND t.KnowledgeOfRelavantLawsETC IS NULL AND e.DY_Supervisor = $emil");
                                 $num = 1;
                                 while($row = mysqli_fetch_array($query)){
                                  // Use $query instead of $result
