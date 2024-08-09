@@ -1094,14 +1094,6 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-CREATE TABLE forgetpassword (
-    Id INT AUTO_INCREMENT PRIMARY KEY,
-    employeeNO VARCHAR(50) NOT NULL,
-    Email VARCHAR(100) NOT NULL,
-    MobileNumber VARCHAR(20) NOT NULL,
-    Name VARCHAR(100) NOT NULL,
-    Status ENUM('Pending', 'Completed') DEFAULT 'Pending'
-);
 
 --
 -- Table structure for table `gratuity`
@@ -1158,10 +1150,11 @@ ALTER TABLE `gratuity`
   ADD CONSTRAINT `fk_empNo` FOREIGN KEY (`empNo`) REFERENCES `employeedata` (`EmployeeNo`);
 COMMIT;
 
+ALTER TABLE `gratuity` CHANGE `EmployeeNo` `EmployeeNo` INT(11) NOT NULL AUTO_INCREMENT; 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
+ALTER TABLE `gratuity` CHANGE `CEO_Status` `CEO_Status` ENUM('pending','accept','reject') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'pending', CHANGE `Finance_Status` `Finance_Status` ENUM('pending','accept','reject') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'pending'; 
 --
 -- Table structure for table `forgetpassword`
 --
@@ -1194,6 +1187,100 @@ ALTER TABLE `forgetpassword`
 --
 ALTER TABLE `forgetpassword`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+ALTER TABLE `atandece`
+ADD COLUMN `timeperiodId` INT AFTER `status`;
+
+-- Add the foreign key constraint for timeperiodId
+ALTER TABLE `atandece`
+ADD CONSTRAINT `fk_timeperiodId`
+FOREIGN KEY (`timeperiodId`) REFERENCES `timeperiod`(`ID`);
+
+-- Add the foreign key constraint for Employeeid
+ALTER TABLE `atandece`
+ADD CONSTRAINT `fk_Employeeid`
+FOREIGN KEY (`Employeeid`) REFERENCES `employeedata`(`EmployeeNo`);
+
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Aug 09, 2024 at 03:09 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `database_wssc`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `encasement`
+--
+
+CREATE TABLE `encasement` (
+  `id` int(11) NOT NULL,
+  `Employee` int(11) NOT NULL,
+  `Ann_Leave_Entitlement` int(11) NOT NULL,
+  `Ann_Leave_Availed` int(11) NOT NULL,
+  `Ann_Leave_Balance` int(11) NOT NULL,
+  `Ann_Leave_Payable` decimal(10,2) NOT NULL,
+  `Gross_Pay_Monthly` decimal(10,2) NOT NULL,
+  `Gross_Pay_Yearly` decimal(10,2) NOT NULL,
+  `Gross_Pay_Daily` decimal(10,2) NOT NULL,
+  `Amount_Payable` decimal(10,2) NOT NULL,
+  `Bank_Branch` varchar(255) NOT NULL,
+  `Account_No` varchar(255) NOT NULL,
+  `Period` varchar(50) NOT NULL,
+  `CEO_Status` enum('pending','accept','reject') DEFAULT 'pending',
+  `Finance_Status` enum('pending','accept','reject') DEFAULT 'pending',
+  `CEO_Status_Date` date DEFAULT NULL,
+  `Finance_Status_Date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `encasement`
+--
+ALTER TABLE `encasement`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_emp_period` (`Employee`,`Period`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `encasement`
+--
+ALTER TABLE `encasement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `encasement`
+--
+ALTER TABLE `encasement`
+  ADD CONSTRAINT `fk_empNo_new` FOREIGN KEY (`Employee`) REFERENCES `employeedata` (`EmployeeNo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

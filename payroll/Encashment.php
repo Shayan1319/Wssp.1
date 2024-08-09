@@ -15,93 +15,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         $employee=$_POST['employee_no'];
         $fromdate=$_POST['from'];
         $todate=$_POST['to'];
-        if (isset($_POST['submit'])) {
-            // Retrieve and sanitize input hidden data
-            $employeeNos = $_POST['EmployeeNo'];
-            $fNames = $_POST['fName'];
-            $jobTitles = $_POST['Job_Tiltle'];
-            $grades = $_POST['Grade'];
-            $joiningDates = $_POST['Joining_Date'];
-            $contractExpiryDates = $_POST['Contract_Expiry_Date'];
-            $totalServiceYs = $_POST['TotalServiceY'];
-            $totalServiceMs = $_POST['TotalServiceM'];
-            $totalServiceDs = $_POST['TotalServiceD'];
-            $periodServiceYs = $_POST['PeriodServiceY'];
-            $periodServiceMs = $_POST['PeriodServiceM'];
-            $periodServiceDs = $_POST['PeriodServiceD'];
-            $gratuityRateYs = $_POST['GratuityRateY'];
-            $gratuityRateMs = $_POST['GratuityRateM'];
-            $gratuityRateDs = $_POST['GratuityRateD'];
-            $serviceGratuityBreakupYs = $_POST['ServiceGratuityBreakupY'];
-            $serviceGratuityBreakupMs = $_POST['ServiceGratuityBreakupM'];
-            $serviceGratuityBreakupDs = $_POST['ServiceGratuityBreakupD'];
-            $periodGratuityBreakupYs = $_POST['PeriodGratuityBreakupY'];
-            $periodGratuityBreakupMs = $_POST['PeriodGratuityBreakupM'];
-            $periodGratuityBreakupDs = $_POST['PeriodGratuityBreakupD'];
-            $totalPeriodGratuities = $_POST['TotalPeriodGratuity'];
-            $totalGratuities = $_POST['TotalGratuity'];
-            
-            foreach ($employeeNos as $index => $employeeNo) {
-                $fName = mysqli_real_escape_string($conn, $fNames[$index]);
-                $jobTitle = mysqli_real_escape_string($conn, $jobTitles[$index]);
-                $grade = mysqli_real_escape_string($conn, $grades[$index]);
-                $joiningDate = mysqli_real_escape_string($conn, $joiningDates[$index]);
-                $contractExpiryDate = mysqli_real_escape_string($conn, $contractExpiryDates[$index]);
-                $totalServiceY = mysqli_real_escape_string($conn, $totalServiceYs[$index]);
-                $totalServiceM = mysqli_real_escape_string($conn, $totalServiceMs[$index]);
-                $totalServiceD = mysqli_real_escape_string($conn, $totalServiceDs[$index]);
-                $periodServiceY = mysqli_real_escape_string($conn, $periodServiceYs[$index]);
-                $periodServiceM = mysqli_real_escape_string($conn, $periodServiceMs[$index]);
-                $periodServiceD = mysqli_real_escape_string($conn, $periodServiceDs[$index]);
-                $gratuityRateY = mysqli_real_escape_string($conn, $gratuityRateYs[$index]);
-                $gratuityRateM = mysqli_real_escape_string($conn, $gratuityRateMs[$index]);
-                $gratuityRateD = mysqli_real_escape_string($conn, $gratuityRateDs[$index]);
-                $serviceGratuityBreakupY = mysqli_real_escape_string($conn, $serviceGratuityBreakupYs[$index]);
-                $serviceGratuityBreakupM = mysqli_real_escape_string($conn, $serviceGratuityBreakupMs[$index]);
-                $serviceGratuityBreakupD = mysqli_real_escape_string($conn, $serviceGratuityBreakupDs[$index]);
-                $periodGratuityBreakupY = mysqli_real_escape_string($conn, $periodGratuityBreakupYs[$index]);
-                $periodGratuityBreakupM = mysqli_real_escape_string($conn, $periodGratuityBreakupMs[$index]);
-                $periodGratuityBreakupD = mysqli_real_escape_string($conn, $periodGratuityBreakupDs[$index]);
-                $totalPeriodGratuityValue = mysqli_real_escape_string($conn, $totalPeriodGratuities[$index]);
-                $totalGratuityValue = mysqli_real_escape_string($conn, $totalGratuities[$index]);
-    
-                // Check if record already exists
-                $checkQuery = "SELECT COUNT(*) as count FROM `gratuity` WHERE empNo = '$employeeNo'";
-                $result = mysqli_query($conn, $checkQuery);
-                $row = mysqli_fetch_assoc($result);
-    
-                if ($row['count'] > 0) {
-                    // Record exists
-                    echo "<script>alert('Record for EmployeeNo $employeeNo already exists');</script>";
-                } else {
-                    // Prepare and execute the insert query
-                    $query = "INSERT INTO `gratuity` (
-                        empNo, EmpName, EmpDesignation, Grade, JoiningDate, ContrExpDate, 
-                        TotalServiceD, TotalServiceM, TotalServiceY, PeriodServiceD, 
-                        PeriodServiceM, PeriodServiceY, GratuityRateD, GratuityRateM, 
-                        GratuityRateY, ServiceGratuityBreakupD, ServiceGratuityBreakupM, 
-                        ServiceGratuityBreakupY, PeriodGratuityBreakupD, PeriodGratuityBreakupM, 
-                        PeriodGratuityBreakupY, TotalPeriodGratuity, TotalServiceGratuity
-                    ) VALUES (
-                        '$employeeNo', '$fName', '$jobTitle', '$grade', '$joiningDate', 
-                        '$contractExpiryDate', '$totalServiceD', '$totalServiceM', '$totalServiceY', 
-                        '$periodServiceD', '$periodServiceM', '$periodServiceY', '$gratuityRateD', 
-                        '$gratuityRateM', '$gratuityRateY', '$serviceGratuityBreakupD', 
-                        '$serviceGratuityBreakupM', '$serviceGratuityBreakupY', 
-                        '$periodGratuityBreakupD', '$periodGratuityBreakupM', '$periodGratuityBreakupY', 
-                        '$totalPeriodGratuityValue', '$totalGratuityValue'
-                    )";
-                    if (mysqli_query($conn, $query)) {
-                        echo "<script>alert('Data inserted successfully');location.replace('Gratuity.php');</script>";
-                    } else {
-                        echo "Error: " . mysqli_error($conn) . "<br>";
-                    }
-                }
-            }
-    
-            // Close the connection
-            $conn->close();
-        }
 ?>        
 <!DOCTYPE html>
 <html lang="en">
@@ -159,169 +72,191 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         </thead>
                                         
                                         <tbody>
-    <?php
-    if ($employee != "") {
-        $sql = "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee' && STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
-    } else {
-        $sql = "SELECT * FROM `employeedata` WHERE STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
-    }
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        $a = 1;
-        while ($row = mysqli_fetch_array($result)) {
-            $emil = $row['Id'];
-            $empNo = $row['EmployeeNo'];
-            $working_day = 4 * ($row['Weekly_Working_Days']);
-            ?>
-            <tr>
-                <td>
-                    <input hidden type="text" name="EmployeeNo[]" id="EmployeeNo_<?php echo $a; ?>" value="<?php echo $row['EmployeeNo']; ?>"><?php echo $row['EmployeeNo']; ?> 
-                </td>
-                <td>
-                    <input hidden type="text" name="fName[]" id="fName_<?php echo $a; ?>" value="<?php echo $row['fName'] . " " . $row['lName']; ?>"><?php echo $row['fName'] . " " . $row['lName']; ?> 
-                </td>
-                <td>
-                    <input hidden type="text" name="Job_Tiltle[]" id="Job_Tiltle_<?php echo $a; ?>" value="<?php echo $row['Job_Tiltle']; ?>"><?php echo $row['Job_Tiltle']; ?> 
-                </td>
-                <td>
-                    <input hidden type="text" name="Grade[]" id="Grade_<?php echo $a; ?>" value="<?php echo $row['Grade']; ?>"><?php echo $row['Grade']; ?> 
-                </td>
-                <td>
-                    <input hidden type="text" name="Joining_Date[]" id="Joining_Date_<?php echo $a; ?>" value="<?php echo $row['Joining_Date']; ?>"><?php echo $row['Joining_Date']; ?> 
-                </td>
-                <td>
-                    <input hidden type="text" name="Contract_Expiry_Date[]" id="Contract_Expiry_Date_<?php echo $a; ?>" value="<?php echo $row['Contract_Expiry_Date']; ?>"><?php echo $row['Contract_Expiry_Date']; ?> 
-                </td>
-                <?php
-                // Fetch all employees' Joining_Date
-                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
+                                            <?php
+                                            if ($employee != "") {
+                                                $sql = "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee' && STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
+                                            } else {
+                                                $sql = "SELECT * FROM `employeedata` WHERE STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
+                                            }
+                                            $result = $conn->query($sql);
+                                            if ($result->num_rows > 0) {
+                                                $a = 1;
+                                                while ($row = mysqli_fetch_array($result)) {
+                                                    $emil = $row['Id'];
+                                                    $empNo = $row['EmployeeNo'];
+                                                    $working_day = 4 * ($row['Weekly_Working_Days']);
+                                                    ?>
+                                                    <tr>
+                                                        <td>
+                                                            <input hidden type="text" name="EmployeeNo[]" id="EmployeeNo_<?php echo $a; ?>" value="<?php echo $row['EmployeeNo']; ?>"><?php echo $row['EmployeeNo']; ?> 
+                                                        </td>
+                                                        <td>
+                                                            <input hidden type="text" name="fName[]" id="fName_<?php echo $a; ?>" value="<?php echo $row['fName'] . " " . $row['lName']; ?>"><?php echo $row['fName'] . " " . $row['lName']; ?> 
+                                                        </td>
+                                                        <td>
+                                                            <input hidden type="text" name="Job_Tiltle[]" id="Job_Tiltle_<?php echo $a; ?>" value="<?php echo $row['Job_Tiltle']; ?>"><?php echo $row['Job_Tiltle']; ?> 
+                                                        </td>
+                                                        <td>
+                                                            <input hidden type="text" name="Grade[]" id="Grade_<?php echo $a; ?>" value="<?php echo $row['Grade']; ?>"><?php echo $row['Grade']; ?> 
+                                                        </td>
+                                                        <td>
+                                                            <input hidden type="text" name="Joining_Date[]" id="Joining_Date_<?php echo $a; ?>" value="<?php echo $row['Joining_Date']; ?>"><?php echo $row['Joining_Date']; ?> 
+                                                        </td>
+                                                        <td>
+                                                            <input hidden type="text" name="Contract_Expiry_Date[]" id="Contract_Expiry_Date_<?php echo $a; ?>" value="<?php echo $row['Contract_Expiry_Date']; ?>"><?php echo $row['Contract_Expiry_Date']; ?> 
+                                                        </td>
+                                                        <?php
+                                                        // Fetch all employees' Joining_Date
+                                                        $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
+                                                        $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil'");
 
-                while ($employee = mysqli_fetch_assoc($selectEmployees)) {
-                    $joiningDate = $employee['Joining_Date'];
-                    // Create DateTime objects
-                    $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
-                    $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                    // Calculate the difference
-                    $interval = $joiningDateTime->diff($toDateTime);
-                    echo '<td><input hidden type="text" name="TotalServiceY[]" id="TotalServiceY_' . $a . '" value="' . $interval->y . '">' . $interval->y . '</td>';
-                    echo '<td><input hidden type="text" name="TotalServiceM[]" id="TotalServiceM_' . $a . '" value="' . $interval->m . '">' . $interval->m . '</td>';
-                    echo '<td><input hidden type="text" name="TotalServiceD[]" id="TotalServiceD_' . $a . '" value="' . $interval->d . '">' . $interval->d . '</td>';
-                }
-                // Fetch all employees' Joining_Date
-                $currentYear = date('Y');
-                $period = '01-07-' . $currentYear; // July 1st of the current year
-                $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
-                $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                // Calculate the difference
-                $interval = $joiningDateTime->diff($toDateTime);
-                echo '<td><input hidden type="text" name="PeriodServiceY[]" id="PeriodServiceY_' . $a . '" value="' . $interval->y . '">' . $interval->y . '</td>';
-                echo '<td><input hidden type="text" name="PeriodServiceM[]" id="PeriodServiceM_' . $a . '" value="' . $interval->m . '">' . $interval->m . '</td>';
-                echo '<td><input hidden type="text" name="PeriodServiceD[]" id="PeriodServiceD_' . $a . '" value="' . $interval->d . '">' . $interval->d . '</td>';
-                // Fetch all employees' Joining_Date
-                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
-                while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
-                    $gross_pay = $employeedata['gross_pay'];
-                    $daypermonth = $row['Weekly_Working_Days'] * 4;
+                                                        while ($employee = mysqli_fetch_assoc($selectEmployees)) {
+                                                            $joiningDate = $employee['Joining_Date'];
+                                                            // Create DateTime objects
+                                                            $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
+                                                            $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                            // Calculate the difference
+                                                            $interval = $joiningDateTime->diff($toDateTime);
+                                                            echo '<td><input hidden type="text" name="TotalServiceY[]" id="TotalServiceY_' . $a . '" value="' . $interval->y . '">' . $interval->y . '</td>';
+                                                            echo '<td><input hidden type="text" name="TotalServiceM[]" id="TotalServiceM_' . $a . '" value="' . $interval->m . '">' . $interval->m . '</td>';
+                                                            echo '<td><input hidden type="text" name="TotalServiceD[]" id="TotalServiceD_' . $a . '" value="' . $interval->d . '">' . $interval->d . '</td>';
+                                                        }
 
-                    echo '<td><input hidden type="text" name="GratuityRateY[]" id="GratuityRateY_' . $a . '" value="' . round($gross_pay * 12) . '">' . round($gross_pay * 12) . '</td>';
-                    echo '<td><input hidden type="text" name="GratuityRateM[]" id="GratuityRateM_' . $a . '" value="' . round($gross_pay) . '">' . round($gross_pay) . '</td>';
-                    echo '<td><input hidden type="text" name="GratuityRateD[]" id="GratuityRateD_' . $a . '" value="' . round($gross_pay / $daypermonth) . '">' . round($gross_pay / $daypermonth) . '</td>';
-                }
-                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
+                                                        // Fetch all employees' Joining_Date
+                                                        $currentYear = date('Y');
+                                                        $period = '01-07-'. $currentYear; // July 1st of the current year
+                                                        $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
+                                                        $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                        // Calculate the difference
+                                                        $interval = $joiningDateTime->diff($toDateTime);
+                                                        echo '<td><input hidden type="text" name="PeriodServiceY[]" id="PeriodServiceY_' . $a . '" value="' . $interval->y . '">' . $interval->y . '</td>';
+                                                        echo '<td><input hidden type="text" name="PeriodServiceM[]" id="PeriodServiceM_' . $a . '" value="' . $interval->m . '">' . $interval->m . '</td>';
+                                                        echo '<td><input hidden type="text" name="PeriodServiceD[]" id="PeriodServiceD_' . $a . '" value="' . $interval->d . '">' . $interval->d . '</td>';
+                                                        // Fetch all employees' Joining_Date
+                                                        if(mysqli_num_rows($select_gross_pay)>0){
+                                                        while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
+                                                            $gross_pay = $employeedata['gross_pay'];
+                                                            $daypermonth = $row['Weekly_Working_Days'] * 4;
 
-                while ($employee = mysqli_fetch_assoc($selectEmployees)) {
-                    $joiningDate = $employee['Joining_Date'];
-                    // Create DateTime objects
-                    $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
-                    $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                    // Calculate the difference
-                    $interval = $joiningDateTime->diff($toDateTime);
-                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
+                                                            echo '<td><input hidden type="text" name="GratuityRateY[]" id="GratuityRateY_' . $a . '" value="0">' . round($gross_pay * 12) . '</td>';
+                                                            echo '<td><input hidden type="text" name="GratuityRateM[]" id="GratuityRateM_' . $a . '" value="' . round($gross_pay) . '">' . round($gross_pay) . '</td>';
+                                                            echo '<td><input hidden type="text" name="GratuityRateD[]" id="GratuityRateD_' . $a . '" value="' . round($gross_pay / $daypermonth) . '">' . round($gross_pay / $daypermonth) . '</td>';
+                                                        }}
+                                                        else{
+                                                            echo '<td><input hidden type="text" name="GratuityRateY[]" id="GratuityRateY_' . $a . '" value="0">0</td>';
+                                                            echo '<td><input hidden type="text" name="GratuityRateM[]" id="GratuityRateM_' . $a . '" value="0">0</td>';
+                                                            echo '<td><input hidden type="text" name="GratuityRateD[]" id="GratuityRateD_' . $a . '" value="0">0</td>';
+                                                            
+                                                        }
 
-                    while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
-                        $gross_pay = $employeedata['gross_pay'];
+                                                        $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
+                                                        while ($employee = mysqli_fetch_assoc($selectEmployees)) {
+                                                            $joiningDate = $employee['Joining_Date'];
+                                                            // Create DateTime objects
+                                                            $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
+                                                            $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                            // Calculate the difference
+                                                            $interval = $joiningDateTime->diff($toDateTime);
+                                                            $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
+                                                            
+                                                            if(mysqli_num_rows($select_gross_pay)>0)
+                                                            {
+                                                            while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
+                                                                $gross_pay = $employeedata['gross_pay'];
 
-                        echo '<td><input hidden type="text" name="ServiceGratuityBreakupY[]" id="ServiceGratuityBreakupY_' . $a . '" value="' . round($gross_pay * $interval->y) . '">' . round($gross_pay * $interval->y) . '</td>';
-                        echo '<td><input hidden type="text" name="ServiceGratuityBreakupM[]" id="ServiceGratuityBreakupM_' . $a . '" value="' . round($gross_pay * $interval->m) . '">' . round($gross_pay * $interval->m) . '</td>';
-                        echo '<td><input hidden type="text" name="ServiceGratuityBreakupD[]" id="ServiceGratuityBreakupD_' . $a . '" value="' . round($gross_pay / $interval->d) . '">' . round($gross_pay / $interval->d) . '</td>';
-                    }
-                }
+                                                                echo '<td><input hidden type="text" name="ServiceGratuityBreakupY[]" id="ServiceGratuityBreakupY_' . $a . '" value="' . round($gross_pay * $interval->y) . '">' . round($gross_pay * $interval->y) . '</td>';
+                                                                echo '<td><input hidden type="text" name="ServiceGratuityBreakupM[]" id="ServiceGratuityBreakupM_' . $a . '" value="' . round($gross_pay * $interval->m) . '">' . round($gross_pay * $interval->m) . '</td>';
+                                                                echo '<td><input hidden type="text" name="ServiceGratuityBreakupD[]" id="ServiceGratuityBreakupD_' . $a . '" value="' . round($gross_pay / $interval->d) . '">' . round($gross_pay / $interval->d) . '</td>';
+                                                            }
+                                                        }
+                                                        else{
+                                                            echo '<td><input hidden type="text" name="ServiceGratuityBreakupY[]" id="ServiceGratuityBreakupY_' . $a . '" value="0">0</td>';
+                                                                echo '<td><input hidden type="text" name="ServiceGratuityBreakupM[]" id="ServiceGratuityBreakupM_' . $a . '" value="0">0</td>';
+                                                                echo '<td><input hidden type="text" name="ServiceGratuityBreakupD[]" id="ServiceGratuityBreakupD_' . $a . '" value="0">0</td>';
+                                                        }
+                                                    }
 
-                $currentYear = date('Y');
-                $period = '01-07-' . $currentYear; // July 1st of the current year
+                                                        $currentYear = date('Y');
+                                                        $period = '01-07-' . $currentYear; // July 1st of the current year
 
-                $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
+                                                        $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
 
-                $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                        $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
 
-                // Calculate the difference
-                $interval = $joiningDateTime->diff($toDateTime);
-                $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
-
-                while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
-                    $gross_pay = $employeedata['gross_pay'];
-
-                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupY[]" id="PeriodGratuityBreakupY_' . $a . '" value="' . round($gross_pay * $interval->y) . '">' . round($gross_pay * $interval->y) . '</td>';
-                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupM[]" id="PeriodGratuityBreakupM_' . $a . '" value="' . round($gross_pay * $interval->m) . '">' . round($gross_pay * $interval->m) . '</td>';
-                    
-                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupD[]" id="PeriodGratuityBreakupD_' . $a . '" value="' . round($gross_pay / $interval->d) . '"> ' . round($gross_pay / $interval->d) . '</td>';
-                }
-                ?>
-                <td>
-                    <?php
-                     $currentYear = date('Y');
-                     $period = '01-07-' . $currentYear; // July 1st of the current year
-     
-                     $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
-     
-     
-                     $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-                 
-     
-                     // Calculate the difference
-                     $interval = $joiningDateTime->diff($toDateTime);
-                     $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
-     
-                         while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
-                             $gross_pay = $employeedata['gross_pay'];
-                             
-     
-                             echo '<input hidden type="text" name="TotalPeriodGratuity[]" id="TotalPeriodGratuity_' . $a . '" value="' . round($gross_pay * $interval->y) + round($gross_pay*$interval->m) + round($gross_pay / $interval->d) .'">';
-                         }
-                    ?>
-                </td>
-                <td>
-                <?php
-                $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
-
-                while ($employee = mysqli_fetch_assoc($selectEmployees)) {
-                    $joiningDate = $employee['Joining_Date'];
-
-                    // Create DateTime objects
-                    $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
-                    $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
-
-                    // Calculate the difference
-                    $interval = $joiningDateTime->diff($toDateTime);
-                    $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
-
-                    while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
-                        $gross_pay = $employeedata['gross_pay'];
-
-                        echo '<input hidden type="text" name="TotalGratuity[]" id="TotalGratuity_' . $a . '" value="' . (round($gross_pay * $interval->y) + round($gross_pay * $interval->m) + round($gross_pay / $interval->d)) . '">';
-                    }
-                }
-                ?>
-                </td>
-            </tr>
-            <?php
-            $a++;
-        }
-    } else {
-        echo "Data not exist";
-    }
-    ?>
-</tbody>
+                                                        // Calculate the difference
+                                                        $interval = $joiningDateTime->diff($toDateTime);
+                                                        $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
+                                                            if(mysqli_num_rows($select_gross_pay)>0){
+                                                                while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
+                                                                    $gross_pay = $employeedata['gross_pay'];
+                                                                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupY[]" id="PeriodGratuityBreakupY_' . $a . '" value="' . round($gross_pay * $interval->y) . '">' . round($gross_pay * $interval->y) . '</td>';
+                                                                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupM[]" id="PeriodGratuityBreakupM_' . $a . '" value="' . round($gross_pay * $interval->m) . '">' . round($gross_pay * $interval->m) . '</td>';
+                                                                    echo '<td><input hidden type="text" name="PeriodGratuityBreakupD[]" id="PeriodGratuityBreakupD_' . $a . '" value="' . round($gross_pay / $interval->d) . '"> ' . round($gross_pay / $interval->d) . '</td>';
+                                                                }
+                                                            }else
+                                                            {
+                                                                echo '<td><input hidden type="text" name="PeriodGratuityBreakupY[]" id="PeriodGratuityBreakupY_' . $a . '" value="0">0</td>';
+                                                                echo '<td><input hidden type="text" name="PeriodGratuityBreakupM[]" id="PeriodGratuityBreakupM_' . $a . '" value="0">0</td>';
+                                                                echo '<td><input hidden type="text" name="PeriodGratuityBreakupD[]" id="PeriodGratuityBreakupD_' . $a . '" value="0"> 0</td>';
+                                                            }
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                            $currentYear = date('Y');
+                                                            $period = '01-07-' . $currentYear; // July 1st of the current year
+                                            
+                                                            $joiningDateTime = DateTime::createFromFormat('d-m-Y', $period);
+                                            
+                                            
+                                                            $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                        
+                                            
+                                                            // Calculate the difference
+                                                            $interval = $joiningDateTime->diff($toDateTime);
+                                                            $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
+                                                                if(mysqli_num_rows($select_gross_pay)){
+                                                                    while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
+                                                                        $gross_pay = $employeedata['gross_pay'];
+                                                                        echo '<input hidden type="text" name="TotalPeriodGratuity[]" id="TotalPeriodGratuity_' . $a . '" value="' . round($gross_pay * $interval->y) + round($gross_pay*$interval->m) + round($gross_pay / $interval->d) .'">' . round($gross_pay * $interval->y) + round($gross_pay*$interval->m) + round($gross_pay / $interval->d) .'';
+                                                                    }
+                                                                }
+                                                                else{
+                                                                    echo '<input hidden type="text" name="TotalPeriodGratuity[]" id="TotalPeriodGratuity_' . $a . '" value="0">0';
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                        <?php
+                                                        $selectEmployees = mysqli_query($conn, "SELECT `Joining_Date` FROM `employeedata` WHERE `Id`='$emil' ");
+                                                        while ($employee = mysqli_fetch_assoc($selectEmployees)) {
+                                                            $joiningDate = $employee['Joining_Date'];
+                                                            // Create DateTime objects
+                                                            $joiningDateTime = DateTime::createFromFormat('d m Y', $joiningDate);
+                                                            $toDateTime = DateTime::createFromFormat('Y-m-d', $timeperiod); // Assuming $timeperiod is already in 'Y-m-d' format
+                                                            // Calculate the difference
+                                                            $interval = $joiningDateTime->diff($toDateTime);
+                                                            $select_gross_pay = mysqli_query($conn, "SELECT `gross_pay` FROM `earning_deduction_fund` WHERE `employee_id`='$emil' ");
+                                                            if(mysqli_num_rows($select_gross_pay)){
+                                                                while ($employeedata = mysqli_fetch_assoc($select_gross_pay)) {
+                                                                    $gross_pay = $employeedata['gross_pay'];
+                                                                    echo '<input hidden type="text" name="TotalGratuity[]" id="TotalGratuity_' . $a . '" value="' . (round($gross_pay * $interval->y) + round($gross_pay * $interval->m) + round($gross_pay / $interval->d)) . '">' . (round($gross_pay * $interval->y) + round($gross_pay * $interval->m) + round($gross_pay / $interval->d)) . '';
+                                                                }
+                                                            }
+                                                            else{
+                                                                echo '<input hidden type="text" name="TotalGratuity[]" id="TotalGratuity_' . $a . '" value="0">0';
+                                                            }
+                                                        }
+                                                        ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                    $a++;
+                                                }
+                                            } else {
+                                                echo "Data not exist";
+                                            }
+                                            ?>
+                                        </tbody>
 
 
                                     </table>
@@ -335,7 +270,207 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 </form>    
             </div>
           </div>
-  
-</script>
   </body>
-</html><?php }}?>
+</html><?php }
+else if(isset($_POST['Encashment'])){
+
+$employee = $_POST['employee_no'];
+$fromdateselect = $_POST['from'];
+$todateselect = $_POST['to'];
+
+// Create date objects from the provided year and month
+$formattedFromDate = $fromdateselect . '-07-01'; // Start of the period
+$formattedToDate= $todateselect . '-06-30'; // End of the period
+
+// Format the dates
+$fromdate = date('Y-m-d', strtotime($formattedFromDate));
+$todate = date('Y-m-d', strtotime($formattedToDate));
+
+// Display the values
+echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " " . $employee;
+
+    
+?>
+       
+<html lang="en">
+  <head>
+    <?php include ('link/links.php')?>
+  </head>
+  <body>
+    <div id="main">
+      <?php include('link/desigene/navbar.php')?>
+            <div class="container-fluid m-auto py-5 table-responsive ">
+                <form action="insertGrduty.php" method="post">
+                <table class="table">
+                        <thead>
+                                  
+                            <tr>
+                                <th>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Ann. Leave Enti-ment</th>
+                                                <th>Ann. Leave Availed</th>
+                                                <th>Ann. Leave Balance</th>
+                                                <th>Ann. Leave Payable</th>
+                                                <th>Gross Pay (Monthly)</th>
+                                                <th>Gross Pay (Yearly)</th>
+                                                <th>Gross Pay (Daily)</th>
+                                                <th>Amount Payable</th>
+                                                <th>Bank Branch</th>
+                                                <th>Account No</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            if($employee!=""){
+                                            $sql = "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee'";
+                                            }
+                                            else{
+                                            $sql = "SELECT * FROM `employeedata`";
+                                            }
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            $a = 1;
+                                            while ($row = mysqli_fetch_array($result)) {
+                                                $emil = $row['Id'];
+                                                $empNo = $row['EmployeeNo'];
+                                                $working_day = 4*($row['Weekly_Working_Days']);
+                                                ?>
+                    <input type="text" name="Period" value="<?php echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate))?>" id="">
+
+                                                <tr>
+                                                    <td><?php echo $row['EmployeeNo']; ?><h5><?php echo $row['fName']; ?> <?php echo $row['lName']; ?></h5><?php echo $row['Joining_Date']; ?>
+                                                <input type="number" name="EmployeeNo[]" value="<?php echo $row['EmployeeNo'];?>" id="EmployeeNo">
+                                                </td>
+                                                    <td>15
+                                                        <input type="text" value="15" name="Ann_Leave_Entitlement[]" id="Ann_Leave_Entitlement">
+                                                    </td>
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate';");
+                                                    
+                                                        // Check if the query executed correctly
+                                                        if (!$contleave) {
+                                                            die('Query Error: ' . mysqli_error($conn));
+                                                        }
+
+                                                        // Fetch the data
+                                                        $countdata = mysqli_fetch_assoc($contleave);
+
+                                                        // Check if data is fetched and if 'empleave' is NULL
+                                                        if ($countdata && !is_null($countdata['empleave'])) {
+                                                            echo $countdata['empleave'].'<input type="number" name[]="Ann_Leave_Availed" value="'.$countdata['empleave'].'">';
+                                                        } else {
+                                                            echo '0'.'<input type="number" name="Ann_Leave_Availed[]" value="0">';
+                                                        }
+                                                        ?>
+                                                        </td>
+                                                    <td><?php
+                                                        $contleave = mysqli_query($conn, "SELECT 15-SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
+
+                                                        // Check if the query executed correctly
+                                                        if (!$contleave) {
+                                                            die('Query Error: ' . mysqli_error($conn));
+                                                        }
+
+                                                        // Fetch the data
+                                                        $countdata = mysqli_fetch_assoc($contleave);
+
+                                                        // Check if data is fetched and if 'empleave' is NULL
+                                                        if ($countdata && !is_null($countdata['empleave'])) {
+                                                            echo $countdata['empleave'].'<input type="number" name="Ann_Leave_Balance[]" value="'.$countdata['empleave'].'">';
+                                                        } else {
+                                                            echo '15'.'<input type="number" name="Ann_Leave_Balance[]" value="15">';
+                                                        }
+                                                        ?>
+                                                        </td>
+                                                        
+                                                    <td><?php
+                                                        $contleave = mysqli_query($conn, "SELECT (15-SUM(TotalDays)) / 2.0 AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
+
+                                                        // Check if the query executed correctly
+                                                        if (!$contleave) {
+                                                            die('Query Error: ' . mysqli_error($conn));
+                                                        }
+                                                        // Fetch the data
+                                                        $countdata = mysqli_fetch_assoc($contleave);
+                                                        // Check if data is fetched and if 'empleave' is NULL
+                                                        if ($countdata && !is_null($countdata['empleave'])) {
+
+                                                            echo $countdata['empleave']/2.0.'<input type="number" name="Ann_Leave_Payable[]" value="'.$countdata['empleave']/2.0.'">';
+                                                        } else {
+                                                            echo 15 / 2.0;
+                                                            echo 15 / 2.0.'<input type="number" name="Ann_Leave_Payable[]" value="'. 15 / 2.0.'">';
+                                                        }
+                                                        ?>
+                                                        </td>
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay) FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
+                                                    $countdata = mysqli_fetch_assoc($contleave); 
+                                                    echo $countdata['gross_pay'].'<input type="number" name="Gross_Pay_Monthly[]" value="'. $countdata['gross_pay'].'">';
+                                                    
+                                                    ?></td>
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)*12 AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
+                                                    $countdata = mysqli_fetch_assoc($contleave); 
+                                                    echo $countdata['pay'].'<input type="number" name="Gross_Pay_Yearly[]" value="'.$countdata['pay'].'">';?></td>
+                                                    <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
+                                                    $countdata = mysqli_fetch_assoc($contleave); 
+                                                    echo $countdata['pay'].'<input type="number" name="Gross_Pay_Daily[]" value="'.$countdata['pay'].'">';?></td>
+                                                     <td>
+                                                     <?php
+                                                        $LeavePayable = mysqli_query($conn, "SELECT (15-SUM(TotalDays)) / 2.0 AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
+
+                                                        // Check if the query executed correctly
+                                                        if (!$LeavePayable) {
+                                                            die('Query Error: ' . mysqli_error($conn));
+                                                        }
+
+                                                        // Fetch the data
+                                                        $LeavePayabledata = mysqli_fetch_assoc($LeavePayable);
+
+                                                        // Check if data is fetched and if 'empleave' is NULL
+                                                        if ($LeavePayabledata && !is_null($LeavePayabledata['empleave'])) {
+                                                            $days= $LeavePayabledata['empleave'];
+
+                                                        } else {
+                                                            $days= 15 / 2.0;
+                                                        }
+                                                        ?>
+                                                        <?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
+                                                    $countdata = mysqli_fetch_assoc($contleave);
+                                                    echo $days*$countdata['pay'].'<input type="number" name="Amount_Payable[]" value="'.$days*$countdata['pay'].'">';?></td>
+                                                    <td>
+                                                        <?php
+                                                        // Output bank and branch details
+                                                        echo $row['Salary_Bank'] . " | " . $row['Salary_Branch'];
+                                                        ?>
+                                                        <!-- Form input field with the concatenated value -->
+                                                        <input type="text" name="Bank_Branch[]" value="<?php echo htmlspecialchars($row['Salary_Bank'] ." ". $row['Salary_Branch']); ?>">
+                                                    </td>
+
+                                                    <td><?php echo $row['Account_No'].'<input type="number" name="Account_No[]" value="'.$row['Account_No'].'">'?></td>
+                                                </tr>
+                                                <?php
+                                                $a++;
+                                            }
+                                        } else {
+                                            echo "Data not exist";
+                                        }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="form-content">
+                        <button type="submit" class="btn btn-primary" name="submit_encasement">Save</button>
+                    </div>
+                </form>    
+            </div>
+          </div>
+  </body>
+</html> 
+<?php
+    } 
+}?>

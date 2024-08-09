@@ -119,8 +119,11 @@
   <a href="All payroll copy 6.php">
   EOBI Payment
   </a>
-  <a href="Gratuity.php">
-  Gratuity & Leave Encasement
+  <a href="Gratuity copy.php">
+  Gratuity 
+  </a>
+  <a href="Gratuity copy 2.php">
+    Leave Encasement
   </a>
   <a href="EmployeePaySlip.php">
   Employee Pay Slip

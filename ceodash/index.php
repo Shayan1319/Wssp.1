@@ -363,6 +363,43 @@ if ($query->num_rows > 0) {
 } else {
   $exit_formApproved = 0;
 }
+$sql = "SELECT COUNT(*) AS GratuityAccepted
+FROM gratuity
+WHERE CEO_Status = 'accept'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $GratuityAccepted = $row['GratuityAccepted'];
+}
+$sql = "SELECT COUNT(*) AS GratuityPending
+FROM gratuity
+WHERE CEO_Status = 'pending'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $GratuityPending = $row['GratuityPending'];
+}
+$sql = "SELECT COUNT(*) AS encasementAccepted
+FROM encasement
+WHERE CEO_Status = 'accept'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $encasementAccepted = $row['encasementAccepted'];
+}
+$sql = "SELECT COUNT(*) AS encasementPending
+FROM encasement
+WHERE CEO_Status = 'pending'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $encasementPending = $row['encasementPending'];
+}
+
 $sql = "SELECT COUNT(*) AS Appraisals
 FROM employee_performance AS t
 INNER JOIN employeedata AS e ON e.EmployeeNo = t.EmployeeID
@@ -533,6 +570,46 @@ if ($result->num_rows > 0) {
                 <div class="inner">
                 <h3><?php echo $exit_formApproved?></h3>
                   <h5>Employee Clearance Form Approved</h5>
+                </div>                
+              </div>
+              </a>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                <h3><?php echo $GratuityAccepted?></h3>
+                  <h5>Employee Gratuity</h5>
+                </div>                
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <!-- small box -->
+              <a href="GratuityPending.php">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                <h3><?php echo $GratuityPending?></h3>
+                  <h5>Employee Gratuity Pending</h5>
+                </div>                
+              </div>
+              </a>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <!-- small box -->
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                <h3><?php echo $encasementAccepted?></h3>
+                  <h5>Employee encasement</h5>
+                </div>                
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <!-- small box -->
+              <a href="GratuityPending copy.php">
+              <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
+                <div class="inner">
+                <h3><?php echo $encasementPending?></h3>
+                  <h5>Employee encasement Pending</h5>
                 </div>                
               </div>
               </a>

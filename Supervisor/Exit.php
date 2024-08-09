@@ -55,7 +55,18 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                                 <div class="row">
                                     <div class="col-md-4 my-2">
                                         <label for="empid">Employee Id</label>
-                                        <input type="text" class="form-control" value="<?php echo $_SESSION['EmployeeNumber'] ?>" readonly placeholder="Employee Id" name="empid" id="empid">
+                                        <select name="empid" id="empid" class="form-control select2">
+                                            <?php
+                                            $Employee_Manager = $_SESSION['EmployeeNumber'];
+                                            $selectempdata = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND `Attendance_Supervisor`=$Employee_Manager");
+                                            if (mysqli_num_rows($selectempdata) > 0) {
+                                                echo '<option value="#employee_noid" class="employee-option" selected>Search</option>';
+                                                while ($rowempdata = mysqli_fetch_assoc($selectempdata)) {
+                                                    echo '<option value="#emp' . $rowempdata['EmployeeNo'] . '" class="employee-option">' . $rowempdata['EmployeeNo'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                     <div class="col-md-4 my-2">
                                         <label for="empid">Leaving date</label>
@@ -84,8 +95,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
             </div>
         </div>
     </div>
-
-    <!-- Include your JavaScript libraries -->
     </body>
     </html>
 

@@ -32,7 +32,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                   <div class="col-12">
                     <div class="form-group">
                       <label>Employee No</label>
-                      <input type="number" value="<?php echo $_SESSION['EmployeeNumber']?>" class="form-control" disabled readonly name="empnumber" id="employee_no">
+                      <div class="col-md-4 my-2">
+                                        <label for="empnumber">Employee Id</label>
+                                        <select name="empnumber" id="empnumber" class="form-control select2">
+                                            <?php
+                                            $Employee_Manager = $_SESSION['EmployeeNumber'];
+                                            $selectempdata = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND `Attendance_Supervisor`=$Employee_Manager");
+                                            if (mysqli_num_rows($selectempdata) > 0) {
+                                                echo '<option value="#employee_noid" class="employee-option" selected>Search</option>';
+                                                while ($rowempdata = mysqli_fetch_assoc($selectempdata)) {
+                                                    echo '<option value="#emp' . $rowempdata['EmployeeNo'] . '" class="employee-option">' . $rowempdata['EmployeeNo'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                     </div>
                   </div>
                   <div class="col-md-6 my-4">

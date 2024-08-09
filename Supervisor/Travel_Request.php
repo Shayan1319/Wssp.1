@@ -10,7 +10,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
 } else {
     // Your code for logged-in users goes here
     if(isset($_POST['submit'])){
-      $EmployeeNo=$_SESSION['EmployeeNumber'];
+      $EmployeeNo=$_POST['EmployeeNo'];
       $Name=$_POST['Name'];
       $RequestNo=$_POST['RequestNo'];
       $RequestDate=date('d m y');
@@ -114,12 +114,22 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                           
                 ?>
                 <div class="row">
-                  <div class="col-4">
-                    <div class="form-group">
-                      <label>Employee No </label>
-                      <input type="text" name="EmployeeNo" disabled value="<?php echo $row['EmployeeNo']?>" placeholder="Employee No" class="form-control" autocomplete="off" required="">
-                    </div>
-                  </div>
+                 
+                  <div class="col-md-4 my-2">
+                                        <label for="EmployeeNo">Employee Id</label>
+                                        <select name="EmployeeNo" id="EmployeeNo" class="form-control select2">
+                                            <?php
+                                            $Employee_Manager = $_SESSION['EmployeeNumber'];
+                                            $selectempdata = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND `Attendance_Supervisor`=$Employee_Manager");
+                                            if (mysqli_num_rows($selectempdata) > 0) {
+                                                echo '<option value="#employee_noid" class="employee-option" selected>Search</option>';
+                                                while ($rowempdata = mysqli_fetch_assoc($selectempdata)) {
+                                                    echo '<option value="#emp' . $rowempdata['EmployeeNo'] . '" class="employee-option">' . $rowempdata['EmployeeNo'] . '</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label>From City</label>
