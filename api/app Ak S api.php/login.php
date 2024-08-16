@@ -1,26 +1,84 @@
 <?php
-header('Content-type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-type, Access-Control-Allow-Methods, Authorization, X-requested-with');
+session_start();
+header('Content-Type: application/json');
+error_reporting(0);
 
-$data = json_decode(file_get_contents("php://input"), true);
-$email = $data['email'];
-$password = $data['password'];
+// Include the database connection file
+include 'link/desigene/db.php';
 
-include "config.php";
+$response = array();
 
-// Check if the user exists
-$sql = "SELECT * FROM `singin` WHERE `email`='$email' AND `password`='$password'";
-$result = mysqli_query($conn, $sql);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $Email = $_POST['Email'] ?? '';
+    $Password = $_POST['Password'] ?? '';
+    $loginas = $_POST['loginas'] ?? '';
 
-if ($result && mysqli_num_rows($result) > 0) {
-    // User found, send success response
-    $user = mysqli_fetch_assoc($result);
-    unset($user['password']); // Remove password from response for security
-    echo json_encode(array('message' => 'Login successful', 'status' => true, 'user' => $user));
+    if (empty($Email) || empty($Password) || empty($loginas)) {
+        $response['status'] = 'error';
+        $response['message'] = 'All fields are required.';
+        echo json_encode($response);
+        exit();
+    }
+
+    $email_search = mysqli_query($conn, "SELECT * FROM `login` WHERE `Email`='$Email' AND `Password`='$Password'");
+    $row = mysqli_fetch_array($email_search);
+
+    if ($row) {
+        $_SESSION['loginid'] = $row['Id'];
+        $_SESSION['EmployeeNumber'] = $row['EmployeeNumber'];
+        $_SESSION['Designation'] = $row['Designation'];
+        $_SESSION['name'] = $row['FullName'];
+        $_SESSION['Email'] = $row['Email'];
+
+        switch ($row["Designation"]) {
+            case "Admin":
+            case "HR manager":
+            case "Internal Auditor":
+            case "Payroll manager":
+            case "CEO":
+            case "AppAdmin":
+            case "FinanceAdmin":
+            case "Manager":
+            case "DYManager":
+            case "GM":
+            case "Supervisor":
+                if ($loginas == "Admin") {
+                    $response['status'] = 'success';
+                    $response['redirect'] = strtolower(str_replace(' ', '', $row["Designation"])) . "/index.php";
+                } else {
+                    $response['status'] = 'error';
+                    $response['message'] = 'Invalid login type.';
+                }
+                break;
+
+            case "Employee":
+                if ($loginas == "Employee") {
+                    $response['status'] = 'success';
+                    $response['redirect'] = "Employee/index.php";
+                } else {
+                    $response['status'] = 'error';
+                    $response['message'] = 'Invalid login type.';
+                }
+                break;
+
+            default:
+                $response['status'] = 'error';
+                $response['message'] = 'Invalid designation.';
+                break;
+        }
+    } else {
+        $response['status'] = 'error';
+        $response['message'] = 'Invalid email or password.';
+    }
 } else {
-    // User not found, send error response
-    echo json_encode(array('message' => 'Login failed', 'status' => false));
+    $response['status'] = 'error';
+    $response['message'] = 'Invalid request method.';
 }
+
+echo json_encode($response);
 ?>
+<!-- curl -X POST -d "Email=user@example.com&Password=yourpassword&loginas=Admin" http://yourdomain.com/login_api.php -->
+<!-- {
+  "status": "success",
+  "redirect": "admindash/index.php"
+} -->

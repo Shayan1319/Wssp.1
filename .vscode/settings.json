@@ -4,5 +4,6 @@
         "Exitclearance",
         "leverequest",
         "WSSC"
-    ]
+    ],
+    "files.autoSave": "onWindowChange"
 }
