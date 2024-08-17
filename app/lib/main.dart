@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const MartialApp());
@@ -6,6 +8,7 @@ void main() {
 
 class MartialApp extends StatelessWidget {
   const MartialApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +16,7 @@ class MartialApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false, // Disable the debug banner
+      debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
     );
   }
@@ -27,7 +30,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String? _selectedValue; // Initially set to null
+  String? _selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text(
           "Login",
           style: TextStyle(
-            color: Colors.white, // Set text color to white
-            fontWeight: FontWeight.bold, // Make text bold
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -63,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   DropdownButtonFormField<String>(
-                    value: _selectedValue, // Bind the value to _selectedValue
+                    value: _selectedValue,
                     decoration: const InputDecoration(
                       labelText: 'Login As',
                       border: OutlineInputBorder(),
@@ -113,7 +116,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: OutlineInputBorder(),
                       suffixIcon: TextButton(
                         onPressed: () {
-                          // Navigate to Forgot Password screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -165,8 +167,77 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class ForgotPasswordScreen extends StatelessWidget {
+class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
+
+  @override
+  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _employeeNumberController =
+      TextEditingController();
+  final TextEditingController _gmailController = TextEditingController();
+  final TextEditingController _mobileNumberController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  bool _isLoading = false; // To track loading state
+
+  Future<void> _submitRequest() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true; // Show loading indicator
+      });
+
+      final response = await http.post(
+        Uri.parse(
+            'http://72.255.20.2:8181/Wssp.1/api/app%20Ak%20S%20api.php/forget_password_api.php'),
+        body: {
+          'employeeNO': _employeeNumberController.text,
+          'Email': _gmailController.text,
+          'MobileNumber': _mobileNumberController.text,
+          'name': _fullNameController.text,
+        },
+      );
+
+      setState(() {
+        _isLoading = false; // Hide loading indicator
+      });
+
+      final responseData = json.decode(response.body);
+
+      if (responseData['status'] == 'success') {
+        // Show success dialog
+        _showDialog('Success', responseData['message']);
+      } else {
+        // Show error dialog
+        _showDialog('Error', responseData['message']);
+      }
+    }
+  }
+
+  void _showDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (title == 'Success') {
+                  Navigator.pop(context); // Go back to the login screen
+                }
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,103 +245,113 @@ class ForgotPasswordScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Forgot Password'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Employee Number',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter employee number';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: 'Gmail',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter Gmail';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Mobile Number',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter mobile number';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Full Name',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              MaterialButton(
-                onPressed: () {
-                  // Handle the request for new email and password
-                },
-                color: Colors.blueAccent,
-                splashColor: const Color(0xFF0C1C5F),
-                textColor: Colors.white,
-                height: 50,
-                child: const Text(
-                  'Request New Email and Password',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              Row(
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        // Navigate back to login
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        'Back to Login',
-                        style: TextStyle(color: Colors.blue),
+                  TextFormField(
+                    controller: _employeeNumberController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Employee Number',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter employee number';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _gmailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Gmail',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter Gmail';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _mobileNumberController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Mobile Number',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter mobile number';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _fullNameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Full Name',
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  MaterialButton(
+                    onPressed: _submitRequest,
+                    color: Colors.blueAccent,
+                    splashColor: const Color(0xFF0C1C5F),
+                    textColor: Colors.white,
+                    height: 50,
+                    child: const Text(
+                      'Request New Email and Password',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                   ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'Back to Login',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          if (_isLoading)
+            const Center(
+              child: CircularProgressIndicator(),
+            ),
+        ],
       ),
     );
   }
