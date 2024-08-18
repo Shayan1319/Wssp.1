@@ -16,7 +16,7 @@ class MartialApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false, // Disable the debug banner
       home: const LoginScreen(),
     );
   }
@@ -30,7 +30,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String? _selectedValue;
+  String? _selectedValue; // Initially set to null
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text(
           "Login",
           style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+            color: Colors.white, // Set text color to white
+            fontWeight: FontWeight.bold, // Make text bold
           ),
         ),
       ),
@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 children: [
                   DropdownButtonFormField<String>(
-                    value: _selectedValue,
+                    value: _selectedValue, // Bind the value to _selectedValue
                     decoration: const InputDecoration(
                       labelText: 'Login As',
                       border: OutlineInputBorder(),
@@ -116,6 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       border: OutlineInputBorder(),
                       suffixIcon: TextButton(
                         onPressed: () {
+                          // Navigate to Forgot Password screen
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -176,42 +177,53 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _employeeNumberController =
-      TextEditingController();
-  final TextEditingController _gmailController = TextEditingController();
-  final TextEditingController _mobileNumberController = TextEditingController();
-  final TextEditingController _fullNameController = TextEditingController();
-  bool _isLoading = false; // To track loading state
+  final _employeeNumberController = TextEditingController();
+  final _gmailController = TextEditingController();
+  final _mobileNumberController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  bool _isLoading = false;
 
-  Future<void> _submitRequest() async {
-    if (_formKey.currentState!.validate()) {
+  @override
+  void dispose() {
+    _employeeNumberController.dispose();
+    _gmailController.dispose();
+    _mobileNumberController.dispose();
+    _fullNameController.dispose();
+    super.dispose();
+  }
+
+  void _submitRequest() async {
+    if (_formKey.currentState?.validate() ?? false) {
       setState(() {
-        _isLoading = true; // Show loading indicator
+        _isLoading = true;
       });
 
       final response = await http.post(
         Uri.parse(
             'http://72.255.20.2:8181/Wssp.1/api/app%20Ak%20S%20api.php/forget_password_api.php'),
-        body: {
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
           'employeeNO': _employeeNumberController.text,
           'Email': _gmailController.text,
           'MobileNumber': _mobileNumberController.text,
           'name': _fullNameController.text,
-        },
+        }),
       );
 
       setState(() {
-        _isLoading = false; // Hide loading indicator
+        _isLoading = false;
       });
 
-      final responseData = json.decode(response.body);
-
-      if (responseData['status'] == 'success') {
-        // Show success dialog
-        _showDialog('Success', responseData['message']);
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        if (responseData['status']) {
+          _showDialog('Success', responseData['message']);
+          _clearInputFields();
+        } else {
+          _showDialog('Error', responseData['message']);
+        }
       } else {
-        // Show error dialog
-        _showDialog('Error', responseData['message']);
+        _showDialog('Error', 'Failed to send request.');
       }
     }
   }
@@ -219,7 +231,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   void _showDialog(String title, String message) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: Text(title),
           content: Text(message),
@@ -227,9 +239,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                if (title == 'Success') {
-                  Navigator.pop(context); // Go back to the login screen
-                }
               },
               child: const Text('OK'),
             ),
@@ -237,6 +246,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         );
       },
     );
+  }
+
+  void _clearInputFields() {
+    _employeeNumberController.clear();
+    _gmailController.clear();
+    _mobileNumberController.clear();
+    _fullNameController.clear();
   }
 
   @override
@@ -247,7 +263,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       body: Stack(
         children: [
-          Padding(
+          SingleChildScrollView(
             padding: const EdgeInsets.all(16.0),
             child: Form(
               key: _formKey,
