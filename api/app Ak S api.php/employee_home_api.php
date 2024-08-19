@@ -5,6 +5,17 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+// Function to convert image to base64
+function imageToBase64($path) {
+    if (file_exists($path)) {
+        $imageData = file_get_contents($path);
+        $base64 = base64_encode($imageData);
+        $mimeType = mime_content_type($path); // Get the MIME type of the image
+        return 'data:' . $mimeType . ';base64,' . $base64;
+    }
+    return null; // Return null if the file does not exist
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
     include("link/db.php");
@@ -42,7 +53,7 @@ if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
     $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $emil");
     if (mysqli_num_rows($select) > 0) {
         if ($row = mysqli_fetch_assoc($select)) {
-            $imagePath = 'path/to/your/image/directory/' . $row["image"]; 
+            $imagePath = '../../image/' . $row["image"]; // Adjust this path accordingly
             $response['employeeData'] = [
                 "image" => imageToBase64($imagePath),
                 "fName" => $row["fName"],
@@ -57,6 +68,7 @@ if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
                 "Contract_Expiry_Date" => $row["Contract_Expiry_Date"],
                 "Last_Working_Date" => $row["Last_Working_Date"],
                 "DofBc" => $row["DofB"],
+                "Job_Tiltle"=>$row["Job_Tiltle"],
                 "Weekly_Working_Days" => $row["Weekly_Working_Days"]
             ];
         }
