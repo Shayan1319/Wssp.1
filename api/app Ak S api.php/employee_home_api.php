@@ -6,7 +6,6 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 $data = json_decode(file_get_contents("php://input"), true);
-
 if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
     include("link/db.php");
     $emil = $data['employeeNO'];
@@ -56,7 +55,7 @@ if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
                 "Joining_Date" => $row["Joining_Date"],
                 "Contract_Expiry_Date" => $row["Contract_Expiry_Date"],
                 "Last_Working_Date" => $row["Last_Working_Date"],
-                "DofBc" => $row["DofBc"],
+                "DofBc" => $row["DofB"],
                 "Weekly_Working_Days" => $row["Weekly_Working_Days"]
             ];
         }
