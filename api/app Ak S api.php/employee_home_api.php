@@ -42,8 +42,9 @@ if (json_last_error() === JSON_ERROR_NONE && isset($data['employeeNO'])) {
     $select = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo` = $emil");
     if (mysqli_num_rows($select) > 0) {
         if ($row = mysqli_fetch_assoc($select)) {
+            $imagePath = 'path/to/your/image/directory/' . $row["image"]; 
             $response['employeeData'] = [
-                "image" => $row["image"],
+                "image" => imageToBase64($imagePath),
                 "fName" => $row["fName"],
                 "mName" => $row["mName"],
                 "lName" => $row["lName"],
