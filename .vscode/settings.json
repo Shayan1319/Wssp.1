@@ -3,6 +3,7 @@
         "CNIC",
         "Exitclearance",
         "leverequest",
+        "prefs",
         "WSSC"
     ],
     "files.autoSave": "onWindowChange"

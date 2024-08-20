@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'employee/Home.dart';
 
 void main() {
   runApp(const MartialApp());
@@ -16,7 +17,7 @@ class MartialApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false, // Disable the debug banner
+      debugShowCheckedModeBanner: false,
       home: const LoginScreen(),
     );
   }
@@ -26,11 +27,84 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  String? _selectedValue; // Initially set to null
+class LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  String? _selectedValue;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _isLoading = false;
+  bool _obscureText = true;
+
+  Future<void> _login() async {
+    if (_formKey.currentState?.validate() ?? false) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      final response = await http.post(
+        Uri.parse(
+            'http://72.255.20.2:8181/Wssp.1/api/app%20Ak%20S%20api.php/login.php'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'Email': _emailController.text,
+          'Password': _passwordController.text,
+        }),
+      );
+
+      setState(() {
+        _isLoading = false;
+      });
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+
+        if (data['status'] == true) {
+          if (_selectedValue == 'Employee') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                  designation: data['Designation'],
+                  employeeNumber: data['EmployeeNumber'],
+                  fullName: data['FullName'] ?? 'No Name',
+                ),
+              ),
+            );
+          } else {
+            // Navigate to Admin Dashboard
+          }
+        } else {
+          _showDialog('Login Failed', data['message']);
+        }
+      } else {
+        _showDialog('Error', 'Unable to connect to the server.');
+      }
+    }
+  }
+
+  Future<void> _showDialog(String title, String message) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
         title: const Text(
           "Login",
           style: TextStyle(
-            color: Colors.white, // Set text color to white
-            fontWeight: FontWeight.bold, // Make text bold
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
@@ -63,10 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 20),
             Form(
+              key: _formKey,
               child: Column(
                 children: [
                   DropdownButtonFormField<String>(
-                    value: _selectedValue, // Bind the value to _selectedValue
+                    value: _selectedValue,
                     decoration: const InputDecoration(
                       labelText: 'Login As',
                       border: OutlineInputBorder(),
@@ -85,12 +160,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         _selectedValue = newValue;
                       });
-                      print(_selectedValue);
                     },
                     hint: const Text("Select"),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       labelText: "Email",
@@ -101,49 +176,64 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter email";
-                      } else {
-                        return null;
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
-                    keyboardType: TextInputType.visiblePassword,
+                    controller: _passwordController,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       labelText: "Password",
                       hintText: 'Enter Password',
                       prefixIcon: Icon(Icons.lock),
                       border: OutlineInputBorder(),
-                      suffixIcon: TextButton(
-                        onPressed: () {
-                          // Navigate to Forgot Password screen
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const ForgotPasswordScreen(),
+                      suffixIcon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                             ),
-                          );
-                        },
-                        child: const Text(
-                          "Forgot?",
-                          style: TextStyle(color: Colors.blue),
-                        ),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "Forgot?",
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter password";
-                      } else {
-                        return null;
                       }
+                      return null;
                     },
                   ),
                   const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: _login,
                       color: Colors.blueAccent,
                       splashColor: const Color(0xFF0C1C5F),
                       textColor: Colors.white,
@@ -161,6 +251,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
+            if (_isLoading)
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
           ],
         ),
       ),
@@ -172,10 +266,10 @@ class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
+  ForgotPasswordScreenState createState() => ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
   final _employeeNumberController = TextEditingController();
   final _gmailController = TextEditingController();
@@ -183,16 +277,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   final _fullNameController = TextEditingController();
   bool _isLoading = false;
 
-  @override
-  void dispose() {
-    _employeeNumberController.dispose();
-    _gmailController.dispose();
-    _mobileNumberController.dispose();
-    _fullNameController.dispose();
-    super.dispose();
-  }
-
-  void _submitRequest() async {
+  Future<void> _submitRequest() async {
     if (_formKey.currentState?.validate() ?? false) {
       setState(() {
         _isLoading = true;
@@ -214,45 +299,40 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         _isLoading = false;
       });
 
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        if (responseData['status']) {
-          _showDialog('Success', responseData['message']);
-          _clearInputFields();
-        } else {
-          _showDialog('Error', responseData['message']);
-        }
+      final data = jsonDecode(response.body);
+
+      if (data['status'] == true) {
+        _showDialog('Success', data['message']);
+        // Clear input fields after showing dialog
+        _employeeNumberController.clear();
+        _gmailController.clear();
+        _mobileNumberController.clear();
+        _fullNameController.clear();
       } else {
-        _showDialog('Error', 'Failed to send request.');
+        _showDialog('Error', data['message']);
       }
     }
   }
 
-  void _showDialog(String title, String message) {
-    showDialog(
+  Future<void> _showDialog(String title, String message) async {
+    return showDialog<void>(
       context: context,
-      builder: (context) {
+      barrierDismissible: false,
+      builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title),
           content: Text(message),
-          actions: [
+          actions: <Widget>[
             TextButton(
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('OK'),
             ),
           ],
         );
       },
     );
-  }
-
-  void _clearInputFields() {
-    _employeeNumberController.clear();
-    _gmailController.clear();
-    _mobileNumberController.clear();
-    _fullNameController.clear();
   }
 
   @override
@@ -263,7 +343,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
       body: Stack(
         children: [
-          SingleChildScrollView(
+          Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
               key: _formKey,

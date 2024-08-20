@@ -15,14 +15,14 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
 $calendar = new Calendar($date);
 $emil= $_SESSION['EmployeeNumber'];
 // $calendar->add_event('^', $date, 1, 'green');
-$selecttime = mysqli_query($conn, "SELECT `ID`, `FromDate`, `ToDate`, `WrokingDays` FROM `timeperiod` WHERE `ID`='1' # ORDER BY `ID` DESC LIMIT 1");
+$selecttime = mysqli_query($conn, "SELECT `ID`, `FromDate`, `ToDate`, `WrokingDays` FROM `timeperiod` ORDER BY `ID` DESC LIMIT 1");
 
 while ($rowtime = mysqli_fetch_array($selecttime)) {
-   $fromdate= $rowtime['FromDate'];
-   $todate= $rowtime['ToDate'];
+    $fromdate= $rowtime['FromDate'];
+    $todate= $rowtime['ToDate'];
    $workingdate= $rowtime['WrokingDays'];
 }
-$query = "SELECT COUNT(*) as total_attendees FROM atandece # WHERE `Employeeid`='$emil' AND `Date`>='$fromdate' AND `Date`<='$todate' AND `status`='PTESENT'";
+$query = "SELECT COUNT(*) as total_attendees FROM atandece  WHERE `Employeeid`='$emil' AND `Date`>='$fromdate' AND `Date`<='$todate' AND `status`='PTESENT'";
 $resultatd = mysqli_query($conn, $query);
 if($rowatd = mysqli_fetch_assoc($resultatd)){
     $total_attendees = $rowatd['total_attendees'];
