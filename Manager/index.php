@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 // links to database
-include('link/desigene/db.php');
+include('../link/desigene/db.php');
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Manager') {
   // Log the unauthorized access attempt for auditing purposes
   error_log("Unauthorized access attempt. User: {$_SESSION['loginid']}");
@@ -16,6 +16,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
 
 $emil = $_SESSION['EmployeeNumber'];
+
 // Query to count the number of employees 
 $query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata WHERE `Employee_Manager`=$emil");
 $row = mysqli_fetch_array($query);

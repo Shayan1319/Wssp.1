@@ -41,217 +41,147 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <br><!-- /.card-header -->
                           <div class="card-body ">
                             <form action="" id="form" >
-                            <div class="row">
-                            <h3>Employee Personal from data</h3>
-                            <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Religion</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="Religion">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Religion_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Religion_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
-                              <h3>Employment Data</h3>
-                            <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employment Group</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="EmpGroup">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="EmpGroup_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="EmpGroup_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
+                              <!-- <div class="row">
+                              <h3>Employee Personal from data</h3>
                               <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Class</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Class" id="Employee_Class">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Employee_Class_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
+                                  <div class="form-group">
+                                    <label>Religion</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="" id="Religion">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="Religion_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Religion_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Employee_Class_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
+                                <h3>Employment Data</h3>
                               <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Group</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Group" id="Employee_Group">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Employee_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
+                                  <div class="form-group">
+                                    <label>Employment Group</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="EmpGroup">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="EmpGroup_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="EmpGroup_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Employee_Group_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Employee Class</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="Employee_Class" id="Employee_Class">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="Employee_Class_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Class_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Sub Group</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Sub_Group" id="Employee_Sub_Group">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Employee_Sub_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Employee Group</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="Employee_Group" id="Employee_Group">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="Employee_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Group_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Employee_Sub_Group_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Employee Sub Group</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="Employee_Sub_Group" id="Employee_Sub_Group">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="Employee_Sub_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Sub_Group_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Employee Quota</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="Employee_Quota" id="Employee_Quota">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="Employee_Quota_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Employee Quota</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="Employee_Quota" id="Employee_Quota">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="Employee_Quota_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Quota_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Employee_Quota_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Salary Bank</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="SalaryBank" id="SalaryBank">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="SalaryBank_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="SalaryBank_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Salary Bank</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="SalaryBank" id="SalaryBank">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="SalaryBank_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Salary Bank Branch</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="" id="SalaryBankBranch">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="SalaryBankBranch_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="SalaryBankBranch_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="SalaryBank_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Pay Type</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
+                                          <input class="form-control" type="text" placeholder="Add Option" name="PayType" id="PayType">
+                                      </div>
+                                      <div class="col-3">
+                                          <button id="PayType_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                                      </div>
+                                  </div>
+                                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="PayType_drop" ></ul></div>                                
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Salary Bank Branch</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="" id="SalaryBankBranch">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="SalaryBankBranch_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="SalaryBankBranch_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Pay Type</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
-                                        <input class="form-control" type="text" placeholder="Add Option" name="PayType" id="PayType">
-                                    </div>
-                                    <div class="col-3">
-                                        <button id="PayType_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
-                                    </div>
-                                </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="PayType_drop" >
-
-                                      </ul>
-                                  </div>                                
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
-                                  <label>Weekly Working Days</label>
-                                  <div class="row my-2">
-                                    <div class="col-9">
+                                <div class="col-md-4 my-2">
+                                  <div class="form-group">
+                                    <label>Weekly Working Days</label>
+                                    <div class="row my-2">
+                                      <div class="col-9">
                                         <input class="form-control" type="text" placeholder="Add Option" name="WeeklyWorkingDays" id="WeeklyWorkingDays">
                                     </div>
                                     <div class="col-3">
                                         <button id="WeeklyWorkingDays_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="WeeklyWorkingDays_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="WeeklyWorkingDays_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -265,14 +195,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Employee_Pay_Classification_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Employee_Pay_Classification_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Pay_Classification_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -286,14 +209,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Grade_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Grade_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Grade_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -307,14 +223,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Department_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Department_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Department_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -328,14 +237,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Job_Tiltle_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Job_Tiltle_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Job_Tiltle_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -349,14 +251,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Salary_Mode_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Salary_Mode_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Salary_Mode_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <div class="col-md-4 my-2">
@@ -370,14 +265,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Status_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Status_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Status_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <br>
@@ -393,14 +281,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="Dependertype_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="Dependertype_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Dependertype_drop" ></ul></div>                                
                                 </div>
                               </div>
                               <br>
@@ -416,17 +297,198 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <button id="leave_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
-                                      <button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">
-                                      Select
-                                      </button>
-                                      <ul class="dropdown-menu" id="leave_drop" >
-
-                                      </ul>
-                                  </div>                                
+                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="leave_drop" ></ul></div>                                
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
+
+                            <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Parent</th>
+                    <th>Child</th>
+                    <th>Drop Down</th>
+                    <th>Save</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td colspan="4" class="text-center" ><h3>Religion</h3></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Religion</label><input class="form-control" type="text" placeholder="Add Option" name="" id="Religion"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Religion_drop" ></ul></div></td>
+                  <td><button id="Religion_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-center" >
+                    <h3>Employment data</h3>
+                </td>
+                </tr>
+                
+                  <tr>
+
+                  <td>
+                  </td>
+                  <td><label>Employment Group</label><input class="form-control" type="text" placeholder="Add Option" name="EmpGroup" id="EmpGroup"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="EmpGroup_drop" ></ul></div></td>
+                  <td><button id="EmpGroup_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="">Type Parent</label>
+                    <select name="" class="form-select" id="Employee_Class_Parent">
+                      <option value="">Select</option>
+                      <option value="WSSC">WSSC</option>
+                      <option value="TMA">TMA</option>
+                    </select>
+                  </td>
+                  <td><label>Employee Class</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Class" id="Employee_Class"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Class_drop" ></ul></div></td>
+                  <td><button id="Employee_Class_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                  <label>Employee Class Parent</label>
+                    <select name="" class="form-select" id="Employee_Group_Parent">
+                    </select>
+                  </td>
+                  <td><label>Employee Group</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Group" id="Employee_Group"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Group_drop" ></ul></div></td>
+                  <td><button id="Employee_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                  <label>Employee Group Parent</label>
+                    <select name="" class="form-select" id="Employee_Sub_Group_Parent">
+                    </select>
+                  </td>
+                  <td><label>Employee Sub Group</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Sub_Group" id="Employee_Sub_Group"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Sub_Group_drop" ></ul></div></td>
+                  <td><button id="Employee_Sub_Group_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Employee Quota</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Quota" id="Employee_Quota"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Quota_drop" ></ul></div></td>
+                  <td><button id="Employee_Quota_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Salary Bank</label><input class="form-control" type="text" placeholder="Add Option" name="SalaryBank" id="SalaryBank"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="SalaryBank_drop" ></ul></div></td>
+                  <td><button id="SalaryBank_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label>Salary Bank Parent</label>
+                    <select name="" class="form-select" id="SalaryBankBranch_Parent">
+                    </select>
+                  </td>
+                  <td><label>Salary Bank Branch</label><input class="form-control" type="text" placeholder="Add Option" name="" id="SalaryBankBranch"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="SalaryBankBranch_drop" ></ul></div></td>
+                  <td><button id="SalaryBankBranch_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Pay Type</label><input class="form-control" type="text" placeholder="Add Option" name="PayType" id="PayType"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="PayType_drop" ></ul></div></td>
+                  <td><button id="PayType_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Weekly Working Days</label><input class="form-control" type="text" placeholder="Add Option" name="WeeklyWorkingDays" id="WeeklyWorkingDays"></td>
+                  <td>                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="WeeklyWorkingDays_drop" ></ul></div></td>
+                  <td>                                        <button id="WeeklyWorkingDays_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Employee Pay Classification</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Pay_Classification" id="Employee_Pay_Classification"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Employee_Pay_Classification_drop" ></ul></div></td>
+                  <td><button id="Employee_Pay_Classification_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                  <label for="">Type Parent</label>
+                    <select name="" class="form-select" id="Grade_Parent">
+                    <option value="">Select</option>
+                      <option value="WSSC">WSSC</option>
+                      <option value="TMA">TMA</option>
+                    </select>
+                  </td>
+                  <td><label>Grade</label><input class="form-control" type="text" placeholder="Add Option" name="Grade" id="Grade"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Grade_drop" ></ul></div></td>
+                  <td><button id="Grade_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="">Type Parent</label>
+                    <select name="" class="form-select" id="Department_Parent">
+                      <option value="">Select</option>
+                      <option value="WSSC">WSSC</option>
+                      <option value="TMA">TMA</option>
+                    </select>
+                  </td>
+                  <td><label>Department</label><input class="form-control" type="text" placeholder="Add Option" name="Department" id="Department"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Department_drop" ></ul></div></td>
+                  <td><button id="Department_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="">Type Parent</label>
+                    <select name="" class="form-select" id="Job_Tiltle_Parent">
+                      <option value="">Select</option>
+                      <option value="WSSC">WSSC</option>
+                      <option value="TMA">TMA</option>
+                    </select>
+                  </td>
+                  <td><label>Job Title</label><input class="form-control" type="text" placeholder="Add Option" name="Job_Tiltle" id="Job_Tiltle"></td>
+                  <td>                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Job_Tiltle_drop" ></ul></div></td>
+                  <td>                                        <button id="Job_Tiltle_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>                                  <label>Salary Mode</label><input class="form-control" type="text" placeholder="Add Option" name="Salary_Mode" id="Salary_Mode"></td>
+                  <td>                                <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Salary_Mode_drop" ></ul></div></td>
+                  <td>                                        <button id="Salary_Mode_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+
+                <!-- Status -->
+                <tr>
+                  <td></td>
+                  <td> <label>Status</label><input class="form-control" type="text" placeholder="Add Option" name="Status" id="Status"></td>
+                  <td>
+                  <div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Status_drop" ></ul></div>                                
+                  </td>
+                  <td>
+                  <button id="Status_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text text-center"><h4>Depended</h4></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Depended name</label><input class="form-control" type="text" placeholder="Add Option" name="Dependertype" id="Dependertype"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="Dependertype_drop" ></ul></div></td>
+                  <td><button id="Dependertype_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-center" >
+                    <h3>Leave</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td><label>Leave type</label><input class="form-control" type="text" placeholder="Add Option" name="leave" id="leave"></td>
+                  <td><div class="dropdown"><button type="button" class="btn bg-white border border-dark form-control dropdown-toggle" data-bs-toggle="dropdown">Select</button><ul class="dropdown-menu" id="leave_drop" ></ul></div></td>
+                  <td><button id="leave_btn" class="btn btn-primary" type=""><i class="fa-solid fa-plus"></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+
+
                             </form>
                           </div>
                         </div>
@@ -498,13 +560,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             $("#Employee_Class_btn").on("click",function(e){
         e.preventDefault();
         var Employee_Class = $("#Employee_Class").val();
+        var Employee_Class_Parent = $("#Employee_Class_Parent").val();
         $.ajax({
           url:"ajex/Employee_Class.php",
           type:"Post", 
-          data:{Employee_Class:Employee_Class},
+          data:{Employee_Class:Employee_Class,Employee_Class_Parent:Employee_Class_Parent},
           success:function(data){
             if(data == 1){
             loadEmployee_Class();
+            loadEmployee_Class_Parent();
             $("#form").trigger("reset"); 
             }
             else{
@@ -514,44 +578,58 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
-            $("#Employee_Group_btn").on("click",function(e){
+      $("#Employee_Group_btn").on("click",function(e){
         e.preventDefault();
         var Employee_Group = $("#Employee_Group").val();
+        var Employee_Group_Parent = $("#Employee_Group_Parent").val();
         $.ajax({
           url:"ajex/Employee_Group.php",
           type:"Post", 
-          data:{Employee_Group:Employee_Group},
+          data:{Employee_Group:Employee_Group,Employee_Group_Parent:Employee_Group_Parent},
           success:function(data){
-            if(data == 1){
+            alert(data);
             loadEmployee_Group();
+            Employee_Sub_Group_Parent();
             $("#form").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+           
           }
-
         });
             });
-            $("#Employee_Sub_Group_btn").on("click",function(e){
-        e.preventDefault();
-        var Employee_Sub_Group = $("#Employee_Sub_Group").val();
+      
+            $("#Employee_Sub_Group_btn").on("click", function(e) {
+    e.preventDefault();
+    var Employee_Sub_Group = $("#Employee_Sub_Group").val();
+    var Employee_Sub_Group_Parent = $("#Employee_Sub_Group_Parent").val();
+
+    $.ajax({
+        url: "ajex/Employee_Sub_Group.php",
+        type: "POST",
+        data: {
+            Employee_Sub_Group: Employee_Sub_Group,
+            Employee_Sub_Group_Parent: Employee_Sub_Group_Parent
+        },
+        success: function(response) {
+            loadEmployee_Sub_Group(); // Ensure this function is defined
+            $("#form").trigger("reset"); 
+            alert(response);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", status, error);
+        }
+    });
+});
+
+            
+      function Employee_Sub_Group_Parent(){
         $.ajax({
-          url:"ajex/Employee_Sub_Group.php",
-          type:"Post", 
-          data:{Employee_Sub_Group:Employee_Sub_Group},
-          success:function(data){
-            if(data == 1){
-            loadEmployee_Sub_Group();
-            $("#form").trigger("reset"); 
-            }
-            else{
-              alert ("Can't Save Record");
-            }
+          url : "ajex/Employee_Group - Copy copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Sub_Group_Parent").html(data);
           }
-
         });
-            });
+      }
+      Employee_Sub_Group_Parent();
 
             $("#Employee_Quota_btn").on("click",function(e){
         e.preventDefault();
@@ -620,6 +698,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           success:function(data){
             if(data == 1){
             loadSalaryBank();
+            loadSalaryBankBranch_Parant();
             $("#form").trigger("reset"); 
             }
             else{
@@ -629,33 +708,45 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
+
             $("#SalaryBankBranch_btn").on("click",function(e){
         e.preventDefault();
         var SalaryBankBranch = $("#SalaryBankBranch").val();
+        var SalaryBankBranch_Parent = $("#SalaryBankBranch_Parent").val();
         $.ajax({
           url:"ajex/SalaryBankBranch.php",
           type:"Post", 
-          data:{SalaryBankBranch:SalaryBankBranch},
+          data:{SalaryBankBranch:SalaryBankBranch,SalaryBankBranch_Parent:SalaryBankBranch_Parent},
           success:function(data){
             if(data == 1){
-            loadSalaryBankBranch();
-            $("#form").trigger("reset"); 
+              loadSalaryBankBranch();
+              $("#form").trigger("reset"); 
             }
             else{
               alert ("Can't Save Record");
             }
           }
-
         });
             });
+            function loadSalaryBankBranch_Parant(){
+        $.ajax({
+          url : "ajex/SalaryBankBranch - Copy copy.php",
+          type:"POST",
+          success : function(data){
+            $("#SalaryBankBranch_Parent").html(data);
+          }
+        });
+      }
+      loadSalaryBankBranch_Parant();
 
             $("#Grade_btn").on("click",function(e){
         e.preventDefault();
         var Grade = $("#Grade").val();
+        var Grade_Parent = $("#Grade_Parent").val();
         $.ajax({
           url:"ajex/Grade.php",
           type:"Post", 
-          data:{Grade:Grade},
+          data:{Grade:Grade,Grade_Parent:Grade_Parent},
           success:function(data){
             if(data == 1){
             loadGrade();
@@ -668,33 +759,36 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
         });
             });
+
             $("#Department_btn").on("click",function(e){
         e.preventDefault();
         var Department = $("#Department").val();
+        var Department_Parent = $("#Department_Parent").val();
         $.ajax({
           url:"ajex/Department.php",
           type:"Post", 
-          data:{Department:Department},
+          data:{Department:Department,Department_Parent:Department_Parent},
           success:function(data){
-            if(data == 1){
+            if(data==1){
             loadDepartment();
-            $("#form").trigger("reset"); 
-            }
+            $("#form").trigger("reset");}
             else{
               alert ("Can't Save Record");
-            }
+            } 
           }
-
         });
             });
+
+            
             $("#Job_Tiltle_btn").on("click",function(e){
 
         e.preventDefault();
         var Job_Tiltle = $("#Job_Tiltle").val();
+        var Job_Tiltle_Parent = $("#Job_Tiltle_Parent").val();
         $.ajax({
           url:"ajex/Job_Tiltle.php",
           type:"Post", 
-          data:{Job_Tiltle:Job_Tiltle},
+          data:{Job_Tiltle:Job_Tiltle,Job_Tiltle_Parent:Job_Tiltle_Parent},
           success:function(data){
             alert(data);
             loadJob_Tiltle();
@@ -828,6 +922,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadEmployee_Class();
+      function loadEmployee_Class_Parent(){
+        $.ajax({
+          url : "ajex/Employee_Class - Copy copy.php",
+          type:"POST",
+          success : function(data){
+            $("#Employee_Group_Parent").html(data);
+          }
+        });
+      }
+      loadEmployee_Class_Parent();
+      
       function loadEmployee_Group(){
         $.ajax({
           url : "ajex/Employee_Group - Copy.php",
@@ -838,6 +943,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
         });
       }
       loadEmployee_Group();
+      Employee_Sub_Group_Parent();
+      loadEmployee_Class_Parent();
       function loadEmployee_Sub_Group(){
         $.ajax({
           url : "ajex/Employee_Sub_Group - Copy.php",
@@ -988,7 +1095,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               loadEmployee_Pay_Classification();
               loadEmployee_Class();
               loadEmployee_Group();
+              loadEmployee_Class_Parent();
               loadEmployee_Sub_Group();
+              Employee_Sub_Group_Parent();
               loadEmployee_Quota();
               loadSalaryBank();
               loadSalaryBankBranch();

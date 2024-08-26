@@ -3,7 +3,8 @@
 include ('../link/desigene/db.php');
 // var for php insert
 $Job_Tiltle= strtoupper($_POST['Job_Tiltle']);
-$insert= mysqli_query($conn,"INSERT INTO `master`(`drop`, `name`) VALUES ('$Job_Tiltle','Job_Tiltle')");
+$Job_Tiltle_Parent= strtoupper($_POST['Job_Tiltle_Parent']);
+$insert= mysqli_query($conn,"INSERT INTO `master`(`Perant`, `drop`, `name`) VALUES ('$Job_Tiltle_Parent','$Job_Tiltle','Job_Tiltle')");
 if($insert){
  echo "data inserted";
 }else{

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2024 at 03:54 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Aug 26, 2024 at 03:07 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -274,7 +274,7 @@ CREATE TABLE `employeedata` (
 --
 
 INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `TypeEmp`, `type`, `DY_Supervisor`, `leaveAlreadyAvailed`) VALUES
-(1, '', 'Admin', 'Wssc', '-', '-', '12345', 'admin@wssc.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-05', '', 'Male', '-', '-', '', '-', '-', '-', '-', 'WSSC - ADMIN PAY', '', '', '', 'DECEASED SON', '', '', '-', '', '-', '-', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 100001, 10001343, '2023-10-10', '01 06 2023', '2023-10-31', 100008, '-', '-', 'ACCEPT', '', '', 34),
+(1, 'dp.png', 'Admin', 'Wssc', '-', '-', '12345', 'admin@wssc.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-05', '', 'Male', '-', '-', '', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'WSSC PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTINGENT PAY', 'DECEASED SON', '', '', '-', '', '-', '-', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 100001, 10001343, '2023-10-10', '01 06 2023', '2023-10-31', 100008, '-', '-', 'ACCEPT', '', '', 34),
 (2, '', 'Emp1', 'name', '-', '-', '123455431', 'email@email.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-07', '', 'Male', '-', '-', '', '-', '-', '-', '-', 'WSSC - ADMIN PAY', 'WSS-PAY', 'WSSC - ADMIN PAY', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', 'HBL', 'HBL SWAT', '-', '', '-', '-', 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', '', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 100002, 10001343, '2023-09-30', '01 06 2024', '2023-10-27', 10000019, '-', '-', 'ACCPET', '', '100003', 34),
 (3, '', 'CEO', 'CEO', '', '-', '12345678900', 'shan@gmail.comn', '-', '-', '-', '', '-', '-', '-', '0000-00-00', 'ISLAM', 'Male', '-', '-', '', '-', '', '-', '-', 'WSSC - ADMIN PAY', 'WSS-PAY', 'WSSC - ADMIN PAY', 'WSSC - ADMIN - PERMANENT PAY', '', '', '', '', '', '', '', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M-2', '', 'CHIEF EXECUTIVE OFFICER', '', 'ON-DUTY', 100003, 10001343, '0000-00-00', '01 06 2023', '0000-00-00', 10000019, '', '', 'ACCEPT', '', '', 34),
 (4, '', 'Shayan', '', 'Khan', 'Riayat Khan', '263524728', 'payroll@wssc.com', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', '', '', 'WSSC - ADMIN PAY', 'TMA PAY', '', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', '', '', '12444', '', '-', '-', 0, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M-1', 'ADMINISTRATION', 'DY- MANAGER - ADMIN & PROCUREMENT', 'BANK TRANSFER', 'ON-DUTY', 100004, 10001343, '01 02 2022', '01 06 2026', '2024-07-31', 10000019, 'Jehanger', 'Jehanger', 'ACCPET', '', '', 34),
@@ -282,7 +282,7 @@ INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Na
 (15, '', 'kjsadlfkas', 'klsdfkl', 'kldsfkjl', 'dklfksl', '12345678908765', 'shayanm@gmail.com', 'kasdfj', 'lsdkfkl', 'sdfljkslk', 'kjsfdlk', '7898', '7', '989', '9887-08-08', 'iaflkjasdf', '', 'kasdf', 'asdfasf', '', 'adfasdf', '4323234', 'dfsdsdf', '234234', 'WSSC - ADMIN PAY', 'TMA PAY', 'WSSC - ADMIN PAY', 'TMA - ADMIN - PERMANENT PAY', 'DECEASED SON', 'HBL', '', '', '', '', '', 5, 'NO', 'fsdfasdf', 'M-1', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'ON-DUTY', 10001343, 100003, '01 06 2023', '01 06 2024', '2024-03-02', 100002, 'sdfsdsadfasdf', 'sdfasd', 'WSSC', 'DY_ MANAGER', '', 34),
 (16, '', 'Abdul', 'moaez', 'Khan', 'Riayat khan', '12343234565434', 'abd@gmail.co', '', '', '', '', '', '', '', '0000-00-00', 'ISLAM', 'Mail', '', '', '', '', '', '', '', 'WSSC - ADMIN PAY', 'WSS-PAY', 'WSSC - ADMIN PAY', 'WSSC - ADMIN - PERMANENT PAY', 'DAILY WAGES', 'HBL', 'HBL SWAT', 'e55678', 'CASH', '234565432', '345678876543', 6, 'YES', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'S-2', 'MANAGMENT', 'DY- MANAGER - ADMIN & PROCUREMENT', 'BANK TRANSFER', 'ON-DUTY', 100006, 10001343, '01 06 2022', '20 09 2024', '', 100008, '', '', 'WSSC', '', '', 34),
 (17, '', 'Riayat', '', 'Khan', 'Dilawar Khan', '56465465464677', 'email@email.com', '', '', '', '', '', '', '', '0000-00-00', 'ISLAM', 'Mail', '', '', '', '', '', '', '', 'WSSC - ADMIN PAY', 'WSS-PAY', 'WSSC - ADMIN PAY', 'TMA - ADMIN - PERMANENT PAY', 'DAILY WAGES', 'BOK', 'KBO SWAT', '6545645664', 'CHIQ', '', '', 7, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M-1', 'ADMINISTRATION', 'MANAGER SOLID WASTE', 'CHEQUE', 'ON-DUTY', 100008, 10001343, '01 06 2022', '20 09 2024', '0000-00-00', 10000019, '', '', 'WSSC', '', '', 34),
-(18, '', 'test', '', 'five', 'father', '13224124141234', 'erefm@email.com', 'asdjfjlk', 'afskjkl', 'slkdfjkl', '', '', '', '', '12 08 1999', 'ISLAM', 'Mail', '', '', '', '', '', '', '', 'WSSC - ADMIN PAY', 'WSSC PAY', 'WSSC - ADMIN PAY', 'WSSC - ADMIN - PERMANENT PAY', 'DECEASED SON', '', '', '', '', '', '', 6, 'NO', 'WSSC ADMIN PAY - CONTRACTUAL', 'BPS-6', 'SANITATION', 'AM - HR', '', 'NEW', 100005, 10000019, '01 06 2022', '01 06 2024', '', 100008, '', '', 'WSSC', '', '', 34);
+(18, '', 'test', '', 'five', 'father', '13224124141234', 'erefm@email.com', 'asdjfjlk', 'afskjkl', 'slkdfjkl', '', '', '', '', '12 08 1999', 'ISLAM', 'Mail', '', '', '', '', '', '', '', 'WSSC - ADMIN PAY', 'WSSC PAY', 'WSSC - ADMIN PAY', 'WSSC - ADMIN - PERMANENT PAY', 'DECEASED SON', '', '', '', '', '', '', 6, 'NO', 'WSSC ADMIN PAY - CONTRACTUAL', 'BPS-6', 'SANITATION', 'AM - HR', '', 'REJECT', 100005, 10000019, '01 06 2022', '01 06 2024', '', 100008, '', '', 'WSSC', '', '', 34);
 
 -- --------------------------------------------------------
 
@@ -353,6 +353,13 @@ CREATE TABLE `employeedataupdate` (
   `AuthBy` varchar(255) DEFAULT NULL,
   `leaveAlreadyAvailedUpdate` int(255) NOT NULL DEFAULT 34
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employeedataupdate`
+--
+
+INSERT INTO `employeedataupdate` (`Id`, `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `Emptype`, `typeUpdate`, `DY_SupervisorUpdate`, `status`, `Change By`, `date`, `AuthBy`, `leaveAlreadyAvailedUpdate`) VALUES
+(1, 1, '', 'Admin', 'Wssc', '-', '-', '12345', 'admin@wssc.com', '-', '-', '-', '-', '-', '-', '-', '2023-09-05', '', 'Male', '-', '-', '', '-', '-', '-', '-', 'WSSC - ADMIN PAY', '', '', '', 'DECEASED SON', '', '', '-', '', '-', '-', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', '', 'ADMINISTRATION', '', 'BANK TRANSFER', 'ON-DUTY', 100001, 10001343, '2023-10-10', '0000-00-00', '2023-10-31', 100008, '-', '-', 'WSSC', '', '', 'IN PROCESS', '100002', '2024-08-25', NULL, 34);
 
 -- --------------------------------------------------------
 
@@ -510,7 +517,9 @@ CREATE TABLE `forgetpassword` (
 --
 
 INSERT INTO `forgetpassword` (`Id`, `employeeNO`, `Email`, `MobileNumber`, `Name`, `Status`) VALUES
-(1, '100001', 'shayanm1215225@gmail.com', '03091991002', 'Shayan Khan', 'Completed');
+(1, '100001', 'shayans1215225@gmail.com', '023884242', 'test api post man', 'Pending'),
+(2, '10001', 'shayans1215225@gmail.com', '023884242', 'test api post man', 'Pending'),
+(3, '100005', 'shayan1215225@gmail.com', '923491916168', 'Shayan Khan', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -644,6 +653,7 @@ INSERT INTO `login` (`Id`, `FullName`, `Gender`, `Email`, `Password`, `EmployeeN
 
 CREATE TABLE `master` (
   `id` int(11) NOT NULL,
+  `Perant` varchar(255) NOT NULL,
   `drop` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -652,61 +662,62 @@ CREATE TABLE `master` (
 -- Dumping data for table `master`
 --
 
-INSERT INTO `master` (`id`, `drop`, `name`) VALUES
-(1, 'WSSC - ADMIN PAY', 'EmpGroup'),
-(2, 'TMA PAY', 'Employee_Class'),
-(3, 'WSSC - ADMIN PAY', 'Employee_Group'),
-(4, 'TMA - ADMIN - PERMANENT PAY', 'Employee_Sub_Group'),
-(6, 'DECEASED SON', 'Employee_Quota'),
-(7, 'M-1', 'Grade'),
-(9, 'M-2', 'Grade'),
-(10, 'ADMINISTRATION', 'Department'),
-(11, 'DY- MANAGER - ADMIN & PROCUREMENT', 'Job_Tiltle'),
-(12, 'GM (HR, ADMIN & PROCUREMENT)', 'Job_Tiltle'),
-(13, 'CHIEF EXECUTIVE OFFICER', 'Job_Tiltle'),
-(14, 'MANAGER SOLID WASTE', 'Job_Tiltle'),
-(15, 'ADMIN', 'Type'),
-(16, 'CEO', 'Type'),
-(17, 'DY_ MANAGER', 'Type'),
-(18, 'FINANCE', 'Type'),
-(19, 'EMPLOYEE', 'Type'),
-(20, 'GM', 'Type'),
-(21, 'BANK TRANSFER', 'Salary_Mode'),
-(22, 'CHEQUE', 'Salary_Mode'),
-(23, 'CONTRACT EXP', 'Status'),
-(24, 'ON-DUTY', 'Status'),
-(25, 'SUPERVISO', 'Type'),
-(26, 'MANAGER', 'Type'),
-(30, 'HBL', 'SalaryBank'),
-(31, 'KBO SWAT', 'SalaryBankBranch'),
-(32, 'CHIQ', 'PayType'),
-(33, 'CASH', 'PayType'),
-(34, '5', 'WeeklyWorkingDays'),
-(36, 'FATHER', 'dependertype'),
-(37, 'ISLAM', 'Religion'),
-(38, 'HUNDU', 'Religion'),
-(39, 'CHRISTIANITY', 'Religion'),
-(40, 'JEWISH', 'Religion'),
-(41, 'TMA-ADMIN PAY', 'EmpGroup'),
-(42, 'WSS-PAY', 'Employee_Class'),
-(43, 'TMA - ADMIN PAY', 'Employee_Group'),
-(44, 'WSSC - ADMIN - PERMANENT PAY', 'Employee_Sub_Group'),
-(45, 'DAILY WAGES', 'Employee_Quota'),
-(46, 'UBL', 'SalaryBank'),
-(47, 'BOK', 'SalaryBank'),
-(48, 'UBL SWAT', 'SalaryBankBranch'),
-(49, 'HBL SWAT', 'SalaryBankBranch'),
-(51, 'DALY', 'PayType'),
-(52, '6', 'WeeklyWorkingDays'),
-(53, '7', 'WeeklyWorkingDays'),
-(54, 'EMPLOYEE PAY CLASSIFICATION TMA', 'Employee_Pay_Classification'),
-(55, 'EMPLOYEE PAY CLASSIFICATION WSSC', 'Employee_Pay_Classification'),
-(56, 'S-1', 'Grade'),
-(57, 'S-2', 'Grade'),
-(58, 'MANAGMENT', 'Department'),
-(59, 'NEW', 'Status'),
-(60, 'MOTHER', 'dependertype'),
-(61, 'SON', 'dependertype');
+INSERT INTO `master` (`id`, `Perant`, `drop`, `name`) VALUES
+(1, '0', 'WSSC - ADMIN PAY', 'EmpGroup'),
+(6, '0', 'DECEASED SON', 'Employee_Quota'),
+(15, '0', 'ADMIN', 'Type'),
+(16, '0', 'CEO', 'Type'),
+(17, '0', 'DY_ MANAGER', 'Type'),
+(18, '0', 'FINANCE', 'Type'),
+(19, '0', 'EMPLOYEE', 'Type'),
+(20, '0', 'GM', 'Type'),
+(21, '0', 'BANK TRANSFER', 'Salary_Mode'),
+(22, '0', 'CHEQUE', 'Salary_Mode'),
+(23, '0', 'CONTRACT EXP', 'Status'),
+(24, '0', 'ON-DUTY', 'Status'),
+(25, '0', 'SUPERVISO', 'Type'),
+(26, '0', 'MANAGER', 'Type'),
+(32, '0', 'CHIQ', 'PayType'),
+(33, '0', 'CASH', 'PayType'),
+(34, '0', '5', 'WeeklyWorkingDays'),
+(36, '0', 'FATHER', 'dependertype'),
+(37, '0', 'ISLAM', 'Religion'),
+(38, '0', 'HUNDU', 'Religion'),
+(39, '0', 'CHRISTIANITY', 'Religion'),
+(40, '0', 'JEWISH', 'Religion'),
+(41, '0', 'TMA-ADMIN PAY', 'EmpGroup'),
+(45, '0', 'DAILY WAGES', 'Employee_Quota'),
+(51, '0', 'DALY', 'PayType'),
+(52, '0', '6', 'WeeklyWorkingDays'),
+(53, '0', '7', 'WeeklyWorkingDays'),
+(54, '0', 'EMPLOYEE PAY CLASSIFICATION TMA', 'Employee_Pay_Classification'),
+(55, '0', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'Employee_Pay_Classification'),
+(59, '0', 'NEW', 'Status'),
+(60, '0', 'MOTHER', 'dependertype'),
+(61, '0', 'SON', 'dependertype'),
+(69, 'WSSC', 'WSSC PAY', 'Employee_Class'),
+(70, 'TMA', 'TMA PAY', 'Employee_Class'),
+(71, 'TMA PAY', 'TMA - ADMIN PAY', 'Employee_Group'),
+(72, 'WSSC PAY', 'WSSCS - ADMIN PAY', 'Employee_Group'),
+(73, 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTINGENT PAY', 'Employee_Sub_Group'),
+(75, '', 'HBL', 'SalaryBank'),
+(76, '', 'UBL', 'SalaryBank'),
+(77, 'HBL', 'HBL SWAT', 'SalaryBankBranch'),
+(81, 'WSSC', 'ADMINISTRATION', 'Department'),
+(82, 'WSSC', 'TEST', 'Job_Tiltle'),
+(83, 'WSSC', 'M-1', 'Grade'),
+(84, 'TMA PAY', 'TMA - COMMERCIAL', 'Employee_Group'),
+(85, 'WSSC PAY', 'WSSCS - COMMERCIAL', 'Employee_Group'),
+(86, 'TMA - ADMIN PAY', 'TMA - ADMIN - PERMANENT PAY', 'Employee_Sub_Group'),
+(87, 'TMA - COMMERCIAL', 'TMA - COMMERCIAL - PERMANENT PAY', 'Employee_Sub_Group'),
+(88, 'UBL', 'UBL SWAT', 'SalaryBankBranch'),
+(89, 'WSSC', 'M-2', 'Grade'),
+(90, 'TMA', 'S-1', 'Grade'),
+(91, 'TMA', 'S-2', 'Grade'),
+(92, 'WSSC', 'SANITATION', 'Department'),
+(93, 'TMA', 'COMMERCIAL', 'Department'),
+(94, 'WSSC', 'TESTWSSC1', 'Job_Tiltle'),
+(95, 'TMA', 'TESTTMA1', 'Job_Tiltle');
 
 -- --------------------------------------------------------
 
@@ -1204,7 +1215,7 @@ ALTER TABLE `employeedata`
 -- AUTO_INCREMENT for table `employeedataupdate`
 --
 ALTER TABLE `employeedataupdate`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employee_performance`
@@ -1222,7 +1233,7 @@ ALTER TABLE `encasement`
 -- AUTO_INCREMENT for table `forgetpassword`
 --
 ALTER TABLE `forgetpassword`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `gratuity`
@@ -1252,7 +1263,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `master`
 --
 ALTER TABLE `master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT for table `payrole`

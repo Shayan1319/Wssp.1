@@ -16,26 +16,26 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       $ChangeBy = $_SESSION['EmployeeNumber'];
         $date = date('Y-m-d');
         $image = $_FILES["image"];
-        $fName = $_POST["fName"];
-        $mName = $_POST["mName"];
-        $lName = $_POST["lName"];
-        $father_Name = $_POST["father_Name"];
+        $fName =strtoupper( $_POST["fName"]);
+        $mName =strtoupper( $_POST["mName"]);
+        $lName =strtoupper( $_POST["lName"]);
+        $father_Name = strtoupper($_POST["father_Name"]);
         $CNIC = $_POST["CNIC"];
         $email = $_POST["email"];
-        $pAddress = $_POST["pAddress"];
-        $cAddress = $_POST["cAddress"];
-        $city = $_POST["city"];
-        $postAddress = $_POST["postAddress"];
+        $pAddress =strtoupper($_POST["pAddress"]);
+        $cAddress = strtoupper($_POST["cAddress"]);
+        $city = strtoupper($_POST["city"]);
+        $postAddress = strtoupper($_POST["postAddress"]);
+        $religion = strtoupper($_POST["religion"]);
+        $gender = strtoupper($_POST["gender"]);
+        $BlGroup = strtoupper($_POST["BlGroup"]);
+        $Domicile = strtoupper($_POST["Domicile"]);
+        $MaritalStatus = strtoupper($_POST["MaritalStatus"]);
+        $NextofKin = $_POST["NextofKin"];
         $mNumber = $_POST["mNumber"];
         $ofphNumber = $_POST["ofphNumber"];
         $Alternate_Number = $_POST["Alternate_Number"];
         $DofB = $_POST["DofB"];
-        $religion = $_POST["religion"];
-        $gender = $_POST["gender"];
-        $BlGroup = $_POST["BlGroup"];
-        $Domicile = $_POST["Domicile"];
-        $MaritalStatus = $_POST["MaritalStatus"];
-        $NextofKin = $_POST["NextofKin"];
         $NextofKinCellNumber = $_POST["NextofKinCellNumber"];
         $ContactPerson = $_POST["ContactPerson"];
         $CPCN = $_POST["CPCN"];
@@ -394,6 +394,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                           <br>
                           <div class="card-body ">
                             <div class="row">
+                            <div class="col-md-4 my-2">
+                                <div class="form-group">
+                                  <label>Department Type<span>*</span></label>
+                                  <select name="DepartmentType" required id="DepartmentType" class="form-control select2">
+                                    <option value="WSSC">WSSC</option>
+                                    <option value="TMA">TMA</option>
+                                  </select>
+                                </div>
+                              </div>
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
                                   <label>Employement Group<span>*</span></label>
@@ -540,15 +549,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                               </div> -->
                               <div class="col-md-4 my-2">
                                 <div class="form-group">
-                                  <label>Department Type<span>*</span></label>
-                                  <select name="DepartmentType" required id="" class="form-control select2">
-                                    <option value="WSSC">WSSC</option>
-                                    <option value="TMA">TMA</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="col-md-4 my-2">
-                                <div class="form-group">
                                   <label>Salary Mode</label>
                                   <select name="Salary_Mode" id="Salary_Mode_drop" class="form-control select2">
                                     </select>
@@ -669,9 +669,6 @@ function checkEmployeeNoExistence(employeeNo) {
                 dateFormat: 'dd mm yy'
             });
         });
-    </script>
-    <script>
-      
       $(function() {
           $(".select2").select2();
              });
@@ -713,8 +710,6 @@ $(document) .ready(function(){
 });
 
 $(document) .ready(function(){
-   
-
     function loadEmpGroup(){ // renamed the function here
         $.ajax({
             url : "ajex/EmpGroup - Copy.php",
@@ -746,39 +741,74 @@ $(document) .ready(function(){
     }
       loadReligion();
 
-      function loadEmployee_Class(){
-        $.ajax({
-          url : "ajex/Employee_Class - Copy.php",
-          type:"POST",
-          success : function(data){
-            $("#Employee_Class_drop").html(data);
-          }
-        });
-      }
+      function loadEmployee_Class() {
+      var Department_Type = $('#DepartmentType').val();
+
+      $.ajax({
+        url: "ajex/Employee_Class - Copy.php",
+        type: "POST",
+        data: { Department_Type: Department_Type },
+        success: function(data) {
+          $("#Employee_Class_drop").html(data);
+        },
+        error: function() {
+          $("#Employee_Class_drop").html('<option value="">Error loading options</option>');
+        }
+      });
+    }
+
+    // Load employee class options when the department type changes
+    $('#DepartmentType').change(function() {
       loadEmployee_Class();
+    });
 
-      function loadEmployee_Group(){
-        $.ajax({
-          url : "ajex/Employee_Group - Copy.php",
-          type:"POST",
-          success : function(data){
+    // Initial load based on default value
+    loadEmployee_Class();
+
+
+
+// Function to load Employee Group based on Employee Class
+function loadEmployee_Group() {
+    var Employee_Class = $('#Employee_Class_drop').val();
+
+    $.ajax({
+        url: "ajex/Employee_Group - Copy.php",
+        type: "POST",
+        data: { Employee_Class: Employee_Class },
+        success: function(data) {
             $("#Employee_Group_drop").html(data);
-          }
-        });
-      }
-      loadEmployee_Group();
+        },
+        error: function() {
+            $("#Employee_Group_drop").html('<option value="">Error loading options</option>');
+        }
+    });
+}
 
-      
-      function loadEmployee_Sub_Group(){
-        $.ajax({
-          url : "ajex/Employee_Sub_Group - Copy.php",
-          type:"POST",
-          success : function(data){
+// Load employee group options when the employee class changes
+$('#Employee_Class_drop').change(function() {
+    loadEmployee_Group();
+});
+
+
+// Function to load Employee sub Group based on Employee Group
+function loadEmployee_Sub_Group() {
+    var Employee_Group = $('#Employee_Group_drop').val();
+    $.ajax({
+        url: "ajex/Employee_Sub_Group - Copy.php",
+        type: "POST",
+        data: { Employee_Group: Employee_Group },
+        success: function(data) {
             $("#Employee_Sub_Group_drop").html(data);
-          }
-        });
-      }
-      loadEmployee_Sub_Group();
+        },
+        error: function() {
+            $("#Employee_Sub_Group_drop").html('<option value="">Error loading options</option>');
+        }
+    });
+}
+// Load employee group options when the employee class changes
+$('#Employee_Group_drop').change(function() {
+    loadEmployee_Sub_Group();
+});
 
       function loadEmployee_Quota(){
         $.ajax({
@@ -801,16 +831,28 @@ $(document) .ready(function(){
         });
       }
       loadSalaryBank();
-      function loadSalaryBankBranch(){
-        $.ajax({
-          url : "ajex/SalaryBankBranch - Copy.php",
-          type:"POST",
-          success : function(data){
+      
+// Function to load Employee sub Group based on Employee Group
+function loadSalaryBankBranch() {
+    var Salary_Bank = $('#SalaryBank_drop').val();
+    $.ajax({
+        url: "ajex/SalaryBankBranch - Copy.php",
+        type: "POST",
+        data: { Salary_Bank: Salary_Bank },
+        success: function(data) {
             $("#SalaryBankBranch_drop").html(data);
-          }
-        });
-      }
+        },
+        error: function() {
+            $("#SalaryBankBranch_drop").html('<option value="">Error loading options</option>');
+        }
+    });
+}
+// Load employee group options when the employee class changes
+$('#SalaryBank_drop').change(function() {
+    loadSalaryBankBranch();
+});
       loadSalaryBankBranch();
+
       function loadPayType(){
         $.ajax({
           url : "ajex/PayType - Copy.php",
@@ -832,37 +874,67 @@ $(document) .ready(function(){
       }
       loadWeeklyWorkingDays();
 
-      function loadGrade(){
-        $.ajax({
-          url : "ajex/Grade - Copy.php",
-          type:"POST",
-          success : function(data){
-            $("#Grade_drop").html(data);
-          }
-        });
-      }
+      function loadGrade() {
+      var Department_Type = $('#DepartmentType').val();
+      $.ajax({
+        url: "ajex/Grade - Copy.php",
+        type: "POST",
+        data: { Department_Type: Department_Type },
+        success: function(data) {
+          $("#Grade_drop").html(data);
+        },
+        error: function() {
+          $("#Grade_drop").html('<option value="">Error loading options</option>');
+        }
+      });
+    }
+    // Load employee class options when the department type changes
+    $('#DepartmentType').change(function() {
       loadGrade();
-      function loadDepartment(){
-        $.ajax({
-          url : "ajex/Department - Copy.php",
-          type:"POST",
-          success : function(data){
-            $("#Department_drop").html(data);
-          }
-        });
-      }
+    });
+    // Initial load based on default value
+    loadGrade();
+
+      function loadDepartment() {
+      var Department_Type = $('#DepartmentType').val();
+      $.ajax({
+        url: "ajex/Department - Copy.php",
+        type: "POST",
+        data: { Department_Type: Department_Type },
+        success: function(data) {
+          $("#Department_drop").html(data);
+        },
+        error: function() {
+          $("#Department_drop").html('<option value="">Error loading options</option>');
+        }
+      });
+    }
+    // Load employee class options when the department type changes
+    $('#DepartmentType').change(function() {
       loadDepartment();
-      function loadJob_Tiltle(){
-     $.ajax({
-       url : "ajex/Job_Tiltle - Copy.php",
-       type:"POST",
-       success : function(data){
-         console.log(data); // Log the response to the console
-         $("#Job_Tiltle_drop").html(data);
-       }
-     });
-   }
-   loadJob_Tiltle();
+    });
+    // Initial load based on default value
+    loadDepartment();
+   function loadJob_Tiltle() {
+      var Department_Type = $('#DepartmentType').val();
+      $.ajax({
+        url: "ajex/Job_Tiltle - Copy.php",
+        type: "POST",
+        data: { Department_Type: Department_Type },
+        success: function(data) {
+          $("#Job_Tiltle_drop").html(data);
+        },
+        error: function() {
+          $("#Job_Tiltle_drop").html('<option value="">Error loading options</option>');
+        }
+      });
+    }
+    // Load employee class options when the department type changes
+    $('#DepartmentType').change(function() {
+      loadJob_Tiltle();
+    });
+    // Initial load based on default value
+    loadJob_Tiltle();
 
       function loadType(){
         $.ajax({
@@ -901,7 +973,7 @@ $(document) .ready(function(){
 function validateSection1() {
   // Get the entered CNIC number
 
-  var fName = document.getElementById("fName").value;
+var fName = document.getElementById("fName").value;
 var fatherName = document.getElementById("FatherName").value;
 var cNo = document.getElementById("cNo").value;
 var email = document.getElementById("email").value;
