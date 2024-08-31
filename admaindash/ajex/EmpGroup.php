@@ -4,7 +4,7 @@ include ('../link/desigene/db.php');
 // var for php insert
 $EmpGroup= strtoupper($_POST['EmpGroup']);
 // Insert query
-$insert= mysqli_query($conn,"INSERT INTO `master`(`drop`, `name`) VALUES ('$EmpGroup','EmpGroup')");
+$insert= mysqli_query($conn,"INSERT INTO `master`(`Perant`, `drop`, `name`) VALUES (1,'$EmpGroup','EmpGroup')");
 if($insert){
  echo 1;
 }else{

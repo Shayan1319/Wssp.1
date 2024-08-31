@@ -40,8 +40,7 @@ h1 h2 h3 h4 h4 h5 h6 p label{
             </button>
             <ul class="dropdown-menu">
               <?php 
-include('../link/desigene/db.php');
-
+              include('link/desigene/db.php');
               $id = $_SESSION['EmployeeNumber'];
               $insert = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo`='$id'");
               while($row = mysqli_fetch_array($insert)){

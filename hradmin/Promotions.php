@@ -33,7 +33,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       $CNIC = $_GET['updat'];
       $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `EmployeeNo` ='$CNIC' ");
       while($see=mysqli_fetch_array($select)){
+      
       ?>
+      <script>var TypeEmp='<?php echo $see ['TypeEmp'] ?>';</script>
           <div class="container-fluid m-auto p-5 bg-light">
             <div class="row">
               <div class="col-md-6 col-sm-12 col-lg-6">
@@ -661,21 +663,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     }
     loadTable();
     function From_Designation(){
+      var Department_Type = TypeEmp;
      $.ajax({
        url : "ajex/Job_Tiltle - Copy.php",
        type:"POST",
+       data: { Department_Type: Department_Type },
        success : function(data){
          console.log(data); // Log the response to the console
          $("#From_Designation").html(data);
        }
      });
-   }
+   } 
 
    From_Designation();
    function To_Designation(){
+      var Department_Type = TypeEmp;
      $.ajax({
        url : "ajex/Job_Tiltle - Copy.php",
        type:"POST",
+              data: { Department_Type: Department_Type },
        success : function(data){
          console.log(data); // Log the response to the console
          $("#To_Designation").html(data);
@@ -684,9 +690,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    }
    To_Designation();
    function From_BPS(){
+      var Department_Type = TypeEmp;
         $.ajax({
           url : "ajex/Grade - Copy.php",
-          type:"POST",
+          type:"POST",       
+          data: { Department_Type: Department_Type },
           success : function(data){
             $("#From_BPS").html(data);
           }
@@ -694,9 +702,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       }
       From_BPS();
       function to_BPS(){
+      var Department_Type = TypeEmp;
         $.ajax({
           url : "ajex/Grade - Copy.php",
           type:"POST",
+          data: { Department_Type: Department_Type },
           success : function(data){
             $("#to_BPS").html(data);
           }
@@ -705,9 +715,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       to_BPS();
       
     function From_DesignationUpdate(){
+            var Department_Type = TypeEmp;
      $.ajax({
        url : "ajex/Job_Tiltle - Copy.php",
        type:"POST",
+              data: { Department_Type: Department_Type },
        success : function(data){
          console.log(data); // Log the response to the console
          $("#From_DesignationUpdate").html(data);
@@ -717,9 +729,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    
    From_DesignationUpdate();
    function To_DesignationUpdate(){
+          var Department_Type = TypeEmp;
      $.ajax({
        url : "ajex/Job_Tiltle - Copy.php",
        type:"POST",
+              data: { Department_Type: Department_Type },
        success : function(data){
          console.log(data); // Log the response to the console
          $("#To_DesignationUpdate").html(data);
@@ -728,9 +742,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
    }
    To_DesignationUpdate();
    function From_BPSupdate(){
+              var Department_Type = TypeEmp;
         $.ajax({
           url : "ajex/Grade - Copy.php",
           type:"POST",
+                        data: { Department_Type: Department_Type },
           success : function(data){
             $("#From_BPSupdate").html(data);
           }
@@ -738,9 +754,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       }
       From_BPSupdate();
       function to_BPSupdate(){
+                  var Department_Type = TypeEmp;
         $.ajax({
           url : "ajex/Grade - Copy.php",
           type:"POST",
+                        data: { Department_Type: Department_Type },
           success : function(data){
             $("#to_BPSupdate").html(data);
           }

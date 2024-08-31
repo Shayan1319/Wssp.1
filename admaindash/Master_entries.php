@@ -8,7 +8,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   
   // Redirect to the logout page
   header("Location: ../logout.php");
-  exit; // Ensure that the script stops execution after the header redirection
+  exit;
+   // Ensure that the script stops execution after the header redirection
 }else{
 
 ?>
@@ -340,8 +341,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <label for="">Type Parent</label>
                     <select name="" class="form-select" id="Employee_Class_Parent">
                       <option value="">Select</option>
-                      <option value="WSSC">WSSC</option>
-                      <option value="TMA">TMA</option>
+                      <option value="2">WSSC</option>
+                      <option value="3">TMA</option>
                     </select>
                   </td>
                   <td><label>Employee Class</label><input class="form-control" type="text" placeholder="Add Option" name="Employee_Class" id="Employee_Class"></td>
@@ -413,8 +414,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                   <label for="">Type Parent</label>
                     <select name="" class="form-select" id="Grade_Parent">
                     <option value="">Select</option>
-                      <option value="WSSC">WSSC</option>
-                      <option value="TMA">TMA</option>
+                      <option value="2">WSSC</option>
+                      <option value="3">TMA</option>
                     </select>
                   </td>
                   <td><label>Grade</label><input class="form-control" type="text" placeholder="Add Option" name="Grade" id="Grade"></td>
@@ -426,8 +427,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <label for="">Type Parent</label>
                     <select name="" class="form-select" id="Department_Parent">
                       <option value="">Select</option>
-                      <option value="WSSC">WSSC</option>
-                      <option value="TMA">TMA</option>
+                      <option value="2">WSSC</option>
+                      <option value="3">TMA</option>
                     </select>
                   </td>
                   <td><label>Department</label><input class="form-control" type="text" placeholder="Add Option" name="Department" id="Department"></td>
@@ -439,8 +440,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     <label for="">Type Parent</label>
                     <select name="" class="form-select" id="Job_Tiltle_Parent">
                       <option value="">Select</option>
-                      <option value="WSSC">WSSC</option>
-                      <option value="TMA">TMA</option>
+                      <option value="2">WSSC</option>
+                      <option value="3">TMA</option>
                     </select>
                   </td>
                   <td><label>Job Title</label><input class="form-control" type="text" placeholder="Add Option" name="Job_Tiltle" id="Job_Tiltle"></td>
@@ -1069,7 +1070,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }
         });
       }
-      loadleave();
+      loadDependertype();
+
       function loadleave(){
         $.ajax({
           url : "ajex/leave - Copy.php",
@@ -1105,6 +1107,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               loadWeeklyWorkingDays();
               loadGrade();
               loadDepartment();
+              loadDependertype();
               loadJob_Tiltle();
               loadSalary_Mode();
               loadStatus();

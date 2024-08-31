@@ -35,7 +35,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="heading<?php echo $a ?>">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse<?php echo $a ?>" data-bs-target="#collapse<?php echo $a ?>" aria-expanded="true" aria-controls="collapse<?php echo $a ?>">
-                                        Time Period # <?php echo $rowofTP['ID'] ?> | From: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate']))?> | To: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate'])); ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
+                                        Time Period # <?php echo $rowofTP['ID'] ?> | From: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate']))?> | To: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate'])); ?> | Working day: <?php echo $rowofTP['WrokingDays']; $working_day= $rowofTP['WrokingDays']  ?>
                                     </button>
                                 </h2>
                                 <div id="collapse<?php echo $a ?>" class="accordion-collapse collapse show" aria-labelledby="heading<?php echo $a ?>" data-bs-parent="#accordionExample">
@@ -45,9 +45,25 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                             <?php
 $timeperiodId = $rowofTP['ID'];
 $Employee_Manager = $_SESSION['EmployeeNumber'];
+$fromdate = $rowofTP['FromDate'];
+$todate = $rowofTP['ToDate'];
+$working_day = $rowofTP['WrokingDays'];
+$startDate = new DateTime($fromdate);
+$endDate = new DateTime($todate);
 
 // Select query for employees whose supervisor is the logged-in person
-$selectEmp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND `Attendance_Supervisor`=$Employee_Manager");
+$selectEmp = mysqli_query($conn, "SELECT e.*
+FROM employeedata e
+LEFT JOIN (
+    SELECT Employeeid, COUNT(*) AS attendance_count
+    FROM atandece
+    WHERE timeperiodId = '$timeperiodId'
+    GROUP BY Employeeid
+) a ON e.id = a.Employeeid
+WHERE e.Status = 'ON-DUTY'
+  AND e.Attendance_Supervisor = '$Employee_Manager'
+  AND (a.attendance_count IS NULL OR a.attendance_count < '$working_day');
+");
 
 $e = 1;
 while ($rowoemp = mysqli_fetch_array($selectEmp)) {

@@ -1,41 +1,52 @@
 <?php
-                    include('../link/desigene/db.php');
-                    $sql = "SELECT * FROM `employeedataupdate` WHERE `status`='IN PROCESS'";
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) {
-                        $a=1;
-                          while($row=mysqli_fetch_array($result)){
-                            ?>
-                          <form method="post" enctype="multipart/form-data">
-                            <tr>
-                                <th scope="row"><?php echo $a?></th>
-                                <td>
-                                    <?php echo $row['EmployeeNoUpdate'] ?>
-                                </td>
-                                <td>
-                                    <h5><?php echo $row['fNameUpdate']?> <?php echo $row['lNameUpdate']?></h5>
-                                </td>
-                                <td><?php echo $row['Job_TiltleUpdate'] ?></td>
-                                <td><?php echo $row['CNICUpdate'] ?></td>
-                                <td><?php echo $row['father_NameUpdate'] ?></td>
-                                <td><?php echo $row['emailUpdate'] ?></td>
-                                <td><?php echo $row['Employement_GroupUpdate'] ?></td>
-                                <td><?php echo $row['GradeUpdate'] ?></td>
-                                <td><?php echo $row['DepartmentUpdate'] ?></td>
-                                <td><?php echo $row['Job_TiltleUpdate'] ?></td>
-                                <td><?php echo $row['StatusUpdate'] ?></td>
-                                <td><?php echo $row['Joining_DateUpdate'] ?></td>
-                                <td><?php echo $row['Contract_Expiry_DateUpdate'] ?></td>
-                                <td><a class="btn btn-success text-white float-right shadow" href="update_singil_data.php?id=<?php echo $row['Id']?>" >See</a></td>
-                                <td>
-                                  <input  type="submit" data-acpt="<?php echo $row['Id'] ?>" class="btn btn-success text-white float-right shadow" value="Accept" id="Accept">
-                                </td>
-                                <td>
-                                  <input type="submit" data-rejc="<?php echo $row['Id'] ?>" class="btn bg-danger text-white float-right shadow" value="Reject" id="Reject"><input type="number" readonly hidden name="deletid" value="<?php echo $row['Id']?>" id="">
-                                </td>
-                            </tr>
+$servername = "localhost";
+$username = "root";
+$password = "";
+$db = "database_wssc";
 
-                          </form>
-                        <?php
-                    $a++;} }
-                            ?>
+// Create connection
+$conn = mysqli_connect($servername, $username, $password,$db);
+
+// Check connection
+if ($conn->connect_error) {
+ ?>
+ <script>
+      alert("Sorry not connect to database");
+ </script>
+<?php }
+else
+{
+     echo "connected";
+}
+?>
+<?php
+$sql = "SELECT * FROM `employeedataupdate` WHERE `status`='IN PROCESS'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $a = 1;
+    while ($row = mysqli_fetch_array($result)) {
+        echo "<tr>
+                <th scope='row'>{$a}</th>
+                <td>{$row['EmployeeNoUpdate']}</td>
+                <td><h5>{$row['fNameUpdate']} {$row['lNameUpdate']}</h5></td>
+                <td>{$row['Job_TiltleUpdate']}</td>
+                <td>{$row['CNICUpdate']}</td>
+                <td>{$row['father_NameUpdate']}</td>
+                <td>{$row['emailUpdate']}</td>
+                <td>{$row['Employement_GroupUpdate']}</td>
+                <td>{$row['GradeUpdate']}</td>
+                <td>{$row['DepartmentUpdate']}</td>
+                <td>{$row['Job_TiltleUpdate']}</td>
+                <td>{$row['StatusUpdate']}</td>
+                <td>{$row['Joining_DateUpdate']}</td>
+                <td>{$row['Contract_Expiry_DateUpdate']}</td>
+                <td><a class='btn btn-success text-white float-right shadow' href='update_singil_data.php?id={$row['Id']}'>See</a></td>
+                <td><button data-acpt='{$row['Id']}' class='btn btn-success text-white float-right shadow accept-btn'>Accept</button></td>
+                <td><button data-rejc='{$row['Id']}' class='btn bg-danger text-white float-right shadow reject-btn'>Reject</button></td>
+              </tr>";
+        $a++;
+    }
+} else {
+    echo "<tr><td colspan='16'>0 results</td></tr>";
+}
+?>

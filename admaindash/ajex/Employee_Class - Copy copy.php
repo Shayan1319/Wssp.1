@@ -7,7 +7,7 @@ if(mysqli_num_rows($select)>0){
   <?php
     while($row=mysqli_fetch_assoc($select)){
      ?>
-     <option value="<?php echo $row['drop'] ?>"><?php echo $row['drop'] ?></option>
+     <option value="<?php echo $row['id'] ?>"><?php echo $row['drop'] ?></option>
      <?php   
     }
 }

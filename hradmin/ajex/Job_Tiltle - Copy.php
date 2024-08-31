@@ -1,24 +1,46 @@
 <?php
-include ('../link/desigene/db.php');
+include('../link/desigene/db.php');
+
 // Check if Department_Type is set
 if (isset($_POST['Department_Type'])) {
-    $Department_Type = $_POST['Department_Type'];
-    // Prepare and execute the query
-    $stmt = $conn->prepare("SELECT * FROM `master` WHERE `Perant` = ? AND `name` = 'Job_Tiltle'");
-    $stmt->bind_param('s', $Department_Type);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        echo '<option value="">Select</option>';
-        while ($row = $result->fetch_assoc()) {
-            echo '<option value="' . htmlspecialchars($row['drop']) . '">' . htmlspecialchars($row['drop']) . '</option>';
+    $dropdown = $_POST['Department_Type'];
+
+    // Prepare and execute the query to get the ID from the 'master' table
+    $dropQuery = $conn->prepare("SELECT `id` FROM `master` WHERE `drop` = ? AND `name` = 'EmpType'");
+    $dropQuery->bind_param('s', $dropdown);
+    $dropQuery->execute();
+    $dropResult = $dropQuery->get_result();
+
+    // Fetch the ID and use it to get job titles
+    if ($dropResult->num_rows > 0) {
+        while ($rowdrop = $dropResult->fetch_assoc()) {
+            $parentId = $rowdrop['id']; // Use the fetched ID
+
+            // Prepare and execute the query to get job titles based on the Perant (EmpType)
+            $stmt = $conn->prepare("SELECT * FROM `master` WHERE `Perant` = ? AND `name` = 'Job_Tiltle'");
+            $stmt->bind_param('s', $parentId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                echo '<option value="">Select</option>';
+                while ($row = $result->fetch_assoc()) {
+                    echo '<option value="' . htmlspecialchars($row['drop']) . '">' . htmlspecialchars($row['drop']) . '</option>';
+                }
+            } else {
+                echo '<option value="">No options available</option>';
+            }
+
+            $stmt->close();
         }
     } else {
         echo '<option value="">No options available</option>';
     }
-    $stmt->close();
+
+    $dropQuery->close();
 } else {
-      echo '<option value="">No options available</option>';
-  }
+    echo '<option value="">No options available</option>';
+}
+
 $conn->close();
 ?>

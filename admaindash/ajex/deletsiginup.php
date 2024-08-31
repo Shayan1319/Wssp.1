@@ -1,26 +1,25 @@
 <?php
 include('../link/desigene/db.php');
 
-    $did = $_GET['did'];
+$response = array('success' => false, 'message' => '');
 
-    // Delete query
-    $delete = mysqli_query($conn, "DELETE FROM `login` WHERE `Id` = '$did'");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $did = $_POST['did'];
 
-    if($delete) {
-         // Insertion was successful
-    ?>
-    <script>
-        alert("Data delete successfully");
-        location.replace("../signup.php");
-    </script>
-    <?php
+    // Validate the ID
+    if (empty($did)) {
+        $response['message'] = 'No ID provided.';
     } else {
-         // Insertion was successful
-    ?>
-    <script>
-        alert("Data not delete successfully");
-        location.replace("signup.php");
-    </script>
-    <?php // Failed to delete
+        $query = "DELETE FROM `login` WHERE `Id` = '$did'";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $response['success'] = true;
+            $response['message'] = 'Data deleted successfully.';
+        } else {
+            $response['message'] = 'Error deleting data: ' . mysqli_error($conn);
+        }
     }
-?>
+}
+
+echo json_encode($response);

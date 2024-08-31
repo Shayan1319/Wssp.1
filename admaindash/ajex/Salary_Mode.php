@@ -4,7 +4,7 @@ include ('../link/desigene/db.php');
 // var for php insert
 $Salary_Mode= strtoupper($_POST['Salary_Mode']);
 // Insert query
-$insert= mysqli_query($conn,"INSERT INTO `master`(`drop`, `name`) VALUES ('$Salary_Mode','Salary_Mode')");
+$insert= mysqli_query($conn,"INSERT INTO `master`(`Perant`,`drop`, `name`) VALUES (1,'$Salary_Mode','Salary_Mode')");
 if($insert){
  echo 1;
 }else{

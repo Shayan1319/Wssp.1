@@ -4,8 +4,7 @@ include('../link/desigene/db.php');
 
 // Variables for PHP insert
 $Status = strtoupper($_POST['Dependertype']);
-$Department_Parent = strtoupper($_POST['Department_Parent']);
-$query="INSERT INTO `master` (`Perant`, `drop`, `name`) VALUES ('$Department_Parent', '$Status', 'dependertype')";
+$query="INSERT INTO `master` (`Perant`, `drop`, `name`) VALUES ( 1,'$Status', 'dependertype')";
 // Insert query
 // echo $query;
 $insert = mysqli_query($conn, $query);

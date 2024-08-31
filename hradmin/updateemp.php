@@ -49,10 +49,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
       $emptype = strtoupper($_POST["DepartmentType"]);
       $EmployeeNowssp = $_POST["EmployeeNo"];
       $Employee_Manager = $_POST["Employee_Manager"];
-      $Joining_Date = $_POST["Joining_Date"];
-      $Contract_Expiry_Date = $_POST["Contract_Expiry_Date"];
-      $Last_Working_Date = $_POST["Last_Working_Date"];
-      $Attendance_Supervisor = $_POST["Attendance_Supervisor"];
+      $Joining_Date = strtoupper($_POST["Joining_Date"]);
+      $Contract_Expiry_Date = strtoupper($_POST["Contract_Expiry_Date"]);
+      $Last_Working_Date = strtoupper($_POST["Last_Working_Date"]);
+      $Attendance_Supervisor = strtoupper($_POST["Attendance_Supervisor"]);
       $Duty_Location = strtoupper($_POST["Duty_Location"]);
       $Duty_Point = strtoupper($_POST["Duty_Point"]);
       $Salary_Bank = strtoupper($_POST['Salary_Bank']);
@@ -138,12 +138,12 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 $select = mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Id` = $id");
                 while($fetchdata=mysqli_fetch_array($select)){
                   $selectedEmployeeClass = htmlspecialchars($fetchdata['Employee_Class']); // Get the selected value
-                  $selectedEmployeeGroup = htmlspecialchars($fetchdata['Employee_Group']); // Get the selected value
+                  $selectedEmployeeGroup = htmlspecialchars($fetchdata['Employee_Group']);  // Get the selected value
                   $selectedEmployeeSubGroup = htmlspecialchars($fetchdata['Employee_Sub_Group']); // Get the selected value
                   $selectedGrade = htmlspecialchars($fetchdata['Grade']); // Get the selected value
                   $selectedDepartment = htmlspecialchars($fetchdata['Department']); // Get the selected value
-                  $selectedJobTitle = htmlspecialchars($fetchdata['Job_Title']); // Get the selected value
-                  $selectedSalaryBank = htmlspecialchars($fetchdata['Salary_Branch']); // Get the selected value
+                  $selectedJobTitle = htmlspecialchars($fetchdata['Job_Tiltle']); // Get the selected value
+                  $selectedSalaryBranch = htmlspecialchars($fetchdata['Salary_Branch']); // Get the selected value
                 ?>
     <?php include ('link/desigene/sidebar.php')?>
     <div id="main">
@@ -412,30 +412,29 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </div>
                                 </div>
                                 <div class="col-md-4 my-2">
-    <div class="form-group">
-        <label>Employee Class<span>*</span></label>
-        <select name="Employee_Class" id="Employee_Class_drop" class="form-control" data-selected="<?php echo $selectedEmployeeClass; ?>">
-            <!-- Options will be populated via AJAX -->
-        </select>
-    </div>
-</div>
-<div class="col-md-4 my-2">
-    <div class="form-group">
-        <label>Employee Group</label>
-        <select name="Employee_Group" id="Employee_Group_drop" class="form-control" data-selected="<?php echo $selectedEmployeeGroup; ?>">
-            <!-- Options will be populated via AJAX -->
-        </select>
-    </div>
-</div>
-<div class="col-md-4 my-2">
-    <div class="form-group">
-        <label>Employee Sub Group</label>
-        <select name="Employee_Sub_Group" id="Employee_Sub_Group_drop" class="form-control" data-selected="<?php echo $selectedEmployeeSubGroup; ?>">
-            <!-- Options will be populated via AJAX -->
-        </select>
-    </div>
-</div>
-
+                                    <div class="form-group">
+                                        <label>Employee Class<span>*</span></label>
+                                        <select name="Employee_Class" id="Employee_Class_drop" class="form-control" data-selected="<?php echo $selectedEmployeeClass; ?>">
+                                            <!-- Options will be populated via AJAX -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <div class="form-group">
+                                        <label>Employee Group</label>
+                                        <select name="Employee_Group" id="Employee_Group_drop" class="form-control" data-selected="<?php echo $selectedEmployeeGroup; ?>">
+                                            <!-- Options will be populated via AJAX -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <div class="form-group">
+                                        <label>Employee Sub Group</label>
+                                        <select name="Employee_Sub_Group" id="Employee_Sub_Group_drop" class="form-control" data-selected="<?php echo $selectedEmployeeSubGroup; ?>">
+                                            <!-- Options will be populated via AJAX -->
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
                                     <label>Employee Quota</label>
@@ -569,25 +568,26 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                   </select>
                                   </div>
                                 </div>
+                               
                                 <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label>Grade</label>
-                                    <select name="Grade" id="Grade_drop" class="form-control ">
-                                  </select>
-                                  </div>
+                                    <div class="form-group">
+                                        <label>Grade</label>
+                                        <select name="Grade" id="Grade_drop" class="form-control" data-selected-value="<?php echo $selectedGrade; ?>"></select>
+                                    </div>
                                 </div>
+
                                 <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label>Department</label>
-                                    <select name="Department" id="Department_drop" class="form-control ">
-                                  </select>
-                                  </div>
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <select name="Department" id="Department_drop" class="form-control" data-selected-value="<?php echo $selectedDepartment; ?>"></select>
+                                    </div>
                                 </div>
+
                                 <div class="col-md-4 my-2">
-                                  <div class="form-group">
-                                    <label>Job Title</label>
-                                    <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control "></select>
-                                  </div>
+                                    <div class="form-group">
+                                        <label>Job Title</label>
+                                        <select name="Job_Tiltle" id="Job_Tiltle_drop" class="form-control" data-selected-value="<?php echo $selectedJobTitle; ?>"></select>
+                                    </div>
                                 </div>
                                 <div class="col-md-4 my-2">
                                   <div class="form-group">
@@ -609,7 +609,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                       ?>    
                                   </select>
                                     </div>
-                                  </div>
+                                </div>
                                   <div class="col-md-4 my-2">
                                     <div class="form-group">
                                       <label>Status</label>
@@ -805,7 +805,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             }
         });
     }
-    function loadOptions(selectId, url, paramName) {
+    function loadOptions(selectId, url) {
         var Department_Type = $('#DepartmentType').val();
         $.ajax({
             url: url,
@@ -815,6 +815,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 // Add "Other" option
                 var options = '<option value="">Select</option>' + data + '<option value="Other">Other</option>';
                 $(selectId).html(options);
+                // Set the selected value after loading options
+                var selectedValue = $(selectId).data('selected-value');
+                $(selectId).val(selectedValue);
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error: " + status + error);
@@ -873,17 +876,17 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
     $('#DepartmentType').change(function() {
         loadEmployee_Class();
     });
-
-    function loadSalaryBankBranches(selectedValue) {
+    $(document).ready(function() {
+    function loadSalaryBankBranches(selectedValue, selectedBranch) {
         $.ajax({
             url: "ajex/EmployeeUpdate/Salary_Branch.php",
             type: "POST",
-            data: { Salary_Bank: selectedValue },
+            data: { Salary_Bank: selectedValue, Salary_Bank_Branch: selectedBranch },
             success: function(data) {
                 $("#SalaryBankBranch_drop").html(data);
             },
             error: function(xhr, status, error) {
-                console.error("AJAX Error: " + status + error);
+                console.error("AJAX Error: " + status + " " + error);
                 $("#SalaryBankBranch_drop").html('<option value="">Error loading options</option>');
             }
         });
@@ -891,12 +894,15 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
     // On page load, get the initial selected value and load the options
     var initialSelectedValue = $('#SalaryBank_drop').val();
-    loadSalaryBankBranches(initialSelectedValue);
+    var initialSelectedBranch = "<?php echo $selectedSalaryBranch; ?>";
+    loadSalaryBankBranches(initialSelectedValue, initialSelectedBranch);
 
     // When the Salary Bank changes, load the corresponding branches
     $('#SalaryBank_drop').change(function() {
-        loadSalaryBankBranches($(this).val());
+        loadSalaryBankBranches($(this).val(), '');
     });
+});
+
   });
 </script>
 <?php } ?>

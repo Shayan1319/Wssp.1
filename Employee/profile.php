@@ -11,10 +11,23 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
   header("Location: ../logout.php");
   exit; // Ensure that the script stops execution after the header redirection
 }else{
-?><!DOCTYPE html>
+?>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .message {
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
   <div id="main">
@@ -37,6 +50,78 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber'])) {
                 <h5><?php echo $see1 ['ContactPerson']?></h5>
                 <h5 class="text-primary"><?php echo $see1 ['email']?></h5>
                 <h5><?php echo $see1 ['ofphNumber']?></h5>
+                <h2>Verify Your Current Email and Password</h2>
+    <div id="verificationForm">
+        <form id="verifyForm">
+            <label for="currentEmail">Current Email:</label>
+            <input type="email" id="currentEmail" name="currentEmail" required><br><br>
+
+            <label for="currentPassword">Current Password:</label>
+            <input type="password" id="currentPassword" name="currentPassword" required><br><br>
+
+            <button type="submit">Verify</button>
+            <div id="verificationMessage" class="message"></div>
+        </form>
+    </div>
+
+    <div id="updateForm" style="display: none;">
+        <h2>Change Your Email and/or Password</h2>
+        <form id="updateProfileForm">
+            <label for="newEmail">New Email:</label>
+            <input type="email" id="newEmail" name="newEmail"><br><br>
+
+            <label for="newPassword">New Password:</label>
+            <input type="password" id="newPassword" name="newPassword"><br><br>
+
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword"><br><br>
+
+            <button type="submit">Update</button>
+            <div id="updateMessage" class="message"></div>
+        </form>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        // Handle verification form submission
+        $('#verifyForm').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: 'ajex/process_verification.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        $('#verificationForm').hide();
+                        $('#updateForm').show();
+                    }
+                    $('#verificationMessage').html('<p class="' + (response.success ? 'success' : 'error') + '">' + response.message + '</p>');
+                },
+                error: function(xhr, status, error) {
+                    $('#verificationMessage').html('<p class="error">An error occurred: ' + error + '</p>');
+                }
+            });
+        });
+
+        // Handle update profile form submission
+        $('#updateProfileForm').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: 'ajex/process_update.php',
+                type: 'POST',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    $('#updateMessage').html('<p class="' + (response.success ? 'success' : 'error') + '">' + response.message + '</p>');
+                },
+                error: function(xhr, status, error) {
+                    $('#updateMessage').html('<p class="error">An error occurred: ' + error + '</p>');
+                }
+            });
+        });
+    });
+    </script>
               </div>
             </div>
           </div>
