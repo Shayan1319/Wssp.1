@@ -79,9 +79,9 @@ if (isset($_POST['id'])) {
         // Execute the query
         $queryupadfer = mysqli_query($conn, $insertquery);
     }
-        echo 1;
+        echo "Employee ".$EmployeeNo." " .$fName." ".$lName. " Accepted Successfully";
     } else {
-        echo 0;
+        echo "Employee ".$EmployeeNo." " .$fName." ".$lName. " Not Accepted";
     }
 } else {
     echo 0;

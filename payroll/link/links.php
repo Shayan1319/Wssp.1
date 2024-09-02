@@ -5,6 +5,8 @@
 <meta content="" name="description">
 <meta content="" name="keywords">
 
+<link rel="stylesheet" href="../dist/select2/select2.min.css">
+<script src="../dist/select2/select2.min.js"></script>
 <!-- Favicons -->
 <link href="assets/img/apple-touch-icon.png" rel="icon">
 <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">

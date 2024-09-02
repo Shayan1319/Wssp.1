@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2024 at 02:49 PM
+-- Generation Time: Sep 02, 2024 at 01:53 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,8 +50,8 @@ INSERT INTO `allowances` (`id`, `allowance`, `fin_classification`, `rate_calc_mo
 (6, 'MOB CRG', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
 (7, 'CAR MON', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
 (8, 'CONVEY', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
-(9, 'FUEL (LTR)', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
-(10, 'EOBI - EE', 'EOBI-EE', 'RUNTIME VALUE', 'DEDUCTION', 'ACTIVE', 1),
+(9, 'FUEL (LTR)', 'GROSS PAY', 'PREVAILING RATE', 'EARNING', 'ACTIVE', 300),
+(10, 'EOBI - EE', 'EOBI-ER', 'PRESENT RATE', 'FUND', 'ACTIVE', 1),
 (11, 'HTV', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
 (12, 'SPECIAL ALLOWANCE 2021 W.E.F. 01/06/2021', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
 (13, 'ARA-2013 @ 5% - 30/06/2015', 'GROSS PAY', 'PRESENT RATE', 'EARNING', 'ACTIVE', 1),
@@ -85,6 +85,13 @@ CREATE TABLE `allowancesrateupdate` (
   `price` int(255) NOT NULL,
   `allownce_id` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `allowancesrateupdate`
+--
+
+INSERT INTO `allowancesrateupdate` (`ID`, `timeperiod`, `discription`, `price`, `allownce_id`) VALUES
+(1, 2, 'FUEL (LTR)', 300, 9);
 
 -- --------------------------------------------------------
 
@@ -123,6 +130,116 @@ CREATE TABLE `atandece` (
   `PayrollStatusDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `atandece`
+--
+
+INSERT INTO `atandece` (`id`, `Employeeid`, `Shift`, `Tehsil`, `Area`, `Date`, `DDorOT`, `status`, `timeperiodId`, `ManagerStatus`, `ManagerStatusDate`, `GMStatus`, `GMStatusData`, `PayrollStatus`, `PayrollStatusDate`) VALUES
+(1, 1000029, 'Morning', '', '', '2024-08-01', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(2, 1000029, 'Morning', '', '', '2024-08-02', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(3, 1000029, 'Morning', '', '', '2024-08-03', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(4, 1000029, 'Morning', '', '', '2024-08-05', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(5, 1000029, 'Morning', '', '', '2024-08-06', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(6, 1000029, 'Morning', '', '', '2024-08-07', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(7, 1000029, 'Morning', '', '', '2024-08-08', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(8, 1000029, 'Morning', '', '', '2024-08-09', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(9, 1000029, 'Morning', '', '', '2024-08-10', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(10, 1000029, 'Morning', '', '', '2024-08-12', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(11, 1000029, 'Morning', '', '', '2024-08-13', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(12, 1000029, 'Morning', '', '', '2024-08-14', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(13, 1000029, 'Morning', '', '', '2024-08-15', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(14, 1000029, 'Morning', '', '', '2024-08-16', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(15, 1000029, 'Morning', '', '', '2024-08-17', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(16, 1000029, 'Morning', '', '', '2024-08-19', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(17, 1000029, 'Morning', '', '', '2024-08-20', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(18, 1000029, 'Morning', '', '', '2024-08-21', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(19, 1000029, 'Morning', '', '', '2024-08-22', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(20, 1000029, 'Morning', '', '', '2024-08-23', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(21, 1000029, 'Morning', '', '', '2024-08-24', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(22, 1000029, 'Morning', '', '', '2024-08-26', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(23, 1000029, 'Morning', '', '', '2024-08-27', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(24, 1000029, 'Morning', '', '', '2024-08-28', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(25, 1000029, 'Morning', '', '', '2024-08-29', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(26, 1000029, 'Morning', '', '', '2024-08-30', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(27, 1400013, 'Morning', '', '', '2024-08-01', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(28, 1400013, 'Morning', '', '', '2024-08-02', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(29, 1400013, 'Morning', '', '', '2024-08-03', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(30, 1400013, 'Morning', '', '', '2024-08-05', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(31, 1400013, 'Morning', '', '', '2024-08-06', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(32, 1400013, 'Morning', '', '', '2024-08-07', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(33, 1400013, 'Morning', '', '', '2024-08-08', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(34, 1400013, 'Morning', '', '', '2024-08-09', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(35, 1400013, 'Morning', '', '', '2024-08-10', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(36, 1400013, 'Morning', '', '', '2024-08-12', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(37, 1400013, 'Morning', '', '', '2024-08-13', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(38, 1400013, 'Morning', '', '', '2024-08-14', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(39, 1400013, 'Morning', '', '', '2024-08-15', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(40, 1400013, 'Morning', '', '', '2024-08-16', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(41, 1400013, 'Morning', '', '', '2024-08-17', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(42, 1400013, 'Morning', '', '', '2024-08-19', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(43, 1400013, 'Morning', '', '', '2024-08-20', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(44, 1400013, 'Morning', '', '', '2024-08-21', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(45, 1400013, 'Morning', '', '', '2024-08-22', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(46, 1400013, 'Morning', '', '', '2024-08-23', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(47, 1400013, 'Morning', '', '', '2024-08-24', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(48, 1400013, 'Morning', '', '', '2024-08-26', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(49, 1400013, 'Morning', '', '', '2024-08-27', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(50, 1400013, 'Morning', '', '', '2024-08-28', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(51, 1400013, 'Morning', '', '', '2024-08-29', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(52, 1400013, 'Morning', '', '', '2024-08-30', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(53, 1000023, 'Morning', '', '', '2024-08-01', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(54, 1000023, 'Morning', '', '', '2024-08-02', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(55, 1000023, 'Morning', '', '', '2024-08-03', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(56, 1000023, 'Morning', '', '', '2024-08-05', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(57, 1000023, 'Morning', '', '', '2024-08-06', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(58, 1000023, 'Morning', '', '', '2024-08-07', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(59, 1000023, 'Morning', '', '', '2024-08-08', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(60, 1000023, 'Morning', '', '', '2024-08-09', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(61, 1000023, 'Morning', '', '', '2024-08-10', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(62, 1000023, 'Morning', '', '', '2024-08-12', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(63, 1000023, 'Morning', '', '', '2024-08-13', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(64, 1000023, 'Morning', '', '', '2024-08-14', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(65, 1000023, 'Morning', '', '', '2024-08-15', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(66, 1000023, 'Morning', '', '', '2024-08-16', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(67, 1000023, 'Morning', '', '', '2024-08-17', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(68, 1000023, 'Morning', '', '', '2024-08-19', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(69, 1000023, 'Morning', '', '', '2024-08-20', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(70, 1000023, 'Morning', '', '', '2024-08-21', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(71, 1000023, 'Morning', '', '', '2024-08-22', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(72, 1000023, 'Morning', '', '', '2024-08-23', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(73, 1000023, 'Morning', '', '', '2024-08-24', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(74, 1000023, 'Morning', '', '', '2024-08-26', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(75, 1000023, 'Morning', '', '', '2024-08-27', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(76, 1000023, 'Morning', '', '', '2024-08-28', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(77, 1000023, 'Morning', '', '', '2024-08-29', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(78, 1000023, 'Morning', '', '', '2024-08-30', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(79, 1000024, 'Morning', '', '', '2024-08-01', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(80, 1000024, 'Morning', '', '', '2024-08-02', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(81, 1000024, 'Morning', '', '', '2024-08-03', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(82, 1000024, 'Morning', '', '', '2024-08-05', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(83, 1000024, 'Morning', '', '', '2024-08-06', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(84, 1000024, 'Morning', '', '', '2024-08-07', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(85, 1000024, 'Morning', '', '', '2024-08-08', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(86, 1000024, 'Morning', '', '', '2024-08-09', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(87, 1000024, 'Morning', '', '', '2024-08-10', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(88, 1000024, 'Morning', '', '', '2024-08-12', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(89, 1000024, 'Morning', '', '', '2024-08-13', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(90, 1000024, 'Morning', '', '', '2024-08-14', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(91, 1000024, 'Morning', '', '', '2024-08-15', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(92, 1000024, 'Morning', '', '', '2024-08-16', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(93, 1000024, 'Morning', '', '', '2024-08-17', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(94, 1000024, 'Morning', '', '', '2024-08-19', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(95, 1000024, 'Morning', '', '', '2024-08-20', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(96, 1000024, 'Morning', '', '', '2024-08-21', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(97, 1000024, 'Morning', '', '', '2024-08-22', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(98, 1000024, 'Morning', '', '', '2024-08-23', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(99, 1000024, 'Morning', '', '', '2024-08-24', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(100, 1000024, 'Morning', '', '', '2024-08-26', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(101, 1000024, 'Morning', '', '', '2024-08-27', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(102, 1000024, 'Morning', '', '', '2024-08-28', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(103, 1000024, 'Morning', '', '', '2024-08-29', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(104, 1000024, 'Morning', '', '', '2024-08-30', '', 'Present', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +270,15 @@ CREATE TABLE `earning_deduction_fund` (
   `deduction` decimal(10,2) DEFAULT NULL,
   `net_pay` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `earning_deduction_fund`
+--
+
+INSERT INTO `earning_deduction_fund` (`id`, `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`) VALUES
+(1, 2, 320.00, 81671.00, 0.00, 81671.00),
+(2, 25, 320.00, 40026.00, 0.00, 40026.00),
+(3, 38, 320.00, 36581.00, 0.00, 36581.00);
 
 -- --------------------------------------------------------
 
@@ -225,7 +351,7 @@ CREATE TABLE `employeedata` (
 
 INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Name`, `CNIC`, `email`, `pAddress`, `cAddress`, `city`, `postAddress`, `mNumber`, `ofphNumber`, `Alternate_Number`, `DofB`, `religion`, `gender`, `BlGroup`, `Domicile`, `MaritalStatus`, `NextofKin`, `NextofKinCellNumber`, `ContactPerson`, `CPCN`, `Employement_Group`, `Employee_Class`, `Employee_Group`, `Employee_Sub_Group`, `Employee_Quota`, `Salary_Bank`, `Salary_Branch`, `Account_No`, `Pay_Type`, `EOBI_No`, `Bill_Walved_Off`, `Weekly_Working_Days`, `Bill_Waived_Off`, `Employee_Pay_Classification`, `Grade`, `Department`, `Job_Tiltle`, `Salary_Mode`, `Status`, `EmployeeNo`, `Employee_Manager`, `Joining_Date`, `Contract_Expiry_Date`, `Last_Working_Date`, `Attendance_Supervisor`, `Duty_Location`, `Duty_Point`, `TypeEmp`, `type`, `DY_Supervisor`, `leaveAlreadyAvailed`) VALUES
 (1, 'dp.png', 'QASIM', 'ALI', 'KHAN', 'ZARIN', '1641056941379', 'CEO@WSSCSWAT.ORG.PK', 'VILLAGE SALANDA, MANGLAWAR, BABOZAI, SWAT', 'VILLAGE SALANDA, MANGLAWAR, BABOZAI, SWAT', 'SWAT', 'VILLAGE SALANDA, MANGLAWAR, BABOZAI, SWAT', '03319079081', NULL, NULL, '01 12 1946', 'ISLAM', 'MALE', 'B (+)', 'SWABI', 'MARRIED', NULL, NULL, NULL, NULL, 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'ASKARI BANK LTD', 'ASKARI BANK SAIDU SHARIF ROAD MAKANBAGH', '000-345-879-879', '', '478556F8974', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 1', 'ADMINISTRATION', 'CHIEF EXECUTIVE OFFICER', 'BANK TRANSFER', 'RESIGNED', 1000001, 1000049, '01 07 2021', '30 06 2024', NULL, 2000010, '-', '-', 'WSSC', '', '', 34),
-(2, '', 'ASIF', NULL, 'SALEEM', 'YOUSAF KHAN', '1569189741788', 'ASIF.SALEEM@WSSCSWAT.ORG.PK', 'VILLAGE GHALEGAY', 'VILLAGE GHALEGAY', 'SWAT', 'VILLAGE GHALEGAY', '03455388958', NULL, NULL, '03 01 1957', 'ISLAM', 'MALE', NULL, 'SWAT', 'MARRIED', NULL, NULL, NULL, NULL, 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154786', '', '478556F8975', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 3', 'ADMINISTRATION', 'ON-DUTY', 'BANK TRANSFER', 'ON-DUTY', 1000002, 1000049, '01 08 2017', '30 07 2026', NULL, 2000010, '-', '-', 'WSSC', '', '100003', 34),
+(2, '', 'ASIF', NULL, 'SALEEM', 'YOUSAF KHAN', '1569189741788', 'ASIF.SALEEM@WSSCSWAT.ORG.PK', 'VILLAGE GHALEGAY', 'VILLAGE GHALEGAY', 'SWAT', 'VILLAGE GHALEGAY', '03455388958', NULL, NULL, '03 01 1957', 'ISLAM', 'MALE', NULL, 'SWAT', 'MARRIED', NULL, NULL, NULL, NULL, 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154786', '', '478556F8975', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 3', 'ADMINISTRATION', 'GM (HR, ADMIN & PROCUREMENT)', 'BANK TRANSFER', 'ON-DUTY', 1000002, 1000049, '01 08 2017', '30 07 2026', NULL, 2000010, '-', '-', 'WSSC', '', '100003', 34),
 (3, '', 'MIAN', 'SHAHID', 'ALI', 'ZARAWAR', '1561970541547', 'MIAN.SHAHID@WSSCSWAT.ORG.PK', 'VILLAGE & PO GHALEGAY, SWAT.', 'VILLAGE & PO GHALEGAY, SWAT.', 'SWAT', 'VILLAGE & PO GHALEGAY, SWAT.', '03447549030', NULL, NULL, '08 10 1958', 'ISLAM', 'MALE', NULL, 'SWAT', 'MARRIED', '-', '', '-', '-', 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154787', '', '478556F8976', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 5', 'ADMINISTRATION', 'MANAGER SOLID WASTE', 'BANK TRANSFER', 'CONTRACT EXP.', 1000003, 1000036, '01 03 2018', '28 02 2022', NULL, 2000010, '', '', 'WSSC', '', '', 34),
 (4, '', 'SAFI', 'TAHIR', 'ULLAH', 'WAHID ZAMAN', '1641053741331', 'SAFI.ULLAH@WSSCSWAT.ORG.PK', 'STREET NO 5, RASHIDABAD NEAR OLD FAQIRABAD PS', 'STREET NO 5, RASHIDABAD NEAR OLD FAQIRABAD PS', 'SWAT', 'STREET NO 5, RASHIDABAD NEAR OLD FAQIRABAD PS', '03319439093', NULL, NULL, '01 01 1959', 'ISLAM', 'MALE', NULL, 'SWAT', 'MARRIED', '', '', '', '', 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154788', '', '478556F8977', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 4', 'ADMINISTRATION', 'SENIOR MANAGER COMMERCIAL', 'BANK TRANSFER', 'ON-DUTY', 1000004, 1000049, '08 08 2017', '06 08 2026', NULL, 2000010, 'Jehanger', 'Jehanger', 'WSSC', '', '', 34),
 (5, '', 'IMTIAZ', NULL, 'UDDIN', 'TALIMAND', '1564076141617', 'IMTIAZ.UDDIN@WSSCSWAT.ORG.PK', 'SHOP NO 9, GREEN CHOWK, MINGORA, SWAT', 'SHOP NO 9, GREEN CHOWK, MINGORA, SWAT', 'SWAT', 'SHOP NO 9, GREEN CHOWK, MINGORA, SWAT', '03316919009', NULL, NULL, '01 01 1959', 'ISLAM', 'MALE', 'B+', 'SWAT', 'MARRIED', '', '', '', '', 'WSSC CONTRACTUAL', 'WSSCS PAY', 'WSSCS - ADMIN PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154789', '', '478556F8978', NULL, 5, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 6', 'ADMINISTRATION', 'DY. MANAGER - ADMIN & PROCUREMENT', 'BANK TRANSFER', 'ON-DUTY', 1000005, 1000049, '16 02 2018', '15 02 2024', NULL, 2000010, '', '', 'WSSC', '', '', 34),
@@ -299,7 +425,8 @@ INSERT INTO `employeedata` (`Id`, `image`, `fName`, `mName`, `lName`, `father_Na
 (72, NULL, 'AKBAR', NULL, 'RAHMAN', 'AKBAR ALI', '1571295341854', NULL, 'BARN, TAHIRABAD, MINGORA, TEHSIL BABOZAI, SWAT', 'BARN, TAHIRABAD, MINGORA, TEHSIL BABOZAI, SWAT', 'SWAT', 'BARN, TAHIRABAD, MINGORA, TEHSIL BABOZAI, SWAT', '03454758937', NULL, NULL, '10 01 2001', NULL, 'MALE', 'N/A', NULL, 'MARRIED', NULL, NULL, NULL, NULL, 'TMA PERMANENT', 'TMA PAY', 'TMA - WATER PAY', 'TMA - WATER - PERMANENT PAY', 'LETTER OF INTEREST', NULL, NULL, '204154812', NULL, NULL, NULL, 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'BPS-6', 'WATER SUPPLY', 'TW OPERATOR', 'BANK TRANSFER', 'RETIRED', 2000022, 1000006, '08 06 1987', '30 06 2019', NULL, 2000010, NULL, NULL, 'TMA', NULL, NULL, 15),
 (73, NULL, 'FAZAL', NULL, 'KHAN', 'AJAB GUL', '1567384941728', NULL, NULL, NULL, 'SWAT', NULL, '03455928976', NULL, NULL, '01 02 2001', NULL, 'MALE', 'N/A', NULL, 'MARRIED', NULL, NULL, NULL, NULL, 'TMA PERMANENT', 'TMA PAY', 'TMA - WATER PAY', 'TMA - WATER - PERMANENT PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD.', NULL, NULL, NULL, NULL, NULL, 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'BPS-6', 'WATER SUPPLY', 'TW OPERATOR', 'BANK TRANSFER', 'RETIRED', 2000023, 1100009, '16 04 1987', '31 12 2027', NULL, 2000010, NULL, NULL, 'TMA', NULL, NULL, 15),
 (74, NULL, 'ALI', NULL, 'KHALIQ', 'ABDUR RAHMAN', '1570092141814', NULL, 'MOH: SHAHEEN ABAD, SAIDU SHARIF TEH: BABUZAI DISTT: SWAT', 'MOH: SHAHEEN ABAD, SAIDU SHARIF TEH: BABUZAI DISTT: SWAT', 'SWAT', 'MOH: SHAHEEN ABAD, SAIDU SHARIF TEH: BABUZAI DISTT: SWAT', '03455118949', NULL, NULL, '06 04 2001', NULL, 'MALE', 'N/A', NULL, 'MARRIED', NULL, NULL, NULL, NULL, 'TMA PERMANENT', 'TMA PAY', 'TMA - WATER PAY', 'TMA - WATER - PERMANENT PAY', 'LETTER OF INTEREST', 'THE BANK OF KHYBER LTD.', 'BOK SAIDU SHARIF ROAD MAKANBAGH', NULL, NULL, NULL, NULL, 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'BPS-6', 'WATER SUPPLY', 'TW OPERATOR', 'BANK TRANSFER', 'ON-DUTY', 2000024, 1100009, '23 05 1988', '30 06 2021', NULL, 2000010, NULL, NULL, 'TMA', NULL, NULL, 15),
-(75, NULL, 'SAID', 'MUHAMMAD', 'BAHADURE', 'ABDUL GHAFOOR', '1641052941321', NULL, 'MOH. RAHGMUHALLA, MINGORA, SWAT', 'MOH. RAHGMUHALLA, MINGORA, SWAT', 'SWAT', 'MOH. RAHGMUHALLA, MINGORA, SWAT', '03319529096', NULL, NULL, '01 01 2020', NULL, 'MALE', 'N/A', 'SWAT', 'MARRIED', NULL, NULL, NULL, NULL, NULL, 'TMA PAY', 'TMA - WATER PAY', 'TMA - WATER - PERMANENT PAY', 'LETTER OF INTEREST', 'BANK TRANSFER', 'BOK SAIDU SHARIF ROAD MAKANBAGH', NULL, NULL, NULL, NULL, 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'BPS-6', 'WATER SUPPLY', NULL, 'BANK TRANSFER', 'RETIRED', 2000025, NULL, NULL, '30 06 2021', NULL, 2000010, NULL, NULL, 'TMA', NULL, NULL, 15);
+(75, NULL, 'SAID', 'MUHAMMAD', 'BAHADURE', 'ABDUL GHAFOOR', '1641052941321', NULL, 'MOH. RAHGMUHALLA, MINGORA, SWAT', 'MOH. RAHGMUHALLA, MINGORA, SWAT', 'SWAT', 'MOH. RAHGMUHALLA, MINGORA, SWAT', '03319529096', NULL, NULL, '01 01 2020', NULL, 'MALE', 'N/A', 'SWAT', 'MARRIED', NULL, NULL, NULL, NULL, NULL, 'TMA PAY', 'TMA - WATER PAY', 'TMA - WATER - PERMANENT PAY', 'LETTER OF INTEREST', 'BANK TRANSFER', 'BOK SAIDU SHARIF ROAD MAKANBAGH', NULL, NULL, NULL, NULL, 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'BPS-6', 'WATER SUPPLY', NULL, 'BANK TRANSFER', 'RETIRED', 2000025, NULL, NULL, '30 06 2021', NULL, 2000010, NULL, NULL, 'TMA', NULL, NULL, 15),
+(76, '', 'SHAYAN', '', 'KHAN', 'RIAYAT KHAN', '3740560259313', 'shayans1215225@gmail.com', 'MOH AWAN JEHANGIRA SWABI', '', 'SWABI', 'MOH AWAN JEHANGIRA SWABI', '034191916168', '', '', '28 08 1999', 'ISLAM', 'MAIL', 'B+', 'SWABI', 'UNMARRIED', '', '', '', '', 'TMA DAILY WAGES', 'WSSCS PAY', 'WSSCS - MANAGEMENT', 'WSSCS - MSW - CONTINGENT PAY', 'LETTER OF INTEREST', 'HABIB BANK LTD', 'KHASRA # 2461.JEHANGIRA ROAD SWABI', '23423032402340', 'MONTHLY', '93939729', '', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 7', 'ADMINISTRATION', 'ASSTT : SANITARY INSPECTOR', 'BANK TRANSFER', 'ON-DUTY', 1400026, 1000007, '30 09 2023', '30 09 2024', '', 2000010, '', '', 'WSSC', '', '', 34);
 
 -- --------------------------------------------------------
 
@@ -370,6 +497,14 @@ CREATE TABLE `employeedataupdate` (
   `AuthBy` varchar(255) DEFAULT NULL,
   `leaveAlreadyAvailedUpdate` int(255) NOT NULL DEFAULT 34
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employeedataupdate`
+--
+
+INSERT INTO `employeedataupdate` (`Id`, `IdUpdate`, `imageUpdate`, `fNameUpdate`, `mNameUpdate`, `lNameUpdate`, `father_NameUpdate`, `CNICUpdate`, `emailUpdate`, `pAddressUpdate`, `cAddressUpdate`, `cityUpdate`, `postAddressUpdate`, `mNumberUpdate`, `ofphNumberUpdate`, `Alternate_NumberUpdate`, `DofBUpdate`, `religionUpdate`, `genderUpdate`, `BlGroupUpdate`, `DomicileUpdate`, `MaritalStatusUpdate`, `NextofKinUpdate`, `NextofKinCellNumberUpdate`, `ContactPersonUpdate`, `CPCNUpdate`, `Employement_GroupUpdate`, `Employee_ClassUpdate`, `Employee_GroupUpdate`, `Employee_Sub_GroupUpdate`, `Employee_QuotaUpdate`, `Salary_BankUpdate`, `Salary_BranchUpdate`, `Account_NoUpdate`, `Pay_TypeUpdate`, `EOBI_NoUpdate`, `Bill_Walved_OffUpdate`, `Weekly_Working_DaysUpdate`, `Bill_Waived_OffUpdate`, `Employee_Pay_ClassificationUpdate`, `GradeUpdate`, `DepartmentUpdate`, `Job_TiltleUpdate`, `Salary_ModeUpdate`, `StatusUpdate`, `EmployeeNoUpdate`, `Employee_ManagerUpdate`, `Joining_DateUpdate`, `Contract_Expiry_DateUpdate`, `Last_Working_DateUpdate`, `Attendance_SupervisorUpdate`, `Duty_LocationUpdate`, `Duty_PointUpdate`, `Emptype`, `typeUpdate`, `DY_SupervisorUpdate`, `status`, `Change By`, `date`, `AuthBy`, `leaveAlreadyAvailedUpdate`) VALUES
+(1, 76, '', 'SHAYAN', '', 'KHAN', 'RIAYAT KHAN', '3740560259313', 'shayans1215225@gmail.com', 'MOH AWAN JEHANGIRA SWABI', '', 'SWABI', 'MOH AWAN JEHANGIRA SWABI', '034191916168', '', '', '28 08 1999', 'ISLAM', 'MAIL', 'B+', 'SWABI', 'UNMARRIED', '', '', '', '', 'TMA DAILY WAGES', 'WSSCS PAY', 'WSSCS - MANAGEMENT', 'WSSCS - MSW - CONTINGENT PAY', 'LETTER OF INTEREST', 'HABIB BANK LTD', 'KHASRA # 2461.JEHANGIRA ROAD SWABI', '23423032402340', 'MONTHLY', '93939729', '', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 7', 'ADMINISTRATION', 'ASSTT : SANITARY INSPECTOR', 'BANK TRANSFER', 'NEW', 1400026, 1000007, '30 09 2023', '30 09 2024', '', 2000010, '', '', 'WSSC', '', '', 'NEw', '1000002', '2024-09-01', NULL, 34),
+(2, 76, '', 'SHAYAN', '', 'KHAN', 'RIAYAT KHAN', '3740560259313', 'shayans1215225@gmail.com', 'MOH AWAN JEHANGIRA SWABI', '', 'SWABI', 'MOH AWAN JEHANGIRA SWABI', '034191916168', '', '', '28 08 1999', 'ISLAM', 'MAIL', 'B+', 'SWABI', 'UNMARRIED', '', '', '', '', 'TMA DAILY WAGES', 'WSSCS PAY', 'WSSCS - MANAGEMENT', 'WSSCS - MSW - CONTINGENT PAY', 'LETTER OF INTEREST', 'HABIB BANK LTD', 'KHASRA # 2461.JEHANGIRA ROAD SWABI', '23423032402340', 'MONTHLY', '93939729', '', 6, 'NO', 'EMPLOYEE PAY CLASSIFICATION WSSC', 'M - 7', 'ADMINISTRATION', 'ASSTT : SANITARY INSPECTOR', 'BANK TRANSFER', 'ON-DUTY', 1400026, 1000007, '30 09 2023', '30 09 2024', '', 2000010, '', '', NULL, '', '', NULL, NULL, '2024-09-01', NULL, 34);
 
 -- --------------------------------------------------------
 
@@ -566,6 +701,16 @@ CREATE TABLE `holidays` (
   `Day` varchar(10) DEFAULT NULL,
   `Type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `holidays`
+--
+
+INSERT INTO `holidays` (`ID`, `DateOfSub`, `Date`, `Day`, `Type`) VALUES
+(1, '2024-09-01', '2024-08-04', 'Sunday', 'Weekly Holiday'),
+(2, '2024-09-01', '2024-08-11', 'Sunday', 'Weekly Holiday'),
+(3, '2024-09-01', '2024-08-18', 'Sunday', 'Weekly Holiday'),
+(4, '2024-09-01', '2024-08-25', 'Sunday', 'Weekly Holiday');
 
 -- --------------------------------------------------------
 
@@ -811,6 +956,24 @@ CREATE TABLE `payrole` (
   `timeperiod` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `payrole`
+--
+
+INSERT INTO `payrole` (`Allownceid`, `EmpNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`, `timeperiod`) VALUES
+(1, 25, 'RUNNING BP', 1, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 22091.00, 1, '22091', '2024-09-02', 2),
+(2, 25, 'HOUSE RENT', 2, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 11028.00, 1, '11028', '2024-09-02', 2),
+(3, 25, 'UTILITIES', 3, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 2227.00, 1, '2227', '2024-09-02', 2),
+(4, 25, 'OPD/MEDICAL', 5, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 2000.00, 1, '2000', '2024-09-02', 2),
+(5, 25, 'CONVEY', 8, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 3000.00, 1, '3000', '2024-09-02', 2),
+(6, 25, 'EOBI - EE', 10, 'EOBI-ER', 'PRESENT RATE', ' FUND', 320.00, 1, '320', '2024-09-02', 2),
+(7, 38, 'RUNNING BP', 1, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 19938.00, 1, '19938', '2024-09-02', 2),
+(8, 38, 'HOUSE RENT', 2, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 9953.00, 1, '9953', '2024-09-02', 2),
+(9, 38, 'UTILITIES', 3, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 2010.00, 1, '2010', '2024-09-02', 2),
+(10, 38, 'OPD/MEDICAL', 5, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 2000.00, 1, '2000', '2024-09-02', 2),
+(11, 38, 'CONVEY', 8, 'GROSS PAY', 'PRESENT RATE', ' EARNING', 3000.00, 1, '3000', '2024-09-02', 2),
+(12, 38, 'EOBI - EE', 10, 'EOBI-ER', 'PRESENT RATE', ' FUND', 320.00, 1, '320', '2024-09-02', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -854,6 +1017,13 @@ CREATE TABLE `qualification` (
   `Status` varchar(255) NOT NULL DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `qualification`
+--
+
+INSERT INTO `qualification` (`Id`, `Qualification`, `Grade/Division`, `Passing Year of Degree`, `Last Institute`, `PEC Registration`, `CV`, `Institute Address`, `Major Subject`, `Remarks`, `Employee_id`, `Status`) VALUES
+(1, 'BS', 'B', '12 11 2023', 'SUIT PESHAWER', '01931', '', 'PESHAWER PAKISTAN', 'SOFTWERE ENGE', '', '1400026', 'PENDING');
+
 -- --------------------------------------------------------
 
 --
@@ -865,9 +1035,33 @@ CREATE TABLE `rate` (
   `rate` decimal(10,2) DEFAULT NULL,
   `employee_id` int(11) DEFAULT NULL,
   `allowances_id` int(11) DEFAULT NULL,
-  `EmployementType` varchar(255) DEFAULT NULL,
   `Date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rate`
+--
+
+INSERT INTO `rate` (`id`, `rate`, `employee_id`, `allowances_id`, `Date`) VALUES
+(1, 52091.00, 2, 1, '2024-09-01'),
+(2, 15000.00, 2, 2, '2024-09-01'),
+(3, 11300.00, 2, 3, '2024-09-01'),
+(4, 2000.00, 2, 5, '2024-09-01'),
+(5, 3000.00, 2, 8, '2024-09-01'),
+(6, 1.00, 2, 9, '2024-09-01'),
+(7, 320.00, 2, 10, '2024-09-01'),
+(8, 22091.00, 25, 1, '2024-09-02'),
+(9, 11028.00, 25, 2, '2024-09-02'),
+(10, 2227.00, 25, 3, '2024-09-02'),
+(11, 2000.00, 25, 5, '2024-09-02'),
+(12, 3000.00, 25, 8, '2024-09-02'),
+(13, 320.00, 25, 10, '2024-09-02'),
+(14, 19938.00, 38, 1, '2024-09-02'),
+(15, 9953.00, 38, 2, '2024-09-02'),
+(16, 2010.00, 38, 3, '2024-09-02'),
+(17, 2000.00, 38, 5, '2024-09-02'),
+(18, 3000.00, 38, 8, '2024-09-02'),
+(19, 320.00, 38, 10, '2024-09-02');
 
 -- --------------------------------------------------------
 
@@ -894,6 +1088,7 @@ CREATE TABLE `salary` (
   `ClassGroup` varchar(255) DEFAULT NULL,
   `SubGroup` varchar(255) DEFAULT NULL,
   `PaymentMode` varchar(255) DEFAULT NULL,
+  `Bank` varchar(255) NOT NULL,
   `BankAccountNo` varchar(20) DEFAULT NULL,
   `timeperiod` int(255) NOT NULL,
   `HrReview` varchar(255) NOT NULL DEFAULT 'PENDING',
@@ -905,6 +1100,14 @@ CREATE TABLE `salary` (
   `InternalAuditor` varchar(255) NOT NULL DEFAULT 'PENDING',
   `InternalAuditordate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `salary`
+--
+
+INSERT INTO `salary` (`id`, `employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `Bank`, `BankAccountNo`, `timeperiod`, `HrReview`, `HrReviewDate`, `finace`, `finacedate`, `ceo`, `ceodata`, `InternalAuditor`, `InternalAuditordate`) VALUES
+(1, 1000029, 320.00, 40026.00, 0.00, 40346.00, '2024-09-02', 'ZIAD  ALI', 'PIR MUHAMMAD', '1560212365471', '0000-00-00', 'ASSOCIATE ENGINEER', 'S - 4', '', 'ADMINISTRATION', 'WSSCS - WATER PAY WSSCS PAY', 'WSSCS - ADMIN - CONTRACTUAL PAY', '', 'BOK SAIDU SHARIF ROAD MAKANBAGH', '204154802', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL),
+(2, 1400013, 320.00, 36581.00, 0.00, 36901.00, '2024-09-02', 'ZARBAZ  ', 'MUHAMMAD ALI', '1560321365471', '0000-00-00', 'SANITARY WORKER', 'COVID-19', '', 'SANITATION', 'WSSCS - MSW PAY WSSCS PAY', 'WSSCS - MSW - CONTINGENT PAY', '', '', '', 2, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL, 'PENDING', NULL);
 
 -- --------------------------------------------------------
 
@@ -961,6 +1164,13 @@ CREATE TABLE `timeperiod` (
   `HRStatus` varchar(255) DEFAULT 'PENDING',
   `DateOfHRStatus` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `timeperiod`
+--
+
+INSERT INTO `timeperiod` (`ID`, `DateOfSub`, `FromDate`, `ToDate`, `WrokingDays`, `HRStatus`, `DateOfHRStatus`) VALUES
+(2, '2024-09-01', '2024-08-01', '2024-08-31', 26, 'ACCEPT', '2024-09-01');
 
 -- --------------------------------------------------------
 
@@ -1071,7 +1281,8 @@ ALTER TABLE `child`
 -- Indexes for table `earning_deduction_fund`
 --
 ALTER TABLE `earning_deduction_fund`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employee_id` (`employee_id`);
 
 --
 -- Indexes for table `employeedata`
@@ -1232,7 +1443,7 @@ ALTER TABLE `allowances`
 -- AUTO_INCREMENT for table `allowancesrateupdate`
 --
 ALTER TABLE `allowancesrateupdate`
-  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `announcement`
@@ -1244,7 +1455,7 @@ ALTER TABLE `announcement`
 -- AUTO_INCREMENT for table `atandece`
 --
 ALTER TABLE `atandece`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `child`
@@ -1256,19 +1467,19 @@ ALTER TABLE `child`
 -- AUTO_INCREMENT for table `earning_deduction_fund`
 --
 ALTER TABLE `earning_deduction_fund`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employeedata`
 --
 ALTER TABLE `employeedata`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `employeedataupdate`
 --
 ALTER TABLE `employeedataupdate`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `employee_performance`
@@ -1298,7 +1509,7 @@ ALTER TABLE `gratuity`
 -- AUTO_INCREMENT for table `holidays`
 --
 ALTER TABLE `holidays`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `leavereq`
@@ -1322,7 +1533,7 @@ ALTER TABLE `master`
 -- AUTO_INCREMENT for table `payrole`
 --
 ALTER TABLE `payrole`
-  MODIFY `Allownceid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Allownceid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `promotion`
@@ -1334,19 +1545,19 @@ ALTER TABLE `promotion`
 -- AUTO_INCREMENT for table `qualification`
 --
 ALTER TABLE `qualification`
-  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rate`
 --
 ALTER TABLE `rate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `salary`
 --
 ALTER TABLE `salary`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `spouse`
@@ -1364,7 +1575,7 @@ ALTER TABLE `tabill`
 -- AUTO_INCREMENT for table `timeperiod`
 --
 ALTER TABLE `timeperiod`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `training`

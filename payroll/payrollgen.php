@@ -46,8 +46,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }else{
             // Insert into salary table
             $salarySql = "INSERT INTO `salary`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `ClassGroup`, `SubGroup`, `PaymentMode`, `Bank`, `BankAccountNo`,`timeperiod`) 
-                    VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}','{$Employee_Group[$e]} {$Employee_Class[$e]}','{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}',{$Salary_Branch[$e]},'{$Account_No[$e]}','$timeperiod')";
+            VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}','{$Employee_Group[$e]} {$Employee_Class[$e]}','{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}','{$Salary_Branch[$e]}','{$Account_No[$e]}','$timeperiod')";
           }
+          // echo $salarySql;
+            // $query = mysqli_query($conn, $salarySql);
             if ($conn->query($salarySql) === TRUE) {
             } else {
               echo '<script>alert( "Data not inserted success fully");</script>';
@@ -68,18 +70,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
             if(mysqli_num_rows($seletqueryallawnce)){
               echo '<script>alert( "Allawnce Already Exist");</script>';
             }else{
-            $payrollSql = "INSERT INTO `payrole`(`EmpNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`, `timeperiod`) VALUES ('$employee_no','$allowance','$allowanceId','$finClassificationValue','$rateCalcModeValue',' $earningDeductionFundValue','$rateValue','$priceValue','$total','$date','$timeperiod')";
+            $payrollSql = "INSERT INTO `payrole`(`EmpNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`, `timeperiod`) VALUES ('$employee_no','$allowance','$allowanceId','$finClassificationValue','$rateCalcModeValue',' $earningDeductionFundValue','$rateValue','$priceValue','$total','$date','$timeperiod');";
+            echo $payrollSql;
             if ($conn->query($payrollSql) === TRUE) {
               // Get the ID of the inserted salary record
              echo "Pay inserteedd";
              ?>
-        <script>
+         <script>
           location.replace('index.php');
-        </script>
-        <?php 
+         </script>
+         <?php 
           } else {
               echo "Error inserting salary: " . $conn->error;
-          }}
+          }
+        }
         }
         
       }
@@ -92,10 +96,31 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   <?php
   include('link/links.php');
   ?>
-  <link rel="stylesheet" href="path/to/select2.min.css">
+<link rel="stylesheet" href="../dist/select2/select2.min.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/select2.min.js"></script>
+<script src="../dist/select2/select2.min.js"></script>
 </head>
+<style>
+    #payroll_print {
+      font-size: 24px;
+    }
+
+    .select2-selection__rendered {
+      line-height: 31px !important;
+
+    }
+
+    .select2-container .select2-selection--single {
+      height: 35px !important;
+      border: 1px solid #ced4da;
+      border-radius: 0px;
+    }
+
+    .select2-selection__arrow {
+      height: 34px !important;
+
+    }
+  </style>
 <body>
   <div id="main">
     <?php include('link/desigene/navbar.php'); ?>
@@ -135,18 +160,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                     </select>
                 </div>
             </div>
-                        
-              <div id="time_employee_ajax" class="col-12">
-              
-              </div>
+              <div id="time_employee_ajax" class="col-12"></div>
         </div>
       </form>
     </div>
   </div>
-<!-- Include jQuery library -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
+
+  $(document).ready(function() {
+  $('.select2').select2();
+  
   $("#employee_noid").change(function() {
             var selectedEmployee = $(this).val();
             if (selectedEmployee) {

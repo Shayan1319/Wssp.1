@@ -12,14 +12,17 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
     $todate = $rowtime['ToDate'];
     $workingdays = $rowtime['WrokingDays'];
     $timeid = $rowtime['ID'];
-
-    $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY'");
-    if (mysqli_num_rows($selectemp)) {
-      $e = 1;
+    $slectedf=mysqli_query($conn,"SELECT * FROM `earning_deduction_fund`");
+    while ($rowf = mysqli_fetch_array($slectedf)) {
+      $eidedf=$rowf['employee_id'];
+      $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND Id = '$eidedf'");
+      if (mysqli_num_rows($selectemp)) {
+        $e = 1;
         while ($rowemp = mysqli_fetch_array($selectemp)) {
-            $employee_id = $rowemp['EmployeeNo'];
-            $employee_no = $rowemp['Id'];
-            
+          $employee_id = $rowemp['EmployeeNo'];
+          $employee_no = $rowemp['Id'];
+          
+        
             $selectatend = mysqli_prepare($conn, "SELECT COUNT(id) AS attendance_count FROM `atandece` WHERE `Date` >= ? AND `Date` <= ? AND `Employeeid` = ?");
             mysqli_stmt_bind_param($selectatend, "sss", $fromdate, $todate, $employee_id);
             mysqli_stmt_execute($selectatend);
@@ -53,7 +56,7 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                     <div class="form-group">
                       <label>Father Name</label>
                       <input value="<?php echo $rowemp['father_Name']?>" type="text" name="father_name[]" id="father_name" placeholder="Father Name" class="form-control" readonly autocomplete="off" required="">
-                      <input value="<?php echo $rowemp['Salary_Branch']?>" type="text" name="Salary_Branch[]" id="Salary_Branch" placeholder="Father Name" class="form-control" readonly autocomplete="off" required="">
+                      <input value="<?php echo $rowemp['Salary_Branch']?>" type="text" name="Salary_Branch[]" id="Salary_Branch" placeholder="Father Name" class="form-control" hidden readonly autocomplete="off" required="">
                     </div>
                   </div>
                   <!-- Type -->
@@ -327,5 +330,6 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
             }
        $e++; }
     }
+  }
 }
 ?>

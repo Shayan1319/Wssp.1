@@ -11,24 +11,24 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   exit; // Ensure that the script stops execution after the header redirection
 } else{
 if (isset($_POST['submit'])) {
-    $employeeId = $_POST['employee_no'];
-    $allowanceIds = $_POST['description_id'];
-    $fundInput = $_POST['fundInput'];
-    $grossPay = $_POST['grossPayInput'];
-    $deductionInput = $_POST['deductionInput'];
-    $netPayInput = $_POST['netPayInput'];
-    $rateInput = $_POST['rates'];
-    $date= date("Y-m-d");
-    $type=strtoupper($_POST['type']);
-    $select=mysqli_query($conn,"SELECT * FROM `earning_deduction_fund` WHERE `employee_id`=$employeeId");
+  $employeeId = $_POST['employee_no'];
+  $allowanceIds = $_POST['description_id'];
+  $fundInput = $_POST['fundInput'];
+  $grossPay = $_POST['grossPayInput'];
+  $deductionInput = $_POST['deductionInput'];
+  $netPayInput = $_POST['netPayInput'];
+  $rateInput = $_POST['rates'];
+  $date= date("Y-m-d");
+  $select=mysqli_query($conn,"SELECT * FROM `earning_deduction_fund` WHERE `employee_id`=$employeeId");
     if(mysqli_num_rows($select)){echo '<script>alert( "Payroll already exist");</script>';}else{
     $Insert = "INSERT INTO `earning_deduction_fund`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`)VALUES ('$employeeId', '$fundInput', '$grossPay', '$deductionInput', '$netPayInput');";
+  
     if (isset($allowanceIds) && is_array($allowanceIds) && count($allowanceIds) > 0) {
       $size = sizeof($allowanceIds);
       for ($i = 0; $i < $size; $i++) {
         $currentAllowanceId = $allowanceIds[$i];
         $currentrateId = $rateInput[$i];
-        $rateinsert = mysqli_query($conn,"INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`, `EmployementType`, `Date`)VALUES('$currentrateId', '$employeeId', '$currentAllowanceId','$type', '$date')") ;
+        $rateinsert = mysqli_query($conn,"INSERT INTO `rate` (`rate`, `employee_id`, `allowances_id`,  `Date`)VALUES('$currentrateId', '$employeeId', '$currentAllowanceId', '$date')") ;
       }
     }
       $query=mysqli_query($conn,$Insert);
@@ -38,10 +38,9 @@ if (isset($_POST['submit'])) {
         <script>
           location.replace('payroll.php');
         </script>
-        <?php 
-        
-        
-      }}
+        <?php    
+      }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -51,8 +50,8 @@ if (isset($_POST['submit'])) {
   <?php
   include('link/links.php');
   ?>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../dist/select2/select2.min.js"></script>
   <style>
     #payroll_print {
       font-size: 24px;
@@ -75,7 +74,6 @@ if (isset($_POST['submit'])) {
     }
   </style>
 </head>
-
 
 <body>
   <div id="main">

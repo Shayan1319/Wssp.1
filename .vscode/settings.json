@@ -4,6 +4,7 @@
         "Exitclearance",
         "leverequest",
         "prefs",
+        "Timeperiod",
         "WSSC"
     ],
     "files.autoSave": "onWindowChange"

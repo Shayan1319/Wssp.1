@@ -8,7 +8,6 @@ if(mysqli_num_rows($select)>0){
     while($row=mysqli_fetch_assoc($select)){
      ?>
      <option value="<?php echo $row['Id']?>"><?php echo $row['EmployeeNo']?></option>
-    
      <?php   
     }
 }

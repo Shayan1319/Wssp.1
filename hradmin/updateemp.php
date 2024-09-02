@@ -114,6 +114,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <html lang="en">
 <head>
    <?php include ('link/links.php')?>
+   
+<link rel="stylesheet" href="../dist/select2/select2.min.css">
+<script src="../dist/select2/select2.min.js"></script>
 </head>
 <style>
     .select2-selection__rendered {
