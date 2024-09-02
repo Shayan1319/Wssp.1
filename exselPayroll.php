@@ -3,14 +3,13 @@ session_start();
 error_reporting(0);
 // links to database
 include('link/desigene/db.php');
-if(isset($_POST['submit'])){ 
+if(isset($_POST['submit'])){
     $employee_no = $_POST['employee_no'];
     $frommonth = $_POST['frommonth'];
     $tomunth = $_POST['tomunth'];
     $Employee_Sub_Group_drop=$_POST['Employee_Sub_Group'];
     $Salary_Branch=$_POST['Salary_Branch'];
     $Department=$_POST['Department'];
-    
         $html.= '
         <table  class="table table-bordered table-striped">
             <thead>
@@ -77,13 +76,9 @@ if(isset($_POST['submit'])){
                 $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Salary_Branch`='$Salary_Branch' AND `Department`='$Department'");
             } else if ($employee_no == "" && $Employee_Sub_Group_drop == "" && $Salary_Branch == "" && $Department != "") {
                 $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Department`='$Department'");
-            } else {
+            } else if($employee_no == "" && $Employee_Sub_Group_drop == "" && $Salary_Branch == "" && $Department == "") {
                 $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata`");
             }
-            
-        
-        
-            
             $num = 1;
             while($empdata=mysqli_fetch_array($selectemp)){
                 $emil=$empdata['Id'];
@@ -132,8 +127,7 @@ if(isset($_POST['submit'])){
     $num++;
     }
     }
-    $html.=" </tbody>
-        </table>";
+    $html.=" </tbody></table>";
      header("Content-Type: application/vnd.ms-excel");
      header("Content-Disposition: attachment; filename=Payroll.xls");
     echo $html;
@@ -628,144 +622,7 @@ if(isset($_POST['submit'])){
             </html>
     <?php
     }                
-                if(isset($_POST['submit'])){ 
-                    $employee_no = $_POST['employee_no'];
-                    $frommonth = $_POST['frommonth'];
-                    $tomunth = $_POST['tomunth'];
-                    $Employee_Sub_Group_drop=$_POST['Employee_Sub_Group'];
-                    $Salary_Branch=$_POST['Salary_Branch'];
-                    $Department=$_POST['Department'];
-                    
-                        $html.= '
-                        <table  class="table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>Employee No	</th>
-                                <th>Name</th>
-                                <th>Father Name</th>
-                                <th>CNIC</th>
-                                <th>Joining Date</th>
-                                <th>Job Title</th>
-                                <th>Grade</th>
-                                <th>Employment Type</th>
-                                <th>Department</th>
-                                <th>Class</th>
-                                <th>Group</th>
-                                <th>Sub-Group</th>
-                                <th>Payment Mode</th>
-                                <th>Bank Account No.</th>
-                                ';
-                                $selected=mysqli_query($conn,"SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
-                                while($rowallownce=mysqli_fetch_array($selected)){
-                                    $html.= '<th>'.$rowallownce['allowance'].'</th>';
-                                }
-                                $html.= '<th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        ';
-                        $selecttime = mysqli_query($conn, "SELECT * FROM `timeperiod` WHERE `FromDate` >= '$frommonth' AND `FromDate` <= '$tomunth' ORDER BY `ID` DESC ") or die(mysqli_error($conn));
-                        // Loop through the time periods
-                        $num = 1;
-                        while ($rowtime = mysqli_fetch_array($selecttime)) {
-                            $Timeid = $rowtime['ID'];
-                            // Fetch data for the given employee and time period
-                           
-                            if ($employee_no != "" && $Employee_Sub_Group_drop == "" && $Salary_Branch == "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop != "" && $Salary_Branch == "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Employee_Sub_Group`='$Employee_Sub_Group_drop'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop != "" && $Salary_Branch == "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Employee_Sub_Group`='$Employee_Sub_Group_drop'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop == "" && $Salary_Branch != "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Salary_Branch`='$Salary_Branch'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop != "" && $Salary_Branch != "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Salary_Branch`='$Salary_Branch'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop != "" && $Salary_Branch != "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Salary_Branch`='$Salary_Branch'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop == "" && $Salary_Branch != "" && $Department == "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Salary_Branch`='$Salary_Branch'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop == "" && $Salary_Branch == "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Department`='$Department'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop != "" && $Salary_Branch == "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Department`='$Department'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop != "" && $Salary_Branch == "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Department`='$Department'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop == "" && $Salary_Branch != "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Salary_Branch`='$Salary_Branch' AND `Department`='$Department'");
-                            } else if ($employee_no != "" && $Employee_Sub_Group_drop != "" && $Salary_Branch != "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee_no' AND `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Salary_Branch`='$Salary_Branch' AND `Department`='$Department'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop != "" && $Salary_Branch != "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Employee_Sub_Group`='$Employee_Sub_Group_drop' AND `Salary_Branch`='$Salary_Branch' AND `Department`='$Department'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop == "" && $Salary_Branch != "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Salary_Branch`='$Salary_Branch' AND `Department`='$Department'");
-                            } else if ($employee_no == "" && $Employee_Sub_Group_drop == "" && $Salary_Branch == "" && $Department != "") {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Department`='$Department'");
-                            } else {
-                                $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata`");
-                            }
-                            
-                        
-                        
-                            
-                            $num = 1;
-                            while($empdata=mysqli_fetch_array($selectemp)){
-                                $emil=$empdata['Id'];
-                                $EmployeeNo=$empdata['EmployeeNo'];
-                            $stmt = mysqli_query($conn, "SELECT * FROM salary AS sal
-                            LEFT JOIN employeedata AS emp ON emp.EmployeeNo=sal.employee_id
-                            WHERE sal.timeperiod= '$Timeid' AND sal.employee_id = '$EmployeeNo'  && sal.HrReview='ACCEPT' && sal.finace ='ACCEPT' && sal.ceo='ACCEPT'") or die(mysqli_error($conn));
-                            // Check if any data is fetched
-                            if (mysqli_num_rows($stmt) > 0) {
-                                // Loop through the fetched data
-                                while ($fetch = mysqli_fetch_array($stmt)) {
-                        $html.= "<tr>
-                                    <td>{$num}</td>
-                                    <td>{$fetch['employee_id']}</td>
-                                    <td>{$fetch['EmpName']}</td>
-                                    <td>{$fetch['EmpFatderName']}</td>
-                                    <td>{$fetch['EmpCNIC']}</td>
-                                    <td>{$fetch['JoiningDate']}</td>
-                                    <td>{$fetch['JobTitle']}</td>
-                                    <td>{$fetch['Grade']}</td>
-                                    <td>{$fetch['EmploymentType']}</td>
-                                    <td>{$fetch['Department']}</td>
-                                    <td>{$fetch['ClassGroup']}</td>
-                                    <td>{$fetch['ClassGroup']}</td>
-                                    <td>{$fetch['SubGroup']}</td>
-                                    <td>{$fetch['PaymentMode']}</td>
-                                    <td>{$fetch['BankAccountNo']}</td>";
-                                    $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
-                                    while ($rowallowance = mysqli_fetch_array($selected)) {
-                                        $allowanceId=$rowallowance['id'];
-                                        $seletpayroll=mysqli_query($conn,"SELECT * FROM `payrole` WHERE `EmpNo`='$emil' AND `AllowancesId`='$allowanceId' AND `timeperiod`='$Timeid'");
-                                        if(mysqli_num_rows($seletpayroll)==0){
-                                            $html.= '<td></td>';
-                                        }else{
-                                            while($rowpayroll=mysqli_fetch_array($seletpayroll)){
-                                                $html.= '<td>'.$rowpayroll['total'].'</td>';
-                                            }
-                                        }
-                                    }
-                                    $html.= "
-                                    <td>{$fetch['net_pay']}</td>";
-                        // Fetch allowances data from the database
-                        $html.= "</tr>";
-                    }
-                    }
-                    $num++;
-                    }
-                    }
-                    $html.=" </tbody>
-                        </table>";
-                     header("Content-Type: application/vnd.ms-excel");
-                     header("Content-Disposition: attachment; filename=Payroll.xls");
-                    echo $html;
-                    
-                    
-                    }
-                    
+               
                         else if(isset($_POST['submitall'])){
                             $frommonth = $_POST['frommonth'];
                             $tomunth = $_POST['tomunth'];
