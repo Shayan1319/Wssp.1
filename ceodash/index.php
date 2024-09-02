@@ -14,6 +14,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
   
     // Your code for logged-in users goes here
     $currentDate = date('Y-m-d');
+
 // Query to count the number of employees 
 $query = mysqli_query($conn, "SELECT COUNT(id) AS total_employees FROM employeedata");
 $row = mysqli_fetch_array($query);
@@ -27,6 +28,7 @@ if ($result->num_rows > 0) {
 } else {
     $employeeCount = 0;
 }
+
 
 // Query to count the number of employees with status 'ABSENT' on the current date
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS employeeCountABSENT FROM employeedata AS e INNER JOIN atandece AS a ON e.EmployeeNo = a.Employeeid WHERE a.status = 'ABSENT' AND a.Date = '$currentDate'";
@@ -43,6 +45,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $employeeCountDDorOT = $row['employeeCountDDorOT'];
+    
 } else {
     $employeeCountDDorOT = 0;
 }
@@ -53,6 +56,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $employeeCountOVERTIME = $row['employeeCountOVERTIME'];
+    
 } else {
     $employeeCountOVERTIME = 0;
 } 
@@ -68,6 +72,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $totalPendingLeaves = $row['totalPendingLeaves'];
+    
 } else {
     $totalPendingLeaves = 0;
 }
@@ -81,6 +86,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $totalAcceptLeaves = $row['totalAcceptLeaves'];
+    
 } else {
     $totalAcceptLeaves = 0;
 }
@@ -94,6 +100,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $totalAPROVELeaves = $row['totalAPROVELeaves'];
+    
 } else {
     $totalAPROVELeaves = 0;
 }
@@ -108,10 +115,10 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $totalREJECTEDLeaves = $row['totalREJECTEDLeaves'];
+    
 } else {
     $totalREJECTEDLeaves = 0;
 }
-
 
 $sql = "SELECT COUNT(DISTINCT e.EmployeeNo) AS totalLeaves
         FROM employeedata AS e
@@ -123,6 +130,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $totalLeaves = $row['totalLeaves'];
+    
 } else {
     $totalLeaves = 0;
 }
@@ -136,15 +144,15 @@ if ($query) {
         $total_rate = 0;
     }
 }
-$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE());");
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'WSSC' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE());");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $total_rate_wssc = $result['total_rate_wssc'];
     if($total_rate_wssc = 0){
         $total_rate_wssc = 0;
     }
-}                          
-$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
+}     
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'TMA' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $total_rate_tma = $result['total_rate_tma'];
@@ -152,7 +160,8 @@ if ($query) {
         $total_rate_tma = 0;
     }
 } 
-$query = mysqli_query($conn, "SELECT(SELECT SUM(rate) FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
+
+$query = mysqli_query($conn, "SELECT(SELECT SUM(rate) FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'TMA' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'WSSC' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $rate_difference = $result['rate_difference'];
@@ -160,6 +169,7 @@ if ($query) {
         $rate_difference = 0;
     }
 } 
+
 $query = mysqli_query($conn, "SELECT (SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate WHERE MONTH(Date) = MONTH(CURRENT_DATE() - INTERVAL 1 MONTH) AND YEAR(Date) = YEAR(CURRENT_DATE() - INTERVAL 1 MONTH)) AS rate_difference_previous_month;");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
@@ -205,6 +215,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $TravelReq = $row['TravelReq'];
+    
 } else {
     $TravelReq = 0;
 }
@@ -218,6 +229,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $TravelReqAprove = $row['TravelReqAprove'];
+    
 } else {
     $TravelReqAprove = 0;
 }
@@ -232,6 +244,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $TravelReqPENDING = $row['TravelReqPENDING'];
+    
 } else {
     $TravelReqPENDING = 0;
 }
@@ -245,6 +258,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $TravelReqREJECTED = $row['TravelReqREJECTED'];
+    
 } else {
     $TravelReqREJECTED = 0;
 }
@@ -262,6 +276,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $employeeCountexp = $row['EmployeeCountexp'];
     
+    
 } else {
   $employeeCountexp =0;
 }
@@ -274,6 +289,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $employeeCount_on_duty = $row['EmployeeCount_on_duty'];
+    
     
 } else {
   $employeeCount_on_duty =0;
@@ -291,6 +307,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $Tabill = $row['Tabill'];
+    
 } else {
     $Tabill = 0;
 }
@@ -301,6 +318,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $tabillAprove = $row['tabillAprove'];
+    
 } else {
     $tabillAprove = 0;
 }
@@ -312,6 +330,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $tabillaccept = $row['tabillaccept'];
+    
 } else {
     $tabillaccept = 0;
 }
@@ -323,6 +342,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $tabillPENDING = $row['tabillPENDING'];
+    
 } else {
     $tabillPENDING = 0;
 }
@@ -334,6 +354,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $tabillREJECTED = $row['tabillREJECTED'];
+    
 } else {
     $tabillREJECTED = 0;
 }
@@ -342,6 +363,7 @@ WHERE Handover_File IS NULL AND Handover_File_Remarks IS NULL AND Handover_Info 
 if ($query->num_rows > 0) {
   $row = $query->fetch_assoc();
   $exit_form = $row['exit_form'];
+  
 } else {
   $exit_form = 0;
 }
@@ -351,6 +373,7 @@ WHERE e.Handover_File IS NULL AND e.Handover_File_Remarks IS NULL AND e.Handover
 if ($query->num_rows > 0) {
   $row = $query->fetch_assoc();
   $exit_form = $row['exit_form'];
+  
 } else {
   $exit_form = 0;
 }
@@ -360,6 +383,7 @@ WHERE e.Handover_File IS NOT NULL AND e.Handover_File_Remarks IS NOT NULL AND e.
 if ($query->num_rows > 0) {
   $row = $query->fetch_assoc();
   $exit_formApproved = $row['exit_formApproved'];
+  
 } else {
   $exit_formApproved = 0;
 }
@@ -469,6 +493,7 @@ $result = mysqli_query($conn, $query);
 if ($result) {
     $row = mysqli_fetch_assoc($result);
     $total_rows_new_update = $row['total_rows_new_update'];
+    
 } else {
   $total_rows_new_update = 0;
 }$sql = "SELECT COUNT(*) AS timeperiod FROM salary WHERE `HrReview` = 'ACCEPT' AND `finace` = 'ACCEPT' AND `ceo` = 'PENDING'";
@@ -476,9 +501,11 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $timeperiod = $row['timeperiod'];
+    
 } else {
     $timeperiod = 0;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -711,7 +738,7 @@ if ($result->num_rows > 0) {
               <div style="background-color: #6471d3; text-decoration:none;" class="small-box py-2 text-white">
                 <div class="inner">
                 <h3><?php echo $timeperiod?></h3>
-                  <h4>Time Period</h4>
+                  <h4>Pending Salary</h4>
                 </div>
               </div>
               </a>

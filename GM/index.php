@@ -141,7 +141,7 @@ if ($query) {
         $total_rate = 0;
     }
 }
-$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE());");
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_wssc FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'WSSC' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE());");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $total_rate_wssc = $result['total_rate_wssc'];
@@ -149,7 +149,7 @@ if ($query) {
         $total_rate_wssc = 0;
     }
 }                          
-$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())");
+$query = mysqli_query($conn, "SELECT SUM(rate) AS total_rate_tma FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'TMA' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $total_rate_tma = $result['total_rate_tma'];
@@ -157,7 +157,7 @@ if ($query) {
         $total_rate_tma = 0;
     }
 } 
-$query = mysqli_query($conn, "SELECT(SELECT SUM(rate) FROM rate WHERE EmployementType = 'TMA' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate WHERE EmployementType = 'WSSC' AND MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
+$query = mysqli_query($conn, "SELECT(SELECT SUM(rate) FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'TMA' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())) -(SELECT SUM(rate) FROM rate AS r LEFT JOIN employeedata AS emp ON emp.Id=r.employee_id WHERE emp.TypeEmp = 'WSSC' AND MONTH(r.Date) = MONTH(CURRENT_DATE()) AND YEAR(r.Date) = YEAR(CURRENT_DATE())) AS rate_difference;");
 if ($query) {
     $result = mysqli_fetch_assoc($query);
     $rate_difference = $result['rate_difference'];

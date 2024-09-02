@@ -49,7 +49,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         echo '<script>alert( "Data updated successfully");</script>';
                                         ?>
                                         <script>
-                                          location.replace('employeeCountotal copy.php');
+                                          location.replace('index.php');
                                         </script>
                                         <?php 
                                     } else {

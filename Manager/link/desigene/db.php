@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "wssc_data";
+$db = "atabase_wssc";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$db);

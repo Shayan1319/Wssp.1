@@ -65,7 +65,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading<?php echo $a?>">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $a?>" aria-expanded="true" aria-controls="collapse<?php echo $a?>">
-                                            Time Period # <?php echo $rowofTP['ID'] ?> | From: <?php echo $rowofTP['FromDate'] ?> | To: <?php echo $rowofTP['ToDate'] ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
+                                            Time Period # <?php echo $rowofTP['ID']; $timeid=$rowofTP['ID']; ?> | From: <?php echo $rowofTP['FromDate'] ?> | To: <?php echo $rowofTP['ToDate'] ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
 
                                             <button type="submit" name="submit<?php echo $a ?>" class="btn btn-primary">Update Records</button>
                                         </button>
@@ -74,7 +74,14 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <div class="accordion-body">
                                             <div class="accordion" id="employeeAccordion<?php echo $a ?>">
                                             <?php
-                                                $selectmang = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY'");
+                                                $selectmang = mysqli_query($conn, "SELECT DISTINCT emp.*
+                                                FROM `employeedata` AS emp 
+                                                INNER JOIN `atandece` AS ata ON ata.Employeeid = emp.EmployeeNo 
+                                                WHERE emp.Status = 'ON-DUTY'  
+                                                AND ata.ManagerStatus = 'ACCEPT' 
+                                                AND ata.GMStatus = 'PENDING'
+                                                AND ata.timeperiodId = $timeid;
+                                                ");
                                                 $m = 1;
                                                 while ($rowomang = mysqli_fetch_array($selectmang)) {
                                                 ?>

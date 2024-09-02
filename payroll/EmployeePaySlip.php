@@ -15,6 +15,9 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <html lang="en">
   <head>
     <?php include ('link/links.php')?>
+<link rel="stylesheet" href="../dist/select2/select2.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../dist/select2/select2.min.js"></script>
   </head>
   <body>
     

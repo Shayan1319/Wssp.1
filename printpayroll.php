@@ -288,7 +288,7 @@ else if(isset($_POST['submitsum'])){
                                         <td>Class</td>
                                         <td>Group</td>
                                         <td>Sub-Group</td>
-                                        <td>Emp.Count</td>
+                                        <td class="text-end" >Emp.Count</td>
                                         <td>Amount</td>
                                     </tr>
                                 </thead>
@@ -301,14 +301,13 @@ else if(isset($_POST['submitsum'])){
                         // Check if there are any results
                         if ($result->num_rows > 0) {
                             $a = 1;
-                            
                             // Loop through each distinct Employee_Class
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $employee_class = $row['Class'];
                                 ?>
                                 <tr>
                                     <td><?php echo $employee_class; ?></td>
-                                    <td>
+                                    <td colspan="4">
                                         <table class="table">
                                         <?php
                                         // SQL query to select distinct Employee_Class from employeedata
@@ -322,18 +321,14 @@ else if(isset($_POST['submitsum'])){
                                                 $employee_ClassGroup = $row['ClassGroup'];
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $employee_ClassGroup; ?></td>
-                                                </tr>
-                                                
-                                            </table>
-                                        </td>
-                                        <td colspan="4">
-                                        <table class="table text-start">
-                                        <?php
+                                                    <td><?php echo $employee_ClassGroup; ?>
+                                                </td>
+                                                <td colspan="3">
+                                                <table class="table text-start">
+                                                <?php
                                         // SQL query to select distinct Employee_Class from employeedata
                                         $SubGroup = "SELECT DISTINCT `SubGroup` FROM `salary` WHERE `Class`='$employee_class'&& `ClassGroup`='$employee_ClassGroup '";
                                         $resultSubGroup = $conn->query($SubGroup);
-                                        
                                         // Check if there are any resultSubGroups
                                         if ($resultSubGroup->num_rows > 0) {
                                             // Loop through each distinct Employee_SubGroup
@@ -372,15 +367,14 @@ else if(isset($_POST['submitsum'])){
                                                             echo $employee_total_net_pay; ?>
                                                     </td>
                                                 </tr>
-                                                
-                                                <?php } } ?>
                                                 <tr>
-                                                    <td class="text-center">Total</td>
+                                                    <td class="text-start">Total</td>
                                                     <td class="text-start">
                                                         <?php $employee = "SELECT COUNT(*) AS employee FROM `salary`AS sal 
                                                             INNER JOIN timeperiod AS tim ON tim.ID = sal.timeperiod
                                                             WHERE sal.Class='$employee_class'
                                                             && sal.ClassGroup='$employee_ClassGroup' 
+                                                            && sal.SubGroup='$employee_SubGroup'
                                                             && tim.FromDate >= '$frommonth'
                                                             && tim.FromDate <= '$tomunth'";
                                                             $resultemployee = $conn->query($employee);
@@ -393,7 +387,8 @@ else if(isset($_POST['submitsum'])){
                                                         FROM `salary` AS sal
                                                         INNER JOIN `timeperiod` AS tim ON sal.timeperiod = tim.ID
                                                         WHERE sal.Class='$employee_class'
-                                                        && sal.ClassGroup='$employee_ClassGroup' 
+                                                        && sal.ClassGroup='$employee_ClassGroup'
+                                                        && sal.SubGroup='$employee_SubGroup'
                                                         && tim.FromDate >= '$frommonth'
                                                         && tim.FromDate <= '$tomunth'";
                                                         $resulttotal_net_pay = $conn->query($total_net_pay);
@@ -401,12 +396,18 @@ else if(isset($_POST['submitsum'])){
                                                             echo $net_pay['total_net_pay'];
                                                             ?></td>
                                                         </tr>
+                                                <?php } } ?>
+                                                </table>
+                                                </td>
+                                                </tr>
                                                 <?php } }?>
                                             </table>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-end" colspan="3">Total</td>
+                                        <td></td>
+                                        <td class="text-center">Total</td>
+                                        <td></td>
                                         <td class="text-end">
                                             <?php
                                             $employee = "SELECT COUNT(*) AS employee FROM `salary`AS sal 
@@ -434,7 +435,9 @@ else if(isset($_POST['submitsum'])){
                                 </tr>
                                 <?php $a++; }}?>
                                 <tr class="bg-light">
-                                        <td class="text-end" colspan="3">Total</td>
+                                    <td class="text-center">Total</td>
+                                    <td></td>
+                                    <td></td>
                                         <td class="text-end">
                                             <?php
                                             $employee = "SELECT COUNT(*) AS employee FROM `salary`AS sal 
@@ -476,7 +479,7 @@ else if(isset($_POST['submitsum'])){
         include('link/desigene/db.php');
 
         // SQL query to group by Salary_Branch and calculate employee count and total amount
-        $sql = "SELECT DISTINCT Bank FROM salary";
+        $sql = "SELECT DISTINCT Bank FROM salary WHERE `Bank` !=''";
         $result = $conn->query($sql);
         
         // Check if there are any results
@@ -523,7 +526,7 @@ else if(isset($_POST['submitsum'])){
                         $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `salary`AS sal 
                                             INNER JOIN timeperiod AS tim ON tim.ID = sal.timeperiod
                                             WHERE tim.FromDate >= '$frommonth'
-                                            && tim.FromDate <= '$tomunth'");
+                                            && tim.FromDate <= '$tomunth' && `Bank` !=''");
                         $countdata = mysqli_fetch_assoc($countquery);
                         echo $countdata['employee']; ?>
                     </td>
@@ -533,7 +536,7 @@ else if(isset($_POST['submitsum'])){
                                                         FROM `salary` AS sal
                                                         INNER JOIN `timeperiod` AS tim ON sal.timeperiod = tim.ID
                                                         WHERE tim.FromDate >= '$frommonth'
-                                                        && tim.FromDate <= '$tomunth'");
+                                                        && tim.FromDate <= '$tomunth' && `Bank` !=''");
                         $countdata = mysqli_fetch_assoc($countquery);
                         echo $countdata['total_net_pay'];?>
                    </td>

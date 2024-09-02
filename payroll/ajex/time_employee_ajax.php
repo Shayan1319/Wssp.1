@@ -57,6 +57,7 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                       <label>Father Name</label>
                       <input value="<?php echo $rowemp['father_Name']?>" type="text" name="father_name[]" id="father_name" placeholder="Father Name" class="form-control" readonly autocomplete="off" required="">
                       <input value="<?php echo $rowemp['Salary_Branch']?>" type="text" name="Salary_Branch[]" id="Salary_Branch" placeholder="Father Name" class="form-control" hidden readonly autocomplete="off" required="">
+                      <input value="<?php echo $rowemp['Salary_Bank']?>" type="text" name="Salary_Bank[]" id="Salary_Bank" placeholder="Father Name" class="form-control" hidden readonly autocomplete="off" required="">
                     </div>
                   </div>
                   <!-- Type -->
@@ -81,7 +82,7 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
                       <input  hidden value="<?php echo $rowemp['Joining_Date']?>" type="date" name="Joining_Date[]" id="Joining_Date" placeholder="Joining_Date" class="form-control" readonly autocomplete="off" required="">
                       <input hidden value="<?php echo $rowemp['Grade']?>" type="text" name="Grade[]" id="Grade" placeholder="Grade" class="form-control" readonly autocomplete="off" required="">
                       <input hidden value="<?php echo $rowemp['Department']?>" type="text" name="Department[]" id="Department" placeholder="Department" class="form-control" readonly autocomplete="off" required="">
-                      <input hidden value="<?php echo $rowemp['Pay_Type']?>" type="text" name="Pay_Type[]" id="Pay_Type" placeholder="Pay_Type" class="form-control" readonly autocomplete="off" required="">
+                      <input hidden value="<?php echo $rowemp['Salary_Mode']?>" type="text" name="Pay_Type[]" id="Pay_Type" placeholder="Pay_Type" class="form-control" readonly autocomplete="off" required="">
                       <input hidden value="<?php echo $rowemp['Account_No']?>" type="text" name="Account_No[]" id="Account_No" placeholder="Account_No" class="form-control" readonly autocomplete="off" required="">
                     </div>
                   </div>

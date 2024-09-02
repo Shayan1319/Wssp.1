@@ -22,7 +22,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                 text-align: center;
             }
         </style>
-    </head>
+    </head>  
     
     <body>
         
@@ -60,7 +60,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="heading<?php echo $a ?>">
                                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $a ?>" aria-expanded="true" aria-controls="collapse<?php echo $a ?>">
-                                                Time Period # <?php echo $rowofTP['ID'] ?> | From: <?php echo $rowofTP['FromDate'] ?> | To: <?php echo $rowofTP['ToDate'] ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
+                                                Time Period # <?php echo $rowofTP['ID']; $timeid=$rowofTP['ID']; ?> | From: <?php echo $rowofTP['FromDate'] ?> | To: <?php echo $rowofTP['ToDate'] ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
     
                                                 <button type="submit" name="submit<?php echo $a ?>" class="btn btn-primary">Update Records</button>
                                             </button> 
@@ -69,13 +69,19 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                             <div class="accordion-body">
                                                 <div class="accordion" id="employeeAccordion<?php echo $a ?>">
                                                 <?php
-                                                    $selectmang = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY'");
+                                                $selectmang = mysqli_query($conn, "SELECT DISTINCT emp.*
+                                                FROM `employeedata` AS emp 
+                                                INNER JOIN `atandece` AS ata ON ata.Employeeid = emp.EmployeeNo 
+                                                WHERE emp.Status = 'ON-DUTY'  
+                                                AND ata.ManagerStatus = 'ACCEPT' 
+                                                AND ata.GMStatus = 'ACCEPT'
+                                                AND ata.PayrollStatus = 'PENDING'
+                                                AND ata.timeperiodId = $timeid;");
                                                     $m = 1;
                                                     while ($rowomang = mysqli_fetch_array($selectmang)) {
                                                         
                                                     ?>
                                                         <div class="accordion-item">
-                                                            <!-- Adjust the fields accordingly based on your database structure -->
                                                             <h2 class="accordion-header" id="headingEmp<?php echo $m . $a ?>">
                                                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEmp<?php echo $m . $a ?>" aria-expanded="true" aria-controls="collapseEmp<?php echo $m . $a ?>">
                                                                     Employee # <?php echo $rowomang['EmployeeNo'] ?> | Name : <?php echo $rowomang['fName'] ?> <?php echo $rowomang['mName'] ?> <?php echo $rowomang['lName'] ?> | Type: <?php echo $rowomang['Job_Tiltle'] ?> | Employeement Group: <?php echo $rowomang['Employement_Group'] ?> | Employee Class: <?php echo $rowomang['Employee_Class'] ?> |  <?php 

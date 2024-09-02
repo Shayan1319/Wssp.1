@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 
 // links to the database
-include('link/desigene/db.php');
+include('../link/desigene/db.php');
 
 if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SESSION['Designation'] != 'Manager') {
     // Log the unauthorized access attempt for auditing purposes
@@ -65,7 +65,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="heading<?php echo $a ?>">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $a ?>" aria-expanded="true" aria-controls="collapse<?php echo $a ?>">
-                                            Time Period # <?php echo $rowofTP['ID'] ?> | From: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate']))?> | To: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate'])); ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
+                                            Time Period # <?php echo $rowofTP['ID'] ; $timeid=$rowofTP['ID']; ?> | From: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate']))?> | To: <?php echo date('d-m-Y', strtotime($rowofTP['ToDate'])); ?> | Working day: <?php echo $rowofTP['WrokingDays'] ?>
 
                                             <button type="submit" name="submit<?php echo $a ?>" class="btn btn-primary">Update Records</button>
                                         </button>
@@ -76,7 +76,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                             <div class="accordion" id="employeeAccordion<?php echo $a ?>">
                                                 <?php
                                                 $Employee_Manager = $_SESSION['EmployeeNumber'];
-                                                $selectEmp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `Employee_Manager`=$Employee_Manager");
+                                                $selectEmp = mysqli_query ( $conn, "SELECT DISTINCT emp.*
+                                                FROM `employeedata` AS emp 
+                                                INNER JOIN `atandece` AS ata ON ata.Employeeid = emp.EmployeeNo 
+                                                WHERE emp.Status = 'ON-DUTY' 
+                                                AND emp.Employee_Manager = $Employee_Manager 
+                                                AND ata.ManagerStatus = 'PENDING' 
+                                                AND ata.timeperiodId = $timeid;");
                                                 $e = 1;
                                                 while ($rowoemp = mysqli_fetch_array($selectEmp)) {
                                                 ?>
@@ -89,7 +95,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                                                 $fromdatetoatt=$rowofTP['FromDate'];
                                                                 $todatetoatt=$rowofTP['ToDate'];
                                                                 // echo $fromdatetoatt." / ".$todatetoatt;
-                                                                $resultatdcont = mysqli_query($conn, "SELECT COUNT(*) AS TotalAttendance FROM atandece WHERE `Employeeid` = '$employee_nocount' &&  `Date`>='$fromdatetoatt' && `Date`<='$todatetoatt'");
+                                                                $resultatdcont = mysqli_query($conn, "SELECT COUNT(*) AS TotalAttendance FROM atandece WHERE `Employeeid` = '$employee_nocount' && `timeperiodId`='$timeid'");
 
                                                                 if (mysqli_num_rows($resultatdcont) > 0) {
 
