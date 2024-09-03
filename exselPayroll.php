@@ -548,7 +548,7 @@ if(isset($_POST['submit'])){
                                                         </tr>
                                                     </thead>
                                                     <tbody class=" table-bordered border-black" >
-                                                        <?php $selectsallery=mysqli_query($conn,"SELECT * FROM `salary` WHERE `Bank`='$SalaryBankBranch' && `timeperiod`='$timeId'");
+                                                        <?php $selectsallery=mysqli_query($conn,"SELECT * FROM `salary` WHERE `Branch`='$SalaryBankBranch' && `timeperiod`='$timeId'");
                                                         while($rowsallery=mysqli_fetch_array($selectsallery)){
                                                             ?>
                                                             <tr>
@@ -1183,7 +1183,7 @@ else if(isset($_POST['Department'])){
                         while ($rowtime = mysqli_fetch_array($selecttime)) {
                             $timeId=$rowtime['ID'];
                             ?>
-                            <h6>Payroll (Bank Credit Advice) - <?php echo date('F Y', strtotime($rowtime['ToDate']));?> </h6>
+                            <h6>Payroll (Department) - <?php echo date('F Y', strtotime($rowtime['ToDate']));?> </h6>
                             <p>Date :- <?php echo date("d-M-Y")?></p>
                             <table class="table table-bordered border-dark border-5">
                                 <?php 
@@ -1200,7 +1200,7 @@ else if(isset($_POST['Department'])){
                                     <table>
                                         <tr>
                                             <th class="text-start" >
-                                                Bank: <?php echo $SalaryBankBranch;?>
+                                                Department: <?php echo $SalaryBankBranch;?>
                                             </th>
                                         </tr>
                                         <tr>
@@ -1220,7 +1220,7 @@ else if(isset($_POST['Department'])){
                                                     </tr>
                                                 </thead>
                                                 <tbody class=" table-bordered border-black" >
-                                                    <?php $selectsallery=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Department`='$SalaryBankBranch'");
+                                                    <?php $selectsallery=mysqli_query($conn,"SELECT * FROM `employeedata` WHERE `Department`='$SalaryBankBranch' AND `Status`='ON-DUTY' ");
                                                     while($rowsallery=mysqli_fetch_array($selectsallery)){
                                                         ?>
                                                         <tr>

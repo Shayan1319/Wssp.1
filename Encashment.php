@@ -139,7 +139,7 @@ if(isset($_POST['Encashment'])){
 </html>
 <?php
 }
-else if (isset($_POST['Gratuity'])) {
+else if(isset($_POST['Gratuity'])) {
     $employee = $_POST['employee_no'];
     $fromdate = $_POST['from'];
     $todate = $_POST['to'];

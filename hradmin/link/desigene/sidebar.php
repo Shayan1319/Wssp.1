@@ -63,9 +63,6 @@
                 <a href="EXITCLEARANCEFORM.php" class="nav-link">
                   Exit clearance form
                 </a>
-                <a href="Gratuity.php">
-                Gratuity & Leave Encasement
-                </a>
                 <a href="Leaves.php" class="nav-link">
                   Reports
                 </a>

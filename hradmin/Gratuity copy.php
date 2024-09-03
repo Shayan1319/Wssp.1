@@ -15,6 +15,26 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <html lang="en">
   <head>
     <?php include ('link/links.php')?>
+    <link rel="stylesheet" href="../dist/select2/select2.min.css">
+<script src="../dist/select2/select2.min.js"></script>
+</head>
+<style>
+    .select2-selection__rendered {
+      line-height: 31px !important;
+    }
+    label span{
+      color: red;
+    }
+    .select2-container .select2-selection--single {
+      height: 35px !important;
+      border: 1px solid #ced4da;
+      border-radius: 0px;
+      width: 300px !important;
+    }
+    .select2-selection__arrow {
+      height: 34px !important;
+    }
+  </style>
   </head>
   <body>
     <div id="main">

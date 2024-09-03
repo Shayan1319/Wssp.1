@@ -102,7 +102,7 @@
     Payroll Backup
   </a>
   <a href="All payroll copy.php">
-  Payroll Details
+  Pay Slip Details
   </a>
   <a href="All payroll copy 2.php">
   Pay Sub-Group

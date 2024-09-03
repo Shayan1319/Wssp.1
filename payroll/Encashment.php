@@ -286,8 +286,6 @@ $formattedToDate= $todateselect . '-06-30'; // End of the period
 $fromdate = date('Y-m-d', strtotime($formattedFromDate));
 $todate = date('Y-m-d', strtotime($formattedToDate));
 
-// Display the values
-echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " " . $employee;
 
     
 ?>
@@ -301,9 +299,11 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
       <?php include('link/desigene/navbar.php')?>
             <div class="container-fluid m-auto py-5 table-responsive ">
                 <form action="insertGrduty.php" method="post">
+                    <div class="form-content">
+                        <button type="submit" class="btn btn-primary" name="submit_encasement">Save</button>
+                    </div>
                 <table class="table">
                         <thead>
-                                  
                             <tr>
                                 <th>
                                     <table class="table">
@@ -339,14 +339,14 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
                                                 $empNo = $row['EmployeeNo'];
                                                 $working_day = 4*($row['Weekly_Working_Days']);
                                                 ?>
-                    <input type="text" name="Period" value="<?php echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate))?>" id="">
+                    <input hidden type="text" name="Period" value="<?php echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate))?>" id="">
 
                                                 <tr>
                                                     <td><?php echo $row['EmployeeNo']; ?><h5><?php echo $row['fName']; ?> <?php echo $row['lName']; ?></h5><?php echo $row['Joining_Date']; ?>
-                                                <input type="number" name="EmployeeNo[]" value="<?php echo $row['EmployeeNo'];?>" id="EmployeeNo">
+                                                <input hidden type="number" name="EmployeeNo[]" value="<?php echo $row['EmployeeNo'];?>" id="EmployeeNo">
                                                 </td>
                                                     <td>15
-                                                        <input type="text" value="15" name="Ann_Leave_Entitlement[]" id="Ann_Leave_Entitlement">
+                                                        <input hidden type="text" value="15" name="Ann_Leave_Entitlement[]" id="Ann_Leave_Entitlement">
                                                     </td>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT SUM(TotalDays) AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate';");
                                                     
@@ -360,9 +360,9 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
 
                                                         // Check if data is fetched and if 'empleave' is NULL
                                                         if ($countdata && !is_null($countdata['empleave'])) {
-                                                            echo $countdata['empleave'].'<input type="number" name[]="Ann_Leave_Availed" value="'.$countdata['empleave'].'">';
+                                                            echo $countdata['empleave'].'<input hidden type="number" name[]="Ann_Leave_Availed" value="'.$countdata['empleave'].'">';
                                                         } else {
-                                                            echo '0'.'<input type="number" name="Ann_Leave_Availed[]" value="0">';
+                                                            echo '0'.'<input hidden type="number" name="Ann_Leave_Availed[]" value="0">';
                                                         }
                                                         ?>
                                                         </td>
@@ -379,9 +379,9 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
 
                                                         // Check if data is fetched and if 'empleave' is NULL
                                                         if ($countdata && !is_null($countdata['empleave'])) {
-                                                            echo $countdata['empleave'].'<input type="number" name="Ann_Leave_Balance[]" value="'.$countdata['empleave'].'">';
+                                                            echo $countdata['empleave'].'<input hidden type="number" name="Ann_Leave_Balance[]" value="'.$countdata['empleave'].'">';
                                                         } else {
-                                                            echo '15'.'<input type="number" name="Ann_Leave_Balance[]" value="15">';
+                                                            echo '15'.'<input hidden type="number" name="Ann_Leave_Balance[]" value="15">';
                                                         }
                                                         ?>
                                                         </td>
@@ -398,24 +398,24 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
                                                         // Check if data is fetched and if 'empleave' is NULL
                                                         if ($countdata && !is_null($countdata['empleave'])) {
 
-                                                            echo $countdata['empleave']/2.0.'<input type="number" name="Ann_Leave_Payable[]" value="'.$countdata['empleave']/2.0.'">';
+                                                            echo $countdata['empleave']/2.0.'<input hidden type="number" name="Ann_Leave_Payable[]" value="'.$countdata['empleave']/2.0.'">';
                                                         } else {
                                                             echo 15 / 2.0;
-                                                            echo 15 / 2.0.'<input type="number" name="Ann_Leave_Payable[]" value="'. 15 / 2.0.'">';
+                                                            echo 15 / 2.0.'<input hidden type="number" name="Ann_Leave_Payable[]" value="'. 15 / 2.0.'">';
                                                         }
                                                         ?>
                                                         </td>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay) FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); 
-                                                    echo $countdata['gross_pay'].'<input type="number" name="Gross_Pay_Monthly[]" value="'. $countdata['gross_pay'].'">';
+                                                    echo $countdata['gross_pay'].'<input hidden type="number" name="Gross_Pay_Monthly[]" value="'. $countdata['gross_pay'].'">';
                                                     
                                                     ?></td>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)*12 AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); 
-                                                    echo $countdata['pay'].'<input type="number" name="Gross_Pay_Yearly[]" value="'.$countdata['pay'].'">';?></td>
+                                                    echo $countdata['pay'].'<input hidden type="number" name="Gross_Pay_Yearly[]" value="'.$countdata['pay'].'">';?></td>
                                                     <td><?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave); 
-                                                    echo $countdata['pay'].'<input type="number" name="Gross_Pay_Daily[]" value="'.$countdata['pay'].'">';?></td>
+                                                    echo $countdata['pay'].'<input hidden type="number" name="Gross_Pay_Daily[]" value="'.$countdata['pay'].'">';?></td>
                                                      <td>
                                                      <?php
                                                         $LeavePayable = mysqli_query($conn, "SELECT (15-SUM(TotalDays)) / 2.0 AS empleave FROM `leavereq` WHERE `EmployeeNo`='$empNo' && `Statusofmanger`='ACCEPT' && `StatusofGm`='ACCEPT' && `LeaveTo`>='$fromdate' && `LeaveTo`<='$todate'");
@@ -438,17 +438,17 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
                                                         ?>
                                                         <?php $contleave=mysqli_query($conn,"SELECT (gross_pay)/$working_day  AS pay FROM `earning_deduction_fund` WHERE `employee_id`='$emil';");
                                                     $countdata = mysqli_fetch_assoc($contleave);
-                                                    echo $days*$countdata['pay'].'<input type="number" name="Amount_Payable[]" value="'.$days*$countdata['pay'].'">';?></td>
+                                                    echo $days*$countdata['pay'].'<input hidden type="number" name="Amount_Payable[]" value="'.$days*$countdata['pay'].'">';?></td>
                                                     <td>
                                                         <?php
                                                         // Output bank and branch details
                                                         echo $row['Salary_Bank'] . " | " . $row['Salary_Branch'];
                                                         ?>
                                                         <!-- Form input field with the concatenated value -->
-                                                        <input type="text" name="Bank_Branch[]" value="<?php echo htmlspecialchars($row['Salary_Bank'] ." ". $row['Salary_Branch']); ?>">
+                                                        <input hidden type="text" name="Bank_Branch[]" value="<?php echo htmlspecialchars($row['Salary_Bank'] ." ". $row['Salary_Branch']); ?>">
                                                     </td>
 
-                                                    <td><?php echo $row['Account_No'].'<input type="number" name="Account_No[]" value="'.$row['Account_No'].'">'?></td>
+                                                    <td><?php echo $row['Account_No'].'<input hidden type="number" name="Account_No[]" value="'.$row['Account_No'].'">'?></td>
                                                 </tr>
                                                 <?php
                                                 $a++;
@@ -463,9 +463,7 @@ echo date('y', strtotime($fromdate)) . "-" . date('Y', strtotime($todate)) . " "
                             </tr>
                         </thead>
                     </table>
-                    <div class="form-content">
-                        <button type="submit" class="btn btn-primary" name="submit_encasement">Save</button>
-                    </div>
+                    
                 </form>    
             </div>
           </div>

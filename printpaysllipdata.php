@@ -68,160 +68,152 @@ if(isset($_POST['submit'])){
                                         <td>Amount</td>
                                     </tr>
                                 </thead>
-                    <tbody class="text-center">
-                        <?php
-                        // SQL query to select distinct Employee_Class from employeedata
-                        $sql = "SELECT DISTINCT `Employee_Class` FROM `employeedata`";
-                        $result = $conn->query($sql);
-                        
-                        // Check if there are any results
-                        if ($result->num_rows > 0) {
-                            $a = 1;
-                            
-                            // Loop through each distinct Employee_Class
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $employee_class = $row['Employee_Class'];
-                                ?>
-                                <tr>
-                                    <td><?php echo $employee_class; ?></td>
-                                    <td class="text-center">
-                                        <table class="text-center table">
-                                            <?php
-                                            // SQL query to select distinct Employement_Group for each Employee_Class
-                                            $selectgroup = mysqli_query($conn, "SELECT DISTINCT `Employement_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class'");
-                                            
-                                            // Loop through each Employement_Group for the current Employee_Class
-                                            while ($datagrop = mysqli_fetch_assoc($selectgroup)) {
-                                                $group = $datagrop['Employement_Group'];
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $group;?></td>
-                                                    
-                                                </tr>
-                                                </table>
-                                            </td>
-                                            <td colspan="3" class="text-center">
-                                                        <table class="text-center table">
-                                                            <?php
-                                                            // SQL query to select distinct Employee_Sub_Group for each Employement_Group and Employee_Class
-                                                            $selectsubgroup = mysqli_query($conn, "SELECT DISTINCT `Employee_Sub_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group'");
-                                                            
-                                                            // Loop through each Employee_Sub_Group for the current Employee_Class and Employement_Group
-                                                            while ($datasub = mysqli_fetch_assoc($selectsubgroup)) {
-                                                                $subgroup = $datasub['Employee_Sub_Group'];
-                                                                ?>
-                                                                <tr>
-                                                                    <td><?php echo $subgroup; ?></td>
-                                                                    <td class="text-center">
-                                                                            <?php
-                                                                            // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
-                                                                            $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group' AND `Employee_Sub_Group`='$subgroup'");
-                                                                            $countdata = mysqli_fetch_assoc($countquery);
-                                                                             echo $countdata['employee']; ?>
-                                                                    </td>
-                                                                    <td class="text-center">
-
-                                                                            <?php
-                                                                            // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
-                                                                            $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
-                                                                                FROM `employeedata` AS ed
-                                                                                INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
-                                                                                WHERE ed.Employee_Class = '$employee_class'
-                                                                                AND ed.Employement_Group = '$group'
-                                                                                AND ed.Employee_Sub_Group = '$subgroup';
-                                                                                ");$countdata = mysqli_fetch_assoc($countquery);
-                                                                                if($countdata['total_net_pay']>0){
-                                                                             echo $countdata['total_net_pay']; } else{
-                                                                                echo 0 ;
-                                                                            }?>
-
-                                                                    </td>
-                                                                </tr>
-                                    </td>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                    </tr>
-                                                    </tbody>    
-                                                    </table>
-                                                    </td>
-                                                    
-                                                <?php
-                                            }
+                                <tbody class="text-center">
+                                    <?php
+                                    // SQL query to select distinct Employee_Class from employeedata
+                                    $sql = "SELECT DISTINCT `Employee_Class` FROM `employeedata`";
+                                    $result = $conn->query($sql);
+                                    
+                                    // Check if there are any results
+                                    if ($result->num_rows > 0) {
+                                        $a = 1;
+                                        
+                                        // Loop through each distinct Employee_Class
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            $employee_class = $row['Employee_Class'];
                                             ?>
-                                </tr>
-                                <?php
-                                $a++;
-                            }
-                        } else {
-                            echo "<tr><td colspan='5'>Data not exist</td></tr>";
-                        }
-                        ?>
-                        <tr>
-                            <td class="text-end" colspan="4">Total</td>
-                            <td>
-                            <?php
-                            $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
-                            FROM `employeedata` AS ed
-                            INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
-                           ");$countdata = mysqli_fetch_assoc($countquery);echo $countdata['total_net_pay'];?>
-                            </td>
-                        </tr>
-                    </tbody>
+                                            <tr>
+                                                <td><?php echo $employee_class; ?></td>
+                                                <td colspan="4" class="text-center">
+                                                    <table class="text-center table">
+                                                        <?php
+                                                        // SQL query to select distinct Employement_Group for each Employee_Class
+                                                        $selectgroup = mysqli_query($conn, "SELECT DISTINCT `Employement_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class'");
+                                                        
+                                                        // Loop through each Employement_Group for the current Employee_Class
+                                                        while ($datagrop = mysqli_fetch_assoc($selectgroup)) {
+                                                            $group = $datagrop['Employement_Group'];
+                                                            ?>
+                                                            <tr>
+                                                                <td><?php echo $group;?></td>
+                                                                <td class="text-center">
+                                                                    <table class="text-center table">
+                                                                        <?php
+                                                                        // SQL query to select distinct Employee_Sub_Group for each Employement_Group and Employee_Class
+                                                                        $selectsubgroup = mysqli_query($conn, "SELECT DISTINCT `Employee_Sub_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group'");
+                                                                        
+                                                                        // Loop through each Employee_Sub_Group for the current Employee_Class and Employement_Group
+                                                                        while ($datasub = mysqli_fetch_assoc($selectsubgroup)) {
+                                                                            $subgroup = $datasub['Employee_Sub_Group'];
+                                                                            ?>
+                                                                            <tr>
+                                                                                <td><?php echo $subgroup; ?></td>
+                                                                                <td class="text-center">
+                                                                                        <?php
+                                                                                        // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
+                                                                                        $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group' AND `Employee_Sub_Group`='$subgroup'");
+                                                                                        $countdata = mysqli_fetch_assoc($countquery);
+                                                                                            echo $countdata['employee']; ?>
+                                                                                </td>
+                                                                                <td class="text-center">
+                                                                                        <?php
+                                                                                        // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
+                                                                                        $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
+                                                                                            FROM `employeedata` AS ed
+                                                                                            INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
+                                                                                            WHERE ed.Employee_Class = '$employee_class'
+                                                                                            AND ed.Employement_Group = '$group'
+                                                                                            AND ed.Employee_Sub_Group = '$subgroup';
+                                                                                            ");$countdata = mysqli_fetch_assoc($countquery);
+                                                                                            if($countdata['total_net_pay']>0){
+                                                                                            echo $countdata['total_net_pay']; } else{
+                                                                                            echo 0 ;
+                                                                                        }?>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <?php
+                                                                        }
+                                                                        ?>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <?php    $a++;
+                                        }  } else {
+                                            echo "<tr><td colspan='5'>Data not exist</td></tr>";
+                                        } ?>
+                                </tbody>
+                            </table>
+                        </th>
+                    </tr>                    
+                    <tr>
+                        <td>Total</td>
+                        <td>
+                        <?php
+                        $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
+                        FROM `employeedata` AS ed
+                        INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
+                        ");$countdata = mysqli_fetch_assoc($countquery);echo $countdata['total_net_pay'];?>
+                        </td>
+                    </tr>
                 </table>
-<div class="container mt-5">
-    
-<table class="table text-center mt-5">
-    <thead>
-        <tr>
-            <td>Bank (Salary_Branch)</td>
-            <td>Emp. Count</td>
-            <td>Total Amount</td>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        <?php
-        // Include the database connection file
-        include('link/desigene/db.php');
+                <div class="container mt-5">
+                    
+                    <table class="table text-center mt-5">
+                        <thead>
+                            <tr>
+                                <td>Bank (Salary_Branch)</td>
+                                <td>Emp. Count</td>
+                                <td>Total Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <?php
+                            // Include the database connection file
+                            include('link/desigene/db.php');
 
-        // SQL query to group by Salary_Branch and calculate employee count and total amount
-        $sql = "SELECT DISTINCT Salary_Branch FROM employeedata";
-        $result = $conn->query($sql);
-        
-        // Check if there are any results
-        if ($result->num_rows > 0) {
-            // Loop through each result
-            while ($row = mysqli_fetch_assoc($result)) {
-                ?>
-                <tr>
-                    <td><?php echo $row['Salary_Branch']; 
-                    $salary=$row['Salary_Branch'];
-                    ?></td>
-                    <td><?php
-                    $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Salary_Branch`='$salary'");
-                    $countdata = mysqli_fetch_assoc($countquery);
-                    echo $countdata['employee']; ?></td>
-                   <td>
-                   <?php 
-                    $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
-                            FROM `employeedata` AS ed
-                            INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
-                            WHERE  ed.Salary_Branch ='$salary'
-                           ");
-                           $countdata = mysqli_fetch_assoc($countquery);
-                           echo $countdata['total_net_pay'];?>
-                   </td>
-                </tr>
-                <?php
-            }
-        } else {
-            echo "<tr><td colspan='3'>Data not exist</td></tr>";
-        }
-        ?>
-    </tbody>
-</table>
-</div>
-
+                            // SQL query to group by Salary_Branch and calculate employee count and total amount
+                            $sql = "SELECT DISTINCT Salary_Branch FROM employeedata";
+                            $result = $conn->query($sql);
+                            
+                            // Check if there are any results
+                            if ($result->num_rows > 0) {
+                                // Loop through each result
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $row['Salary_Branch']; 
+                                        $salary=$row['Salary_Branch'];
+                                        ?></td>
+                                        <td><?php
+                                        $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Salary_Branch`='$salary'");
+                                        $countdata = mysqli_fetch_assoc($countquery);
+                                        echo $countdata['employee']; ?></td>
+                                    <td>
+                                    <?php 
+                                        $countquery = mysqli_query($conn, "SELECT SUM(edf.net_pay) AS total_net_pay
+                                                FROM `employeedata` AS ed
+                                                INNER JOIN `earning_deduction_fund` AS edf ON edf.employee_id = ed.Id
+                                                WHERE  ed.Salary_Branch ='$salary'
+                                            ");
+                                            $countdata = mysqli_fetch_assoc($countquery);
+                                            echo $countdata['total_net_pay'];?>
+                                    </td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>Data not exist</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
                 <hr>
                 <div class="text-center">
                     <b>Human Resource Department WSSC Swat.</b>
