@@ -130,21 +130,21 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
      
              // Prepare SQL query to insert data
              $sql = "INSERT INTO encasement 
-                     (Employee, Ann_Leave_Entitlement, Ann_Leave_Availed, Ann_Leave_Balance, 
-                      Ann_Leave_Payable, Gross_Pay_Monthly, Gross_Pay_Yearly, Gross_Pay_Daily, 
-                      Amount_Payable, Bank_Branch, Account_No, Period)
+                     (`Employee`, `Ann_Leave_Entitlement`, `Ann_Leave_Availed`, `Ann_Leave_Balance`, `Ann_Leave_Payable`, `Gross_Pay_Monthly`, `Gross_Pay_Yearly`, `Gross_Pay_Daily`, `Amount_Payable`, `Bank_Branch`, `Account_No`, `Period`)
                      VALUES 
                      ('$EmployeeNo', '$Ann_Leave_Entitlement', '$Ann_Leave_Availed', '$Ann_Leave_Balance', 
                       '$Ann_Leave_Payable', '$Gross_Pay_Monthly', '$Gross_Pay_Yearly', '$Gross_Pay_Daily', 
-                      '$Amount_Payable', '$Bank_Branch', '$Account_No', '$Period')";
-     
+                      '$Amount_Payable', '$Bank_Branch', '$Account_No', '$Period');";
+    //  echo $sql;
              // Execute the query
              if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Data inserted successfully');location.replace('Gratuity.php');</script>";
+                echo "<script>alert('Data inserted successfully');
+                location.replace('Gratuity.php');</script>";
 
              } else {
                  echo "Error: " . $sql . "<br>" . $conn->error;
              }
+
          }
      }
      

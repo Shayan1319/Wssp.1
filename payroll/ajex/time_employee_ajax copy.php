@@ -9,12 +9,10 @@ while ($rowtime = mysqli_fetch_array($selecttime)) {
 
   $selery=mysqli_query($conn,"SELECT * FROM `salary` WHERE `timeperiod`='$timeid' AND (`HrReview`='PENDING' || `finace` = 'PENDING' || `ceo`='PENDING' || `InternalAuditor`='PENDING') ");
   $e = 1;
-
-    while($rowsallery=mysqli_fetch_array($selery)){
-      $emil=$rowsallery['employee_id'];
-
-    $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `EmployeeNo`='$emil'");
+  while($rowsallery=mysqli_fetch_array($selery)){
+    $emil=$rowsallery['employee_id'];
     
+    $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' && `EmployeeNo`='$emil'");
     if (mysqli_num_rows($selectemp)) {
         while ($rowemp = mysqli_fetch_array($selectemp)) {
             $employee_id = $rowemp['EmployeeNo'];

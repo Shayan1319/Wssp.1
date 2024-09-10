@@ -98,22 +98,7 @@ if ($result->num_rows > 0) {
             <td><?php echo $row['Contract_Expiry_DateUpdate']; ?></td>
             <td><?php echo $row['Change By']; ?></td>
             <td><?php echo $row['AuthBy']; ?></td>
-            <?php 
-            $selected = mysqli_query($conn, "SELECT * FROM `allowances` WHERE `allowance_status`='ACTIVE'");
-            while ($rowallowance = mysqli_fetch_array($selected)) {
-                $allowanceId = $rowallowance['id'];
-                
-                $seletpayroll = mysqli_query($conn, "SELECT * FROM `rate` WHERE `employee_id`='$emil' AND `allowances_id`='$allowanceId'");
-                if (mysqli_num_rows($seletpayroll) == 0) {
-                    echo '<th></th>';
-                } else {
-                    while ($rowpayroll = mysqli_fetch_array($seletpayroll)) {
-                        echo '<th>' . $rowpayroll['rate'] . '</th>';
-                    }
-                }
-            }
-            ?>
-            <td><?php echo $row['net_pay']; ?></td>
+           
         </tr>
         <?php
         $a++;

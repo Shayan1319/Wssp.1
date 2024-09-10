@@ -203,20 +203,18 @@ if(isset($_POST['ContractExp'])){
         </div>
 
         <p class="text-center" >Employees Count:  <?php echo date("d-M-Y")?></p>
-        <table class="table">
-             
-                <th>
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <td>Class</td>
-                                <td>Group</td>
-                                <td>Sub-Group</td>
-                                <td>Emp.Count</td>
-                            </tr>
-                        </thead>
+       
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <td>Class</td>
+                    <td>Group</td>
+                    <td>Sub-Group</td>
+                    <td>Emp.Count</td>
+                </tr>
+            </thead>
             <tbody class="text-center">
-                <?php
+            <?php
                 // SQL query to select distinct Employee_Class from employeedata
                 $sql = "SELECT DISTINCT `Employee_Class` FROM `employeedata` WHERE `Status`='ON-DUTY'";
                 $result = $conn->query($sql);
@@ -231,25 +229,19 @@ if(isset($_POST['ContractExp'])){
                         ?>
                         <tr>
                             <td><?php echo $employee_class; ?></td>
-                            <td class="text-center">
-                                <table class="text-center table">
-                                    <?php
-                                    // SQL query to select distinct Employement_Group for each Employee_Class
-                                    $selectgroup = mysqli_query($conn, "SELECT DISTINCT `Employement_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class' &&`Status`='ON-DUTY'");
-                                    
-                                    // Loop through each Employement_Group for the current Employee_Class
-                                    while ($datagrop = mysqli_fetch_assoc($selectgroup)) {
+                            <td colspan="4" class="text-center">
+                                    <table class="text-center table">
+                                        <?php
+                                        // SQL query to select distinct Employement_Group for each Employee_Class
+                                        $selectgroup = mysqli_query($conn, "SELECT DISTINCT `Employement_Group` FROM `employeedata` WHERE `Employee_Class`='$employee_class' &&`Status`='ON-DUTY'");
+                                        
+                                        // Loop through each Employement_Group for the current Employee_Class
+                                        while ($datagrop = mysqli_fetch_assoc($selectgroup)) {
                                         $group = $datagrop['Employement_Group'];
                                         ?>
                                         <tr>
                                             <td><?php echo $group;?></td>
-                                            
-                                        </tr>
-                                        
-                                       
-                                        </table>
-                                    </td>
-                                    <td colspan="3" class="text-center">
+                                            <td colspan="3" class="text-center">
                                                 <table class="text-center table">
                                                     <?php
                                                     // SQL query to select distinct Employee_Sub_Group for each Employement_Group and Employee_Class
@@ -266,31 +258,29 @@ if(isset($_POST['ContractExp'])){
                                                                     // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
                                                                     $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group' AND `Employee_Sub_Group`='$subgroup' AND `Status`='ON-DUTY'");
                                                                     $countdata = mysqli_fetch_assoc($countquery);
-                                                                     echo $countdata['employee']; ?>
+                                                                    echo $countdata['employee']; ?>
                                                             </td>
-                                                           
+                                                        
                                                         </tr>
-                            </td>
                                                         <?php
                                                     }
                                                     ?>
-                                            </tr>
-                                             <tr>
-                                                <td colspan="3" class="text-end">
-                                                Group Total:   <?php
-                                                $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group' AND `Status`='ON-DUTY'");
-                                                $countdata = mysqli_fetch_assoc($countquery);
-                                                echo $countdata['employee']; ?>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                               
-                                            </table>
+                                                </table>
                                             </td>
-                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan="" class="text-end">
+                                            Group Total:   <?php
+                                            $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE `Employee_Class`='$employee_class' AND `Employement_Group`='$group' AND `Status`='ON-DUTY'");
+                                            $countdata = mysqli_fetch_assoc($countquery);
+                                            echo $countdata['employee']; ?>
+                                            </td>
+                                        </tr>
                                         <?php
                                     }
                                     ?>
+                                </table>
+                            </td>
                         </tr>
                         <?php
                         $a++;
@@ -299,30 +289,26 @@ if(isset($_POST['ContractExp'])){
                     echo "<tr><td colspan='5'>Data not exist</td></tr>";
                 }
                 ?>
-              
             </tbody>
             <tfoot>
-
-                                                 <tr>
-                                        <td colspan="6" class="text-end"> Report Total:
-                                                                    <?php
-                                                                    // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
-                                                                    $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE  `Status`='ON-DUTY'");
-                                                                    $countdata = mysqli_fetch_assoc($countquery);
-                                                                     echo $countdata['employee']; ?>
-                                                            </td>
-                                        </tr>
-                                                
-                                            </tfoot> 
+                <tr>
+                    <td colspan="6" class="text-end"> Report Total:
+                        <?php
+                        // SQL query to count employees for each Employee_Sub_Group, Employement_Group, and Employee_Class
+                        $countquery = mysqli_query($conn, "SELECT COUNT(*) AS employee FROM `employeedata` WHERE  `Status`='ON-DUTY'");
+                        $countdata = mysqli_fetch_assoc($countquery);
+                        echo $countdata['employee']; ?>
+                    </td>
+                </tr>
+            </tfoot> 
         </table>
-
         <hr>
         <div class="text-center">
             <b>Human Resource Department WSSC Swat.</b>
             <p style="font-size: 8px;" >Software by Kurtlar Developer www.kurtlardeveloper.com</p>
         </div>
         <hr>
-    </div>
+</div>
     
 <style>@media print {
 .no-print {

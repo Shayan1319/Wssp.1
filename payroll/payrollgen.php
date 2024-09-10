@@ -47,7 +47,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }else{
             // Insert into salary table
             $salarySql = "INSERT INTO `salary`(`employee_id`, `fund`, `gross_pay`, `deduction`, `net_pay`, `date`, `EmpName`, `EmpFatherName`, `EmpCNIC`, `JoiningDate`, `JobTitle`, `Grade`, `EmploymentType`, `Department`, `Class`,`ClassGroup`, `SubGroup`, `PaymentMode`, `Branch`, `Bank`, `BankAccountNo`,`timeperiod`) 
-            VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}',{$Employee_Class[$e]}','{$Employee_Group[$e]} , '{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}','{$Salary_Branch[$e]}','{$Salary_Bank[$e]}','{$Account_No[$e]}','$timeperiod')";
+            VALUES ('{$EmployeeNo[$e]}','{$fundInput[$e]}','{$grossPayInput[$e]}','{$deductionInput[$e]}','{$netPayInput[$e]}','$date','{$empname[$e]}','{$father_name[$e]}','{$CNIC[$e]}','{$Joining_Date[$e]}','{$job_title[$e]}','{$Grade[$e]}','{$type[$e]}','{$Department[$e]}','{$Employee_Class[$e]}','{$Employee_Group[$e]}' , '{$Employee_Sub_Group[$e]}','{$Pay_Type[$e]}','{$Salary_Branch[$e]}','{$Salary_Bank[$e]}','{$Account_No[$e]}','$timeperiod');";
           }
           // echo $salarySql;
             // $query = mysqli_query($conn, $salarySql);
@@ -72,7 +72,7 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
               echo '<script>alert( "Allawnce Already Exist");</script>';
             }else{
             $payrollSql = "INSERT INTO `payrole`(`EmpNo`, `AllowancesName`, `AllowancesId`, `fin_classification`, `rate_calc_mode`, `earning_deduction_fund`, `Rate`, `price`, `total`, `Date`, `timeperiod`) VALUES ('$employee_no','$allowance','$allowanceId','$finClassificationValue','$rateCalcModeValue',' $earningDeductionFundValue','$rateValue','$priceValue','$total','$date','$timeperiod');";
-            echo $payrollSql;
+            // echo $payrollSql;
             if ($conn->query($payrollSql) === TRUE) {
               // Get the ID of the inserted salary record
              echo "Pay inserteedd";
@@ -86,7 +86,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
           }
         }
         }
-        
       }
 
 ?>

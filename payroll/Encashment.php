@@ -74,9 +74,20 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                         <tbody>
                                             <?php
                                             if ($employee != "") {
-                                                $sql = "SELECT * FROM `employeedata` WHERE `EmployeeNo`='$employee' && STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
+                                                $sql = "SELECT e.*
+FROM `employeedata` e
+LEFT JOIN `gratuity` g ON e.EmployeeNo = g.empNo
+WHERE e.EmployeeNo = '$employee'
+  AND STR_TO_DATE(e.Contract_Expiry_Date, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR)
+  AND g.empNo IS NULL;
+";
                                             } else {
-                                                $sql = "SELECT * FROM `employeedata` WHERE STR_TO_DATE(`Joining_Date`, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR);";
+                                                $sql = "SELECT e.*
+FROM `employeedata` e
+LEFT JOIN `gratuity` g ON e.EmployeeNo = g.empNo
+WHERE STR_TO_DATE(e.Contract_Expiry_Date, '%d %m %Y') <= DATE_SUB(STR_TO_DATE('$timeperiod', '%Y-%m-%d'), INTERVAL 1 YEAR)
+  AND g.empNo IS NULL;
+";
                                             }
                                             $result = $conn->query($sql);
                                             if ($result->num_rows > 0) {

@@ -72,7 +72,7 @@
     ?>
   </a>
   <a href="GratuityPending copy.php" class="nav-link">
-    Gratuity Pending
+  leave Encasement Pending
     <?php 
     if(mysqli_num_rows($seletencash)) {
         echo '<span class="red-dot"></span>';

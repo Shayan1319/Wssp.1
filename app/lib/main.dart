@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'links/config.dart';
 import 'employee/Home.dart';
 
 void main() {
@@ -45,8 +46,7 @@ class LoginScreenState extends State<LoginScreen> {
       });
 
       final response = await http.post(
-        Uri.parse(
-            'http://72.255.20.2:8181/Wssp.1/api/app%20Ak%20S%20api.php/login.php'),
+        Uri.parse('${Config.baseUrl}login.php'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'Email': _emailController.text,
@@ -284,8 +284,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       });
 
       final response = await http.post(
-        Uri.parse(
-            'http://72.255.20.2:8181/Wssp.1/api/app%20Ak%20S%20api.php/forget_password_api.php'),
+        Uri.parse('${Config.baseUrl}forget_password_api.php'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'employeeNO': _employeeNumberController.text,

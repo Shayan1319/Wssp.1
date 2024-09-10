@@ -15,6 +15,10 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 <html lang="en">
   <head>
     <?php include ('link/links.php')?>
+    
+<link rel="stylesheet" href="../dist/select2/select2.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../dist/select2/select2.min.js"></script>
   </head>
   <body>
     <div id="main">
@@ -29,20 +33,6 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                       </select>
                     </div>
                   </div>
-                  <div class="col-md-6 my-4">
-                      <label>From Month</label>
-                      <div class="form-group">
-                        <input type="date" class="form-control" name="from" id="">
-                      </div>
-                  </div>
-                  <div class="col-md-6 my-4">
-                      <div class="form-group">
-                        <label>To Month</label>
-                        <div class="form-group">
-                        <input type="date" class="form-control" name="to" id="">
-                        </div>
-                      </div>
-                  </div> 
                   <div class="col-md-12 text-end mt-2">
                     <input style="background-color: darkblue;" type="submit" name="Gratuity" id="Gratuity" class="btn text-white float-right shadow" value="Gratuity">
                   </div>

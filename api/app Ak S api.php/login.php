@@ -15,25 +15,30 @@ if (json_last_error() === JSON_ERROR_NONE && isset($data['Password']) && isset($
     $Password = $data['Password'];
 
     // Use prepared statements to avoid SQL injection
-    $stmt = $conn->prepare("SELECT * FROM `login` WHERE `Email` = ? AND `Password` = ?");
-    $stmt->bind_param("ss", $Email, $Password); // Bind parameters
+    $stmt = $conn->prepare("SELECT * FROM `login` WHERE `Email` = ?");
+    $stmt->bind_param("s", $Email); // Bind parameters
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $Email = $row["Email"]; // Ensure column names match those in your database
-        $Password = $row["Password"];
+        $storedHash = $row["Password"]; // Retrieve the hashed password from the database
         $Designation = $row["Designation"];
         $EmployeeNumber = $row["EmployeeNumber"];
         $FullName = $row["FullName"];
-        echo json_encode(array(
-            'message' => 'Login Successful',
-            'status' => true,
-            'Designation' => $Designation,
-            'EmployeeNumber' => $EmployeeNumber,
-            'FullName' => $FullName
-        ));
+
+        // Verify the password
+        if (password_verify($Password, $storedHash)) {
+            echo json_encode(array(
+                'message' => 'Login Successful',
+                'status' => true,
+                'Designation' => $Designation,
+                'EmployeeNumber' => $EmployeeNumber,
+                'FullName' => $FullName
+            ));
+        } else {
+            echo json_encode(array('message' => 'Invalid Email or Password', 'status' => false));
+        }
     } else {
         echo json_encode(array('message' => 'Invalid Email or Password', 'status' => false));
     }

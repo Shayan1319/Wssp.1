@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:app/main.dart';
+import '../links/config.dart';
 
 class HomeScreen extends StatefulWidget {
   final String designation;
@@ -33,8 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _fetchEmployeeData() async {
     final response = await http.post(
-      Uri.parse(
-          'http://72.255.20.2:8181/Wssp.1/api/app Ak S api.php/employee_home_api.php'),
+      Uri.parse('${Config.baseUrl}employee_home_api.php'),
       headers: {"Content-Type": "application/json"},
       body: json.encode({"employeeNO": widget.employeeNumber.toString()}),
     );

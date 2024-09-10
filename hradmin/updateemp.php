@@ -308,8 +308,8 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                             <label>Gender</label>
                             <select name="gender" id="" class="form-control ">
                                 <option <?php echo ($fetchdata['gender'] =='') ? 'selected' : ''; ?> value="">Choose</option>
-                                <option <?php echo ($fetchdata['gender'] =='Male') ? 'selected' : ''; ?> value="Male">Male</option>
-                                <option <?php echo ($fetchdata['gender'] =='Female') ? 'selected':'';?> value="Female">Female</option>
+                                <option <?php echo ($fetchdata['gender'] =='MALE') ? 'selected' : ''; ?> value="Male">Male</option>
+                                <option <?php echo ($fetchdata['gender'] =='FEMALE') ? 'selected':'';?> value="Female">Female</option>
                             </select>
                           </div>
                         </div>

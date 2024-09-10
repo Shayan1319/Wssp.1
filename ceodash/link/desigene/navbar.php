@@ -6,6 +6,12 @@
 h1 h2 h3 h4 h4 h5 h6 p label{
   font-family: 'Times New Roman', Times, serif;
 }
+th{
+  color:#f1f1f1 !important;
+}
+thead{
+  background-color: darkblue !important;
+}
 </style>
 <nav class="navbar header">
     <div class="row w-100">

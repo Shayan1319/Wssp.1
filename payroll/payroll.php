@@ -268,12 +268,65 @@ if (isset($_POST['submit'])) {
   </div>
   <div class="clearfix">&nbsp;</div>
   <div class="clearfix">&nbsp;</div>
-<script>
+  <script>
+$(document).ready(function() {
+  // Initialize select2 if not already initialized
+  $(".select2").select2();
+
+  // Function to handle Alt + A, Alt + R, and Shift + Enter shortcuts
+  $(document).keydown(function(e) {
+    // Check if Alt key is pressed along with the A key
+    if (e.altKey && e.key === 'a') {
+      e.preventDefault(); // Prevent the default action of the shortcut
+
+      // Check if select2 is applied and use its methods
+      var select2Element = $("#description").data('select2');
+      if (select2Element) {
+        // Open the select2 dropdown
+        select2Element.open();
+
+        // Use a timeout to ensure the dropdown has time to open before focusing the search box
+        setTimeout(function() {
+          // Focus on the search box within the select2 dropdown
+          $(".select2-container--open .select2-search__field").focus();
+        }, 300); // Increase the timeout if needed
+
+      } else {
+        // Fallback to click if select2 is not used
+        $("#description").click();
+      }
+
+      return false; // Prevent any other default action
+    }
+
+    // Check if Alt key is pressed along with the R key
+    else if (e.altKey && e.key === 'r') {
+      e.preventDefault(); // Prevent the default action of the shortcut
+      
+      // Focus on the input field
+      $("#rate_input").focus();
+      
+      return false; // Prevent any other default action
+    }
+
+    // Check if Shift key is pressed along with Enter key
+    else if (e.shiftKey && e.key === 'Enter') {
+      e.preventDefault(); // Prevent the default action of the shortcut
+      
+      // Trigger click event on the element with ID 'add'
+      $("#add").click();
+      
+      return false; // Prevent any other default action
+    }
+  });
+});
+
     var addSerial = 0;
     $(function() {
       $(".select2").select2();
     });
 $(document) .ready(function(){
+  
   function loadTable(){
     $.ajax({
       url : "ajex/empid copy.php",

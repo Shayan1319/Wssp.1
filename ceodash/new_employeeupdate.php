@@ -79,10 +79,11 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
 
     $(document).on("click", ".accept-btn", function() {
         var accept = $(this).data("acpt");
+        var EmployeeNumber = <?php echo $_SESSION['EmployeeNumber']; ?>;
         $.ajax({
             url: "ajex/NEW_EMPUpdate_Accept_ajax.php",
             type: "POST",
-            data: { id: accept },
+            data: { id: accept, EmployeeNumber: EmployeeNumber },
             success: function(data) {
                 alert(data);
                 loadTable();

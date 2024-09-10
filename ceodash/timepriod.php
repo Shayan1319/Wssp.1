@@ -70,16 +70,16 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                     </h2>
                                     <div id="collapse<?php echo $a ?>" class="accordion-collapse collapse show" aria-labelledby="heading<?php echo $a ?>" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <div class="accordion table-responsive" id="employeeAccordion<?php echo $a ?>">
                                             <?php
                                                 $Timeid = $rowofTP['ID'];
                                                 $selectemp=mysqli_query($conn,"SELECT * FROM `employeedata`");
                                                 while($rowemp=mysqli_fetch_array($selectemp)){
                                                     $employee= $rowemp['EmployeeNo'];
                                                     $employeeid= $rowemp['Id'];
-                                                $selectmang = mysqli_query($conn, "SELECT * FROM `salary` WHERE `employee_id`='$employee' && `timeperiod`='$Timeid' && `HrReview`='ACCEPT' && `finace`='ACCEPT' && `InternalAuditor`='ACCEPT' && `ceo`='PENDING'");
-                                                if(mysqli_num_rows($selectmang)>0){
-                                                    ?>
+                                                    $selectmang = mysqli_query($conn, "SELECT * FROM `salary` WHERE `employee_id`='$employee' && `timeperiod`='$Timeid' && `HrReview`='ACCEPT' && `finace`='ACCEPT' && `InternalAuditor`='ACCEPT' && `ceo`='PENDING'");
+                                                    if(mysqli_num_rows($selectmang)>0){
+                                                        ?>
+                                                        <div class="accordion table-responsive" id="employeeAccordion<?php echo $a ?>">
                                                      <table class="table">
                                                         <thead style="background-color: darkblue;">
                                                             <tr>
@@ -195,12 +195,13 @@ if (!isset($_SESSION['loginid']) || !isset($_SESSION['EmployeeNumber']) || $_SES
                                                 
                                                 }
                                                 echo" </tbody>
-                                                </table>";
+                                                </table>
+                                                </div>
+                                                ";
                                             }}
                                                 echo"<hr>";
                                                 ?>
                                                        
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

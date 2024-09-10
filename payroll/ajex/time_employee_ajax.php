@@ -13,11 +13,11 @@ while ($rowtime = mysqli_fetch_array($resultTime)) {
     $workingdays = $rowtime['WrokingDays'];
     $timeid = $rowtime['ID'];
     $slectedf=mysqli_query($conn,"SELECT * FROM `earning_deduction_fund`");
+    $e = 1;
     while ($rowf = mysqli_fetch_array($slectedf)) {
       $eidedf=$rowf['employee_id'];
       $selectemp = mysqli_query($conn, "SELECT * FROM `employeedata` WHERE `Status`='ON-DUTY' AND Id = '$eidedf'");
       if (mysqli_num_rows($selectemp)) {
-        $e = 1;
         while ($rowemp = mysqli_fetch_array($selectemp)) {
           $employee_id = $rowemp['EmployeeNo'];
           $employee_no = $rowemp['Id'];
